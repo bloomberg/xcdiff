@@ -44,13 +44,13 @@ final class RendererContextTests: XCTestCase {
         sut.onlyInFirstHeader()
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(consoleContent, """
         \n⚠️  Only in first:\n\n
-        """, crContent())
+        """)
 
-        XCTAssertEqual("""
+        XCTAssertEqual(markdownContent, """
         \n### ⚠️  Only in first:\n\n
-        """, mdrContent())
+        """)
     }
 
     func testOnlyInFirstHeader_whenCount5() {
@@ -58,13 +58,13 @@ final class RendererContextTests: XCTestCase {
         sut.onlyInFirstHeader(count: 5)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(consoleContent, """
         \n⚠️  Only in first (5):\n\n
-        """, crContent())
+        """)
 
-        XCTAssertEqual("""
+        XCTAssertEqual(markdownContent, """
         \n### ⚠️  Only in first (5):\n\n
-        """, mdrContent())
+        """)
     }
 
     func testOnlyInSecondHeader_whenNoCount() {
@@ -72,13 +72,13 @@ final class RendererContextTests: XCTestCase {
         sut.onlyInSecondHeader()
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(consoleContent, """
         \n⚠️  Only in second:\n\n
-        """, crContent())
+        """)
 
-        XCTAssertEqual("""
+        XCTAssertEqual(markdownContent, """
         \n### ⚠️  Only in second:\n\n
-        """, mdrContent())
+        """)
     }
 
     func testOnlyInSecondHeader_whenCount5() {
@@ -86,13 +86,13 @@ final class RendererContextTests: XCTestCase {
         sut.onlyInSecondHeader(count: 5)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(consoleContent, """
         \n⚠️  Only in second (5):\n\n
-        """, crContent())
+        """)
 
-        XCTAssertEqual("""
+        XCTAssertEqual(markdownContent, """
         \n### ⚠️  Only in second (5):\n\n
-        """, mdrContent())
+        """)
     }
 
     func testDifferentValuesHeader_whenNoCount() {
@@ -100,13 +100,13 @@ final class RendererContextTests: XCTestCase {
         sut.differentValuesHeader()
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(consoleContent, """
         \n⚠️  Value mismatch:\n\n
-        """, crContent())
+        """)
 
-        XCTAssertEqual("""
+        XCTAssertEqual(markdownContent, """
         \n### ⚠️  Value mismatch:\n\n
-        """, mdrContent())
+        """)
     }
 
     func testDifferentValuesHeader_whenCount5() {
@@ -114,13 +114,13 @@ final class RendererContextTests: XCTestCase {
         sut.differentValuesHeader(count: 5)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(consoleContent, """
         \n⚠️  Value mismatch (5):\n\n
-        """, crContent())
+        """)
 
-        XCTAssertEqual("""
+        XCTAssertEqual(markdownContent, """
         \n### ⚠️  Value mismatch (5):\n\n
-        """, mdrContent())
+        """)
     }
 
     func testSuccessHeader() {
@@ -128,13 +128,13 @@ final class RendererContextTests: XCTestCase {
         sut.successHeader("Header")
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(consoleContent, """
         ✅ Header\n
-        """, crContent())
+        """)
 
-        XCTAssertEqual("""
+        XCTAssertEqual(markdownContent, """
         \n## ✅ Header\n\n
-        """, mdrContent())
+        """)
     }
 
     func testErrorHeader() {
@@ -142,13 +142,13 @@ final class RendererContextTests: XCTestCase {
         sut.errorHeader("Header")
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(consoleContent, """
         ❌ Header\n
-        """, crContent())
+        """)
 
-        XCTAssertEqual("""
+        XCTAssertEqual(markdownContent, """
         \n## ❌ Header\n\n
-        """, mdrContent())
+        """)
     }
 
     func testConsoleRenderer_whenSample1() {
@@ -156,7 +156,7 @@ final class RendererContextTests: XCTestCase {
         setupSample1()
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(consoleContent, """
         ✅ Success1
         ✅ Success2
         ❌ Error1
@@ -182,7 +182,7 @@ final class RendererContextTests: XCTestCase {
             ◦ V2.1\n
 
         ✅ Success3\n
-        """, crContent())
+        """)
     }
 
     func testMarkdownRenderer_whenSample1() {
@@ -190,7 +190,7 @@ final class RendererContextTests: XCTestCase {
         setupSample1()
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(markdownContent, """
 
         ## ✅ Success1\n
 
@@ -219,7 +219,7 @@ final class RendererContextTests: XCTestCase {
             - `V2.1`\n\n
 
         ## ✅ Success3\n\n
-        """, mdrContent())
+        """)
     }
 
     // MARK: - Private
@@ -253,11 +253,11 @@ final class RendererContextTests: XCTestCase {
         sut.successHeader("Success3")
     }
 
-    private func crContent() -> String {
+    private var consoleContent: String {
         return consoleStringOutputBuffer.flush()
     }
 
-    private func mdrContent() -> String {
+    private var markdownContent: String {
         return markdownOutputBuffer.flush()
     }
 }

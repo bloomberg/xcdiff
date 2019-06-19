@@ -36,7 +36,7 @@ final class MarkdownRendererTests: XCTestCase {
         sut.text("3")
 
         // Then
-        XCTAssertEqual("1\n2\n3\n", outputBuffer.flush())
+        XCTAssertEqual(content, "1\n2\n3\n")
     }
 
     func testList_whenBegin() {
@@ -44,7 +44,7 @@ final class MarkdownRendererTests: XCTestCase {
         sut.list(.begin)
 
         // Then
-        XCTAssertEqual("", outputBuffer.flush())
+        XCTAssertEqual(content, "")
     }
 
     func testList_whenEnd() {
@@ -52,7 +52,7 @@ final class MarkdownRendererTests: XCTestCase {
         sut.list(.end)
 
         // Then
-        XCTAssertEqual("\n", outputBuffer.flush())
+        XCTAssertEqual(content, "\n")
     }
 
     func testListWithBullets() {
@@ -65,12 +65,12 @@ final class MarkdownRendererTests: XCTestCase {
         sut.list(.end)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(content, """
         - `b1`
           - `b1.1`
           - `b1.2`
             - `b1.2.1`\n\n
-        """, content())
+        """)
     }
 
     func testNewLine() {
@@ -78,7 +78,7 @@ final class MarkdownRendererTests: XCTestCase {
         sut.newLine(3)
 
         // Then
-        XCTAssertEqual("\n\n\n", content())
+        XCTAssertEqual(content, "\n\n\n")
     }
 
     func testHeader_whenH1() {
@@ -86,9 +86,9 @@ final class MarkdownRendererTests: XCTestCase {
         sut.header("H1", .h1)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(content, """
         \n# H1\n\n
-        """, content())
+        """)
     }
 
     func testHeader_whenH2() {
@@ -96,9 +96,9 @@ final class MarkdownRendererTests: XCTestCase {
         sut.header("H2", .h2)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(content, """
         \n## H2\n\n
-        """, content())
+        """)
     }
 
     func testHeader_whenH3() {
@@ -106,9 +106,9 @@ final class MarkdownRendererTests: XCTestCase {
         sut.header("H3", .h3)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(content, """
         \n### H3\n\n
-        """, content())
+        """)
     }
 
     func testSample1() {
@@ -126,7 +126,7 @@ final class MarkdownRendererTests: XCTestCase {
         sut.list(.end)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(content, """
 
         ### Header
 
@@ -137,12 +137,12 @@ final class MarkdownRendererTests: XCTestCase {
           - `Different Values 2`
             - `Value1`
             - `Value2`\n\n
-        """, content())
+        """)
     }
 
     // MARK: - Private
 
-    func content() -> String {
+    private var content: String {
         return outputBuffer.flush()
     }
 }

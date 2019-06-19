@@ -38,11 +38,11 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
         sut.render(result)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(content, """
         ✅ TAG1
         ✅ TAG2
 
-        """, content())
+        """)
     }
 
     func testRender_whenConsoleRendererAndDescription() {
@@ -57,7 +57,7 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
         sut.render(result)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(content, """
         ❌ TAG1
         Description1
 
@@ -72,7 +72,7 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
 
           • OIF1\n\n
 
-        """, content())
+        """)
     }
 
     func testRender_whenConsoleRendererAndVerboseFalse() {
@@ -85,11 +85,11 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
         sut.render(result)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(content, """
         ❌ TAG1 > Context1 > Context2
         ❌ TAG2 > Context1 > Context2
 
-        """, content())
+        """)
     }
 
     // swiftlint:disable:next function_body_length
@@ -103,7 +103,7 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
         sut.render(result)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(content, """
         ❌ TAG1 > Context1 > Context2
 
         ⚠️  Only in first (2):
@@ -158,7 +158,7 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
             ◦ DV4_V1
             ◦ DV4_V2\n\n
 
-        """, content())
+        """)
     }
 
     func testRender_whenMarkdownRendererAndVerboseFalse() {
@@ -171,13 +171,13 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
         sut.render(result)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(content, """
 
         ## ❌ TAG1 > Context1 > Context2\n
 
         ## ❌ TAG2 > Context1 > Context2\n
 
-        """, content())
+        """)
     }
 
     // swiftlint:disable:next function_body_length
@@ -191,7 +191,7 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
         sut.render(result)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(content, """
 
         ## ❌ TAG1 > Context1 > Context2\n
 
@@ -247,12 +247,12 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
             - `DV4_V1`
             - `DV4_V2`\n\n
 
-        """, content())
+        """)
     }
 
     // MARK: - Private
 
-    private func content() -> String {
+    private var content: String {
         return outputBuffer.flush()
     }
 }

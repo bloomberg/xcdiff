@@ -24,8 +24,8 @@ final class ComparatorParametersTests: XCTestCase {
         let sut = ComparatorParameters(targets: .all, configuration: .none)
 
         // Then
-        XCTAssertEqual(.all, sut.targets)
-        XCTAssertEqual(.none, sut.configuration)
+        XCTAssertEqual(sut.targets, .all)
+        XCTAssertEqual(sut.configuration, .none)
     }
 
     func testOptionFilter_whenNone() {
@@ -34,7 +34,7 @@ final class ComparatorParametersTests: XCTestCase {
         let data = ["A", "B", "C"]
 
         // When / Then
-        XCTAssertEqual([], data.filter(by: sut))
+        XCTAssertEqual(data.filter(by: sut), [])
     }
 
     func testOptionFilter_whenOnly() {
@@ -43,7 +43,7 @@ final class ComparatorParametersTests: XCTestCase {
         let data = ["A", "B", "C"]
 
         // When / Then
-        XCTAssertEqual(["B"], data.filter(by: sut))
+        XCTAssertEqual(data.filter(by: sut), ["B"])
     }
 
     func testOptionFilter_whenSome() {
@@ -52,7 +52,7 @@ final class ComparatorParametersTests: XCTestCase {
         let data = ["A", "B", "C"]
 
         // When / Then
-        XCTAssertEqual(["B", "C"], data.filter(by: sut))
+        XCTAssertEqual(data.filter(by: sut), ["B", "C"])
     }
 
     func testOptionFilter_whenAll() {
@@ -61,7 +61,7 @@ final class ComparatorParametersTests: XCTestCase {
         let data = ["A", "B", "C"]
 
         // When / Then
-        XCTAssertEqual(["A", "B", "C"], data.filter(by: sut))
+        XCTAssertEqual(data.filter(by: sut), ["A", "B", "C"])
     }
 
     func testValues() {
@@ -72,10 +72,10 @@ final class ComparatorParametersTests: XCTestCase {
         let sut4: ComparatorParameters.Option<String> = .none
 
         // When / Then
-        XCTAssertEqual(nil, sut1.values())
-        XCTAssertEqual(["A"], sut2.values())
-        XCTAssertEqual(["A", "B"], sut3.values())
-        XCTAssertEqual([], sut4.values())
+        XCTAssertNil(sut1.values())
+        XCTAssertEqual(sut2.values(), ["A"])
+        XCTAssertEqual(sut3.values(), ["A", "B"])
+        XCTAssertEqual(sut4.values(), [])
     }
 
     func testContains() {

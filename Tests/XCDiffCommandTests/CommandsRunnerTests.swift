@@ -38,8 +38,8 @@ final class CommandsRunnerTests: XCTestCase {
         let code = sut.run(with: ["-l"])
 
         // Then
-        XCTAssertEqual("No available comparators\n", printer.output)
-        XCTAssertEqual(0, code)
+        XCTAssertEqual(printer.output, "No available comparators\n")
+        XCTAssertEqual(code, 0)
     }
 
     func testRun_whenSameProject() {
@@ -53,8 +53,8 @@ final class CommandsRunnerTests: XCTestCase {
         let code = sut.run(with: command)
 
         // Then
-        XCTAssertEqual("\n", printer.output)
-        XCTAssertEqual(0, code)
+        XCTAssertEqual(printer.output, "\n")
+        XCTAssertEqual(code, 0)
     }
 
     func testRun_whenDifferentProjects() {
@@ -65,8 +65,8 @@ final class CommandsRunnerTests: XCTestCase {
         let code = sut.run(with: command)
 
         // Then
-        XCTAssertEqual("\n", printer.output)
-        XCTAssertEqual(0, code)
+        XCTAssertEqual(printer.output, "\n")
+        XCTAssertEqual(code, 0)
     }
 
     func testRun_whenDifferentProjectsFormatMarkdown() {
@@ -77,8 +77,8 @@ final class CommandsRunnerTests: XCTestCase {
         let code = sut.run(with: command)
 
         // Then
-        XCTAssertEqual("\n", printer.output)
-        XCTAssertEqual(0, code)
+        XCTAssertEqual(printer.output, "\n")
+        XCTAssertEqual(code, 0)
     }
 
     func testRun_whenDifferentProjectsFormatJSON() {
@@ -89,8 +89,8 @@ final class CommandsRunnerTests: XCTestCase {
         let code = sut.run(with: command)
 
         // Then
-        XCTAssertEqual("[\n\n]\n", printer.output)
-        XCTAssertEqual(0, code)
+        XCTAssertEqual(printer.output, "[\n\n]\n")
+        XCTAssertEqual(code, 0)
     }
 
     func testRun_whenDifferentProjectsUnrecognizedFormat() {
@@ -102,7 +102,7 @@ final class CommandsRunnerTests: XCTestCase {
 
         // Then
         XCTAssertEqual("Unrecognized format, use `-f (console | json | markdown)`\n", printer.output)
-        XCTAssertEqual(1, code)
+        XCTAssertEqual(code, 1)
     }
 
     func testRun_whenDifferentProjectsVerbose() {
@@ -113,8 +113,8 @@ final class CommandsRunnerTests: XCTestCase {
         let code = sut.run(with: command)
 
         // Then
-        XCTAssertEqual("\n", printer.output)
-        XCTAssertEqual(0, code)
+        XCTAssertEqual(printer.output, "\n")
+        XCTAssertEqual(code, 0)
     }
 
     func testRun_whenDifferentProjectsFilterTargets() {
@@ -125,8 +125,8 @@ final class CommandsRunnerTests: XCTestCase {
         let code = sut.run(with: command)
 
         // Then
-        XCTAssertEqual("\n", printer.output)
-        XCTAssertEqual(0, code)
+        XCTAssertEqual(printer.output, "\n")
+        XCTAssertEqual(code, 0)
     }
 
     func testRun_whenDifferentProjectsFilterConfigurations() {
@@ -137,8 +137,8 @@ final class CommandsRunnerTests: XCTestCase {
         let code = sut.run(with: command)
 
         // Then
-        XCTAssertEqual("\n", printer.output)
-        XCTAssertEqual(0, code)
+        XCTAssertEqual(printer.output, "\n")
+        XCTAssertEqual(code, 0)
     }
 
     func testRun_whenDifferentProjectsFilterTag() {
@@ -149,8 +149,8 @@ final class CommandsRunnerTests: XCTestCase {
         let code = sut.run(with: command)
 
         // Then
-        XCTAssertEqual("Unsupported tag \"TARGETS\"\n", printer.output)
-        XCTAssertEqual(1, code)
+        XCTAssertEqual(printer.output, "Unsupported tag \"TARGETS\"\n")
+        XCTAssertEqual(code, 1)
     }
 
     func testRun_whenDifferentProjectsFilterTags() {
@@ -161,8 +161,8 @@ final class CommandsRunnerTests: XCTestCase {
         let code = sut.run(with: command)
 
         // Then
-        XCTAssertEqual("Unsupported tag(s) \"CONFIGURATIONS\", \"TARGETS\"\n", printer.output)
-        XCTAssertEqual(1, code)
+        XCTAssertEqual(printer.output, "Unsupported tag(s) \"CONFIGURATIONS\", \"TARGETS\"\n")
+        XCTAssertEqual(code, 1)
     }
 
     func testRun_whenP1NotExists() {
@@ -178,8 +178,8 @@ final class CommandsRunnerTests: XCTestCase {
 
         // Then
         let expected = "-p1 \"\(nonExistingPath)\" project does not exist\n"
-        XCTAssertEqual(expected, printer.output)
-        XCTAssertEqual(1, code)
+        XCTAssertEqual(printer.output, expected)
+        XCTAssertEqual(code, 1)
     }
 
     func testRun_whenP2NotExists() {
@@ -195,8 +195,8 @@ final class CommandsRunnerTests: XCTestCase {
 
         // Then
         let expected = "-p2 \"\(nonExistingPath)\" project does not exist\n"
-        XCTAssertEqual(expected, printer.output)
-        XCTAssertEqual(1, code)
+        XCTAssertEqual(printer.output, expected)
+        XCTAssertEqual(code, 1)
     }
 
     func testRun_whenBothNotExist() {
@@ -212,8 +212,8 @@ final class CommandsRunnerTests: XCTestCase {
 
         // Then
         let expected = "-p1 \"\(nonExistingPath)\" project does not exist\n"
-        XCTAssertEqual(expected, printer.output)
-        XCTAssertEqual(1, code)
+        XCTAssertEqual(printer.output, expected)
+        XCTAssertEqual(code, 1)
     }
 
     func testRun_whenUnknownArguments() {
@@ -224,8 +224,8 @@ final class CommandsRunnerTests: XCTestCase {
         let code = sut.run(with: command)
 
         // Then
-        XCTAssertEqual("unexpected argument unknown; use --help to list available arguments\n", printer.output)
-        XCTAssertEqual(1, code)
+        XCTAssertEqual(printer.output, "unexpected argument unknown; use --help to list available arguments\n")
+        XCTAssertEqual(code, 1)
     }
 
     func testRun_whenProjectsNotSpecifiedButExistInCurrentDirectory() {
@@ -240,8 +240,8 @@ final class CommandsRunnerTests: XCTestCase {
         let code = sut.run(with: command)
 
         // Then
-        XCTAssertEqual("\n", printer.output)
-        XCTAssertEqual(0, code)
+        XCTAssertEqual(printer.output, "\n")
+        XCTAssertEqual(code, 0)
     }
 
     func testRun_whenProjectsNotSpecifiedAndNotExistInCurrentDirectory() {
@@ -258,8 +258,8 @@ final class CommandsRunnerTests: XCTestCase {
 
         // Then
         let expected = "The project cannot be found at \(nonExistingPath)\n"
-        XCTAssertEqual(expected, printer.output)
-        XCTAssertEqual(1, code)
+        XCTAssertEqual(printer.output, expected)
+        XCTAssertEqual(code, 1)
     }
 
     func testRun_whenProjectsNotSpecifiedAndMoreThen2ProjectInCurrentDirectory() {
@@ -277,8 +277,8 @@ final class CommandsRunnerTests: XCTestCase {
 
         // Then
         let expected = "Could not find 2 projects in the current directory\n"
-        XCTAssertEqual(expected, printer.output)
-        XCTAssertEqual(1, code)
+        XCTAssertEqual(printer.output, expected)
+        XCTAssertEqual(code, 1)
     }
 
     // MARK: - Private

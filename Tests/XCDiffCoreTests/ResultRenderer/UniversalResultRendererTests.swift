@@ -30,11 +30,11 @@ final class UniversalResultRendererTests: XCTestCase {
         let actual = try sut.render(result)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(actual, """
         ❌ TAG1 > Context1 > Context2
         ❌ TAG2 > Context1 > Context2
 
-        """, actual)
+        """)
     }
 
     func testRender_whenMarkdownAndVerboseFalse() throws {
@@ -46,12 +46,12 @@ final class UniversalResultRendererTests: XCTestCase {
         let actual = try sut.render(result)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(actual, """
 
         ## ❌ TAG1 > Context1 > Context2\n
 
         ## ❌ TAG2 > Context1 > Context2\n\n
-        """, actual)
+        """)
     }
 
     // swiftlint:disable:next function_body_length
@@ -64,7 +64,7 @@ final class UniversalResultRendererTests: XCTestCase {
         let actual = try sut.render(result)
 
         // Then
-        XCTAssertEqual("""
+        XCTAssertEqual(actual, """
         [
           {
             "context" : [
@@ -135,6 +135,6 @@ final class UniversalResultRendererTests: XCTestCase {
             "tag" : "Tag2"
           }
         ]
-        """, actual)
+        """)
     }
 }

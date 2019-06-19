@@ -21,7 +21,7 @@ import XCTest
 final class ComperatorTypeTests: XCTestCase {
     func testAllAvailableComparators() {
         // When / Then
-        XCTAssertEqual(0, [ComparatorType].allAvailableComparators.count)
+        XCTAssertEqual([ComparatorType].allAvailableComparators.count, 0)
     }
 
     func testTag_whenCustom() {
@@ -30,6 +30,6 @@ final class ComperatorTypeTests: XCTestCase {
         let sut = ComparatorType.custom(comparator)
 
         // When / Then
-        XCTAssertEqual("Tag1", sut.tag)
+        XCTAssertEqual(sut.tag, "Tag1")
     }
 }

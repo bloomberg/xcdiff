@@ -50,7 +50,7 @@ final class DefaultXcodeProjLoaderTests: XCTestCase {
                 XCTFail("Expected ComparatorError")
                 return
             }
-            XCTAssertEqual("The project cannot be found at \(path.string)", error.localizedDescription)
+            XCTAssertEqual(error.localizedDescription, "The project cannot be found at \(path.string)")
         }
     }
 }

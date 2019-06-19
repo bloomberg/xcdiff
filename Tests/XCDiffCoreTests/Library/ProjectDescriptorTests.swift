@@ -32,7 +32,7 @@ final class ProjectDescriptorTests: XCTestCase {
         let sut = ProjectDescriptor(path: path, xcodeProj: xcodeProj)
 
         // Then
-        XCTAssertEqual(path, sut.path)
+        XCTAssertEqual(sut.path, path)
         XCTAssertTrue(xcodeProj.pbxproj === sut.pbxproj)
     }
 }

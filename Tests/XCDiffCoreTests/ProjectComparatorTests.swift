@@ -35,7 +35,7 @@ final class ProjectComparatorTests: XCTestCase {
 
         // Then
         XCTAssertTrue(result.success)
-        XCTAssertEqual("", result.output)
+        XCTAssertEqual(result.output, "")
     }
 
     func testCompare_whenCustomComparatorAndNoResults_success() throws {
@@ -51,7 +51,7 @@ final class ProjectComparatorTests: XCTestCase {
 
         // Then
         XCTAssertTrue(result.success)
-        XCTAssertEqual("", result.output)
+        XCTAssertEqual(result.output, "")
     }
 
     func testCompare_whenCustomComparatorAndNoDifference_success() throws {
@@ -68,7 +68,7 @@ final class ProjectComparatorTests: XCTestCase {
 
         // Then
         XCTAssertTrue(result.success)
-        XCTAssertEqual("✅ COMPARATOR1\n", result.output)
+        XCTAssertEqual(result.output, "✅ COMPARATOR1\n")
     }
 
     func testCompare_whenCustomComparatorAndSomeDifferences_error() throws {
@@ -85,13 +85,13 @@ final class ProjectComparatorTests: XCTestCase {
 
         // Then
         XCTAssertFalse(result.success)
-        XCTAssertEqual("""
+        XCTAssertEqual(result.output, """
         ❌ COMPARATOR1
 
         ⚠️  Only in first (1):
 
           • file.txt\n\n
 
-        """, result.output)
+        """)
     }
 }

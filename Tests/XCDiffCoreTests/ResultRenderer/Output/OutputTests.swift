@@ -24,7 +24,7 @@ final class StringOutputBufferTests: XCTestCase {
         let sut = StringOutputBuffer()
 
         // Then
-        XCTAssertEqual("", sut.flush())
+        XCTAssertEqual(sut.flush(), "")
     }
 
     func testWrite_whenSingleString() {
@@ -35,7 +35,7 @@ final class StringOutputBufferTests: XCTestCase {
         sut.write("ABC")
 
         // Then
-        XCTAssertEqual("ABC", sut.flush())
+        XCTAssertEqual(sut.flush(), "ABC")
     }
 
     func testWrite_whenMultipleStrings() {
@@ -48,6 +48,6 @@ final class StringOutputBufferTests: XCTestCase {
         sut.write("C")
 
         // Then
-        XCTAssertEqual("ABC", sut.flush())
+        XCTAssertEqual(sut.flush(), "ABC")
     }
 }

@@ -41,10 +41,6 @@ let package = Package(
             dependencies: ["XcodeProj"]
         ),
         .testTarget(
-            name: "XCDiffTests",
-            dependencies: ["XCDiff"]
-        ),
-        .testTarget(
             name: "XCDiffCommandTests",
             dependencies: ["XCDiffCore", "XCDiffCommand", "PathKit"]
         ),

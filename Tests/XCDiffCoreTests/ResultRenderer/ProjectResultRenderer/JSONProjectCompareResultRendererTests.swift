@@ -39,7 +39,7 @@ final class JSONProjectCompareResultRendererTests: XCTestCase {
         try sut.render(result)
 
         // Then
-        XCTAssertEqual(expectedContent, content())
+        XCTAssertEqual(content, expectedContent)
     }
 
     // The result is the same as for Verbose=true case, JSON format always contains all the details
@@ -52,7 +52,7 @@ final class JSONProjectCompareResultRendererTests: XCTestCase {
         try sut.render(result)
 
         // Then
-        XCTAssertEqual(expectedContent, content())
+        XCTAssertEqual(content, expectedContent)
     }
 
     // MARK: - Private
@@ -130,7 +130,7 @@ final class JSONProjectCompareResultRendererTests: XCTestCase {
     ]
     """
 
-    private func content() -> String {
+    private var content: String {
         return outputBuffer.flush()
     }
 }
