@@ -21,7 +21,9 @@ import XCTest
 final class ComperatorTypeTests: XCTestCase {
     func testAllAvailableComparators() {
         // When / Then
-        XCTAssertEqual([ComparatorType].allAvailableComparators.count, 0)
+        XCTAssertEqual([ComparatorType].allAvailableComparators.map { $0.tag }, [
+            "targets",
+        ])
     }
 
     func testTag_whenCustom() {

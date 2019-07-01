@@ -22,22 +22,35 @@ final class Fixtures {
 }
 
 final class ProjectFixtures {
+    enum Project: String {
+        // swiftlint:disable identifier_name
+        case non_existing
+        case ios_project_1
+        case ios_project_2
+        // swiftlint:enable identifier_name
+    }
+
     func non_existing() -> Path {
-        return path(to: "non_existing")
+        return path(to: .non_existing)
     }
 
     func ios_project_1() -> Path {
-        return path(to: "ios_project_1")
+        return path(to: .ios_project_1)
     }
 
     func ios_project_2() -> Path {
-        return path(to: "ios_project_2")
+        return path(to: .ios_project_2)
+    }
+
+    func json_diff(_ first: Project, _ second: Project) throws -> String {
+        let path = "\(rootPath().string)/\(first.rawValue)__\(second.rawValue)_diff.json"
+        return try String(contentsOfFile: path)
     }
 
     // MARK: - Private
 
-    private func path(to fixture: String) -> Path {
-        let path = Path("\(fixture)/Project.xcodeproj")
+    private func path(to project: Project) -> Path {
+        let path = Path("\(project.rawValue)/Project.xcodeproj")
         let absolutePath = rootPath() + path
         return absolutePath
     }

@@ -35,8 +35,8 @@ final class PBXProjBuilder {
     }
 
     @discardableResult
-    func addTarget(name: String = "Target", _ closure: ((PBXTargetBuilder) -> Void)? = nil) -> PBXProjBuilder {
-        let builder = PBXTargetBuilder(name: name)
+    func addTarget(name: String = "Target", _ closure: ((PBXNativeTargetBuilder) -> Void)? = nil) -> PBXProjBuilder {
+        let builder = PBXNativeTargetBuilder(name: name)
         closure?(builder)
         let (target, targetObjects) = builder.build()
         pbxproject.targets.append(target)
@@ -45,8 +45,19 @@ final class PBXProjBuilder {
     }
 
     @discardableResult
-    func addTargets(names: [String], _ closure: ((PBXTargetBuilder) -> Void)? = nil) -> PBXProjBuilder {
+    func addTargets(names: [String], _ closure: ((PBXNativeTargetBuilder) -> Void)? = nil) -> PBXProjBuilder {
         names.forEach { addTarget(name: $0, closure) }
+        return self
+    }
+
+    @discardableResult
+    func addAggregateTarget(name: String = "Target",
+                            closure: ((PBXAggregateTargetBuilder) -> Void)? = nil) -> PBXProjBuilder {
+        let builder = PBXAggregateTargetBuilder(name: name)
+        closure?(builder)
+        let (target, targetObjects) = builder.build()
+        pbxproject.targets.append(target)
+        targetObjects.forEach { pbxproj.add(object: $0) }
         return self
     }
 

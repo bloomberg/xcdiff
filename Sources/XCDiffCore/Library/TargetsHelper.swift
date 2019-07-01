@@ -15,18 +15,13 @@
 //
 
 import Foundation
-import XcodeProj
 
-final class PBXTargetBuilder {
-    private var pbxtarget: PBXTarget
-    private var objects: [PBXObject] = []
-
-    init(name: String) {
-        pbxtarget = PBXNativeTarget(name: name)
-        objects.append(pbxtarget)
+final class TargetsHelper {
+    func native(from projectDescriptor: ProjectDescriptor) -> Set<String> {
+        return Set(projectDescriptor.pbxproj.nativeTargets.map { $0.name })
     }
 
-    func build() -> (PBXTarget, [PBXObject]) {
-        return (pbxtarget, objects)
+    func aggregate(from projectDescriptor: ProjectDescriptor) -> Set<String> {
+        return Set(projectDescriptor.pbxproj.aggregateTargets.map { $0.name })
     }
 }

@@ -14,30 +14,10 @@
 // limitations under the License.
 //
 
-import Foundation
+@testable import XCDiffCore
 
-public enum ComparatorType {
-    case targets
-    case custom(Comparator)
-
-    public var tag: String {
-        return comparator().tag
-    }
-
-    func comparator() -> Comparator {
-        switch self {
-        case .targets:
-            return TargetsComparator()
-        case let .custom(comparator):
-            return comparator
-        }
-    }
-}
-
-public extension Array where Element == ComparatorType {
-    static var allAvailableComparators: [ComparatorType] {
-        return [
-            .targets,
-        ]
+extension ComparatorParameters {
+    static var none: ComparatorParameters {
+        return ComparatorParameters(targets: .none, configuration: .none)
     }
 }

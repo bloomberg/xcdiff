@@ -15,29 +15,18 @@
 //
 
 import Foundation
+import XcodeProj
 
-public enum ComparatorType {
-    case targets
-    case custom(Comparator)
+final class PBXAggregateTargetBuilder {
+    private var pbxtarget: PBXAggregateTarget
+    private var objects: [PBXObject] = []
 
-    public var tag: String {
-        return comparator().tag
+    init(name: String) {
+        pbxtarget = PBXAggregateTarget(name: name)
+        objects.append(pbxtarget)
     }
 
-    func comparator() -> Comparator {
-        switch self {
-        case .targets:
-            return TargetsComparator()
-        case let .custom(comparator):
-            return comparator
-        }
-    }
-}
-
-public extension Array where Element == ComparatorType {
-    static var allAvailableComparators: [ComparatorType] {
-        return [
-            .targets,
-        ]
+    func build() -> (PBXAggregateTarget, [PBXObject]) {
+        return (pbxtarget, objects)
     }
 }

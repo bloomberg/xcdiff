@@ -1,0 +1,32 @@
+[
+  {
+    "context" : [
+      "Native"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "NewFramework"
+    ],
+    "tag" : "targets"
+  },
+  {
+    "context" : [
+      "Aggregate"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "NewAggregate"
+    ],
+    "tag" : "targets"
+  }
+]

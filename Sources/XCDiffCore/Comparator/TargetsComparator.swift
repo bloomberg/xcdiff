@@ -16,28 +16,19 @@
 
 import Foundation
 
-public enum ComparatorType {
-    case targets
-    case custom(Comparator)
+final class TargetsComparator: Comparator {
+    let tag = "targets"
 
-    public var tag: String {
-        return comparator().tag
-    }
+    private let targets = TargetsHelper()
 
-    func comparator() -> Comparator {
-        switch self {
-        case .targets:
-            return TargetsComparator()
-        case let .custom(comparator):
-            return comparator
-        }
-    }
-}
-
-public extension Array where Element == ComparatorType {
-    static var allAvailableComparators: [ComparatorType] {
-        return [
-            .targets,
-        ]
+    func compare(_ first: ProjectDescriptor,
+                 _ second: ProjectDescriptor,
+                 parameters _: ComparatorParameters) throws -> [CompareResult] {
+        return results(context: ["Native"],
+                       first: targets.native(from: first),
+                       second: targets.native(from: second))
+            + results(context: ["Aggregate"],
+                      first: targets.aggregate(from: first),
+                      second: targets.aggregate(from: second))
     }
 }
