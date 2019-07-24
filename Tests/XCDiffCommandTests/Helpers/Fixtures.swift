@@ -22,7 +22,7 @@ final class Fixtures {
 }
 
 final class ProjectFixtures {
-    enum Project: String {
+    enum Project: String, CaseIterable {
         // swiftlint:disable identifier_name
         case non_existing
         case ios_project_1
@@ -47,13 +47,17 @@ final class ProjectFixtures {
         return try String(contentsOfFile: path)
     }
 
-    // MARK: - Private
+    func scenarios() -> [Path] {
+        return Path.glob("\(rootPath().parent().string)/TestsCommands/*.txt")
+    }
 
-    private func path(to project: Project) -> Path {
+    func path(to project: Project) -> Path {
         let path = Path("\(project.rawValue)/Project.xcodeproj")
         let absolutePath = rootPath() + path
         return absolutePath
     }
+
+    // MARK: - Private
 
     private func rootPath() -> Path {
         let localFilePathComponents = URL(fileURLWithPath: #file).pathComponents
