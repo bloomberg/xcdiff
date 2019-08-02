@@ -30,6 +30,8 @@
 		2EFBAAD322B9A34600AA5E95 /* NewFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EFBAAD122B9A34600AA5E95 /* NewFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2EFBAAD622B9A34600AA5E95 /* NewFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFBAACF22B9A34600AA5E95 /* NewFramework.framework */; };
 		2EFBAAD722B9A34600AA5E95 /* NewFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFBAACF22B9A34600AA5E95 /* NewFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FBAE6F0622F0248A004B7BDB /* ObjcClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F0522F0248A004B7BDB /* ObjcClass.m */; settings = {COMPILER_FLAGS = "-ObjC"; }; };
+		FBAE6F4822F02746004B7BDB /* MetricsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F4722F02746004B7BDB /* MetricsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,9 @@
 		2EFBAACF22B9A34600AA5E95 /* NewFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NewFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EFBAAD122B9A34600AA5E95 /* NewFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewFramework.h; sourceTree = "<group>"; };
 		2EFBAAD222B9A34600AA5E95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FBAE6F0422F0248A004B7BDB /* ObjcClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcClass.h; sourceTree = "<group>"; };
+		FBAE6F0522F0248A004B7BDB /* ObjcClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjcClass.m; sourceTree = "<group>"; };
+		FBAE6F4722F02746004B7BDB /* MetricsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +152,8 @@
 		2E26637622B7F52500BA59BC /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				FBAE6F0322F02466004B7BDB /* Group A */,
+				FBAE6F0F22F02562004B7BDB /* Group B */,
 				2E26637722B7F52500BA59BC /* AppDelegate.swift */,
 				2E26637922B7F52500BA59BC /* ViewController.swift */,
 				2E26637B22B7F52500BA59BC /* Main.storyboard */,
@@ -171,6 +178,7 @@
 			children = (
 				2E26639722B7F52600BA59BC /* ProjectUITests.swift */,
 				2E26639922B7F52600BA59BC /* Info.plist */,
+				FBAE6F4722F02746004B7BDB /* MetricsTests.swift */,
 			);
 			path = ProjectUITests;
 			sourceTree = "<group>";
@@ -182,6 +190,22 @@
 				2EFBAAD222B9A34600AA5E95 /* Info.plist */,
 			);
 			path = NewFramework;
+			sourceTree = "<group>";
+		};
+		FBAE6F0322F02466004B7BDB /* Group A */ = {
+			isa = PBXGroup;
+			children = (
+				FBAE6F0422F0248A004B7BDB /* ObjcClass.h */,
+				FBAE6F0522F0248A004B7BDB /* ObjcClass.m */,
+			);
+			path = "Group A";
+			sourceTree = "<group>";
+		};
+		FBAE6F0F22F02562004B7BDB /* Group B */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Group B";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,6 +307,7 @@
 				TargetAttributes = {
 					2E26637322B7F52500BA59BC = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
 					};
 					2E26638722B7F52600BA59BC = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -362,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E26637A22B7F52500BA59BC /* ViewController.swift in Sources */,
+				FBAE6F0622F0248A004B7BDB /* ObjcClass.m in Sources */,
 				2E26637822B7F52500BA59BC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E26639822B7F52600BA59BC /* ProjectUITests.swift in Sources */,
+				FBAE6F4822F02746004B7BDB /* MetricsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,6 +576,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -557,6 +585,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bloomberg.xcdiff.Project;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -566,6 +595,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

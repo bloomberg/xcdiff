@@ -19,11 +19,15 @@ import PathKit
 
 public enum ComparatorError: LocalizedError {
     case generic(String)
+    case cannotFind(type: String, elements: [String])
 
     public var errorDescription: String? {
         switch self {
         case let .generic(message):
             return message
+        case let .cannotFind(type, elements):
+            let formattedElemenets = elements.map { "\"\($0)\"" }.joined(separator: ", ")
+            return "Cannot find \(type)\(elements.count > 1 ? "s" : "") \(formattedElemenets)"
         }
     }
 }

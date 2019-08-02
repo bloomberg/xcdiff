@@ -33,176 +33,6 @@ final class CommandsRunnerTests: XCTestCase {
         sut = CommandRunner(printer: printer, system: system)
     }
 
-    func testRun_whenL_listAvailableComparators() {
-        // When
-        let code = sut.run(with: ["-l"])
-
-        // Then
-        XCTAssertEqual(printer.output, "- TARGETS\n")
-        XCTAssertEqual(code, 0)
-    }
-
-    func testRun_whenSameProject() {
-        // Given
-        let command = [
-            "-p1", fixtures.project.ios_project_1().string,
-            "-p2", fixtures.project.ios_project_1().string,
-        ]
-
-        // When
-        let code = sut.run(with: command)
-
-        // Then
-        XCTAssertEqual(printer.output, """
-        ✅ TARGETS > Native
-        ✅ TARGETS > Aggregate\n
-
-        """)
-        XCTAssertEqual(code, 0)
-    }
-
-    func testRun_whenDifferentProjects() {
-        // Given
-        let command = buildCommand()
-
-        // When
-        let code = sut.run(with: command)
-
-        // Then
-        XCTAssertEqual(printer.output, """
-        ❌ TARGETS > Native
-        ❌ TARGETS > Aggregate\n
-
-        """)
-        XCTAssertEqual(code, 1)
-    }
-
-    func testRun_whenDifferentProjectsFormatMarkdown() {
-        // Given
-        let command = buildCommand("-f", "markdown")
-
-        // When
-        let code = sut.run(with: command)
-
-        // Then
-        XCTAssertEqual(printer.output, """
-
-        ## ❌ TARGETS > Native\n\n
-        ## ❌ TARGETS > Aggregate\n\n\n
-        """)
-        XCTAssertEqual(code, 1)
-    }
-
-    func testRun_whenDifferentProjectsFormatJSON() throws {
-        // Given
-        let command = buildCommand("-f", "json")
-
-        // When
-        let code = sut.run(with: command)
-
-        // Then
-        let expected = try fixtures.project.json_diff(.ios_project_1, .ios_project_2)
-        XCTAssertEqual(printer.output, expected)
-        XCTAssertEqual(code, 1)
-    }
-
-    func testRun_whenDifferentProjectsUnrecognizedFormat() {
-        // Given
-        let command = buildCommand("-f", "unrecognized")
-
-        // When
-        let code = sut.run(with: command)
-
-        // Then
-        XCTAssertEqual("Unrecognized format, use `-f (console | json | markdown)`\n", printer.output)
-        XCTAssertEqual(code, 1)
-    }
-
-    func testRun_whenDifferentProjectsVerbose() {
-        // Given
-        let command = buildCommand("-v")
-
-        // When
-        let code = sut.run(with: command)
-
-        // Then
-        XCTAssertEqual(printer.output, """
-        ❌ TARGETS > Native
-
-        ⚠️  Only in second (1):
-
-          • NewFramework\n
-
-        ❌ TARGETS > Aggregate
-
-        ⚠️  Only in second (1):
-
-          • NewAggregate\n\n\n
-
-        """)
-        XCTAssertEqual(code, 1)
-    }
-
-    func testRun_whenDifferentProjectsFilterTargets() {
-        // Given
-        let command = buildCommand("-t", "Target")
-
-        // When
-        let code = sut.run(with: command)
-
-        // Then
-        XCTAssertEqual(printer.output, """
-        ❌ TARGETS > Native
-        ❌ TARGETS > Aggregate\n
-
-        """)
-        XCTAssertEqual(code, 1)
-    }
-
-    func testRun_whenDifferentProjectsFilterConfigurations() {
-        // Given
-        let command = buildCommand("-c", "Debug")
-
-        // When
-        let code = sut.run(with: command)
-
-        // Then
-        XCTAssertEqual(printer.output, """
-        ❌ TARGETS > Native
-        ❌ TARGETS > Aggregate\n
-
-        """)
-        XCTAssertEqual(code, 1)
-    }
-
-    func testRun_whenDifferentProjectsFilterTagTargets() {
-        // Given
-        let command = buildCommand("-g", "targets")
-
-        // When
-        let code = sut.run(with: command)
-
-        // Then
-        XCTAssertEqual(printer.output, """
-        ❌ TARGETS > Native
-        ❌ TARGETS > Aggregate\n
-
-        """)
-        XCTAssertEqual(code, 1)
-    }
-
-    func testRun_whenDifferentProjectsFilterUnsupportedTag() {
-        // Given
-        let command = buildCommand("-g", "unsupported")
-
-        // When
-        let code = sut.run(with: command)
-
-        // Then
-        XCTAssertEqual(printer.output, "Unsupported tag \"UNSUPPORTED\"\n")
-        XCTAssertEqual(code, 1)
-    }
-
     func testRun_whenDifferentProjectsFilterUnsupportedTags() {
         // Given
         let command = buildCommand("-g", "targets, unsupported, unsupported_too")
@@ -292,7 +122,11 @@ final class CommandsRunnerTests: XCTestCase {
         // Then
         XCTAssertEqual(printer.output, """
         ✅ TARGETS > Native
-        ✅ TARGETS > Aggregate\n
+        ✅ TARGETS > Aggregate
+        ✅ SOURCES > "Project" target
+        ✅ SOURCES > "ProjectTests" target
+        ✅ SOURCES > "ProjectUITests" target
+
 
         """)
         XCTAssertEqual(code, 0)

@@ -18,6 +18,7 @@ import Foundation
 
 public enum ComparatorType {
     case targets
+    case sources
     case custom(Comparator)
 
     public var tag: String {
@@ -28,6 +29,8 @@ public enum ComparatorType {
         switch self {
         case .targets:
             return TargetsComparator()
+        case .sources:
+            return SourcesComparator()
         case let .custom(comparator):
             return comparator
         }
@@ -38,6 +41,7 @@ public extension Array where Element == ComparatorType {
     static var allAvailableComparators: [ComparatorType] {
         return [
             .targets,
+            .sources,
         ]
     }
 }

@@ -20,4 +20,16 @@ extension ComparatorParameters {
     static var none: ComparatorParameters {
         return ComparatorParameters(targets: .none, configuration: .none)
     }
+
+    static var all: ComparatorParameters {
+        return ComparatorParameters(targets: .all, configuration: .all)
+    }
+
+    static func only(target: String) -> ComparatorParameters {
+        return ComparatorParameters(targets: .only(target), configuration: .all)
+    }
+
+    static func some(targets: [String]) -> ComparatorParameters {
+        return ComparatorParameters(targets: .some(targets), configuration: .all)
+    }
 }

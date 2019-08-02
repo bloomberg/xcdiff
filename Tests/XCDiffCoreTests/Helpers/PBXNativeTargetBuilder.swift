@@ -29,4 +29,41 @@ final class PBXNativeTargetBuilder {
     func build() -> (PBXNativeTarget, [PBXObject]) {
         return (pbxtarget, objects)
     }
+
+    @discardableResult
+    func addBuildPhase(_ type: BuildPhase, _ closure: (PBXBuildPhaseBuilder) -> Void) -> PBXNativeTargetBuilder {
+        let builder = PBXBuildPhaseBuilder()
+        closure(builder)
+        let (buildPhase, buildPhaseObjects) = builder.build(type)
+        pbxtarget.buildPhases.append(buildPhase)
+        objects.append(contentsOf: buildPhaseObjects)
+        return self
+    }
+
+    @discardableResult
+    func addSources(_ sources: [String]) -> PBXNativeTargetBuilder {
+        addBuildPhase(.sources) { buildPhaseBuilder in
+            sources.forEach { source in
+                buildPhaseBuilder.addBuildFile { buildFileBuilder in
+                    buildFileBuilder.setName(source)
+                    buildFileBuilder.setPath(source)
+                }
+            }
+        }
+        return self
+    }
+
+    @discardableResult
+    func addSources(_ sources: [(name: String, flags: String)]) -> PBXNativeTargetBuilder {
+        addBuildPhase(.sources) { buildPhaseBuilder in
+            sources.forEach { source in
+                buildPhaseBuilder.addBuildFile { buildFileBuilder in
+                    buildFileBuilder.setName(source.name)
+                    buildFileBuilder.setPath(source.name)
+                    buildFileBuilder.setSettings(["COMPILER_FLAGS": source.flags])
+                }
+            }
+        }
+        return self
+    }
 }

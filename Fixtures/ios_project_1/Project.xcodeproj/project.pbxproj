@@ -14,6 +14,10 @@
 		2E26638222B7F52600BA59BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E26638022B7F52600BA59BC /* LaunchScreen.storyboard */; };
 		2E26638D22B7F52600BA59BC /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E26638C22B7F52600BA59BC /* ProjectTests.swift */; };
 		2E26639822B7F52600BA59BC /* ProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E26639722B7F52600BA59BC /* ProjectUITests.swift */; };
+		FBAE6F0A22F02523004B7BDB /* ObjcClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F0922F02523004B7BDB /* ObjcClass.m */; };
+		FBAE6F0E22F02550004B7BDB /* AnotherObjcClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F0D22F02550004B7BDB /* AnotherObjcClass.m */; };
+		FBAE6F1122F0263D004B7BDB /* BarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F1022F0263D004B7BDB /* BarTests.swift */; };
+		FBAE6F1322F02660004B7BDB /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F1222F02660004B7BDB /* LoginTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,12 @@
 		2E26639322B7F52600BA59BC /* ProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E26639722B7F52600BA59BC /* ProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectUITests.swift; sourceTree = "<group>"; };
 		2E26639922B7F52600BA59BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FBAE6F0822F02523004B7BDB /* ObjcClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcClass.h; sourceTree = "<group>"; };
+		FBAE6F0922F02523004B7BDB /* ObjcClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjcClass.m; sourceTree = "<group>"; };
+		FBAE6F0C22F02550004B7BDB /* AnotherObjcClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnotherObjcClass.h; sourceTree = "<group>"; };
+		FBAE6F0D22F02550004B7BDB /* AnotherObjcClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnotherObjcClass.m; sourceTree = "<group>"; };
+		FBAE6F1022F0263D004B7BDB /* BarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarTests.swift; sourceTree = "<group>"; };
+		FBAE6F1222F02660004B7BDB /* LoginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +107,8 @@
 		2E26637622B7F52500BA59BC /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				FBAE6F0722F0250D004B7BDB /* Group A */,
+				FBAE6F0B22F02530004B7BDB /* Group B */,
 				2E26637722B7F52500BA59BC /* AppDelegate.swift */,
 				2E26637922B7F52500BA59BC /* ViewController.swift */,
 				2E26637B22B7F52500BA59BC /* Main.storyboard */,
@@ -111,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				2E26638C22B7F52600BA59BC /* ProjectTests.swift */,
+				FBAE6F1022F0263D004B7BDB /* BarTests.swift */,
 				2E26638E22B7F52600BA59BC /* Info.plist */,
 			);
 			path = ProjectTests;
@@ -120,9 +133,28 @@
 			isa = PBXGroup;
 			children = (
 				2E26639722B7F52600BA59BC /* ProjectUITests.swift */,
+				FBAE6F1222F02660004B7BDB /* LoginTests.swift */,
 				2E26639922B7F52600BA59BC /* Info.plist */,
 			);
 			path = ProjectUITests;
+			sourceTree = "<group>";
+		};
+		FBAE6F0722F0250D004B7BDB /* Group A */ = {
+			isa = PBXGroup;
+			children = (
+				FBAE6F0822F02523004B7BDB /* ObjcClass.h */,
+				FBAE6F0922F02523004B7BDB /* ObjcClass.m */,
+			);
+			path = "Group A";
+			sourceTree = "<group>";
+		};
+		FBAE6F0B22F02530004B7BDB /* Group B */ = {
+			isa = PBXGroup;
+			children = (
+				FBAE6F0C22F02550004B7BDB /* AnotherObjcClass.h */,
+				FBAE6F0D22F02550004B7BDB /* AnotherObjcClass.m */,
+			);
+			path = "Group B";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +225,7 @@
 				TargetAttributes = {
 					2E26637322B7F52500BA59BC = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
 					};
 					2E26638722B7F52600BA59BC = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -257,6 +290,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E26637A22B7F52500BA59BC /* ViewController.swift in Sources */,
+				FBAE6F0A22F02523004B7BDB /* ObjcClass.m in Sources */,
+				FBAE6F0E22F02550004B7BDB /* AnotherObjcClass.m in Sources */,
 				2E26637822B7F52500BA59BC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E26638D22B7F52600BA59BC /* ProjectTests.swift in Sources */,
+				FBAE6F1122F0263D004B7BDB /* BarTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E26639822B7F52600BA59BC /* ProjectUITests.swift in Sources */,
+				FBAE6F1322F02660004B7BDB /* LoginTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +469,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -440,6 +478,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bloomberg.xcdiff.Project;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -449,6 +488,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
