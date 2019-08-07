@@ -1,11 +1,11 @@
-❌ TARGETS > Native
+❌ TARGETS > NATIVE targets
 
 ⚠️  Only in second (1):
 
   • NewFramework
 
 
-❌ TARGETS > Aggregate
+❌ TARGETS > AGGREGATE targets
 
 ⚠️  Only in second (1):
 

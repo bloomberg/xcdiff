@@ -35,12 +35,12 @@ final class TargetsComparatorTests: XCTestCase {
             .projectDescriptor()
 
         // When
-        let actual = try sut.compare(first, second, parameters: .none)
+        let actual = try sut.compare(first, second, parameters: .all)
 
         // Then
         XCTAssertEqual(actual, [
-            CompareResult(tag: "targets", context: ["Native"]),
-            CompareResult(tag: "targets", context: ["Aggregate"]),
+            CompareResult(tag: "targets", context: ["NATIVE targets"]),
+            CompareResult(tag: "targets", context: ["AGGREGATE targets"]),
         ])
     }
 
@@ -54,12 +54,12 @@ final class TargetsComparatorTests: XCTestCase {
             .projectDescriptor()
 
         // When
-        let actual = try sut.compare(first, second, parameters: .none)
+        let actual = try sut.compare(first, second, parameters: .all)
 
         // Then
         XCTAssertEqual(actual, [
-            CompareResult(tag: "targets", context: ["Native"]),
-            CompareResult(tag: "targets", context: ["Aggregate"]),
+            CompareResult(tag: "targets", context: ["NATIVE targets"]),
+            CompareResult(tag: "targets", context: ["AGGREGATE targets"]),
         ])
     }
 
@@ -74,17 +74,46 @@ final class TargetsComparatorTests: XCTestCase {
             .projectDescriptor()
 
         // When
-        let actual = try sut.compare(first, second, parameters: .none)
+        let actual = try sut.compare(first, second, parameters: .all)
 
         // Then
         let expected = [
             CompareResult(tag: "targets",
-                          context: ["Native"],
+                          context: ["NATIVE targets"],
                           onlyInFirst: ["A", "C_UPDATED", "D_NEW"],
                           onlyInSecond: ["A_UPDATED", "C", "E_NEW"]),
             CompareResult(tag: "targets",
-                          context: ["Aggregate"],
+                          context: ["AGGREGATE targets"],
                           onlyInSecond: ["NEW_AGGREGATE"]),
+        ]
+        XCTAssertEqual(actual, expected)
+    }
+
+    func testCompare_whenHaveDifferentTargetsAndTargetSomeFilter() throws {
+        // Given
+        let first = project()
+            .addTargets(names: ["A", "B", "X1", "X2"])
+            .addAggregateTargets(names: ["C", "E"])
+            .projectDescriptor()
+        let second = project()
+            .addTargets(names: ["X1", "B", "X3"])
+            .addAggregateTargets(names: ["C", "D"])
+            .projectDescriptor()
+
+        // When
+        let actual = try sut.compare(first, second,
+                                     parameters: .init(targets: .some(["A", "B", "C", "D"]), configuration: .none))
+
+        // Then
+        let expected = [
+            CompareResult(tag: "targets",
+                          context: ["NATIVE targets"],
+                          onlyInFirst: ["A"],
+                          onlyInSecond: []),
+            CompareResult(tag: "targets",
+                          context: ["AGGREGATE targets"],
+                          onlyInFirst: [],
+                          onlyInSecond: ["D"]),
         ]
         XCTAssertEqual(actual, expected)
     }

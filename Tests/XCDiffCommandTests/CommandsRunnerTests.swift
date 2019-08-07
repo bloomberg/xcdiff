@@ -121,8 +121,8 @@ final class CommandsRunnerTests: XCTestCase {
 
         // Then
         XCTAssertEqual(printer.output, """
-        ✅ TARGETS > Native
-        ✅ TARGETS > Aggregate
+        ✅ TARGETS > NATIVE targets
+        ✅ TARGETS > AGGREGATE targets
         ✅ SOURCES > "Project" target
         ✅ SOURCES > "ProjectTests" target
         ✅ SOURCES > "ProjectUITests" target

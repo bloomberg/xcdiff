@@ -52,12 +52,19 @@ final class PBXProjBuilder {
 
     @discardableResult
     func addAggregateTarget(name: String = "Target",
-                            closure: ((PBXAggregateTargetBuilder) -> Void)? = nil) -> PBXProjBuilder {
+                            _ closure: ((PBXAggregateTargetBuilder) -> Void)? = nil) -> PBXProjBuilder {
         let builder = PBXAggregateTargetBuilder(name: name)
         closure?(builder)
         let (target, targetObjects) = builder.build()
         pbxproject.targets.append(target)
         targetObjects.forEach { pbxproj.add(object: $0) }
+        return self
+    }
+
+    @discardableResult
+    func addAggregateTargets(names: [String],
+                             _ closure: ((PBXAggregateTargetBuilder) -> Void)? = nil) -> PBXProjBuilder {
+        names.forEach { addAggregateTarget(name: $0, closure) }
         return self
     }
 

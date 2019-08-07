@@ -56,3 +56,9 @@ extension Array where Array.Element == String {
         return filter { option.contains($0) }
     }
 }
+
+extension Set where Set.Element == String {
+    func filter(by option: ComparatorParameters.Option<String>) -> Set<String> {
+        return filter { option.contains($0) }
+    }
+}

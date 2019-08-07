@@ -23,12 +23,12 @@ final class TargetsComparator: Comparator {
 
     func compare(_ first: ProjectDescriptor,
                  _ second: ProjectDescriptor,
-                 parameters _: ComparatorParameters) throws -> [CompareResult] {
-        return results(context: ["Native"],
-                       first: targets.native(from: first),
-                       second: targets.native(from: second))
-            + results(context: ["Aggregate"],
-                      first: targets.aggregate(from: first),
-                      second: targets.aggregate(from: second))
+                 parameters: ComparatorParameters) throws -> [CompareResult] {
+        return results(context: ["NATIVE targets"],
+                       first: targets.native(from: first).filter(by: parameters.targets),
+                       second: targets.native(from: second).filter(by: parameters.targets))
+            + results(context: ["AGGREGATE targets"],
+                      first: targets.aggregate(from: first).filter(by: parameters.targets),
+                      second: targets.aggregate(from: second).filter(by: parameters.targets))
     }
 }
