@@ -32,6 +32,8 @@
 		2EFBAAD722B9A34600AA5E95 /* NewFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFBAACF22B9A34600AA5E95 /* NewFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FBAE6F0622F0248A004B7BDB /* ObjcClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F0522F0248A004B7BDB /* ObjcClass.m */; settings = {COMPILER_FLAGS = "-ObjC"; }; };
 		FBAE6F4822F02746004B7BDB /* MetricsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F4722F02746004B7BDB /* MetricsTests.swift */; };
+		FBB3B02322FAE65400EE8176 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB3B02222FAE65400EE8176 /* search.png */; };
+		FBB3B02B22FAE75300EE8176 /* ListResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FBB3B02A22FAE75300EE8176 /* ListResponse.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,8 @@
 		FBAE6F0422F0248A004B7BDB /* ObjcClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcClass.h; sourceTree = "<group>"; };
 		FBAE6F0522F0248A004B7BDB /* ObjcClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjcClass.m; sourceTree = "<group>"; };
 		FBAE6F4722F02746004B7BDB /* MetricsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsTests.swift; sourceTree = "<group>"; };
+		FBB3B02222FAE65400EE8176 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
+		FBB3B02A22FAE75300EE8176 /* ListResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListResponse.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +156,7 @@
 		2E26637622B7F52500BA59BC /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				FBB3B02122FAE57E00EE8176 /* Resources */,
 				FBAE6F0322F02466004B7BDB /* Group A */,
 				FBAE6F0F22F02562004B7BDB /* Group B */,
 				2E26637722B7F52500BA59BC /* AppDelegate.swift */,
@@ -167,6 +172,7 @@
 		2E26638B22B7F52600BA59BC /* ProjectTests */ = {
 			isa = PBXGroup;
 			children = (
+				FBB3B02922FAE73800EE8176 /* Responses */,
 				2E26638C22B7F52600BA59BC /* ProjectTests.swift */,
 				2E26638E22B7F52600BA59BC /* Info.plist */,
 			);
@@ -206,6 +212,22 @@
 			children = (
 			);
 			path = "Group B";
+			sourceTree = "<group>";
+		};
+		FBB3B02122FAE57E00EE8176 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FBB3B02222FAE65400EE8176 /* search.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FBB3B02922FAE73800EE8176 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				FBB3B02A22FAE75300EE8176 /* ListResponse.json */,
+			);
+			path = Responses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,6 +377,7 @@
 				2E26638222B7F52600BA59BC /* LaunchScreen.storyboard in Resources */,
 				2E26637F22B7F52600BA59BC /* Assets.xcassets in Resources */,
 				2E26637D22B7F52500BA59BC /* Main.storyboard in Resources */,
+				FBB3B02322FAE65400EE8176 /* search.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +385,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBB3B02B22FAE75300EE8176 /* ListResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

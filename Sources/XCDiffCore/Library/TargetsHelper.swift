@@ -65,6 +65,17 @@ final class TargetsHelper {
         }
     }
 
+    func resources(from target: PBXTarget) throws -> [String] {
+        guard let resourcesBuildPhase = try target.resourcesBuildPhase() else {
+            return []
+        }
+        let buildFiles = resourcesBuildPhase.files?.compactMap { $0 } ?? []
+
+        return try buildFiles.compactMap {
+            try path(from: $0)
+        }
+    }
+
     private func path(from buildFile: PBXBuildFile) throws -> String? {
         // TODO: Maybe pass it via init?
         let sourceRoot = Path("/")

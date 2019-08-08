@@ -18,6 +18,10 @@
 		FBAE6F0E22F02550004B7BDB /* AnotherObjcClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F0D22F02550004B7BDB /* AnotherObjcClass.m */; };
 		FBAE6F1122F0263D004B7BDB /* BarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F1022F0263D004B7BDB /* BarTests.swift */; };
 		FBAE6F1322F02660004B7BDB /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F1222F02660004B7BDB /* LoginTests.swift */; };
+		FBB3B02022FAE52500EE8176 /* AViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBB3B01E22FAE52500EE8176 /* AViewController.xib */; };
+		FBB3B02622FAE67300EE8176 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB3B02522FAE67300EE8176 /* search.png */; };
+		FBB3B02822FAE6BD00EE8176 /* time.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB3B02722FAE6BD00EE8176 /* time.png */; };
+		FBB3B02F22FAE7FC00EE8176 /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB3B02E22FAE7FC00EE8176 /* empty.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +61,10 @@
 		FBAE6F0D22F02550004B7BDB /* AnotherObjcClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnotherObjcClass.m; sourceTree = "<group>"; };
 		FBAE6F1022F0263D004B7BDB /* BarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarTests.swift; sourceTree = "<group>"; };
 		FBAE6F1222F02660004B7BDB /* LoginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTests.swift; sourceTree = "<group>"; };
+		FBB3B01E22FAE52500EE8176 /* AViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AViewController.xib; sourceTree = "<group>"; };
+		FBB3B02522FAE67300EE8176 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
+		FBB3B02722FAE6BD00EE8176 /* time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = time.png; sourceTree = "<group>"; };
+		FBB3B02E22FAE7FC00EE8176 /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +115,7 @@
 		2E26637622B7F52500BA59BC /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				FBB3B02422FAE66900EE8176 /* Resources */,
 				FBAE6F0722F0250D004B7BDB /* Group A */,
 				FBAE6F0B22F02530004B7BDB /* Group B */,
 				2E26637722B7F52500BA59BC /* AppDelegate.swift */,
@@ -132,6 +141,7 @@
 		2E26639622B7F52600BA59BC /* ProjectUITests */ = {
 			isa = PBXGroup;
 			children = (
+				FBB3B02D22FAE7DD00EE8176 /* Screenshots */,
 				2E26639722B7F52600BA59BC /* ProjectUITests.swift */,
 				FBAE6F1222F02660004B7BDB /* LoginTests.swift */,
 				2E26639922B7F52600BA59BC /* Info.plist */,
@@ -153,8 +163,26 @@
 			children = (
 				FBAE6F0C22F02550004B7BDB /* AnotherObjcClass.h */,
 				FBAE6F0D22F02550004B7BDB /* AnotherObjcClass.m */,
+				FBB3B01E22FAE52500EE8176 /* AViewController.xib */,
 			);
 			path = "Group B";
+			sourceTree = "<group>";
+		};
+		FBB3B02422FAE66900EE8176 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FBB3B02722FAE6BD00EE8176 /* time.png */,
+				FBB3B02522FAE67300EE8176 /* search.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FBB3B02D22FAE7DD00EE8176 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				FBB3B02E22FAE7FC00EE8176 /* empty.png */,
+			);
+			path = Screenshots;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +290,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBB3B02622FAE67300EE8176 /* search.png in Resources */,
+				FBB3B02022FAE52500EE8176 /* AViewController.xib in Resources */,
+				FBB3B02822FAE6BD00EE8176 /* time.png in Resources */,
 				2E26638222B7F52600BA59BC /* LaunchScreen.storyboard in Resources */,
 				2E26637F22B7F52600BA59BC /* Assets.xcassets in Resources */,
 				2E26637D22B7F52500BA59BC /* Main.storyboard in Resources */,
@@ -279,6 +310,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBB3B02F22FAE7FC00EE8176 /* empty.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

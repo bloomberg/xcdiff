@@ -1,0 +1,8 @@
+{
+    "name": "xcdiff",
+    "item": [
+        "diff targets",
+        "diff sources",
+        "diff resources",
+    ]
+}

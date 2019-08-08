@@ -126,6 +126,9 @@ final class CommandsRunnerTests: XCTestCase {
         ✅ SOURCES > "Project" target
         ✅ SOURCES > "ProjectTests" target
         ✅ SOURCES > "ProjectUITests" target
+        ✅ RESOURCES > "Project" target
+        ✅ RESOURCES > "ProjectTests" target
+        ✅ RESOURCES > "ProjectUITests" target
 
 
         """)

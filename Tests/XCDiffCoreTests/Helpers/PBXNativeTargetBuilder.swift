@@ -66,4 +66,17 @@ final class PBXNativeTargetBuilder {
         }
         return self
     }
+
+    @discardableResult
+    func addResources(_ resources: [String]) -> PBXNativeTargetBuilder {
+        addBuildPhase(.resources) { buildPhaseBuilder in
+            resources.forEach { source in
+                buildPhaseBuilder.addBuildFile { buildFileBuilder in
+                    buildFileBuilder.setName(source)
+                    buildFileBuilder.setPath(source)
+                }
+            }
+        }
+        return self
+    }
 }

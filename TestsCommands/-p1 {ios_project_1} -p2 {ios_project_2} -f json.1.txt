@@ -76,5 +76,51 @@
       "\/ProjectUITests\/MetricsTests.swift"
     ],
     "tag" : "sources"
+  },
+  {
+    "context" : [
+      "\"Project\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+      "\/Project\/Group B\/AViewController.xib",
+      "\/Project\/Resources\/time.png"
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "resources"
+  },
+  {
+    "context" : [
+      "\"ProjectTests\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "\/ProjectTests\/Responses\/ListResponse.json"
+    ],
+    "tag" : "resources"
+  },
+  {
+    "context" : [
+      "\"ProjectUITests\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+      "\/ProjectUITests\/Screenshots\/empty.png"
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "resources"
   }
 ]

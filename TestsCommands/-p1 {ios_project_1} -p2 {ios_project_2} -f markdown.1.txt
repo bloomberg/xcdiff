@@ -14,3 +14,12 @@
 ## ❌ SOURCES > "ProjectUITests" target
 
 
+## ❌ RESOURCES > "Project" target
+
+
+## ❌ RESOURCES > "ProjectTests" target
+
+
+## ❌ RESOURCES > "ProjectUITests" target
+
+
