@@ -1,3 +1,0 @@
-❌ TARGETS > NATIVE targets
-❌ TARGETS > AGGREGATE targets
-

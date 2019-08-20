@@ -91,7 +91,7 @@ public final class CommandRunner {
                                 usage: "List all available comparators (tags)")
     }
 
-    public func run(with arguments: ArgumentParser.Result) -> UInt {
+    public func run(with arguments: ArgumentParser.Result) -> Int32 {
         // Collect required command line arguments
         let list = getList(from: arguments)
 
@@ -108,7 +108,7 @@ public final class CommandRunner {
         }
     }
 
-    public func run(with rawArguments: [String]) -> UInt {
+    public func run(with rawArguments: [String]) -> Int32 {
         do {
             let arguments = try parseArguments(rawArguments)
             return run(with: arguments)
@@ -119,7 +119,7 @@ public final class CommandRunner {
 
     // MARK: - Private
 
-    private func runPrintAvailableOperators() -> UInt {
+    private func runPrintAvailableOperators() -> Int32 {
         let comparators = [ComparatorType].allAvailableComparators
         guard !comparators.isEmpty else {
             printer.text("No available comparators")
@@ -132,7 +132,7 @@ public final class CommandRunner {
         return 0
     }
 
-    private func runPrintCompare(with arguments: ArgumentParser.Result) throws -> UInt {
+    private func runPrintCompare(with arguments: ArgumentParser.Result) throws -> Int32 {
         // Collect required command line arguments
         let format = try getFormat(from: arguments)
         let targets = getTarget(from: arguments)
@@ -241,13 +241,13 @@ public final class CommandRunner {
         parser.printUsage(on: stdoutStream)
     }
 
-    private func handleError(_ error: Error) -> UInt {
+    private func handleError(_ error: Error) -> Int32 {
         let parsedError = parseError(error)
         printer.error(parsedError.message)
         return parsedError.code
     }
 
-    private func parseError(_ error: Error) -> (code: UInt, message: String) {
+    private func parseError(_ error: Error) -> (code: Int32, message: String) {
         switch error {
         case let error as ArgumentParserError:
             return (1, error.description)

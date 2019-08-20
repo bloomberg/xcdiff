@@ -24,81 +24,146 @@ final class CommandBasedTests: XCTestCase {
 
     func testCommands() {
         let scenarios = fixtures.project.scenarios()
-        let commands = scenarios.map(createCommand)
+        let commands = scenarios.map(createCommandFromMarkdown)
 
         commands.forEach { command in
-            print("Checking '\(command.command)'.")
+            print("Checking '\(command)'.")
             let printer = PrinterMock()
             let sut = CommandRunner(printer: printer)
-            let exitCode = sut.run(with: command.asArray())
+            let exitCode = sut.run(with: command.command)
 
             XCTAssertEqual(printer.output, command.expectedOutput,
-                           "'\(command.command)' didn't produce expected output.")
+                           "'\(command)' didn't produce expected output.")
             XCTAssertEqual(exitCode, command.expectedExitCode,
-                           "'\(command.command)' didn't produce expected exit code.")
+                           "'\(command)' didn't produce expected exit code.")
         }
     }
 
     // MARK: - Private
 
-    private func createCommand(from path: Path) -> Command {
-        let components = path.lastComponent.capturedGroups(withRegex: "^(.*)\\.(.*)\\.(.*)$")
+    private func createCommandFromMarkdown(from path: Path) -> Command {
+        guard let content = try? String(contentsOfFile: path.string) else {
+            fatalError("Scenario at \"\(path)\" output cannot be read from the file.")
+        }
+        let scanner = Scanner(string: content)
+        scanner.charactersToBeSkipped = CharacterSet() // newlines are important
 
-        guard components.count == 3 else {
-            fatalError("Scenario at \"\(path)\" has incorrect filename, use <command>.<expected_exit_code>.txt")
+        // # Command
+        var commandJson: NSString?
+
+        scanner.scanStringOrFail("# Command", into: nil)
+        scanner.scanNewLineOrFail()
+        scanner.scanStringOrFail("```", into: nil)
+        scanner.scanUpToCharactersOrFail(from: .newlines, into: nil)
+        scanner.scanNewLineOrFail()
+        scanner.scanUpToCharactersOrFail(from: .newlines, into: &commandJson)
+        scanner.scanNewLineOrFail()
+        scanner.scanStringOrFail("```", into: nil)
+        scanner.scanNewLineOrFail()
+        scanner.scanNewLineOrFail()
+
+        // # Expected exit code
+        var expectedExitCode: Int32 = .min
+
+        scanner.scanStringOrFail("# Expected exit code", into: nil)
+        scanner.scanNewLineOrFail()
+        scanner.scanInt32OrFail(&expectedExitCode)
+        scanner.scanNewLineOrFail()
+        scanner.scanNewLineOrFail()
+
+        // # Expected output
+        var expectedOutput: NSString?
+
+        scanner.scanStringOrFail("# Expected output", into: nil)
+        scanner.scanNewLineOrFail()
+        scanner.scanStringOrFail("```", into: nil)
+        scanner.scanNewLineOrFail()
+        scanner.scanUpToOrFail("\n```", into: &expectedOutput)
+
+        guard let expectedOutputString = expectedOutput as String? else {
+            fatalError()
         }
 
-        let command: String = ProjectFixtures.Project.allCases
-            .map { (key: "{\($0)}", path: fixtures.project.path(to: $0).string) }
-            .reduce(components[0]) { acc, tuple in acc.replacingOccurrences(of: tuple.key, with: tuple.path) }
-
-        guard let expectedExitCode = UInt(components[1]) else {
-            fatalError("Scenario at \"\(path)\" exit code cannot be converted to UInt")
-        }
-
-        guard let expectedOutput = try? String(contentsOfFile: path.string) else {
-            fatalError("Scenario at \"\(path)\" output cannot be read from the file")
-        }
-
-        return Command(command: command,
+        return Command(filename: path.lastComponent,
+                       command: decodeJsonCommand(from: commandJson, at: path),
                        expectedExitCode: expectedExitCode,
-                       expectedOutput: expectedOutput)
+                       expectedOutput: expectedOutputString)
+    }
+
+    private func decodeJsonCommand(from commandJson: NSString?, at path: Path) -> [String] {
+        guard let jsonString = commandJson as String? else {
+            fatalError()
+        }
+        guard let commandData = jsonString.data(using: .utf8) else {
+            fatalError("Scenario at \"\(path)\" command cannot be parsed, cannot convert first line to Data type.")
+        }
+        guard let rawCommand = try? JSONDecoder().decode([String].self, from: commandData) else {
+            fatalError("Scenario at \"\(path)\" command cannot be parsed, make sure you use JSON array.")
+        }
+        let projectPathsTuples = ProjectFixtures.Project.allCases
+            .map { (key: "{\($0)}", path: fixtures.project.path(to: $0).string) }
+        let projectPaths = Dictionary(uniqueKeysWithValues: projectPathsTuples)
+        let command = rawCommand.map { projectPaths[$0] ?? $0 }
+        return command
     }
 }
 
-private struct Command {
-    let command: String
-    let expectedExitCode: UInt
+private extension Scanner {
+    func scanStringOrFail(_ string: String, into result: AutoreleasingUnsafeMutablePointer<NSString?>?) {
+        guard scanString(string, into: result) else {
+            fatalError("Missing token: \(string)")
+        }
+    }
+
+    func scanCharactersOrFail(from characterSet: CharacterSet,
+                              into result: AutoreleasingUnsafeMutablePointer<NSString?>?) {
+        guard scanUpToCharacters(from: characterSet, into: result) else {
+            fatalError("Missing token from character set: \(characterSet)")
+        }
+    }
+
+    func scanUpToCharactersOrFail(from characterSet: CharacterSet,
+                                  into result: AutoreleasingUnsafeMutablePointer<NSString?>?) {
+        guard scanUpToCharacters(from: characterSet, into: result) else {
+            fatalError("Missing token from character set: \(characterSet)")
+        }
+    }
+
+    func scanUpToOrFail(_ string: String,
+                        into result: AutoreleasingUnsafeMutablePointer<NSString?>?) {
+        guard scanUpTo(string, into: result) else {
+            fatalError("Missing token: \(string)")
+        }
+    }
+
+    func scanInt32OrFail(_ result: UnsafeMutablePointer<Int32>?) {
+        guard scanInt32(result) else {
+            fatalError("Missing int32")
+        }
+    }
+
+    func scanNewLineOrFail() {
+        scanStringOrFail("\n", into: nil)
+    }
+}
+
+private struct Command: CustomStringConvertible {
+    let filename: String
+    let command: [String]
+    let expectedExitCode: Int32
     let expectedOutput: String
 
-    func asArray() -> [String] {
-        return command.split(separator: " ").map { String($0) }
+    var description: String {
+        return "\(filename)"
     }
 }
 
 private extension String {
-    func capturedGroups(withRegex pattern: String) -> [String] {
-        let regex: NSRegularExpression
-        do {
-            regex = try NSRegularExpression(pattern: pattern, options: [])
-        } catch {
-            return []
+    func lines() -> [String] {
+        var lines: [String] = []
+        enumerateLines { string, _ in
+            lines.append(string)
         }
-
-        let matches = regex.matches(in: self, options: [], range: NSRange(location: 0, length: count))
-        guard let match = matches.first else {
-            return []
-        }
-
-        let lastRangeIndex = match.numberOfRanges - 1
-        guard lastRangeIndex >= 1 else {
-            return []
-        }
-
-        return (1 ... lastRangeIndex).map { index in
-            let capturedGroupIndex = match.range(at: index)
-            let matchedString = (self as NSString).substring(with: capturedGroupIndex)
-            return matchedString
-        }
+        return lines
     }
 }

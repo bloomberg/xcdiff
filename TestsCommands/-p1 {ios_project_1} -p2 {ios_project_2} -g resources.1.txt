@@ -1,4 +1,0 @@
-❌ RESOURCES > "Project" target
-❌ RESOURCES > "ProjectTests" target
-❌ RESOURCES > "ProjectUITests" target
-

@@ -1,5 +1,0 @@
-✅ TARGETS > NATIVE targets
-✅ TARGETS > AGGREGATE targets
-❌ SOURCES > "Project" target
-❌ RESOURCES > "Project" target
-

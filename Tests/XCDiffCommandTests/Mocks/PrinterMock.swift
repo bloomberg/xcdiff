@@ -27,7 +27,7 @@ final class PrinterMock: Printer {
     }
 
     func error(_ message: String) {
-        output += message + "\n"
+        output += "ERROR: " + message + "\n"
         errorCalls.append(message)
     }
 }

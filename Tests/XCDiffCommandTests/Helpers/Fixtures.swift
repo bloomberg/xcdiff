@@ -48,7 +48,7 @@ final class ProjectFixtures {
     }
 
     func scenarios() -> [Path] {
-        return Path.glob("\(rootPath().parent().string)/TestsCommands/*.txt")
+        return Path.glob("\(rootPath().parent().string)/CommandTests/**/*.md")
     }
 
     func path(to project: Project) -> Path {

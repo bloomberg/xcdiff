@@ -33,81 +33,6 @@ final class CommandsRunnerTests: XCTestCase {
         sut = CommandRunner(printer: printer, system: system)
     }
 
-    func testRun_whenDifferentProjectsFilterUnsupportedTags() {
-        // Given
-        let command = buildCommand("-g", "targets, unsupported, unsupported_too")
-
-        // When
-        let code = sut.run(with: command)
-
-        // Then
-        XCTAssertEqual(printer.output, "Unsupported tag(s) \"UNSUPPORTED\", \"UNSUPPORTED_TOO\"\n")
-        XCTAssertEqual(code, 1)
-    }
-
-    func testRun_whenP1NotExists() {
-        // Given
-        let nonExistingPath = fixtures.project.non_existing().string
-        let command = [
-            "-p1", nonExistingPath,
-            "-p2", fixtures.project.ios_project_2().string,
-        ]
-
-        // When
-        let code = sut.run(with: command)
-
-        // Then
-        let expected = "-p1 \"\(nonExistingPath)\" project does not exist\n"
-        XCTAssertEqual(printer.output, expected)
-        XCTAssertEqual(code, 1)
-    }
-
-    func testRun_whenP2NotExists() {
-        // Given
-        let nonExistingPath = fixtures.project.non_existing().string
-        let command = [
-            "-p1", fixtures.project.ios_project_1().string,
-            "-p2", nonExistingPath,
-        ]
-
-        // When
-        let code = sut.run(with: command)
-
-        // Then
-        let expected = "-p2 \"\(nonExistingPath)\" project does not exist\n"
-        XCTAssertEqual(printer.output, expected)
-        XCTAssertEqual(code, 1)
-    }
-
-    func testRun_whenBothNotExist() {
-        // Given
-        let nonExistingPath = fixtures.project.non_existing().string
-        let command = [
-            "-p1", nonExistingPath,
-            "-p2", nonExistingPath,
-        ]
-
-        // When
-        let code = sut.run(with: command)
-
-        // Then
-        let expected = "-p1 \"\(nonExistingPath)\" project does not exist\n"
-        XCTAssertEqual(printer.output, expected)
-        XCTAssertEqual(code, 1)
-    }
-
-    func testRun_whenUnknownArguments() {
-        // Given
-        let command = ["unknown", "arguments"]
-
-        // When
-        let code = sut.run(with: command)
-
-        // Then
-        XCTAssertEqual(printer.output, "unexpected argument unknown; use --help to list available arguments\n")
-        XCTAssertEqual(code, 1)
-    }
-
     func testRun_whenProjectsNotSpecifiedButExistInCurrentDirectory() {
         // Given
         let command: [String] = []
@@ -148,7 +73,7 @@ final class CommandsRunnerTests: XCTestCase {
         let code = sut.run(with: command)
 
         // Then
-        let expected = "The project cannot be found at \(nonExistingPath)\n"
+        let expected = "ERROR: The project cannot be found at \(nonExistingPath)\n"
         XCTAssertEqual(printer.output, expected)
         XCTAssertEqual(code, 1)
     }
@@ -167,7 +92,7 @@ final class CommandsRunnerTests: XCTestCase {
         let code = sut.run(with: command)
 
         // Then
-        let expected = "Could not find 2 projects in the current directory\n"
+        let expected = "ERROR: Could not find 2 projects in the current directory\n"
         XCTAssertEqual(printer.output, expected)
         XCTAssertEqual(code, 1)
     }
