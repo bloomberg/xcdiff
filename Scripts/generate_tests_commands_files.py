@@ -63,9 +63,11 @@ def run_command(arguments):
 
 def generate_command_tests_files():
     dirname = os.path.dirname(sys.argv[0])
-    command_tests_files = os.path.join(dirname, "../CommandTests/Generated")
+    command_tests_path = os.path.join(dirname, "../CommandTests/Generated")
     commands = generate_commands()
     command_run = ["swift", "run", "xcdiff"]
+
+    remove_all_command_tests_files(command_tests_path)
     for command_tuple in commands:
         command = command_tuple[0]
         alias = command_tuple[1]
@@ -75,7 +77,7 @@ def generate_command_tests_files():
         exit_code_string = str(out.returncode)
         hash_string = hashlib.sha256(alias.encode("utf-8")).hexdigest()[:8]
         filename = alias + "." + exit_code_string + "." + hash_string + ".md"
-        file_path = os.path.join(command_tests_files, filename)
+        file_path = os.path.join(command_tests_path, filename)
         f = open(file_path, "w")
         f.write("# Command\n")
         f.write("```json\n")
@@ -91,6 +93,12 @@ def generate_command_tests_files():
         f.write(output_string)
         f.write("\n```\n")
         f.close()
+
+def remove_all_command_tests_files(command_tests_directory):
+    for file in os.listdir(command_tests_directory):
+        file_path = os.path.join(command_tests_directory, file)
+        if os.path.isfile(file_path):
+            os.unlink(file_path)
 
 def main():
     build_project()
