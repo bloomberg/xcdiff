@@ -21,8 +21,13 @@ import XcodeProj
 typealias TargetPair = (first: PBXTarget, second: PBXTarget)
 
 struct SourceDescriptor: Equatable, Hashable {
-    var path: String
-    var flags: String?
+    let path: String
+    let flags: String?
+}
+
+struct HeaderDescriptor: Equatable, Hashable {
+    let path: String
+    let attributes: String?
 }
 
 final class TargetsHelper {
@@ -50,6 +55,18 @@ final class TargetsHelper {
                 return nil
             }
             return (first: firstTarget, second: secondTarget)
+        }
+    }
+
+    func headers(from target: PBXTarget) throws -> [HeaderDescriptor] {
+        guard let headersBuildPhase = target.headersBuildPhase() else {
+            return []
+        }
+        let buildFiles = headersBuildPhase.files?.compactMap { $0 } ?? []
+
+        return try buildFiles.map {
+            HeaderDescriptor(path: try path(from: $0) ?? "",
+                             attributes: $0.attributes())
         }
     }
 
@@ -102,6 +119,19 @@ private extension PBXBuildFile {
 
         return nil
     }
+
+    func attributes() -> String? {
+        guard let anyAttributes = settings?["ATTRIBUTES"] else {
+            return nil
+        }
+        if let attributes = anyAttributes as? [String] {
+            return attributes.joined(separator: ", ")
+        }
+        if let attributes = anyAttributes as? String {
+            return attributes
+        }
+        return nil
+    }
 }
 
 extension Array where Array.Element == TargetPair {
@@ -115,5 +145,14 @@ extension Array where Array.Element == TargetPair {
             throw ComparatorError.cannotFind(type: "target", elements: unknownTargets.sorted())
         }
         return filter { option.contains($0.first.name) }
+    }
+}
+
+private extension PBXTarget {
+    func headersBuildPhase() -> PBXHeadersBuildPhase? {
+        return buildPhases
+            .filter { $0.buildPhase == .headers }
+            .compactMap { $0 as? PBXHeadersBuildPhase }
+            .first
     }
 }

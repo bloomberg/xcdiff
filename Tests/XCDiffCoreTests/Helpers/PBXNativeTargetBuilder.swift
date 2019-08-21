@@ -41,6 +41,21 @@ final class PBXNativeTargetBuilder {
     }
 
     @discardableResult
+    func addHeaders(_ headers: [(path: String, accessLevel: PBXHeaderAccessLevel?)]) -> PBXNativeTargetBuilder {
+        addBuildPhase(.headers) { buildPhaseBuilder in
+            headers.forEach { header in
+                buildPhaseBuilder.addBuildFile { buildFileBuilder in
+                    buildFileBuilder.setPath(header.path)
+                    if let accessLevel = header.accessLevel {
+                        buildFileBuilder.setSettings(["ATTRIBUTES": accessLevel.rawValue])
+                    }
+                }
+            }
+        }
+        return self
+    }
+
+    @discardableResult
     func addSources(_ sources: [String]) -> PBXNativeTargetBuilder {
         addBuildPhase(.sources) { buildPhaseBuilder in
             sources.forEach { source in

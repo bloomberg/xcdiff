@@ -27,6 +27,11 @@ final class TargetsComparatorTests: XCTestCase {
         sut = TargetsComparator()
     }
 
+    func testTag() {
+        // When / Then
+        XCTAssertEqual(sut.tag, "targets")
+    }
+
     func testCompare_whenHaveNoTargets() throws {
         // Given
         let first = project()

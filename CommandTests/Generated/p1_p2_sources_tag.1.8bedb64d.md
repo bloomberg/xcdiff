@@ -9,6 +9,7 @@
 # Expected output
 ```
 ❌ SOURCES > "Project" target
+✅ SOURCES > "ProjectFramework" target
 ❌ SOURCES > "ProjectTests" target
 ❌ SOURCES > "ProjectUITests" target
 

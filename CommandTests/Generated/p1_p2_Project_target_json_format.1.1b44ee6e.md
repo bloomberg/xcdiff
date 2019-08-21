@@ -44,6 +44,21 @@
       "\"Project\" target"
     ],
     "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "headers"
+  },
+  {
+    "context" : [
+      "\"Project\" target"
+    ],
+    "differentValues" : [
       {
         "context" : "\/Project\/Group A\/ObjcClass.m compiler flags",
         "second" : "-ObjC"

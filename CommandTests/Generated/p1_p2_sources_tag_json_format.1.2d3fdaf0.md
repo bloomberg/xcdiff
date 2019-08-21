@@ -29,6 +29,21 @@
   },
   {
     "context" : [
+      "\"ProjectFramework\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "sources"
+  },
+  {
+    "context" : [
       "\"ProjectTests\" target"
     ],
     "differentValues" : [

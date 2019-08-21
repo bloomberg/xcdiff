@@ -44,6 +44,75 @@
       "\"Project\" target"
     ],
     "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "headers"
+  },
+  {
+    "context" : [
+      "\"ProjectFramework\" target"
+    ],
+    "differentValues" : [
+      {
+        "context" : "\/ProjectFramework\/Header1.h attributes",
+        "first" : "Public",
+        "second" : "nil (Project)"
+      },
+      {
+        "context" : "\/ProjectFramework\/Header2.h attributes",
+        "first" : "Private",
+        "second" : "nil (Project)"
+      }
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "\/ProjectFramework\/Header4.h"
+    ],
+    "tag" : "headers"
+  },
+  {
+    "context" : [
+      "\"ProjectTests\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "headers"
+  },
+  {
+    "context" : [
+      "\"ProjectUITests\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "headers"
+  },
+  {
+    "context" : [
+      "\"Project\" target"
+    ],
+    "differentValues" : [
       {
         "context" : "\/Project\/Group A\/ObjcClass.m compiler flags",
         "second" : "-ObjC"
@@ -51,6 +120,21 @@
     ],
     "onlyInFirst" : [
       "\/Project\/Group B\/AnotherObjcClass.m"
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "sources"
+  },
+  {
+    "context" : [
+      "\"ProjectFramework\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
     ],
     "onlyInSecond" : [
 
@@ -97,6 +181,21 @@
     "onlyInFirst" : [
       "\/Project\/Group B\/AViewController.xib",
       "\/Project\/Resources\/time.png"
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "resources"
+  },
+  {
+    "context" : [
+      "\"ProjectFramework\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
     ],
     "onlyInSecond" : [
 

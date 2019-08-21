@@ -18,6 +18,7 @@ import Foundation
 
 public enum ComparatorType {
     case targets
+    case headers
     case sources
     case resources
     case custom(Comparator)
@@ -30,6 +31,8 @@ public enum ComparatorType {
         switch self {
         case .targets:
             return TargetsComparator()
+        case .headers:
+            return HeadersComparator()
         case .sources:
             return SourcesComparator()
         case .resources:
@@ -44,6 +47,7 @@ public extension Array where Element == ComparatorType {
     static var allAvailableComparators: [ComparatorType] {
         return [
             .targets,
+            .headers,
             .sources,
             .resources,
         ]

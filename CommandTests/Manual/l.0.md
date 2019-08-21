@@ -9,6 +9,7 @@
 # Expected output
 ```
 - TARGETS
+- HEADERS
 - SOURCES
 - RESOURCES
 

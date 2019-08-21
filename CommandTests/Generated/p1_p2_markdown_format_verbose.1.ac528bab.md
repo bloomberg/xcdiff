@@ -27,6 +27,35 @@
 
 
 
+## ✅ HEADERS > "Project" target
+
+
+## ❌ HEADERS > "ProjectFramework" target
+
+
+### ⚠️  Only in second (1):
+
+  - `/ProjectFramework/Header4.h`
+
+
+### ⚠️  Value mismatch (2):
+
+  - `/ProjectFramework/Header1.h attributes`
+    - `Public`
+    - `nil (Project)`
+
+  - `/ProjectFramework/Header2.h attributes`
+    - `Private`
+    - `nil (Project)`
+
+
+
+## ✅ HEADERS > "ProjectTests" target
+
+
+## ✅ HEADERS > "ProjectUITests" target
+
+
 ## ❌ SOURCES > "Project" target
 
 
@@ -40,6 +69,9 @@
   - `/Project/Group A/ObjcClass.m compiler flags`
     - `-ObjC`
 
+
+
+## ✅ SOURCES > "ProjectFramework" target
 
 
 ## ❌ SOURCES > "ProjectTests" target
@@ -73,6 +105,9 @@
   - `/Project/Group B/AViewController.xib`
   - `/Project/Resources/time.png`
 
+
+
+## ✅ RESOURCES > "ProjectFramework" target
 
 
 ## ❌ RESOURCES > "ProjectTests" target

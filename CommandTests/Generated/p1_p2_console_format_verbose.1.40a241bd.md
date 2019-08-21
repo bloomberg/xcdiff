@@ -22,6 +22,27 @@
   • NewAggregate
 
 
+✅ HEADERS > "Project" target
+❌ HEADERS > "ProjectFramework" target
+
+⚠️  Only in second (1):
+
+  • /ProjectFramework/Header4.h
+
+
+⚠️  Value mismatch (2):
+
+  • /ProjectFramework/Header1.h attributes
+    ◦ Public
+    ◦ nil (Project)
+
+  • /ProjectFramework/Header2.h attributes
+    ◦ Private
+    ◦ nil (Project)
+
+
+✅ HEADERS > "ProjectTests" target
+✅ HEADERS > "ProjectUITests" target
 ❌ SOURCES > "Project" target
 
 ⚠️  Only in first (1):
@@ -35,6 +56,7 @@
     ◦ -ObjC
 
 
+✅ SOURCES > "ProjectFramework" target
 ❌ SOURCES > "ProjectTests" target
 
 ⚠️  Only in first (1):
@@ -62,6 +84,7 @@
   • /Project/Resources/time.png
 
 
+✅ RESOURCES > "ProjectFramework" target
 ❌ RESOURCES > "ProjectTests" target
 
 ⚠️  Only in second (1):

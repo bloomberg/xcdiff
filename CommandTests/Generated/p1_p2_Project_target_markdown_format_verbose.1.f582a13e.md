@@ -15,6 +15,9 @@
 ## ✅ TARGETS > AGGREGATE targets
 
 
+## ✅ HEADERS > "Project" target
+
+
 ## ❌ SOURCES > "Project" target
 
 

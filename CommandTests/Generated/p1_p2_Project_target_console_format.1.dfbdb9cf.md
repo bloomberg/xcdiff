@@ -10,6 +10,7 @@
 ```
 ✅ TARGETS > NATIVE targets
 ✅ TARGETS > AGGREGATE targets
+✅ HEADERS > "Project" target
 ❌ SOURCES > "Project" target
 ❌ RESOURCES > "Project" target
 

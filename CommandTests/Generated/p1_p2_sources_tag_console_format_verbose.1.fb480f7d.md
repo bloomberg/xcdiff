@@ -21,6 +21,7 @@
     ◦ -ObjC
 
 
+✅ SOURCES > "ProjectFramework" target
 ❌ SOURCES > "ProjectTests" target
 
 ⚠️  Only in first (1):
