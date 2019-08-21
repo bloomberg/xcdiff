@@ -24,6 +24,7 @@ public final class CommandRunner {
     private let printer: Printer
     private let system: System
     private let parser: ArgumentParser
+    private let versionOption: OptionArgument<Bool>
     private let path1Option: OptionArgument<String>
     private let path2Option: OptionArgument<String>
     private let formatOption: OptionArgument<String>
@@ -55,6 +56,9 @@ public final class CommandRunner {
                                     overview: CommandRunner.overview)
         }
 
+        versionOption = parser.add(option: "--version",
+                                   kind: Bool.self,
+                                   usage: "Show \(command) version")
         path1Option = parser.add(option: "--path1",
                                  shortName: "-p1",
                                  kind: String.self,
@@ -93,7 +97,13 @@ public final class CommandRunner {
 
     public func run(with arguments: ArgumentParser.Result) -> Int32 {
         // Collect required command line arguments
+        let version = getVersion(from: arguments)
         let list = getList(from: arguments)
+
+        // Check if version requested
+        if version {
+            return runPrintVersion()
+        }
 
         // Check if list requested
         if list {
@@ -118,6 +128,11 @@ public final class CommandRunner {
     }
 
     // MARK: - Private
+
+    private func runPrintVersion() -> Int32 {
+        printer.text(Constants.version.description)
+        return 0
+    }
 
     private func runPrintAvailableOperators() -> Int32 {
         let comparators = [ComparatorType].allAvailableComparators
@@ -235,6 +250,10 @@ public final class CommandRunner {
             return false
         }
         return list
+    }
+
+    private func getVersion(from arguments: ArgumentParser.Result) -> Bool {
+        return arguments.get(versionOption) ?? false
     }
 
     private func printUsage() {

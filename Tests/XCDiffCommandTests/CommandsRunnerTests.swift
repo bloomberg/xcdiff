@@ -97,6 +97,18 @@ final class CommandsRunnerTests: XCTestCase {
         XCTAssertEqual(code, 1)
     }
 
+    func testRun_whenVersion() {
+        // Given
+        let command = ["--version"]
+
+        // When
+        let code = sut.run(with: command)
+
+        // Then
+        XCTAssertEqual(printer.output, "0.1.1+debug.local\n")
+        XCTAssertEqual(code, 0)
+    }
+
     // MARK: - Private
 
     private func buildCommand(p1: String? = nil, p2: String? = nil, _ args: String...) -> [String] {
