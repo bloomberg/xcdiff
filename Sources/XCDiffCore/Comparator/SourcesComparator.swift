@@ -44,7 +44,7 @@ final class SourcesComparator: Comparator {
                 return result(context: ["\"\(first.name)\" target"],
                               first: firstPaths,
                               second: secondPaths,
-                              differences: difference)
+                              differentValues: difference)
             }
         return sourcesResults
     }

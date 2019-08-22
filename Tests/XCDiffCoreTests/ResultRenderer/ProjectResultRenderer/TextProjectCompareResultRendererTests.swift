@@ -18,6 +18,7 @@ import Foundation
 @testable import XCDiffCore
 import XCTest
 
+// swiftlint:disable type_body_length
 final class TextProjectCompareResultRendererTests: XCTestCase {
     private var outputBuffer: StringOutputBuffer!
     private let fixtures = Fixtures()
@@ -109,19 +110,25 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
         ⚠️  Only in first (2):
 
           • OIF1
-          • OIF2\n
+          • OIF2
+
 
         ⚠️  Only in second (3):
 
           • OIS1
           • OIS2
-          • OIS3\n
+          • OIS3
+
 
         ⚠️  Value mismatch (4):
 
           • DV1
+            ◦ DV1_V1
+            ◦ nil
 
           • DV2
+            ◦ nil
+            ◦ DV2_V2
 
           • DV3
             ◦ DV3_V1
@@ -129,26 +136,33 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
 
           • DV4
             ◦ DV4_V1
-            ◦ DV4_V2\n
+            ◦ DV4_V2
+
 
         ❌ TAG2 > Context1 > Context2
 
         ⚠️  Only in first (2):
 
           • OIF1
-          • OIF2\n
+          • OIF2
+
 
         ⚠️  Only in second (3):
 
           • OIS1
           • OIS2
-          • OIS3\n
+          • OIS3
+
 
         ⚠️  Value mismatch (4):
 
           • DV1
+            ◦ DV1_V1
+            ◦ nil
 
           • DV2
+            ◦ nil
+            ◦ DV2_V2
 
           • DV3
             ◦ DV3_V1
@@ -193,24 +207,31 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
         // Then
         XCTAssertEqual(content, """
 
-        ## ❌ TAG1 > Context1 > Context2\n
+        ## ❌ TAG1 > Context1 > Context2
+
 
         ### ⚠️  Only in first (2):
 
           - `OIF1`
-          - `OIF2`\n
+          - `OIF2`
+
 
         ### ⚠️  Only in second (3):
 
           - `OIS1`
           - `OIS2`
-          - `OIS3`\n
+          - `OIS3`
+
 
         ### ⚠️  Value mismatch (4):
 
           - `DV1`
+            - `DV1_V1`
+            - `nil`
 
           - `DV2`
+            - `nil`
+            - `DV2_V2`
 
           - `DV3`
             - `DV3_V1`
@@ -218,26 +239,35 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
 
           - `DV4`
             - `DV4_V1`
-            - `DV4_V2`\n\n
+            - `DV4_V2`
 
-        ## ❌ TAG2 > Context1 > Context2\n
+
+
+        ## ❌ TAG2 > Context1 > Context2
+
 
         ### ⚠️  Only in first (2):
 
           - `OIF1`
-          - `OIF2`\n
+          - `OIF2`
+
 
         ### ⚠️  Only in second (3):
 
           - `OIS1`
           - `OIS2`
-          - `OIS3`\n
+          - `OIS3`
+
 
         ### ⚠️  Value mismatch (4):
 
           - `DV1`
+            - `DV1_V1`
+            - `nil`
 
           - `DV2`
+            - `nil`
+            - `DV2_V2`
 
           - `DV3`
             - `DV3_V1`
@@ -256,3 +286,5 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
         return outputBuffer.flush()
     }
 }
+
+// swiftlint:enable type_body_length

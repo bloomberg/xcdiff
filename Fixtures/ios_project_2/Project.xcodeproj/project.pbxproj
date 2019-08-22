@@ -111,6 +111,8 @@
 		2EB29210230B2A5A00C9EB4A /* Header2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header2.h; sourceTree = "<group>"; };
 		2EB29211230B2A6300C9EB4A /* Header4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header4.h; sourceTree = "<group>"; };
 		2EB29212230B2A6C00C9EB4A /* Header3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header3.h; sourceTree = "<group>"; };
+		2E28F9AE230D3468004D2E3F /* Target.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Target.xcconfig; sourceTree = "<group>"; };
+		2E28F9B0230D34AC004D2E3F /* Project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
 		2EFBAACF22B9A34600AA5E95 /* NewFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NewFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EFBAAD122B9A34600AA5E95 /* NewFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewFramework.h; sourceTree = "<group>"; };
 		2EFBAAD222B9A34600AA5E95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -199,6 +201,8 @@
 				2E26637E22B7F52600BA59BC /* Assets.xcassets */,
 				2E26638022B7F52600BA59BC /* LaunchScreen.storyboard */,
 				2E26638322B7F52600BA59BC /* Info.plist */,
+				2E28F9AE230D3468004D2E3F /* Target.xcconfig */,
+				2E28F9B0230D34AC004D2E3F /* Project.xcconfig */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -583,6 +587,7 @@
 /* Begin XCBuildConfiguration section */
 		2E26639A22B7F52600BA59BC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E28F9B0230D34AC004D2E3F /* Project.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -615,6 +620,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CUSTOM_SETTGING_1 = CS_1_PROJECT_LEVEL;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -676,6 +682,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CUSTOM_SETTGING_1 = CS_1_PROJECT_LEVEL;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -699,10 +706,12 @@
 		};
 		2E26639D22B7F52600BA59BC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E28F9AE230D3468004D2E3F /* Target.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CUSTOM_SETTING_COMMON = VALUE_2;
 				INFOPLIST_FILE = Project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -722,6 +731,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CUSTOM_SETTING_COMMON = VALUE_2;
 				INFOPLIST_FILE = Project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

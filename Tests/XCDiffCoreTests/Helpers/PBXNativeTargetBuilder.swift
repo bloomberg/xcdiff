@@ -31,6 +31,26 @@ final class PBXNativeTargetBuilder {
     }
 
     @discardableResult
+    func addBuildConfiguration(name: String, _ closure: ((PBXBuildConfigurationBuilder) -> Void)? = nil)
+        -> PBXNativeTargetBuilder {
+        let builder = PBXBuildConfigurationBuilder(name: name)
+        closure?(builder)
+        let (buildConfiguration, objects) = builder.build()
+        let buildConfigurationList: XCConfigurationList
+        if let targetConfigurationList = pbxtarget.buildConfigurationList {
+            buildConfigurationList = targetConfigurationList
+        } else {
+            buildConfigurationList = XCConfigurationList()
+            pbxtarget.buildConfigurationList = buildConfigurationList
+            self.objects.append(buildConfigurationList)
+        }
+
+        buildConfigurationList.buildConfigurations.append(buildConfiguration)
+        self.objects.append(contentsOf: objects)
+        return self
+    }
+
+    @discardableResult
     func addBuildPhase(_ type: BuildPhase, _ closure: (PBXBuildPhaseBuilder) -> Void) -> PBXNativeTargetBuilder {
         let builder = PBXBuildPhaseBuilder()
         closure(builder)

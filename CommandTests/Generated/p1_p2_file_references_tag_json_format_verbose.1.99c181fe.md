@@ -29,6 +29,8 @@
       "NewFramework.framework",
       "NewFramework\/Info.plist",
       "NewFramework\/NewFramework.h",
+      "Project\/Project.xcconfig",
+      "Project\/Target.xcconfig",
       "ProjectFramework\/Header4.h",
       "ProjectTests\/Responses\/ListResponse.json",
       "ProjectUITests\/MetricsTests.swift",

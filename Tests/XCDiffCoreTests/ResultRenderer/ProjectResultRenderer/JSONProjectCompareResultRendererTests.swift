@@ -66,10 +66,14 @@ final class JSONProjectCompareResultRendererTests: XCTestCase {
         ],
         "differentValues" : [
           {
-            "context" : "DV1"
+            "context" : "DV1",
+            "first" : "DV1_V1",
+            "second" : "nil"
           },
           {
-            "context" : "DV2"
+            "context" : "DV2",
+            "first" : "nil",
+            "second" : "DV2_V2"
           },
           {
             "context" : "DV3",
@@ -100,10 +104,14 @@ final class JSONProjectCompareResultRendererTests: XCTestCase {
         ],
         "differentValues" : [
           {
-            "context" : "DV1"
+            "context" : "DV1",
+            "first" : "DV1_V1",
+            "second" : "nil"
           },
           {
-            "context" : "DV2"
+            "context" : "DV2",
+            "first" : "nil",
+            "second" : "DV2_V2"
           },
           {
             "context" : "DV3",

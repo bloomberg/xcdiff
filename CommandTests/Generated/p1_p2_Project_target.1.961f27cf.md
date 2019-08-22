@@ -14,6 +14,14 @@
 ✅ HEADERS > "Project" target
 ❌ SOURCES > "Project" target
 ❌ RESOURCES > "Project" target
+❌ SETTINGS > Root project > "Debug" configuration > Base configuration
+❌ SETTINGS > Root project > "Debug" configuration > Values
+✅ SETTINGS > Root project > "Release" configuration > Base configuration
+❌ SETTINGS > Root project > "Release" configuration > Values
+❌ SETTINGS > "Project" target > "Debug" configuration > Base configuration
+❌ SETTINGS > "Project" target > "Debug" configuration > Values
+✅ SETTINGS > "Project" target > "Release" configuration > Base configuration
+❌ SETTINGS > "Project" target > "Release" configuration > Values
 
 
 ```

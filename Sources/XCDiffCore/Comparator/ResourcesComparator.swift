@@ -36,7 +36,7 @@ final class ResourcesComparator: Comparator {
             return result(context: ["\"\(first.name)\" target"],
                           first: firstPaths,
                           second: secondPaths,
-                          differences: [])
+                          differentValues: [])
         }
 
         return compareResults

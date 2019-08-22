@@ -22,6 +22,7 @@ public enum ComparatorType {
     case headers
     case sources
     case resources
+    case settings
     case custom(Comparator)
 
     public var tag: String {
@@ -40,6 +41,8 @@ public enum ComparatorType {
             return SourcesComparator()
         case .resources:
             return ResourcesComparator()
+        case .settings:
+            return SettingsComparator()
         case let .custom(comparator):
             return comparator
         }
@@ -54,6 +57,7 @@ public extension Array where Element == ComparatorType {
             .headers,
             .sources,
             .resources,
+            .settings,
         ]
     }
 }

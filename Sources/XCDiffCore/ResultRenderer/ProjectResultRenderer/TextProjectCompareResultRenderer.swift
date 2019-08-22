@@ -73,12 +73,8 @@ final class TextProjectCompareResultRenderer: ProjectCompareResultRenderer {
             differentValues.forEach {
                 renderer.list(.begin)
                 renderer.bullet($0.context, indent: .one)
-                if let first = $0.first {
-                    renderer.bullet("\(first)", indent: .two)
-                }
-                if let second = $0.second {
-                    renderer.bullet("\(second)", indent: .two)
-                }
+                renderer.bullet("\($0.first)", indent: .two)
+                renderer.bullet("\($0.second)", indent: .two)
                 renderer.list(.end)
             }
         }

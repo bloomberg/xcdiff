@@ -31,6 +31,8 @@ struct HeaderDescriptor: Equatable, Hashable {
 }
 
 final class TargetsHelper {
+    let rootPath = Path("/")
+
     func native(from projectDescriptor: ProjectDescriptor) -> Set<String> {
         return Set(projectDescriptor.pbxproj.nativeTargets.map { $0.name })
     }
@@ -70,6 +72,14 @@ final class TargetsHelper {
         }
     }
 
+    /// Find common configurations
+    func commonConfigurations(_ first: ProjectDescriptor,
+                              _ second: ProjectDescriptor) -> [String] {
+        let firstConfigurations = Set(configurations(from: first))
+        let secondConfigurations = Set(configurations(from: second))
+        return firstConfigurations.intersectionSorted(secondConfigurations)
+    }
+
     func sources(from target: PBXTarget) throws -> [SourceDescriptor] {
         guard let sourcesBuildPhase = try target.sourcesBuildPhase() else {
             return []
@@ -93,10 +103,15 @@ final class TargetsHelper {
         }
     }
 
+    /// Find project configurations
+    func configurations(from projectDescriptor: ProjectDescriptor) -> Set<String> {
+        return Set(projectDescriptor.pbxproj.configurationLists
+            .flatMap { $0.buildConfigurations }
+            .map { $0.name })
+    }
+
     private func path(from buildFile: PBXBuildFile) throws -> String? {
-        // TODO: Maybe pass it via init?
-        let sourceRoot = Path("/")
-        guard let path = try buildFile.file?.fullPath(sourceRoot: sourceRoot) else {
+        guard let path = try buildFile.file?.fullPath(sourceRoot: rootPath) else {
             return nil
         }
         return String(path.string)

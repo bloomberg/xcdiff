@@ -37,12 +37,12 @@ final class HeadersComparator: Comparator {
             let secondPaths = Set(secondHeaders.map { $0.path })
 
             let commonHeaders = commonHeaderDescriptorPairs(first: firstHeaders, second: secondHeaders)
-            let difference = attributesDifferences(in: commonHeaders)
+            let differentValues = attributesDifferences(in: commonHeaders)
 
             return result(context: ["\"\(first.name)\" target"],
                           first: firstPaths,
                           second: secondPaths,
-                          differences: difference)
+                          differentValues: differentValues)
         }
     }
 

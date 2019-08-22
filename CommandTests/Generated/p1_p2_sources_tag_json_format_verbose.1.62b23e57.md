@@ -16,6 +16,7 @@
     "differentValues" : [
       {
         "context" : "\/Project\/Group A\/ObjcClass.m compiler flags",
+        "first" : "nil",
         "second" : "-ObjC"
       }
     ],

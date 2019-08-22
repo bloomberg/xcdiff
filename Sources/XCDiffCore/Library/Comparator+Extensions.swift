@@ -19,27 +19,38 @@ import Foundation
 extension Comparator {
     func result(context: [String] = [],
                 description: String? = nil,
+                differentValues: [CompareResult.DifferentValues] = []) -> CompareResult {
+        return CompareResult(tag: tag,
+                             context: context,
+                             description: description,
+                             onlyInFirst: [],
+                             onlyInSecond: [],
+                             differentValues: differentValues)
+    }
+
+    func result(context: [String] = [],
+                description: String? = nil,
                 onlyInFirst: [String] = [],
                 onlyInSecond: [String] = [],
-                differences: [CompareResult.DifferentValues] = []) -> CompareResult {
+                differentValues: [CompareResult.DifferentValues] = []) -> CompareResult {
         return CompareResult(tag: tag,
                              context: context,
                              description: description,
                              onlyInFirst: onlyInFirst,
                              onlyInSecond: onlyInSecond,
-                             differentValues: differences)
+                             differentValues: differentValues)
     }
 
     func result(context: [String] = [],
                 description: String? = nil,
                 first: Set<String> = [],
                 second: Set<String> = [],
-                differences: [CompareResult.DifferentValues] = []) -> CompareResult {
+                differentValues: [CompareResult.DifferentValues] = []) -> CompareResult {
         return result(context: context,
                       description: description,
                       onlyInFirst: first.subtracting(second).sorted(),
                       onlyInSecond: second.subtracting(first).sorted(),
-                      differences: differences)
+                      differentValues: differentValues)
     }
 }
 
@@ -48,23 +59,23 @@ extension Comparator {
                  description: String? = nil,
                  onlyInFirst: [String] = [],
                  onlyInSecond: [String] = [],
-                 differences: [CompareResult.DifferentValues] = []) -> [CompareResult] {
+                 differentValues: [CompareResult.DifferentValues] = []) -> [CompareResult] {
         return [result(context: context,
                        description: description,
                        onlyInFirst: onlyInFirst,
                        onlyInSecond: onlyInSecond,
-                       differences: differences)]
+                       differentValues: differentValues)]
     }
 
     func results(context: [String] = [],
                  description: String? = nil,
                  first: Set<String> = [],
                  second: Set<String> = [],
-                 differences: [CompareResult.DifferentValues] = []) -> [CompareResult] {
+                 differentValues: [CompareResult.DifferentValues] = []) -> [CompareResult] {
         return [result(context: context,
                        description: description,
                        first: first,
                        second: second,
-                       differences: differences)]
+                       differentValues: differentValues)]
     }
 }

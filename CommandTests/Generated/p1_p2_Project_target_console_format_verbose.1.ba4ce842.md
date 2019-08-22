@@ -21,11 +21,13 @@
   • ProjectUITests/Screenshots/empty.png
 
 
-⚠️  Only in second (7):
+⚠️  Only in second (9):
 
   • NewFramework.framework
   • NewFramework/Info.plist
   • NewFramework/NewFramework.h
+  • Project/Project.xcconfig
+  • Project/Target.xcconfig
   • ProjectFramework/Header4.h
   • ProjectTests/Responses/ListResponse.json
   • ProjectUITests/MetricsTests.swift
@@ -45,6 +47,7 @@
 ⚠️  Value mismatch (1):
 
   • /Project/Group A/ObjcClass.m compiler flags
+    ◦ nil
     ◦ -ObjC
 
 
@@ -54,6 +57,58 @@
 
   • /Project/Group B/AViewController.xib
   • /Project/Resources/time.png
+
+
+❌ SETTINGS > Root project > "Debug" configuration > Base configuration
+
+⚠️  Value mismatch (1):
+
+  • Path to .xcconfig
+    ◦ nil
+    ◦ /Project/Project.xcconfig
+
+
+❌ SETTINGS > Root project > "Debug" configuration > Values
+
+⚠️  Only in second (1):
+
+  • CUSTOM_SETTGING_1
+
+
+✅ SETTINGS > Root project > "Release" configuration > Base configuration
+❌ SETTINGS > Root project > "Release" configuration > Values
+
+⚠️  Only in second (1):
+
+  • CUSTOM_SETTGING_1
+
+
+❌ SETTINGS > "Project" target > "Debug" configuration > Base configuration
+
+⚠️  Value mismatch (1):
+
+  • Path to .xcconfig
+    ◦ nil
+    ◦ /Project/Target.xcconfig
+
+
+❌ SETTINGS > "Project" target > "Debug" configuration > Values
+
+⚠️  Value mismatch (1):
+
+  • CUSTOM_SETTING_COMMON
+    ◦ VALUE_1
+    ◦ VALUE_2
+
+
+✅ SETTINGS > "Project" target > "Release" configuration > Base configuration
+❌ SETTINGS > "Project" target > "Release" configuration > Values
+
+⚠️  Value mismatch (1):
+
+  • CUSTOM_SETTING_COMMON
+    ◦ VALUE_1
+    ◦ VALUE_2
 
 
 

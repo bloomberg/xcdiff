@@ -35,6 +35,17 @@ final class PBXProjBuilder {
     }
 
     @discardableResult
+    func addBuildConfiguration(name: String, _ closure: ((PBXBuildConfigurationBuilder) -> Void)? = nil)
+        -> PBXProjBuilder {
+        let builder = PBXBuildConfigurationBuilder(name: name)
+        closure?(builder)
+        let (buildConfiguration, objects) = builder.build()
+        pbxproject.buildConfigurationList.buildConfigurations.append(buildConfiguration)
+        objects.forEach { pbxproj.add(object: $0) }
+        return self
+    }
+
+    @discardableResult
     func addTarget(name: String = "Target", _ closure: ((PBXNativeTargetBuilder) -> Void)? = nil) -> PBXProjBuilder {
         let builder = PBXNativeTargetBuilder(name: name)
         closure?(builder)

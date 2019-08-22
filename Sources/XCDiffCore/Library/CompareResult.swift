@@ -20,15 +20,15 @@ import XcodeProj
 public struct CompareResult: GenericCompareResult, Equatable {
     public struct DifferentValues: Encodable, Equatable {
         public let context: String
-        public let first: String?
-        public let second: String?
+        public let first: String
+        public let second: String
 
         public init(context: String,
                     first: String? = nil,
                     second: String? = nil) {
             self.context = context
-            self.first = first
-            self.second = second
+            self.first = first ?? "nil"
+            self.second = second ?? "nil"
         }
     }
 

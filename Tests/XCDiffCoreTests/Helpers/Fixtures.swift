@@ -52,8 +52,8 @@ final class CompareResultFixtures {
                              onlyInFirst: ["OIF1", "OIF2"],
                              onlyInSecond: ["OIS1", "OIS2", "OIS3"],
                              differentValues: [
-                                 CompareResult.DifferentValues(context: "DV1"),
-                                 CompareResult.DifferentValues(context: "DV2"),
+                                 CompareResult.DifferentValues(context: "DV1", first: "DV1_V1"),
+                                 CompareResult.DifferentValues(context: "DV2", second: "DV2_V2"),
                                  CompareResult.DifferentValues(context: "DV3", first: "DV3_V1", second: "DV3_V2"),
                                  CompareResult.DifferentValues(context: "DV4", first: "DV4_V1", second: "DV4_V2"),
                              ])
