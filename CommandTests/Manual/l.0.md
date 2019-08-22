@@ -8,6 +8,7 @@
 
 # Expected output
 ```
+- FILE_REFERENCES
 - TARGETS
 - HEADERS
 - SOURCES

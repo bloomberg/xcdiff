@@ -68,6 +68,18 @@ final class PBXProjBuilder {
         return self
     }
 
+    @discardableResult
+    func addFileReferences(_ paths: [String]) -> PBXProjBuilder {
+        paths.forEach { addFileReference($0) }
+        return self
+    }
+
+    @discardableResult
+    func addFileReference(_ path: String) -> PBXProjBuilder {
+        pbxproj.add(object: PBXFileReference(path: path))
+        return self
+    }
+
     func build() -> PBXProj {
         return pbxproj
     }
@@ -87,6 +99,7 @@ final class PBXProjBuilder {
         let objects = configurationListObjects + [mainGroup, project]
         let proj = PBXProj(rootObject: project,
                            objects: objects)
+
         return (proj, project)
     }
 

@@ -17,6 +17,7 @@
 import Foundation
 
 public enum ComparatorType {
+    case fileReferences
     case targets
     case headers
     case sources
@@ -29,6 +30,8 @@ public enum ComparatorType {
 
     func comparator() -> Comparator {
         switch self {
+        case .fileReferences:
+            return FileReferencesComparator()
         case .targets:
             return TargetsComparator()
         case .headers:
@@ -46,6 +49,7 @@ public enum ComparatorType {
 public extension Array where Element == ComparatorType {
     static var allAvailableComparators: [ComparatorType] {
         return [
+            .fileReferences,
             .targets,
             .headers,
             .sources,

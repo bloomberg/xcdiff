@@ -103,6 +103,7 @@
 		2E26639322B7F52600BA59BC /* ProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E26639722B7F52600BA59BC /* ProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectUITests.swift; sourceTree = "<group>"; };
 		2E26639922B7F52600BA59BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E8ED10A230D90A00059C005 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2EB29202230B2A3E00C9EB4A /* ProjectFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProjectFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB29204230B2A3E00C9EB4A /* ProjectFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectFramework.h; sourceTree = "<group>"; };
 		2EB29205230B2A3E00C9EB4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -164,6 +165,7 @@
 		2E26636B22B7F52500BA59BC = {
 			isa = PBXGroup;
 			children = (
+				2E8ED10A230D90A00059C005 /* README.md */,
 				2E26637622B7F52500BA59BC /* Project */,
 				2E26638B22B7F52600BA59BC /* ProjectTests */,
 				2E26639622B7F52600BA59BC /* ProjectUITests */,

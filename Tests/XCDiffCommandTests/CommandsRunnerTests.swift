@@ -46,6 +46,7 @@ final class CommandsRunnerTests: XCTestCase {
 
         // Then
         XCTAssertEqual(printer.output, """
+        ✅ FILE_REFERENCES
         ✅ TARGETS > NATIVE targets
         ✅ TARGETS > AGGREGATE targets
         ✅ HEADERS > "Project" target
