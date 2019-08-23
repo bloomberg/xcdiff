@@ -18,7 +18,7 @@
 import XCTest
 
 final class SourcesComparatorTests: XCTestCase {
-    var subject: SourcesComparator!
+    private var subject: SourcesComparator!
 
     override func setUp() {
         subject = SourcesComparator()

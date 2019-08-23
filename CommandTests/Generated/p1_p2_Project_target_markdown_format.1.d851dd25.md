@@ -27,6 +27,9 @@
 ## ❌ RESOURCES > "Project" target
 
 
+## ❌ CONFIGURATIONS > Root project
+
+
 ## ❌ SETTINGS > Root project > "Debug" configuration > Base configuration
 
 

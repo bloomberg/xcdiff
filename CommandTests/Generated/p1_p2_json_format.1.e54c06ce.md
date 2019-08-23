@@ -264,6 +264,21 @@
   },
   {
     "context" : [
+      "Root project"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "CUSTOM_NEW"
+    ],
+    "tag" : "configurations"
+  },
+  {
+    "context" : [
       "Root project",
       "\"Debug\" configuration",
       "Base configuration"

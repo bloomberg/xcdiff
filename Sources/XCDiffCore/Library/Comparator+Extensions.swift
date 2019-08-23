@@ -48,8 +48,8 @@ extension Comparator {
                 differentValues: [CompareResult.DifferentValues] = []) -> CompareResult {
         return result(context: context,
                       description: description,
-                      onlyInFirst: first.subtracting(second).sorted(),
-                      onlyInSecond: second.subtracting(first).sorted(),
+                      onlyInFirst: first.subtractingAndSorted(second),
+                      onlyInSecond: second.subtractingAndSorted(first),
                       differentValues: differentValues)
     }
 }

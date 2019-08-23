@@ -6,7 +6,7 @@ import subprocess
 import sys
 import os
 
-TAGS = ["", "file_references", "targets", "headers", "resources", "settings", "sources"]
+TAGS = ["", "file_references", "targets", "headers", "resources", "configurations", "settings", "sources"]
 TARGETS = ["", "Project", "NewFramework"]
 FORMATS = ["", "console", "json", "markdown"]
 VERBOSE = ["", "-v"]

@@ -126,6 +126,13 @@
   • /ProjectUITests/Screenshots/empty.png
 
 
+❌ CONFIGURATIONS > Root project
+
+⚠️  Only in second (1):
+
+  • CUSTOM_NEW
+
+
 ❌ SETTINGS > Root project > "Debug" configuration > Base configuration
 
 ⚠️  Value mismatch (1):
