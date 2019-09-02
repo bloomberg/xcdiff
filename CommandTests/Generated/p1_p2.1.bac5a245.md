@@ -44,6 +44,7 @@
 ✅ SETTINGS > "ProjectUITests" target > "Debug" configuration > Values
 ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Base configuration
 ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Values
+❌ SOURCE_TREE > Root project
 
 
 ```

@@ -23,6 +23,7 @@
 ❌ SETTINGS > "Project" target > "Debug" configuration > Values
 ✅ SETTINGS > "Project" target > "Release" configuration > Base configuration
 ❌ SETTINGS > "Project" target > "Release" configuration > Values
+❌ SOURCE_TREE > Root project
 
 
 ```

@@ -49,9 +49,14 @@ final class PBXProjBuilder {
     func addTarget(name: String = "Target", _ closure: ((PBXNativeTargetBuilder) -> Void)? = nil) -> PBXProjBuilder {
         let builder = PBXNativeTargetBuilder(name: name)
         closure?(builder)
-        let (target, targetObjects) = builder.build()
-        pbxproject.targets.append(target)
-        targetObjects.forEach { pbxproj.add(object: $0) }
+        let nativeTargetPrototype = builder.build()
+        pbxproject.targets.append(nativeTargetPrototype.pbxtarget)
+        nativeTargetPrototype.objects.forEach { pbxproj.add(object: $0) }
+        let group = PBXGroup(children: nativeTargetPrototype.fileElements, sourceTree: .group, name: name)
+        pbxproj.add(object: group)
+        nativeTargetPrototype.fileElements.forEach { $0.parent = group }
+        group.parent = pbxproject.mainGroup
+        pbxproject.mainGroup.children.append(group)
         return self
     }
 

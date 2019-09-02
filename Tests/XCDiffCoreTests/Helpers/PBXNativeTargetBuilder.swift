@@ -17,17 +17,26 @@
 import Foundation
 import XcodeProj
 
+struct PBXNativeTargetPrototype {
+    let pbxtarget: PBXNativeTarget
+    let objects: [PBXObject]
+    let fileElements: [PBXFileElement] // need to be added to the main group
+}
+
 final class PBXNativeTargetBuilder {
     private var pbxtarget: PBXNativeTarget
     private var objects: [PBXObject] = []
+    private var fileElements: [PBXFileElement] = []
 
     init(name: String) {
         pbxtarget = PBXNativeTarget(name: name)
         objects.append(pbxtarget)
     }
 
-    func build() -> (PBXNativeTarget, [PBXObject]) {
-        return (pbxtarget, objects)
+    func build() -> PBXNativeTargetPrototype {
+        return PBXNativeTargetPrototype(pbxtarget: pbxtarget,
+                                        objects: objects,
+                                        fileElements: fileElements)
     }
 
     @discardableResult
@@ -57,6 +66,8 @@ final class PBXNativeTargetBuilder {
         let (buildPhase, buildPhaseObjects) = builder.build(type)
         pbxtarget.buildPhases.append(buildPhase)
         objects.append(contentsOf: buildPhaseObjects)
+        let fileElements = buildPhase.files?.compactMap { $0.file } ?? []
+        self.fileElements.append(contentsOf: fileElements)
         return self
     }
 
