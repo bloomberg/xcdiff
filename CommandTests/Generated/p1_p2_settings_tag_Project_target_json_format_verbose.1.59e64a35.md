@@ -19,7 +19,7 @@
       {
         "context" : "Path to .xcconfig",
         "first" : "nil",
-        "second" : "\/Project\/Project.xcconfig"
+        "second" : "Project\/Project.xcconfig"
       }
     ],
     "onlyInFirst" : [
@@ -91,7 +91,7 @@
       {
         "context" : "Path to .xcconfig",
         "first" : "nil",
-        "second" : "\/Project\/Target.xcconfig"
+        "second" : "Project\/Target.xcconfig"
       }
     ],
     "onlyInFirst" : [

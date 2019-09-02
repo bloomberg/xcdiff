@@ -63,16 +63,16 @@
 
 ### ⚠️  Only in second (1):
 
-  - `/ProjectFramework/Header4.h`
+  - `ProjectFramework/Header4.h`
 
 
 ### ⚠️  Value mismatch (2):
 
-  - `/ProjectFramework/Header1.h attributes`
+  - `ProjectFramework/Header1.h attributes`
     - `Public`
     - `nil (Project)`
 
-  - `/ProjectFramework/Header2.h attributes`
+  - `ProjectFramework/Header2.h attributes`
     - `Private`
     - `nil (Project)`
 
@@ -89,12 +89,12 @@
 
 ### ⚠️  Only in first (1):
 
-  - `/Project/Group B/AnotherObjcClass.m`
+  - `Project/Group B/AnotherObjcClass.m`
 
 
 ### ⚠️  Value mismatch (1):
 
-  - `/Project/Group A/ObjcClass.m compiler flags`
+  - `Project/Group A/ObjcClass.m compiler flags`
     - `nil`
     - `-ObjC`
 
@@ -108,7 +108,7 @@
 
 ### ⚠️  Only in first (1):
 
-  - `/ProjectTests/BarTests.swift`
+  - `ProjectTests/BarTests.swift`
 
 
 
@@ -117,12 +117,12 @@
 
 ### ⚠️  Only in first (1):
 
-  - `/ProjectUITests/LoginTests.swift`
+  - `ProjectUITests/LoginTests.swift`
 
 
 ### ⚠️  Only in second (1):
 
-  - `/ProjectUITests/MetricsTests.swift`
+  - `ProjectUITests/MetricsTests.swift`
 
 
 
@@ -131,8 +131,8 @@
 
 ### ⚠️  Only in first (2):
 
-  - `/Project/Group B/AViewController.xib`
-  - `/Project/Resources/time.png`
+  - `Project/Group B/AViewController.xib`
+  - `Project/Resources/time.png`
 
 
 
@@ -144,7 +144,7 @@
 
 ### ⚠️  Only in second (1):
 
-  - `/ProjectTests/Responses/ListResponse.json`
+  - `ProjectTests/Responses/ListResponse.json`
 
 
 
@@ -153,7 +153,7 @@
 
 ### ⚠️  Only in first (1):
 
-  - `/ProjectUITests/Screenshots/empty.png`
+  - `ProjectUITests/Screenshots/empty.png`
 
 
 
@@ -173,7 +173,7 @@
 
   - `Path to .xcconfig`
     - `nil`
-    - `/Project/Project.xcconfig`
+    - `Project/Project.xcconfig`
 
 
 
@@ -205,7 +205,7 @@
 
   - `Path to .xcconfig`
     - `nil`
-    - `/Project/Target.xcconfig`
+    - `Project/Target.xcconfig`
 
 
 

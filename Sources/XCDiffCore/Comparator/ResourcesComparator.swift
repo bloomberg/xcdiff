@@ -27,13 +27,11 @@ final class ResourcesComparator: Comparator {
             .commonTargets(first, second)
             .filter(by: parameters.targets)
 
-        let compareResults = try commonTargets.map { targetPair -> CompareResult in
-            let (first, second) = targetPair
+        let compareResults = try commonTargets.map { firstTarget, secondTarget -> CompareResult in
+            let firstPaths = Set(try helper.resources(from: firstTarget, sourceRoot: first.sourceRoot))
+            let secondPaths = Set(try helper.resources(from: secondTarget, sourceRoot: second.sourceRoot))
 
-            let firstPaths = Set(try helper.resources(from: first))
-            let secondPaths = Set(try helper.resources(from: second))
-
-            return result(context: ["\"\(first.name)\" target"],
+            return result(context: ["\"\(firstTarget.name)\" target"],
                           first: firstPaths,
                           second: secondPaths,
                           differentValues: [])

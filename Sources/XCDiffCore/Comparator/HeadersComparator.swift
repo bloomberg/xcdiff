@@ -29,9 +29,9 @@ final class HeadersComparator: Comparator {
             .commonTargets(first, second)
             .filter(by: parameters.targets)
 
-        return try commonTargets.map { first, second -> CompareResult in
-            let firstHeaders = try targetsHelper.headers(from: first)
-            let secondHeaders = try targetsHelper.headers(from: second)
+        return try commonTargets.map { firstTarget, secondTarget -> CompareResult in
+            let firstHeaders = try targetsHelper.headers(from: firstTarget, sourceRoot: first.sourceRoot)
+            let secondHeaders = try targetsHelper.headers(from: secondTarget, sourceRoot: second.sourceRoot)
 
             let firstPaths = Set(firstHeaders.map { $0.path })
             let secondPaths = Set(secondHeaders.map { $0.path })
@@ -39,7 +39,7 @@ final class HeadersComparator: Comparator {
             let commonHeaders = commonHeaderDescriptorPairs(first: firstHeaders, second: secondHeaders)
             let differentValues = attributesDifferences(in: commonHeaders)
 
-            return result(context: ["\"\(first.name)\" target"],
+            return result(context: ["\"\(secondTarget.name)\" target"],
                           first: firstPaths,
                           second: secondPaths,
                           differentValues: differentValues)

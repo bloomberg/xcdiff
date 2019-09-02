@@ -28,14 +28,14 @@ extension Set where Element == String {
 
 extension Array where Element == String {
     func subtractingAndSorted(_ second: [Element]?) -> [Element] {
-        return Set(self).subtractingAndSorted(second?.asSet())
+        return Set(self).subtractingAndSorted(second?.toSet())
     }
 
     func commonSorted(_ second: [Element]?) -> [Element] {
-        return Set(self).intersectionSorted(second?.asSet())
+        return Set(self).intersectionSorted(second?.toSet())
     }
 
-    private func asSet() -> Set<Element> {
+    func toSet() -> Set<Element> {
         return Set(self)
     }
 }

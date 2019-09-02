@@ -14,7 +14,7 @@
 
   • Path to .xcconfig
     ◦ nil
-    ◦ /Project/Project.xcconfig
+    ◦ Project/Project.xcconfig
 
 
 ❌ SETTINGS > Root project > "Debug" configuration > Values
@@ -38,7 +38,7 @@
 
   • Path to .xcconfig
     ◦ nil
-    ◦ /Project/Target.xcconfig
+    ◦ Project/Target.xcconfig
 
 
 ❌ SETTINGS > "Project" target > "Debug" configuration > Values

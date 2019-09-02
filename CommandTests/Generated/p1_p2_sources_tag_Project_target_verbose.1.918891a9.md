@@ -12,12 +12,12 @@
 
 ⚠️  Only in first (1):
 
-  • /Project/Group B/AnotherObjcClass.m
+  • Project/Group B/AnotherObjcClass.m
 
 
 ⚠️  Value mismatch (1):
 
-  • /Project/Group A/ObjcClass.m compiler flags
+  • Project/Group A/ObjcClass.m compiler flags
     ◦ nil
     ◦ -ObjC
 

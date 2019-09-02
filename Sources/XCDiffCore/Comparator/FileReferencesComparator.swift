@@ -21,7 +21,6 @@ final class FileReferencesComparator: Comparator {
     let tag = "file_references"
 
     private let targetsHelper = TargetsHelper()
-    private let sourceRoot = Path("/")
 
     func compare(_ first: ProjectDescriptor,
                  _ second: ProjectDescriptor,
@@ -33,9 +32,7 @@ final class FileReferencesComparator: Comparator {
     // MARK: - Private
 
     private func fileReferencesPaths(from projectDescriptor: ProjectDescriptor) throws -> Set<String> {
-        return try Set(projectDescriptor.pbxproj.fileReferences
-            .map { try $0.fullPath(sourceRoot: sourceRoot)?.string ?? $0.path ?? $0.name }
-            .compactMap { $0 }
-            .map { $0.hasPrefix(sourceRoot.string) ? String($0.dropFirst()) : $0 })
+        return try targetsHelper.fileReferences(from: projectDescriptor.pbxproj,
+                                                sourceRoot: projectDescriptor.sourceRoot)
     }
 }

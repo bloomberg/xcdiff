@@ -14,23 +14,22 @@
 // limitations under the License.
 //
 
+import Basic
 import Foundation
 import PathKit
 import XcodeProj
 
-public struct ProjectDescriptor {
-    public var pbxproj: PBXProj {
-        return xcodeProj.pbxproj
-    }
-
-    public let path: Path
-
-    public var sourceRoot: Path { return path.parent() }
-
-    private let xcodeProj: XcodeProj
-
-    public init(path: Path, xcodeProj: XcodeProj) {
-        self.path = path
-        self.xcodeProj = xcodeProj
+class PathHelper {
+    func fullPath(from fileElement: PBXFileElement?, sourceRoot: Path) throws -> String? {
+        guard let path = try fileElement?.fullPath(sourceRoot: sourceRoot.absolute()) else {
+            return nil
+        }
+        guard path.isAbsolute else {
+            return path.string
+        }
+        let absolutePath = AbsolutePath(path.string)
+        let sourceRootAbsolutePath = AbsolutePath(sourceRoot.absolute().string)
+        let relativePath = absolutePath.relative(to: sourceRootAbsolutePath)
+        return relativePath.pathString
     }
 }

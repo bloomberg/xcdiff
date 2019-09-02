@@ -89,12 +89,12 @@
     ],
     "differentValues" : [
       {
-        "context" : "\/ProjectFramework\/Header1.h attributes",
+        "context" : "ProjectFramework\/Header1.h attributes",
         "first" : "Public",
         "second" : "nil (Project)"
       },
       {
-        "context" : "\/ProjectFramework\/Header2.h attributes",
+        "context" : "ProjectFramework\/Header2.h attributes",
         "first" : "Private",
         "second" : "nil (Project)"
       }
@@ -103,7 +103,7 @@
 
     ],
     "onlyInSecond" : [
-      "\/ProjectFramework\/Header4.h"
+      "ProjectFramework\/Header4.h"
     ],
     "tag" : "headers"
   },
@@ -143,13 +143,13 @@
     ],
     "differentValues" : [
       {
-        "context" : "\/Project\/Group A\/ObjcClass.m compiler flags",
+        "context" : "Project\/Group A\/ObjcClass.m compiler flags",
         "first" : "nil",
         "second" : "-ObjC"
       }
     ],
     "onlyInFirst" : [
-      "\/Project\/Group B\/AnotherObjcClass.m"
+      "Project\/Group B\/AnotherObjcClass.m"
     ],
     "onlyInSecond" : [
 
@@ -179,7 +179,7 @@
 
     ],
     "onlyInFirst" : [
-      "\/ProjectTests\/BarTests.swift"
+      "ProjectTests\/BarTests.swift"
     ],
     "onlyInSecond" : [
 
@@ -194,10 +194,10 @@
 
     ],
     "onlyInFirst" : [
-      "\/ProjectUITests\/LoginTests.swift"
+      "ProjectUITests\/LoginTests.swift"
     ],
     "onlyInSecond" : [
-      "\/ProjectUITests\/MetricsTests.swift"
+      "ProjectUITests\/MetricsTests.swift"
     ],
     "tag" : "sources"
   },
@@ -209,8 +209,8 @@
 
     ],
     "onlyInFirst" : [
-      "\/Project\/Group B\/AViewController.xib",
-      "\/Project\/Resources\/time.png"
+      "Project\/Group B\/AViewController.xib",
+      "Project\/Resources\/time.png"
     ],
     "onlyInSecond" : [
 
@@ -243,7 +243,7 @@
 
     ],
     "onlyInSecond" : [
-      "\/ProjectTests\/Responses\/ListResponse.json"
+      "ProjectTests\/Responses\/ListResponse.json"
     ],
     "tag" : "resources"
   },
@@ -255,7 +255,7 @@
 
     ],
     "onlyInFirst" : [
-      "\/ProjectUITests\/Screenshots\/empty.png"
+      "ProjectUITests\/Screenshots\/empty.png"
     ],
     "onlyInSecond" : [
 
@@ -287,7 +287,7 @@
       {
         "context" : "Path to .xcconfig",
         "first" : "nil",
-        "second" : "\/Project\/Project.xcconfig"
+        "second" : "Project\/Project.xcconfig"
       }
     ],
     "onlyInFirst" : [
@@ -359,7 +359,7 @@
       {
         "context" : "Path to .xcconfig",
         "first" : "nil",
-        "second" : "\/Project\/Target.xcconfig"
+        "second" : "Project\/Target.xcconfig"
       }
     ],
     "onlyInFirst" : [

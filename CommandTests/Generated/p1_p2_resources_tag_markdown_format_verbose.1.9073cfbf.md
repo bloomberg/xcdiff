@@ -14,8 +14,8 @@
 
 ### ⚠️  Only in first (2):
 
-  - `/Project/Group B/AViewController.xib`
-  - `/Project/Resources/time.png`
+  - `Project/Group B/AViewController.xib`
+  - `Project/Resources/time.png`
 
 
 
@@ -27,7 +27,7 @@
 
 ### ⚠️  Only in second (1):
 
-  - `/ProjectTests/Responses/ListResponse.json`
+  - `ProjectTests/Responses/ListResponse.json`
 
 
 
@@ -36,7 +36,7 @@
 
 ### ⚠️  Only in first (1):
 
-  - `/ProjectUITests/Screenshots/empty.png`
+  - `ProjectUITests/Screenshots/empty.png`
 
 
 

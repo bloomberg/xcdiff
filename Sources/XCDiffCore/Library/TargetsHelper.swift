@@ -31,7 +31,7 @@ struct HeaderDescriptor: Equatable, Hashable {
 }
 
 final class TargetsHelper {
-    let rootPath = Path("/")
+    private let pathHelper = PathHelper()
 
     func native(from projectDescriptor: ProjectDescriptor) -> Set<String> {
         return Set(projectDescriptor.pbxproj.nativeTargets.map { $0.name })
@@ -60,14 +60,14 @@ final class TargetsHelper {
         }
     }
 
-    func headers(from target: PBXTarget) throws -> [HeaderDescriptor] {
+    func headers(from target: PBXTarget, sourceRoot: Path) throws -> [HeaderDescriptor] {
         guard let headersBuildPhase = target.headersBuildPhase() else {
             return []
         }
         let buildFiles = headersBuildPhase.files?.compactMap { $0 } ?? []
 
         return try buildFiles.map {
-            HeaderDescriptor(path: try path(from: $0) ?? "",
+            HeaderDescriptor(path: try path(from: $0.file, sourceRoot: sourceRoot) ?? "",
                              attributes: $0.attributes())
         }
     }
@@ -80,27 +80,34 @@ final class TargetsHelper {
         return firstConfigurations.intersectionSorted(secondConfigurations)
     }
 
-    func sources(from target: PBXTarget) throws -> [SourceDescriptor] {
+    func sources(from target: PBXTarget, sourceRoot: Path) throws -> [SourceDescriptor] {
         guard let sourcesBuildPhase = try target.sourcesBuildPhase() else {
             return []
         }
         let buildFiles = sourcesBuildPhase.files?.compactMap { $0 } ?? []
 
         return try buildFiles.map {
-            SourceDescriptor(path: try path(from: $0) ?? "",
+            SourceDescriptor(path: try path(from: $0.file, sourceRoot: sourceRoot) ?? "",
                              flags: $0.compilerFlags())
         }
     }
 
-    func resources(from target: PBXTarget) throws -> [String] {
+    func resources(from target: PBXTarget, sourceRoot: Path) throws -> [String] {
         guard let resourcesBuildPhase = try target.resourcesBuildPhase() else {
             return []
         }
         let buildFiles = resourcesBuildPhase.files?.compactMap { $0 } ?? []
 
         return try buildFiles.compactMap {
-            try path(from: $0)
+            try path(from: $0.file, sourceRoot: sourceRoot)
         }
+    }
+
+    func fileReferences(from proj: PBXProj, sourceRoot: Path) throws -> Set<String> {
+        return try proj.fileReferences
+            .map { try path(from: $0, sourceRoot: sourceRoot) ?? $0.path }
+            .compactMap { $0 }
+            .toSet()
     }
 
     /// Find project configurations
@@ -110,11 +117,8 @@ final class TargetsHelper {
             .map { $0.name })
     }
 
-    private func path(from buildFile: PBXBuildFile) throws -> String? {
-        guard let path = try buildFile.file?.fullPath(sourceRoot: rootPath) else {
-            return nil
-        }
-        return String(path.string)
+    private func path(from fileElement: PBXFileElement?, sourceRoot: Path) throws -> String? {
+        return try pathHelper.fullPath(from: fileElement, sourceRoot: sourceRoot)
     }
 }
 

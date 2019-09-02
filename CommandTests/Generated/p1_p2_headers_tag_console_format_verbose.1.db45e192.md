@@ -13,16 +13,16 @@
 
 ⚠️  Only in second (1):
 
-  • /ProjectFramework/Header4.h
+  • ProjectFramework/Header4.h
 
 
 ⚠️  Value mismatch (2):
 
-  • /ProjectFramework/Header1.h attributes
+  • ProjectFramework/Header1.h attributes
     ◦ Public
     ◦ nil (Project)
 
-  • /ProjectFramework/Header2.h attributes
+  • ProjectFramework/Header2.h attributes
     ◦ Private
     ◦ nil (Project)
 

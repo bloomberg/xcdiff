@@ -41,12 +41,12 @@
 
 ⚠️  Only in first (1):
 
-  • /Project/Group B/AnotherObjcClass.m
+  • Project/Group B/AnotherObjcClass.m
 
 
 ⚠️  Value mismatch (1):
 
-  • /Project/Group A/ObjcClass.m compiler flags
+  • Project/Group A/ObjcClass.m compiler flags
     ◦ nil
     ◦ -ObjC
 
@@ -55,8 +55,8 @@
 
 ⚠️  Only in first (2):
 
-  • /Project/Group B/AViewController.xib
-  • /Project/Resources/time.png
+  • Project/Group B/AViewController.xib
+  • Project/Resources/time.png
 
 
 ❌ CONFIGURATIONS > Root project
@@ -72,7 +72,7 @@
 
   • Path to .xcconfig
     ◦ nil
-    ◦ /Project/Project.xcconfig
+    ◦ Project/Project.xcconfig
 
 
 ❌ SETTINGS > Root project > "Debug" configuration > Values
@@ -96,7 +96,7 @@
 
   • Path to .xcconfig
     ◦ nil
-    ◦ /Project/Target.xcconfig
+    ◦ Project/Target.xcconfig
 
 
 ❌ SETTINGS > "Project" target > "Debug" configuration > Values

@@ -17,8 +17,8 @@
 
     ],
     "onlyInFirst" : [
-      "\/Project\/Group B\/AViewController.xib",
-      "\/Project\/Resources\/time.png"
+      "Project\/Group B\/AViewController.xib",
+      "Project\/Resources\/time.png"
     ],
     "onlyInSecond" : [
 

@@ -15,13 +15,13 @@
     ],
     "differentValues" : [
       {
-        "context" : "\/Project\/Group A\/ObjcClass.m compiler flags",
+        "context" : "Project\/Group A\/ObjcClass.m compiler flags",
         "first" : "nil",
         "second" : "-ObjC"
       }
     ],
     "onlyInFirst" : [
-      "\/Project\/Group B\/AnotherObjcClass.m"
+      "Project\/Group B\/AnotherObjcClass.m"
     ],
     "onlyInSecond" : [
 
@@ -51,7 +51,7 @@
 
     ],
     "onlyInFirst" : [
-      "\/ProjectTests\/BarTests.swift"
+      "ProjectTests\/BarTests.swift"
     ],
     "onlyInSecond" : [
 
@@ -66,10 +66,10 @@
 
     ],
     "onlyInFirst" : [
-      "\/ProjectUITests\/LoginTests.swift"
+      "ProjectUITests\/LoginTests.swift"
     ],
     "onlyInSecond" : [
-      "\/ProjectUITests\/MetricsTests.swift"
+      "ProjectUITests\/MetricsTests.swift"
     ],
     "tag" : "sources"
   }

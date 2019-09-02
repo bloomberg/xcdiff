@@ -16,7 +16,7 @@
 
   - `Path to .xcconfig`
     - `nil`
-    - `/Project/Project.xcconfig`
+    - `Project/Project.xcconfig`
 
 
 
@@ -48,7 +48,7 @@
 
   - `Path to .xcconfig`
     - `nil`
-    - `/Project/Target.xcconfig`
+    - `Project/Target.xcconfig`
 
 
 

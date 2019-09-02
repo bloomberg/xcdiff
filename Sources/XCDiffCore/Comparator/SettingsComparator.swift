@@ -15,6 +15,7 @@
 //
 
 import Foundation
+import PathKit
 import XcodeProj
 
 final class SettingsComparator: Comparator {
@@ -22,6 +23,7 @@ final class SettingsComparator: Comparator {
 
     private let targetHelper = TargetsHelper()
     private let settingsHelper = SettingsHelper()
+    private let pathHelper = PathHelper()
 
     func compare(_ first: ProjectDescriptor,
                  _ second: ProjectDescriptor,
@@ -48,12 +50,14 @@ final class SettingsComparator: Comparator {
         let commonConfigurations = targetHelper
             .commonConfigurations(first, second)
             .filter(by: parameters.configuration)
-        return try commonTargets.flatMap { first, second -> [CompareResult] in
+        return try commonTargets.flatMap { firstTarget, secondTarget -> [CompareResult] in
             try commonConfigurations.flatMap { configurationName in
-                try compare(first.buildConfigurationList,
-                            second.buildConfigurationList,
+                try compare(firstTarget.buildConfigurationList,
+                            secondTarget.buildConfigurationList,
+                            firstSourceRoot: first.sourceRoot,
+                            secondSourceRoot: second.sourceRoot,
                             configurationName: configurationName,
-                            parentContext: ["\"\(first.name)\" target"])
+                            parentContext: ["\"\(firstTarget.name)\" target"])
             }
         }
     }
@@ -74,13 +78,18 @@ final class SettingsComparator: Comparator {
         return try commonConfigurations.flatMap { configurationName in
             try compare(firstRootProject.buildConfigurationList,
                         secondRootProject.buildConfigurationList,
+                        firstSourceRoot: first.sourceRoot,
+                        secondSourceRoot: second.sourceRoot,
                         configurationName: configurationName,
                         parentContext: ["Root project"])
         }
     }
 
+    // swiftlint:disable:next function_parameter_count
     private func compare(_ first: XCConfigurationList?,
                          _ second: XCConfigurationList?,
+                         firstSourceRoot: Path,
+                         secondSourceRoot: Path,
                          configurationName: String,
                          parentContext: [String]) throws -> [CompareResult] {
         let context = parentContext + ["\"\(configurationName)\" configuration"]
@@ -101,7 +110,9 @@ final class SettingsComparator: Comparator {
                 throw ComparatorError.generic("Configuration not found")
             }
             let baseConfigurations = try compareBaseConfigurations(parentContext: context,
-                                                                   firstConfiguration, secondConfiguration)
+                                                                   firstConfiguration, secondConfiguration,
+                                                                   firstSourceRoot: firstSourceRoot,
+                                                                   secondSourceRoot: secondSourceRoot)
             let settingsValues = try compareSettingsValues(parentContext: context,
                                                            firstConfiguration, secondConfiguration)
             return [baseConfigurations, settingsValues]
@@ -125,9 +136,9 @@ final class SettingsComparator: Comparator {
 
         let valueDifferences: [CompareResult.DifferentValues] = try commonKeys.compactMap { settingName in
             let firstSetting = first.buildSettings[settingName]
-            let secondSettings = second.buildSettings[settingName]
+            let secondSetting = second.buildSettings[settingName]
             let firstString = try settingsHelper.stringFromBuildSetting(firstSetting)
-            let secondString = try settingsHelper.stringFromBuildSetting(secondSettings)
+            let secondString = try settingsHelper.stringFromBuildSetting(secondSetting)
             guard settingValueComparator.compare(firstString, secondString) == .orderedSame else {
                 return .init(context: settingName,
                              first: firstString,
@@ -144,10 +155,12 @@ final class SettingsComparator: Comparator {
 
     private func compareBaseConfigurations(parentContext: [String],
                                            _ first: XCBuildConfiguration,
-                                           _ second: XCBuildConfiguration) throws -> CompareResult {
+                                           _ second: XCBuildConfiguration,
+                                           firstSourceRoot: Path,
+                                           secondSourceRoot: Path) throws -> CompareResult {
         let context = parentContext + ["Base configuration"]
-        let firstBaseConfiguration = try baseConfigurationAsString(from: first)
-        let secondBaseConfiguration = try baseConfigurationAsString(from: second)
+        let firstBaseConfiguration = try baseConfigurationAsString(from: first, sourceRoot: firstSourceRoot)
+        let secondBaseConfiguration = try baseConfigurationAsString(from: second, sourceRoot: secondSourceRoot)
         guard firstBaseConfiguration == secondBaseConfiguration else {
             return result(context: context,
                           differentValues: [.init(context: "Path to .xcconfig",
@@ -157,12 +170,13 @@ final class SettingsComparator: Comparator {
         return result(context: context)
     }
 
-    private func baseConfigurationAsString(from buildConfiguration: XCBuildConfiguration) throws -> String? {
+    private func baseConfigurationAsString(from buildConfiguration: XCBuildConfiguration,
+                                           sourceRoot: Path) throws -> String? {
         guard let baseConfiguration = buildConfiguration.baseConfiguration else {
             return nil
         }
-        if let fullpath = try baseConfiguration.fullPath(sourceRoot: targetHelper.rootPath) {
-            return fullpath.string
+        if let fullPath = try pathHelper.fullPath(from: baseConfiguration, sourceRoot: sourceRoot) {
+            return fullPath
         }
         if let path = baseConfiguration.path {
             return path

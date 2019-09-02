@@ -12,12 +12,12 @@
 
 ⚠️  Only in first (1):
 
-  • /Project/Group B/AnotherObjcClass.m
+  • Project/Group B/AnotherObjcClass.m
 
 
 ⚠️  Value mismatch (1):
 
-  • /Project/Group A/ObjcClass.m compiler flags
+  • Project/Group A/ObjcClass.m compiler flags
     ◦ nil
     ◦ -ObjC
 
@@ -27,19 +27,19 @@
 
 ⚠️  Only in first (1):
 
-  • /ProjectTests/BarTests.swift
+  • ProjectTests/BarTests.swift
 
 
 ❌ SOURCES > "ProjectUITests" target
 
 ⚠️  Only in first (1):
 
-  • /ProjectUITests/LoginTests.swift
+  • ProjectUITests/LoginTests.swift
 
 
 ⚠️  Only in second (1):
 
-  • /ProjectUITests/MetricsTests.swift
+  • ProjectUITests/MetricsTests.swift
 
 
 

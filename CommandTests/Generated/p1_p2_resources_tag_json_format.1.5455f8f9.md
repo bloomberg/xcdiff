@@ -17,8 +17,8 @@
 
     ],
     "onlyInFirst" : [
-      "\/Project\/Group B\/AViewController.xib",
-      "\/Project\/Resources\/time.png"
+      "Project\/Group B\/AViewController.xib",
+      "Project\/Resources\/time.png"
     ],
     "onlyInSecond" : [
 
@@ -51,7 +51,7 @@
 
     ],
     "onlyInSecond" : [
-      "\/ProjectTests\/Responses\/ListResponse.json"
+      "ProjectTests\/Responses\/ListResponse.json"
     ],
     "tag" : "resources"
   },
@@ -63,7 +63,7 @@
 
     ],
     "onlyInFirst" : [
-      "\/ProjectUITests\/Screenshots\/empty.png"
+      "ProjectUITests\/Screenshots\/empty.png"
     ],
     "onlyInSecond" : [
 

@@ -14,8 +14,8 @@
 
 ### ⚠️  Only in first (2):
 
-  - `/Project/Group B/AViewController.xib`
-  - `/Project/Resources/time.png`
+  - `Project/Group B/AViewController.xib`
+  - `Project/Resources/time.png`
 
 
 

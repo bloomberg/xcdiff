@@ -30,12 +30,12 @@
     ],
     "differentValues" : [
       {
-        "context" : "\/ProjectFramework\/Header1.h attributes",
+        "context" : "ProjectFramework\/Header1.h attributes",
         "first" : "Public",
         "second" : "nil (Project)"
       },
       {
-        "context" : "\/ProjectFramework\/Header2.h attributes",
+        "context" : "ProjectFramework\/Header2.h attributes",
         "first" : "Private",
         "second" : "nil (Project)"
       }
@@ -44,7 +44,7 @@
 
     ],
     "onlyInSecond" : [
-      "\/ProjectFramework\/Header4.h"
+      "ProjectFramework\/Header4.h"
     ],
     "tag" : "headers"
   },

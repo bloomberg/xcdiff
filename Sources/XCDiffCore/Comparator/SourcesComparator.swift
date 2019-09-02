@@ -30,10 +30,9 @@ final class SourcesComparator: Comparator {
             .filter(by: parameters.targets)
 
         let sourcesResults = try commonTargets
-            .map { targetPair -> CompareResult in
-                let (first, second) = targetPair
-                let firstSources = try helper.sources(from: first)
-                let secondSources = try helper.sources(from: second)
+            .map { firstTarget, secondTarget -> CompareResult in
+                let firstSources = try helper.sources(from: firstTarget, sourceRoot: first.sourceRoot)
+                let secondSources = try helper.sources(from: secondTarget, sourceRoot: second.sourceRoot)
 
                 let firstPaths = Set(firstSources.map { $0.path })
                 let secondPaths = Set(secondSources.map { $0.path })
@@ -41,7 +40,7 @@ final class SourcesComparator: Comparator {
                 let commonSources = commonSourcesPair(first: firstSources, second: secondSources)
                 let difference = compilerFlagDifferences(in: commonSources)
 
-                return result(context: ["\"\(first.name)\" target"],
+                return result(context: ["\"\(firstTarget.name)\" target"],
                               first: firstPaths,
                               second: secondPaths,
                               differentValues: difference)
