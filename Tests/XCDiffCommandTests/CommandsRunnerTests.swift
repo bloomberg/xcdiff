@@ -19,31 +19,31 @@ import Foundation
 import XCTest
 
 final class CommandsRunnerTests: XCTestCase {
-    private var sut: CommandRunner!
+    private var subject: CommandRunner!
     private var printer: PrinterMock!
-    private var system: SystemMock!
+    private var fileSystem: FileSystemMock!
     private let fixtures = Fixtures()
 
     override func setUp() {
         super.setUp()
 
         printer = PrinterMock()
-        system = SystemMock()
+        fileSystem = FileSystemMock()
 
-        sut = CommandRunner(printer: printer, system: system)
+        subject = CommandRunner(printer: printer, fileSystem: fileSystem)
     }
 
     // swiftlint:disable:next function_body_length
     func testRun_whenProjectsNotSpecifiedButExistInCurrentDirectory() {
         // Given
         let command: [String] = []
-        system.listCurrentDirectoryReturn = [
+        fileSystem.listCurrentDirectoryReturn = [
             fixtures.project.ios_project_1().string,
             fixtures.project.ios_project_1().string,
         ]
 
         // When
-        let code = sut.run(with: command)
+        let code = subject.run(with: command)
 
         // Then
         XCTAssertEqual(printer.output, """
@@ -94,13 +94,13 @@ final class CommandsRunnerTests: XCTestCase {
         // Given
         let command: [String] = []
         let nonExistingPath = fixtures.project.non_existing().string
-        system.listCurrentDirectoryReturn = [
+        fileSystem.listCurrentDirectoryReturn = [
             nonExistingPath,
             fixtures.project.ios_project_2().string,
         ]
 
         // When
-        let code = sut.run(with: command)
+        let code = subject.run(with: command)
 
         // Then
         let expected = "ERROR: The project cannot be found at \(nonExistingPath)\n"
@@ -112,14 +112,14 @@ final class CommandsRunnerTests: XCTestCase {
         // Given
         let command: [String] = []
         let nonExistingPath = fixtures.project.non_existing().string
-        system.listCurrentDirectoryReturn = [
+        fileSystem.listCurrentDirectoryReturn = [
             nonExistingPath,
             fixtures.project.ios_project_1().string,
             fixtures.project.ios_project_2().string,
         ]
 
         // When
-        let code = sut.run(with: command)
+        let code = subject.run(with: command)
 
         // Then
         let expected = "ERROR: Could not find 2 projects in the current directory\n"
@@ -132,7 +132,7 @@ final class CommandsRunnerTests: XCTestCase {
         let command = ["--version"]
 
         // When
-        let code = sut.run(with: command)
+        let code = subject.run(with: command)
 
         // Then
         XCTAssertEqual(printer.output, "0.1.1+debug.local\n")

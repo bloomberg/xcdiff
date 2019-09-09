@@ -16,7 +16,7 @@
 
 @testable import XCDiffCommand
 
-final class SystemMock: System {
+final class FileSystemMock: FileSystem {
     var listCurrentDirectoryReturn = [String]()
     private(set) var listCurrentDirectoryCallsCount: Int = 0
 

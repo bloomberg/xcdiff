@@ -19,6 +19,7 @@ import Foundation
 class SettingValueComparator: ValueComparator {
     typealias T = String
 
+    private let stringDiff = SuffixStringDiff()
     private let projectNameDifference: String?
 
     // MARK: - Lifecycle
@@ -29,7 +30,7 @@ class SettingValueComparator: ValueComparator {
             return
         }
 
-        projectNameDifference = SettingValueComparator.difference(firstProjectName, secondProjectName)
+        projectNameDifference = stringDiff.diff(firstProjectName, secondProjectName)
     }
 
     // MARK: - ValueComparator
@@ -53,7 +54,7 @@ class SettingValueComparator: ValueComparator {
         guard let projectNameDifference = projectNameDifference else {
             return lha == rha
         }
-        let settingValuesDifference = SettingValueComparator.difference(lha, rha)
+        let settingValuesDifference = stringDiff.diff(lha, rha)
         return projectNameDifference == settingValuesDifference
     }
 
@@ -66,40 +67,5 @@ class SettingValueComparator: ValueComparator {
                                           with: "",
                                           options: [],
                                           range: firstSubstringRange.upperBound ..< value.endIndex)
-    }
-
-    private static func difference(_ lha: String, _ rha: String) -> String {
-        let longVal, shortVal: String
-        if lha.count > rha.count {
-            longVal = lha
-            shortVal = rha
-        } else {
-            longVal = rha
-            shortVal = lha
-        }
-
-        var longIndex = longVal.startIndex, shortIndex = shortVal.startIndex
-        var diff = ""
-        while longIndex < longVal.endIndex, shortIndex < shortVal.endIndex {
-            if longVal[longIndex] == shortVal[shortIndex] {
-                shortIndex = shortVal.index(after: shortIndex)
-                longIndex = longVal.index(after: longIndex)
-            } else {
-                diff.append(longVal[longIndex])
-                longIndex = longVal.index(after: longIndex)
-            }
-        }
-
-        while longIndex < longVal.endIndex {
-            diff.append(longVal[longIndex])
-            longIndex = longVal.index(after: longIndex)
-        }
-
-        while shortIndex < shortVal.endIndex {
-            diff.append(shortVal[shortIndex])
-            shortIndex = shortVal.index(after: shortIndex)
-        }
-
-        return diff
     }
 }

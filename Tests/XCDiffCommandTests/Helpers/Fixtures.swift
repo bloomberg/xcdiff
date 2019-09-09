@@ -42,11 +42,6 @@ final class ProjectFixtures {
         return path(to: .ios_project_2)
     }
 
-    func json_diff(_ first: Project, _ second: Project) throws -> String {
-        let path = "\(rootPath().string)/\(first.rawValue)__\(second.rawValue)_diff.json"
-        return try String(contentsOfFile: path)
-    }
-
     func scenarios() -> [Path] {
         return Path.glob("\(rootPath().parent().string)/CommandTests/**/*.md")
     }

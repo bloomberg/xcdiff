@@ -122,35 +122,10 @@ final class SettingsComparator: Comparator {
     private func compareSettingsValues(parentContext: [String],
                                        _ first: XCBuildConfiguration,
                                        _ second: XCBuildConfiguration) throws -> CompareResult {
-        let firstKeys = Array(first.buildSettings.keys)
-        let secondKeys = Array(second.buildSettings.keys)
-        let commonKeys = firstKeys.commonSorted(secondKeys)
-        let onlyInFirst = firstKeys.subtractingAndSorted(secondKeys)
-        let onlyInSecond = secondKeys.subtractingAndSorted(firstKeys)
-
-        // we attempt to ignore differences that are a result of different project names
-        let firstProjectName = first.buildSettings["PROJECT_NAME"] as? String
-        let secondProjectName = second.buildSettings["PROJECT_NAME"] as? String
-        let settingValueComparator = SettingValueComparator(firstProjectName: firstProjectName,
-                                                            secondProjectName: secondProjectName)
-
-        let valueDifferences: [CompareResult.DifferentValues] = try commonKeys.compactMap { settingName in
-            let firstSetting = first.buildSettings[settingName]
-            let secondSetting = second.buildSettings[settingName]
-            let firstString = try settingsHelper.stringFromBuildSetting(firstSetting)
-            let secondString = try settingsHelper.stringFromBuildSetting(secondSetting)
-            guard settingValueComparator.compare(firstString, secondString) == .orderedSame else {
-                return .init(context: settingName,
-                             first: firstString,
-                             second: secondString)
-            }
-
-            return nil
-        }
-        return result(context: parentContext + ["Values"],
-                      onlyInFirst: onlyInFirst,
-                      onlyInSecond: onlyInSecond,
-                      differentValues: valueDifferences)
+        return try settingsHelper.compareSettingsValues(tag: tag,
+                                                        parentContext: parentContext,
+                                                        first.buildSettings,
+                                                        second.buildSettings)
     }
 
     private func compareBaseConfigurations(parentContext: [String],

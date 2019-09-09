@@ -22,7 +22,7 @@ import XCDiffCore
 
 public final class CommandRunner {
     private let printer: Printer
-    private let system: System
+    private let fileSystem: FileSystem
     private let parser: ArgumentParser
     private let versionOption: OptionArgument<Bool>
     private let path1Option: OptionArgument<String>
@@ -34,18 +34,19 @@ public final class CommandRunner {
     private let verboseOption: OptionArgument<Bool>
     private let listOption: OptionArgument<Bool>
     private let command: String
-    private let comparators: [ComparatorType] = .allAvailableComparators
+    private let allComparators: [ComparatorType] = .allAvailableComparators
+    private let defaultComparators: [ComparatorType] = .defaultComparators
 
     // MARK: - Public
 
     // swiftlint:disable:next function_body_length
     public init(command: String = "xcdiff",
                 printer: Printer? = nil,
-                system: System? = nil,
+                fileSystem: FileSystem? = nil,
                 externalParser: ArgumentParser? = nil) {
         self.command = command
         self.printer = printer ?? DefaultPrinter()
-        self.system = system ?? DefaultSystem()
+        self.fileSystem = fileSystem ?? DefaultFileSystem()
 
         if let externalParser = externalParser {
             parser = externalParser.add(subparser: command,
@@ -158,7 +159,7 @@ public final class CommandRunner {
 
         // Set up project comparator
         let (path1, path2) = try getPaths(from: arguments)
-        let projectComparator = ProjectComparator.create(comparators: try comparators.filter(by: tags),
+        let projectComparator = ProjectComparator.create(comparators: try allComparators.filter(by: tags),
                                                          format: format,
                                                          verbose: verbose)
 
@@ -193,7 +194,7 @@ public final class CommandRunner {
 
         // check if both paths are undefined, and can find 2 projects
         // in the current directory
-        let currentDirectory = try system.listCurrentDirectory()
+        let currentDirectory = try fileSystem.listCurrentDirectory()
             .filter { $0.hasSuffix(".xcodeproj") }
             .sorted()
         if currentDirectory.count == 2, path1Arg == nil, path2Arg == nil {
@@ -226,7 +227,7 @@ public final class CommandRunner {
 
     private func getTag(from arguments: ArgumentParser.Result) -> ComparatorParameters.Option<String> {
         guard let tag = arguments.get(tagOption) else {
-            return .all
+            return .some(defaultComparators.map { $0.tag })
         }
         return option(from: tag)
     }

@@ -34,7 +34,7 @@ final class FileReferencesComparatorTests: XCTestCase {
         XCTAssertEqual(subject.tag, "file_references")
     }
 
-    func test_whenNoFileReferences_noDifference() throws {
+    func testCompare_whenNoFileReferences_noDifference() throws {
         // Given
         let first = project(name: "P1")
             .addTarget()
@@ -54,7 +54,7 @@ final class FileReferencesComparatorTests: XCTestCase {
         ])
     }
 
-    func test_whenDifferentFileReferences() throws {
+    func testCompare_whenDifferentFileReferences() throws {
         // Given
         let first = project(name: "P1")
             .addFileReferences(["A.md", "B1.md"])

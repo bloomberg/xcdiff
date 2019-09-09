@@ -22,7 +22,7 @@ public protocol Printer {
     func error(_ message: String)
 }
 
-public protocol System {
+public protocol FileSystem {
     func listCurrentDirectory() throws -> [String]
 }
 
@@ -36,7 +36,7 @@ class DefaultPrinter: Printer {
     }
 }
 
-class DefaultSystem: System {
+class DefaultFileSystem: FileSystem {
     func listCurrentDirectory() throws -> [String] {
         let fileManager = FileManager.default
         let contents = try fileManager.contentsOfDirectory(atPath: fileManager.currentDirectoryPath)
