@@ -25,7 +25,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/apple/swift-package-manager", .branch("swift-5.0-RELEASE")),
         .package(url: "https://github.com/kylef/PathKit", .upToNextMinor(from: "1.0.0")),
-        .package(url: "https://github.com/tuist/xcodeproj.git", .revision("6029dac06eb48cc29c762965efebddb5d6c2a496")),
+        .package(url: "https://github.com/tuist/xcodeproj.git", .upToNextMinor(from: "7.0.0")),
     ],
     targets: [
         .target(
