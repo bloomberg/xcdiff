@@ -1,8 +1,81 @@
 # xcdiff
 
-A tool to help diff your .xcodeproj files
+
+xcdiff is an extensible tool that finds differences between your `.xcodeproj` project files. It allows you add comparators of your own very easily.
+
+## How to Use
+
+Running the command xcdiff in your project directory will search for two `.xcodeproj` files in this directory and use all of `xcdiff`'s comparators on the projects (some of which are file references, targets and headers for example).
+
+You can specify two particular projects `xcdiff` will compare.
+```
+xcdiff -p1 "path/to/project1.xcodeproj" -p2 "path/to/project2.xcodeproj"
+```
+
+### Output a Different Format
+
+Since there is a lot of information stored in a `.xcodeproj` file comparisons can get verbose. We provide output format options to make reading the output easier.
+```
+xcdiff -f markdown # alternatively json or console
+```
+
+### View a List of All Comparators
+
+`xcdiff` has an option to view all the comparators currently implemented.
+```
+xcdiff -l
+```
+
+###  Compare Specific Configurations
+
+Xcode projects can have a lot of configurations so you can specify a particular configuration to compare.
+```
+xcdiff -c "Beta"
+```
+
+### Compare Specific Targets
+
+Large projects can have many targets and you may be interested in only a few of them. Use a comma seperated list to specify many targets.
+```
+xcdiff -t "Target1, Target2"
+```
+
+### Compare Any Specific Difference Type
+
+xcdiff uses the notion of `tags` to identify the different types of comparisons it can make. Since you might be interested in looking for a specific type of difference whether it is `targets` or `file references` we added the ability to compare by tag.
+
+```
+xcdiff -l # you can use -l to find all the comparators available
+xcdiff -g "TARGETS"
+xcdiff -g "CONFIGURATIONS"
+```
 
 ## Development
+
+### Project Structure
+
+The file structure of `xcdiff` with comments is below.
+
+```
+.
+├── CommandTests
+│   ├── Generated
+│   └── Manual
+├── Fixtures
+├── Sources
+│   ├── XCDiff # main.swift
+│   ├── XCDiffCommand # command line interface
+│   └── XCDiffCore
+│       ├── Comparator # each difference type has it's own comparator
+│       ├── Library # core comparator
+│       └── ResultRenderer # format the output of xcdiff
+│           ├── Output
+│           ├── ProjectResultRenderer
+│           └── Renderer
+└── Tests
+    ├── XCDiffCommandTests
+    └── XCDiffCoreTests
+```
 
 ### SwiftLint
 
