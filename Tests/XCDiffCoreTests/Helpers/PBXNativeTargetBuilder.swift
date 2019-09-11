@@ -125,4 +125,32 @@ final class PBXNativeTargetBuilder {
         }
         return self
     }
+
+    @discardableResult
+    func addDependencies(dependencies: [DependencyData]) -> PBXNativeTargetBuilder {
+        addBuildPhase(.frameworks) { buildPhaseBuilder in
+            dependencies.forEach { dependency in
+                buildPhaseBuilder.addBuildFile { buildFileBuilder in
+                    if let name = dependency.name { buildFileBuilder.setName(name) }
+                    if let path = dependency.path { buildFileBuilder.setPath(path) }
+                    if let settings = dependency.settings { buildFileBuilder.setSettings(settings) }
+                }
+            }
+        }
+        return self
+    }
+}
+
+struct DependencyData {
+    init(name: String? = nil,
+         path: String? = nil,
+         settings: [String: [String]]? = nil) {
+        self.name = name
+        self.path = path
+        self.settings = settings
+    }
+
+    let name: String?
+    let path: String?
+    let settings: [String: [String]]?
 }

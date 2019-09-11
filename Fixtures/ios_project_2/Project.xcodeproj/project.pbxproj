@@ -37,6 +37,7 @@
 		2EFBAAD322B9A34600AA5E95 /* NewFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EFBAAD122B9A34600AA5E95 /* NewFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2EFBAAD622B9A34600AA5E95 /* NewFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFBAACF22B9A34600AA5E95 /* NewFramework.framework */; };
 		2EFBAAD722B9A34600AA5E95 /* NewFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFBAACF22B9A34600AA5E95 /* NewFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DC89DE8E2321356300352EFE /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC89DE8D2321356300352EFE /* ARKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		FBAE6F0622F0248A004B7BDB /* ObjcClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F0522F0248A004B7BDB /* ObjcClass.m */; settings = {COMPILER_FLAGS = "-ObjC"; }; };
 		FBAE6F4822F02746004B7BDB /* MetricsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F4722F02746004B7BDB /* MetricsTests.swift */; };
 		FBB3B02322FAE65400EE8176 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB3B02222FAE65400EE8176 /* search.png */; };
@@ -116,6 +117,7 @@
 		2EFBAACF22B9A34600AA5E95 /* NewFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NewFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EFBAAD122B9A34600AA5E95 /* NewFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewFramework.h; sourceTree = "<group>"; };
 		2EFBAAD222B9A34600AA5E95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC89DE8D2321356300352EFE /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
 		FBAE6F0422F0248A004B7BDB /* ObjcClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcClass.h; sourceTree = "<group>"; };
 		FBAE6F0522F0248A004B7BDB /* ObjcClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjcClass.m; sourceTree = "<group>"; };
 		FBAE6F4722F02746004B7BDB /* MetricsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsTests.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC89DE8E2321356300352EFE /* ARKit.framework in Frameworks */,
 				2EFBAAD622B9A34600AA5E95 /* NewFramework.framework in Frameworks */,
 				2EB29209230B2A3E00C9EB4A /* ProjectFramework.framework in Frameworks */,
 			);
@@ -174,6 +177,7 @@
 				2EFBAAD022B9A34600AA5E95 /* NewFramework */,
 				2EB29203230B2A3E00C9EB4A /* ProjectFramework */,
 				2E26637522B7F52500BA59BC /* Products */,
+				DC89DE8C2321356300352EFE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -247,6 +251,14 @@
 				2EFBAAD222B9A34600AA5E95 /* Info.plist */,
 			);
 			path = NewFramework;
+			sourceTree = "<group>";
+		};
+		DC89DE8C2321356300352EFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DC89DE8D2321356300352EFE /* ARKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FBAE6F0322F02466004B7BDB /* Group A */ = {

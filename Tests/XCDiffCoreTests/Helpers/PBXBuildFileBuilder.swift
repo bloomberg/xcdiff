@@ -20,7 +20,7 @@ final class PBXBuildFileBuilder {
     private var sourceTree: PBXSourceTree = .absolute
     private var path: String?
     private var name: String?
-    private var settings: [String: String]?
+    private var settings: [String: Any]?
 
     @discardableResult
     func setSourceTree(_ sourceTree: PBXSourceTree) -> PBXBuildFileBuilder {
@@ -37,6 +37,12 @@ final class PBXBuildFileBuilder {
     @discardableResult
     func setName(_ name: String) -> PBXBuildFileBuilder {
         self.name = name
+        return self
+    }
+
+    @discardableResult
+    func setSettings(_ settings: [String: [String]]) -> PBXBuildFileBuilder {
+        self.settings = settings
         return self
     }
 

@@ -178,5 +178,21 @@ Output format: (<path>, <name>, <source_tree>)
 
 
 
+## ❌ DEPENDENCY > "Project" target
+
+
+### ⚠️  Only in second (1):
+
+  - `NewFramework.framework`
+
+
+### ⚠️  Value mismatch (1):
+
+  - `ARKit.framework attributes`
+    - `required`
+    - `optional`
+
+
+
 
 ```

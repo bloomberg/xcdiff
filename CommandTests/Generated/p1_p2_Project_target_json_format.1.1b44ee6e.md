@@ -314,6 +314,25 @@
       "(Target.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)"
     ],
     "tag" : "source_tree"
+  },
+  {
+    "context" : [
+      "\"Project\" target"
+    ],
+    "differentValues" : [
+      {
+        "context" : "ARKit.framework attributes",
+        "first" : "required",
+        "second" : "optional"
+      }
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "NewFramework.framework"
+    ],
+    "tag" : "dependency"
   }
 ]
 

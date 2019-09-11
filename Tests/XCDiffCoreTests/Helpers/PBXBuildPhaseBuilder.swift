@@ -40,6 +40,8 @@ final class PBXBuildPhaseBuilder {
             buildPhase = PBXSourcesBuildPhase(files: buildFiles)
         case .headers:
             buildPhase = PBXHeadersBuildPhase(files: buildFiles)
+        case .frameworks:
+            buildPhase = PBXFrameworksBuildPhase(files: buildFiles)
         default:
             fatalError("Unsupported BuildPhase type \(type)")
         }

@@ -57,5 +57,8 @@
 ## ❌ SOURCE_TREE > Root project
 
 
+## ❌ DEPENDENCY > "Project" target
+
+
 
 ```

@@ -224,6 +224,23 @@ Output format: (<path>, <name>, <source_tree>)
   • (Target.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)
 
 
+❌ DEPENDENCY > "Project" target
+
+⚠️  Only in second (1):
+
+  • NewFramework.framework
+
+
+⚠️  Value mismatch (1):
+
+  • ARKit.framework attributes
+    ◦ required
+    ◦ optional
+
+
+✅ DEPENDENCY > "ProjectFramework" target
+✅ DEPENDENCY > "ProjectTests" target
+✅ DEPENDENCY > "ProjectUITests" target
 
 
 ```

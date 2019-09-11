@@ -662,6 +662,70 @@
       "(Target.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)"
     ],
     "tag" : "source_tree"
+  },
+  {
+    "context" : [
+      "\"Project\" target"
+    ],
+    "differentValues" : [
+      {
+        "context" : "ARKit.framework attributes",
+        "first" : "required",
+        "second" : "optional"
+      }
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "NewFramework.framework"
+    ],
+    "tag" : "dependency"
+  },
+  {
+    "context" : [
+      "\"ProjectFramework\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "dependency"
+  },
+  {
+    "context" : [
+      "\"ProjectTests\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "dependency"
+  },
+  {
+    "context" : [
+      "\"ProjectUITests\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "dependency"
   }
 ]
 

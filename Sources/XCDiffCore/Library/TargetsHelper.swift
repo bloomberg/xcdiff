@@ -30,6 +30,17 @@ struct HeaderDescriptor: Equatable, Hashable {
     let attributes: String?
 }
 
+struct DependencyDescriptor: Equatable, Hashable {
+    let name: String?
+    let path: String?
+    let type: DependencyDescriptorType
+}
+
+enum DependencyDescriptorType: String {
+    case required
+    case optional
+}
+
 final class TargetsHelper {
     private let pathHelper = PathHelper()
 
@@ -115,6 +126,21 @@ final class TargetsHelper {
         return Set(projectDescriptor.pbxproj.configurationLists
             .flatMap { $0.buildConfigurations }
             .map { $0.name })
+    }
+
+    func dependencies(from target: PBXTarget) throws -> [DependencyDescriptor] {
+        guard let dependencies = target.buildPhases.compactMap({ $0 as? PBXFrameworksBuildPhase }).first,
+            let dependencyFiles = dependencies.files else {
+            return []
+        }
+        return dependencyFiles.compactMap {
+            if $0.file?.name != nil || $0.file?.path != nil {
+                return DependencyDescriptor(name: $0.file?.name,
+                                            path: $0.file?.path,
+                                            type: $0.settings == nil ? .required : .optional)
+            }
+            return nil
+        }
     }
 
     private func path(from fileElement: PBXFileElement?, sourceRoot: Path) throws -> String? {

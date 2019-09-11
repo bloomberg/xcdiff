@@ -26,12 +26,14 @@ public enum ComparatorType {
     case settings
     case resolvedSettings
     case sourceTree
+    case dependencies
     case custom(Comparator)
 
     public var tag: String {
         return comparator().tag
     }
 
+    // swiftlint:disable cyclomatic_complexity
     func comparator() -> Comparator {
         switch self {
         case .fileReferences:
@@ -52,6 +54,8 @@ public enum ComparatorType {
             return ResolvedSettingsComparator(system: DefaultSystem())
         case .sourceTree:
             return SourceTreeComparator()
+        case .dependencies:
+            return DependencyComparator()
         case let .custom(comparator):
             return comparator
         }
@@ -70,6 +74,7 @@ public extension Array where Element == ComparatorType {
             .settings,
             .resolvedSettings,
             .sourceTree,
+            .dependencies,
         ]
     }
 
@@ -83,6 +88,7 @@ public extension Array where Element == ComparatorType {
             .configurations,
             .settings,
             .sourceTree,
+            .dependencies,
         ]
     }
 }

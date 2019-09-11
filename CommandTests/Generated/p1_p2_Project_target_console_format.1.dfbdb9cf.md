@@ -24,6 +24,7 @@
 ✅ SETTINGS > "Project" target > "Release" configuration > Base configuration
 ❌ SETTINGS > "Project" target > "Release" configuration > Values
 ❌ SOURCE_TREE > Root project
+❌ DEPENDENCY > "Project" target
 
 
 ```

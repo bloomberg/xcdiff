@@ -120,5 +120,17 @@
 ## ❌ SOURCE_TREE > Root project
 
 
+## ❌ DEPENDENCY > "Project" target
+
+
+## ✅ DEPENDENCY > "ProjectFramework" target
+
+
+## ✅ DEPENDENCY > "ProjectTests" target
+
+
+## ✅ DEPENDENCY > "ProjectUITests" target
+
+
 
 ```

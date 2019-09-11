@@ -20,6 +20,7 @@
 		2EB291E9230B29C000C9EB4A /* Header1.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EB291D4230B295500C9EB4A /* Header1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2EB291EA230B29C500C9EB4A /* Header2.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EB291D5230B296500C9EB4A /* Header2.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2EB291EB230B29CA00C9EB4A /* Header3.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EB291D6230B296D00C9EB4A /* Header3.h */; };
+		DC89DE912321357200352EFE /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC89DE902321357200352EFE /* ARKit.framework */; };
 		FBAE6F0A22F02523004B7BDB /* ObjcClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F0922F02523004B7BDB /* ObjcClass.m */; };
 		FBAE6F0E22F02550004B7BDB /* AnotherObjcClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F0D22F02550004B7BDB /* AnotherObjcClass.m */; };
 		FBAE6F1122F0263D004B7BDB /* BarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F1022F0263D004B7BDB /* BarTests.swift */; };
@@ -88,6 +89,7 @@
 		2EB291DC230B29B300C9EB4A /* ProjectFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProjectFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB291DE230B29B300C9EB4A /* ProjectFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectFramework.h; sourceTree = "<group>"; };
 		2EB291DF230B29B300C9EB4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC89DE902321357200352EFE /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
 		FBAE6F0822F02523004B7BDB /* ObjcClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcClass.h; sourceTree = "<group>"; };
 		FBAE6F0922F02523004B7BDB /* ObjcClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjcClass.m; sourceTree = "<group>"; };
 		FBAE6F0C22F02550004B7BDB /* AnotherObjcClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnotherObjcClass.h; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC89DE912321357200352EFE /* ARKit.framework in Frameworks */,
 				2EB291E3230B29B300C9EB4A /* ProjectFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,6 +144,7 @@
 				2E26639622B7F52600BA59BC /* ProjectUITests */,
 				2EB291DD230B29B300C9EB4A /* ProjectFramework */,
 				2E26637522B7F52500BA59BC /* Products */,
+				DC89DE8F2321357200352EFE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -202,6 +206,14 @@
 				2EB291DF230B29B300C9EB4A /* Info.plist */,
 			);
 			path = ProjectFramework;
+			sourceTree = "<group>";
+		};
+		DC89DE8F2321357200352EFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DC89DE902321357200352EFE /* ARKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FBAE6F0722F0250D004B7BDB /* Group A */ = {
