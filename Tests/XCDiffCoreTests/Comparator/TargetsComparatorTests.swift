@@ -107,7 +107,7 @@ final class TargetsComparatorTests: XCTestCase {
 
         // When
         let actual = try sut.compare(first, second,
-                                     parameters: .init(targets: .some(["A", "B", "C", "D"]), configuration: .none))
+                                     parameters: .init(targets: .some(["A", "B", "C", "D"]), configurations: .none))
 
         // Then
         let expected = [

@@ -279,7 +279,7 @@ final class SettingsComparatorTests: XCTestCase {
 
         // When
         let actual = try subject.compare(first, second, parameters: .init(targets: .all,
-                                                                          configuration: .only("NON_EXISTING")))
+                                                                          configurations: .only("NON_EXISTING")))
 
         // Then
         XCTAssertEqual(actual, [])
@@ -318,7 +318,7 @@ final class SettingsComparatorTests: XCTestCase {
 
         // When
         let actual = try subject.compare(first, second, parameters: .init(targets: .all,
-                                                                          configuration: .only("Debug")))
+                                                                          configurations: .only("Debug")))
 
         // Then
         XCTAssertEqual(actual, [

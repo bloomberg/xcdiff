@@ -42,12 +42,12 @@ public struct ComparatorParameters: Equatable {
     }
 
     public let targets: Option<String>
-    public let configuration: Option<String>
+    public let configurations: Option<String>
 
     public init(targets: Option<String>,
-                configuration: Option<String>) {
+                configurations: Option<String>) {
         self.targets = targets
-        self.configuration = configuration
+        self.configurations = configurations
     }
 }
 

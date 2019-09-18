@@ -26,10 +26,10 @@ final class ConfigurationsComparator: Comparator {
                  parameters: ComparatorParameters) throws -> [CompareResult] {
         let firstConfigurations = targetsHelper
             .configurations(from: first)
-            .filter(by: parameters.configuration)
+            .filter(by: parameters.configurations)
         let secondConfigurations = targetsHelper
             .configurations(from: second)
-            .filter(by: parameters.configuration)
+            .filter(by: parameters.configurations)
         return results(context: ["Root project"],
                        first: firstConfigurations,
                        second: secondConfigurations)

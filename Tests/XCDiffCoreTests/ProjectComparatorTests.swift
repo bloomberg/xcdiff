@@ -22,7 +22,7 @@ import XCTest
 final class ProjectComparatorTests: XCTestCase {
     private let firstPath = Path("/first.xcodeproj")
     private let secondPath = Path("/second.xcodeproj")
-    private let parametersAll = ComparatorParameters(targets: .all, configuration: .all)
+    private let parametersAll = ComparatorParameters(targets: .all, configurations: .all)
 
     func testCompare_whenNoComparators_success() throws {
         // Given

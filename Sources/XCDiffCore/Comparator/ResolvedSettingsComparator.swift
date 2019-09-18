@@ -39,7 +39,7 @@ final class ResolvedSettingsComparator: Comparator {
             .filter(by: parameters.targets)
         let commonConfigurations = targetHelper
             .commonConfigurations(first, second)
-            .filter(by: parameters.configuration)
+            .filter(by: parameters.configurations)
         return try commonTargets.flatMap { firstTarget, secondTarget -> [CompareResult] in
             try commonConfigurations.map { configurationName in
                 try compare((firstTarget, first),

@@ -151,11 +151,11 @@ public final class CommandRunner {
     private func runPrintCompare(with arguments: ArgumentParser.Result) throws -> Int32 {
         // Collect required command line arguments
         let format = try getFormat(from: arguments)
-        let targets = getTarget(from: arguments)
-        let tags = getTag(from: arguments)
-        let configuration = getConfiguration(from: arguments)
+        let targets = getTargets(from: arguments)
+        let tags = getTags(from: arguments)
+        let configurations = getConfigurations(from: arguments)
         let verbose = getVerbose(from: arguments)
-        let parameters = ComparatorParameters(targets: targets, configuration: configuration)
+        let parameters = ComparatorParameters(targets: targets, configurations: configurations)
 
         // Set up project comparator
         let (path1, path2) = try getPaths(from: arguments)
@@ -218,25 +218,25 @@ public final class CommandRunner {
         return format
     }
 
-    private func getTarget(from arguments: ArgumentParser.Result) -> ComparatorParameters.Option<String> {
-        guard let target = arguments.get(targetOption) else {
+    private func getTargets(from arguments: ArgumentParser.Result) -> ComparatorParameters.Option<String> {
+        guard let targets = arguments.get(targetOption) else {
             return .all
         }
-        return option(from: target)
+        return option(from: targets)
     }
 
-    private func getTag(from arguments: ArgumentParser.Result) -> ComparatorParameters.Option<String> {
-        guard let tag = arguments.get(tagOption) else {
+    private func getTags(from arguments: ArgumentParser.Result) -> ComparatorParameters.Option<String> {
+        guard let tags = arguments.get(tagOption) else {
             return .some(defaultComparators.map { $0.tag })
         }
-        return option(from: tag)
+        return option(from: tags)
     }
 
-    private func getConfiguration(from arguments: ArgumentParser.Result) -> ComparatorParameters.Option<String> {
-        guard let configuration = arguments.get(configurationOption) else {
+    private func getConfigurations(from arguments: ArgumentParser.Result) -> ComparatorParameters.Option<String> {
+        guard let configurations = arguments.get(configurationOption) else {
             return .all
         }
-        return option(from: configuration)
+        return option(from: configurations)
     }
 
     private func getVerbose(from arguments: ArgumentParser.Result) -> Bool {

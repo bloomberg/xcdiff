@@ -21,11 +21,11 @@ import XCTest
 final class ComparatorParametersTests: XCTestCase {
     func testInit() {
         // When
-        let sut = ComparatorParameters(targets: .all, configuration: .none)
+        let sut = ComparatorParameters(targets: .all, configurations: .none)
 
         // Then
         XCTAssertEqual(sut.targets, .all)
-        XCTAssertEqual(sut.configuration, .none)
+        XCTAssertEqual(sut.configurations, .none)
     }
 
     func testOptionFilter_whenNone() {

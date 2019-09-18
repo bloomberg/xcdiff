@@ -117,7 +117,8 @@ final class ConfigurationsComparatorTests: XCTestCase {
             .projectDescriptor()
 
         // When
-        let actual = try subject.compare(first, second, parameters: .init(targets: .all, configuration: .only("Debug")))
+        let actual = try subject.compare(first, second,
+                                         parameters: .init(targets: .all, configurations: .only("Debug")))
 
         // Then
         XCTAssertEqual(actual, [

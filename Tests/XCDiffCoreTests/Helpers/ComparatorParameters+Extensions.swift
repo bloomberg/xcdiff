@@ -18,18 +18,18 @@
 
 extension ComparatorParameters {
     static var none: ComparatorParameters {
-        return ComparatorParameters(targets: .none, configuration: .none)
+        return ComparatorParameters(targets: .none, configurations: .none)
     }
 
     static var all: ComparatorParameters {
-        return ComparatorParameters(targets: .all, configuration: .all)
+        return ComparatorParameters(targets: .all, configurations: .all)
     }
 
     static func only(target: String) -> ComparatorParameters {
-        return ComparatorParameters(targets: .only(target), configuration: .all)
+        return ComparatorParameters(targets: .only(target), configurations: .all)
     }
 
     static func some(targets: [String]) -> ComparatorParameters {
-        return ComparatorParameters(targets: .some(targets), configuration: .all)
+        return ComparatorParameters(targets: .some(targets), configurations: .all)
     }
 }
