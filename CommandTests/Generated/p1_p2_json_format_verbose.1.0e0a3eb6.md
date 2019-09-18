@@ -661,7 +661,7 @@
       "(README.md, nil, <group>) → (nil, nil, <group>)",
       "(Target.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)"
     ],
-    "tag" : "source_tree"
+    "tag" : "source_trees"
   },
   {
     "context" : [
@@ -680,7 +680,7 @@
     "onlyInSecond" : [
       "NewFramework.framework"
     ],
-    "tag" : "dependency"
+    "tag" : "dependencies"
   },
   {
     "context" : [
@@ -695,7 +695,7 @@
     "onlyInSecond" : [
 
     ],
-    "tag" : "dependency"
+    "tag" : "dependencies"
   },
   {
     "context" : [
@@ -710,7 +710,7 @@
     "onlyInSecond" : [
 
     ],
-    "tag" : "dependency"
+    "tag" : "dependencies"
   },
   {
     "context" : [
@@ -725,7 +725,7 @@
     "onlyInSecond" : [
 
     ],
-    "tag" : "dependency"
+    "tag" : "dependencies"
   }
 ]
 

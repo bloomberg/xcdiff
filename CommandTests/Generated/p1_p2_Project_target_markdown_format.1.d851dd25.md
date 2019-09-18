@@ -54,10 +54,10 @@
 ## ❌ SETTINGS > "Project" target > "Release" configuration > Values
 
 
-## ❌ SOURCE_TREE > Root project
+## ❌ SOURCE_TREES > Root project
 
 
-## ❌ DEPENDENCY > "Project" target
+## ❌ DEPENDENCIES > "Project" target
 
 
 

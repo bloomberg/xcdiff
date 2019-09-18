@@ -197,7 +197,7 @@
 ✅ SETTINGS > "ProjectUITests" target > "Debug" configuration > Values
 ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Base configuration
 ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Values
-❌ SOURCE_TREE > Root project
+❌ SOURCE_TREES > Root project
 Output format: (<path>, <name>, <source_tree>)
 
 ⚠️  Only in first (7):
@@ -224,7 +224,7 @@ Output format: (<path>, <name>, <source_tree>)
   • (Target.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)
 
 
-❌ DEPENDENCY > "Project" target
+❌ DEPENDENCIES > "Project" target
 
 ⚠️  Only in second (1):
 
@@ -238,9 +238,9 @@ Output format: (<path>, <name>, <source_tree>)
     ◦ optional
 
 
-✅ DEPENDENCY > "ProjectFramework" target
-✅ DEPENDENCY > "ProjectTests" target
-✅ DEPENDENCY > "ProjectUITests" target
+✅ DEPENDENCIES > "ProjectFramework" target
+✅ DEPENDENCIES > "ProjectTests" target
+✅ DEPENDENCIES > "ProjectUITests" target
 
 
 ```

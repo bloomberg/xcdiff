@@ -25,7 +25,7 @@ public enum ComparatorType {
     case configurations
     case settings
     case resolvedSettings
-    case sourceTree
+    case sourceTrees
     case dependencies
     case custom(Comparator)
 
@@ -52,10 +52,10 @@ public enum ComparatorType {
             return SettingsComparator()
         case .resolvedSettings:
             return ResolvedSettingsComparator(system: DefaultSystem())
-        case .sourceTree:
-            return SourceTreeComparator()
+        case .sourceTrees:
+            return SourceTreesComparator()
         case .dependencies:
-            return DependencyComparator()
+            return DependenciesComparator()
         case let .custom(comparator):
             return comparator
         }
@@ -73,7 +73,7 @@ public extension Array where Element == ComparatorType {
             .configurations,
             .settings,
             .resolvedSettings,
-            .sourceTree,
+            .sourceTrees,
             .dependencies,
         ]
     }
@@ -87,7 +87,7 @@ public extension Array where Element == ComparatorType {
             .resources,
             .configurations,
             .settings,
-            .sourceTree,
+            .sourceTrees,
             .dependencies,
         ]
     }

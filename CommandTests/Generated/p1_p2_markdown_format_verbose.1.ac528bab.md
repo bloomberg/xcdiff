@@ -270,7 +270,7 @@
 ## ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Values
 
 
-## ❌ SOURCE_TREE > Root project
+## ❌ SOURCE_TREES > Root project
 
 Output format: (<path>, <name>, <source_tree>)
 
@@ -299,7 +299,7 @@ Output format: (<path>, <name>, <source_tree>)
 
 
 
-## ❌ DEPENDENCY > "Project" target
+## ❌ DEPENDENCIES > "Project" target
 
 
 ### ⚠️  Only in second (1):
@@ -315,13 +315,13 @@ Output format: (<path>, <name>, <source_tree>)
 
 
 
-## ✅ DEPENDENCY > "ProjectFramework" target
+## ✅ DEPENDENCIES > "ProjectFramework" target
 
 
-## ✅ DEPENDENCY > "ProjectTests" target
+## ✅ DEPENDENCIES > "ProjectTests" target
 
 
-## ✅ DEPENDENCY > "ProjectUITests" target
+## ✅ DEPENDENCIES > "ProjectUITests" target
 
 
 

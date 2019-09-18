@@ -83,11 +83,11 @@ final class CommandsRunnerTests: XCTestCase {
         ✅ SETTINGS > "ProjectUITests" target > "Debug" configuration > Values
         ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Base configuration
         ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Values
-        ✅ SOURCE_TREE > Root project
-        ✅ DEPENDENCY > "Project" target
-        ✅ DEPENDENCY > "ProjectFramework" target
-        ✅ DEPENDENCY > "ProjectTests" target
-        ✅ DEPENDENCY > "ProjectUITests" target
+        ✅ SOURCE_TREES > Root project
+        ✅ DEPENDENCIES > "Project" target
+        ✅ DEPENDENCIES > "ProjectFramework" target
+        ✅ DEPENDENCIES > "ProjectTests" target
+        ✅ DEPENDENCIES > "ProjectUITests" target
 
 
         """)

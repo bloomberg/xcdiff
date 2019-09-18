@@ -118,7 +118,7 @@
     ◦ VALUE_2
 
 
-❌ SOURCE_TREE > Root project
+❌ SOURCE_TREES > Root project
 Output format: (<path>, <name>, <source_tree>)
 
 ⚠️  Only in first (7):
@@ -145,7 +145,7 @@ Output format: (<path>, <name>, <source_tree>)
   • (Target.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)
 
 
-❌ DEPENDENCY > "Project" target
+❌ DEPENDENCIES > "Project" target
 
 ⚠️  Only in second (1):
 

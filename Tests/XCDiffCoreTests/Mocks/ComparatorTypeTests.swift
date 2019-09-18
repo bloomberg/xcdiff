@@ -30,8 +30,8 @@ final class ComperatorTypeTests: XCTestCase {
             "configurations",
             "settings",
             "resolved_settings",
-            "source_tree",
-            "dependency",
+            "source_trees",
+            "dependencies",
         ])
     }
 

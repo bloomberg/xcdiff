@@ -149,7 +149,7 @@
 
 
 
-## ❌ SOURCE_TREE > Root project
+## ❌ SOURCE_TREES > Root project
 
 Output format: (<path>, <name>, <source_tree>)
 
@@ -178,7 +178,7 @@ Output format: (<path>, <name>, <source_tree>)
 
 
 
-## ❌ DEPENDENCY > "Project" target
+## ❌ DEPENDENCIES > "Project" target
 
 
 ### ⚠️  Only in second (1):

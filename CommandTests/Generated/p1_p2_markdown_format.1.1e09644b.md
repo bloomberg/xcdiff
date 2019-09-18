@@ -117,19 +117,19 @@
 ## ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Values
 
 
-## ❌ SOURCE_TREE > Root project
+## ❌ SOURCE_TREES > Root project
 
 
-## ❌ DEPENDENCY > "Project" target
+## ❌ DEPENDENCIES > "Project" target
 
 
-## ✅ DEPENDENCY > "ProjectFramework" target
+## ✅ DEPENDENCIES > "ProjectFramework" target
 
 
-## ✅ DEPENDENCY > "ProjectTests" target
+## ✅ DEPENDENCIES > "ProjectTests" target
 
 
-## ✅ DEPENDENCY > "ProjectUITests" target
+## ✅ DEPENDENCIES > "ProjectUITests" target
 
 
 
