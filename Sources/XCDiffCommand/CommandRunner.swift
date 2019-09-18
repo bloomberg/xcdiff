@@ -168,7 +168,7 @@ public final class CommandRunner {
 
         printer.text(result.output)
 
-        return result.success ? 0 : 1
+        return result.success ? 0 : 2
     }
 
     private func parseArguments(_ arguments: [String]) throws -> ArgumentParser.Result {

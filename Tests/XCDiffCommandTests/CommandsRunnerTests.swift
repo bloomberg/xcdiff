@@ -131,6 +131,21 @@ final class CommandsRunnerTests: XCTestCase {
         XCTAssertEqual(code, 1)
     }
 
+    func testRun_whenDifferentProjects_exitCode2() {
+        // Given
+        let command: [String] = []
+        fileSystem.listCurrentDirectoryReturn = [
+            fixtures.project.ios_project_1().string,
+            fixtures.project.ios_project_2().string,
+        ]
+
+        // When
+        let code = subject.run(with: command)
+
+        // Then
+        XCTAssertEqual(code, 2)
+    }
+
     func testRun_whenVersion() {
         // Given
         let command = ["--version"]
