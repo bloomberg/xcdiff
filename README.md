@@ -1,5 +1,6 @@
-# xcdiff
-
+<p align="center">
+    <img src="Documentation/Resources/xcdiff.png" alt="xcdiff logo" />
+</p>
 
 xcdiff is an extensible tool that finds differences between your `.xcodeproj` project files. It allows you add comparators of your own very easily.
 
