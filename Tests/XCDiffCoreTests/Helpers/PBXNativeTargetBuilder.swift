@@ -23,6 +23,14 @@ struct PBXNativeTargetPrototype {
     let fileElements: [PBXFileElement] // need to be added to the main group
 }
 
+public enum BuildPhase: String {
+    case sources = "Sources"
+    case frameworks = "Frameworks"
+    case resources = "Resources"
+    case embedFrameworks = "EmbedFrameworks"
+    case headers = "Headers"
+}
+
 final class PBXNativeTargetBuilder {
     private var pbxtarget: PBXNativeTarget
     private var objects: [PBXObject] = []
@@ -60,10 +68,11 @@ final class PBXNativeTargetBuilder {
     }
 
     @discardableResult
-    func addBuildPhase(_ type: BuildPhase, _ closure: (PBXBuildPhaseBuilder) -> Void) -> PBXNativeTargetBuilder {
-        let builder = PBXBuildPhaseBuilder()
+    func addBuildPhase(_ type: BuildPhase,
+                       _ closure: (PBXBuildPhaseBuilder) -> Void) -> PBXNativeTargetBuilder {
+        let builder = PBXBuildPhaseBuilder(type: type)
         closure(builder)
-        let (buildPhase, buildPhaseObjects) = builder.build(type)
+        let (buildPhase, buildPhaseObjects) = builder.build()
         pbxtarget.buildPhases.append(buildPhase)
         objects.append(contentsOf: buildPhaseObjects)
         let fileElements = buildPhase.files?.compactMap { $0.file } ?? []
@@ -127,13 +136,26 @@ final class PBXNativeTargetBuilder {
     }
 
     @discardableResult
-    func addDependencies(dependencies: [DependencyData]) -> PBXNativeTargetBuilder {
+    func addDependencies(_ dependencies: [DependencyData]) -> PBXNativeTargetBuilder {
         addBuildPhase(.frameworks) { buildPhaseBuilder in
             dependencies.forEach { dependency in
                 buildPhaseBuilder.addBuildFile { buildFileBuilder in
                     if let name = dependency.name { buildFileBuilder.setName(name) }
                     if let path = dependency.path { buildFileBuilder.setPath(path) }
                     if let settings = dependency.settings { buildFileBuilder.setSettings(settings) }
+                }
+            }
+        }
+        return self
+    }
+
+    @discardableResult
+    func addEmbeddedFrameworks(_ embeddedFrameworks: [EmbeddedFrameworksData]) -> PBXNativeTargetBuilder {
+        addBuildPhase(.embedFrameworks) { buildPhaseBuilder in
+            embeddedFrameworks.forEach { embeddedFramework in
+                buildPhaseBuilder.addBuildFile { buildFileBuilder in
+                    buildFileBuilder.setPath(embeddedFramework.path)
+                    buildFileBuilder.setSettings(embeddedFramework.settings)
                 }
             }
         }
@@ -153,4 +175,9 @@ struct DependencyData {
     let name: String?
     let path: String?
     let settings: [String: [String]]?
+}
+
+struct EmbeddedFrameworksData {
+    let path: String
+    let settings: [String: [String]]
 }

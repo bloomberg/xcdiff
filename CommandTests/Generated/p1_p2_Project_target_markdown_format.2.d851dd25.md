@@ -57,7 +57,10 @@
 ## ❌ SOURCE_TREES > Root project
 
 
-## ❌ DEPENDENCIES > "Project" target
+## ❌ DEPENDENCIES > "Project" target > Linked Dependencies
+
+
+## ❌ DEPENDENCIES > "Project" target > Embedded Frameworks
 
 
 

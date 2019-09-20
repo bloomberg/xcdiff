@@ -20,6 +20,11 @@ import XcodeProj
 final class PBXBuildPhaseBuilder {
     private var buildFiles: [PBXBuildFile] = []
     private var objects: [PBXObject] = []
+    private let type: BuildPhase
+
+    init(type: BuildPhase) {
+        self.type = type
+    }
 
     @discardableResult
     func addBuildFile(_ closure: (PBXBuildFileBuilder) -> Void) -> PBXBuildPhaseBuilder {
@@ -31,7 +36,7 @@ final class PBXBuildPhaseBuilder {
         return self
     }
 
-    func build(_ type: BuildPhase) -> (PBXBuildPhase, [PBXObject]) {
+    func build() -> (PBXBuildPhase, [PBXObject]) {
         let buildPhase: PBXBuildPhase
         switch type {
         case .resources:
@@ -42,6 +47,9 @@ final class PBXBuildPhaseBuilder {
             buildPhase = PBXHeadersBuildPhase(files: buildFiles)
         case .frameworks:
             buildPhase = PBXFrameworksBuildPhase(files: buildFiles)
+        case .embedFrameworks:
+            buildPhase = PBXCopyFilesBuildPhase(dstSubfolderSpec: .frameworks,
+                                                files: buildFiles)
         default:
             fatalError("Unsupported BuildPhase type \(type)")
         }

@@ -665,7 +665,8 @@
   },
   {
     "context" : [
-      "\"Project\" target"
+      "\"Project\" target",
+      "Linked Dependencies"
     ],
     "differentValues" : [
       {
@@ -684,7 +685,24 @@
   },
   {
     "context" : [
-      "\"ProjectFramework\" target"
+      "\"Project\" target",
+      "Embedded Frameworks"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "NewFramework.framework"
+    ],
+    "tag" : "dependencies"
+  },
+  {
+    "context" : [
+      "\"ProjectFramework\" target",
+      "Linked Dependencies"
     ],
     "differentValues" : [
 
@@ -699,7 +717,8 @@
   },
   {
     "context" : [
-      "\"ProjectTests\" target"
+      "\"ProjectFramework\" target",
+      "Embedded Frameworks"
     ],
     "differentValues" : [
 
@@ -714,7 +733,56 @@
   },
   {
     "context" : [
-      "\"ProjectUITests\" target"
+      "\"ProjectTests\" target",
+      "Linked Dependencies"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "dependencies"
+  },
+  {
+    "context" : [
+      "\"ProjectTests\" target",
+      "Embedded Frameworks"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "dependencies"
+  },
+  {
+    "context" : [
+      "\"ProjectUITests\" target",
+      "Linked Dependencies"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "dependencies"
+  },
+  {
+    "context" : [
+      "\"ProjectUITests\" target",
+      "Embedded Frameworks"
     ],
     "differentValues" : [
 

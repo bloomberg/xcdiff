@@ -45,10 +45,14 @@
 ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Base configuration
 ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Values
 ❌ SOURCE_TREES > Root project
-❌ DEPENDENCIES > "Project" target
-✅ DEPENDENCIES > "ProjectFramework" target
-✅ DEPENDENCIES > "ProjectTests" target
-✅ DEPENDENCIES > "ProjectUITests" target
+❌ DEPENDENCIES > "Project" target > Linked Dependencies
+❌ DEPENDENCIES > "Project" target > Embedded Frameworks
+✅ DEPENDENCIES > "ProjectFramework" target > Linked Dependencies
+✅ DEPENDENCIES > "ProjectFramework" target > Embedded Frameworks
+✅ DEPENDENCIES > "ProjectTests" target > Linked Dependencies
+✅ DEPENDENCIES > "ProjectTests" target > Embedded Frameworks
+✅ DEPENDENCIES > "ProjectUITests" target > Linked Dependencies
+✅ DEPENDENCIES > "ProjectUITests" target > Embedded Frameworks
 
 
 ```

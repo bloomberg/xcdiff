@@ -36,6 +36,11 @@ struct DependencyDescriptor: Equatable, Hashable {
     let type: DependencyDescriptorType
 }
 
+struct EmbeddedFrameworksDescriptor: Equatable, Hashable {
+    let path: String
+    let codeSignOnCopy: Bool
+}
+
 enum DependencyDescriptorType: String {
     case required
     case optional
@@ -138,6 +143,20 @@ final class TargetsHelper {
                 return DependencyDescriptor(name: $0.file?.name,
                                             path: $0.file?.path,
                                             type: $0.settings == nil ? .required : .optional)
+            }
+            return nil
+        }
+    }
+
+    func embeddedFrameworks(from target: PBXTarget) throws -> [EmbeddedFrameworksDescriptor] {
+        guard let embeddedFrameworks = target.embedFrameworksBuildPhases().first,
+            let embeddedFrameworksFiles = embeddedFrameworks.files else {
+            return []
+        }
+        return embeddedFrameworksFiles.compactMap {
+            if let path = $0.file?.path, let settings = $0.settings {
+                let attributes = (settings["ATTRIBUTES"] as? [String]) ?? []
+                return EmbeddedFrameworksDescriptor(path: path, codeSignOnCopy: attributes.contains("CodeSignOnCopy"))
             }
             return nil
         }

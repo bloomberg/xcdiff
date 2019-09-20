@@ -224,7 +224,7 @@ Output format: (<path>, <name>, <source_tree>)
   • (Target.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)
 
 
-❌ DEPENDENCIES > "Project" target
+❌ DEPENDENCIES > "Project" target > Linked Dependencies
 
 ⚠️  Only in second (1):
 
@@ -238,9 +238,19 @@ Output format: (<path>, <name>, <source_tree>)
     ◦ optional
 
 
-✅ DEPENDENCIES > "ProjectFramework" target
-✅ DEPENDENCIES > "ProjectTests" target
-✅ DEPENDENCIES > "ProjectUITests" target
+❌ DEPENDENCIES > "Project" target > Embedded Frameworks
+
+⚠️  Only in second (1):
+
+  • NewFramework.framework
+
+
+✅ DEPENDENCIES > "ProjectFramework" target > Linked Dependencies
+✅ DEPENDENCIES > "ProjectFramework" target > Embedded Frameworks
+✅ DEPENDENCIES > "ProjectTests" target > Linked Dependencies
+✅ DEPENDENCIES > "ProjectTests" target > Embedded Frameworks
+✅ DEPENDENCIES > "ProjectUITests" target > Linked Dependencies
+✅ DEPENDENCIES > "ProjectUITests" target > Embedded Frameworks
 
 
 ```

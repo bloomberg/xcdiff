@@ -17,35 +17,79 @@
 import Foundation
 
 final class DependenciesComparator: Comparator {
-    private typealias DependencyDescriptorPair = (first: DependencyDescriptor, second: DependencyDescriptor)
-    let tag = "dependencies"
+    private typealias DependencyDescriptorPair = (first: DependencyDescriptor,
+                                                  second: DependencyDescriptor)
+    private typealias EmbeddedFrameworksDescriptorPair = (first: EmbeddedFrameworksDescriptor,
+                                                          second: EmbeddedFrameworksDescriptor)
     private let targetsHelper = TargetsHelper()
+
+    let tag = "dependencies"
 
     func compare(_ first: ProjectDescriptor,
                  _ second: ProjectDescriptor,
                  parameters: ComparatorParameters) throws -> [CompareResult] {
         let commonTargets = try targetsHelper.commonTargets(first, second).filter(by: parameters.targets)
 
-        let compareResults = try commonTargets.map { firstTarget, secondTarget -> CompareResult in
-
-            let firstDependencies = try targetsHelper.dependencies(from: firstTarget)
-            let secondDependencies = try targetsHelper.dependencies(from: secondTarget)
-
-            let firstPaths = Set(firstDependencies.compactMap { dependencyKey(dependency: $0) })
-            let secondPaths = Set(secondDependencies.compactMap { dependencyKey(dependency: $0) })
-
-            let descriptorPairs = commonDependencyDescriptorPairs(first: firstDependencies,
-                                                                  second: secondDependencies)
-
-            let differences = attributesDifferences(in: descriptorPairs)
-
-            return result(context: ["\"\(firstTarget.name)\" target"],
-                          first: firstPaths,
-                          second: secondPaths,
-                          differentValues: differences)
+        let results = try commonTargets.flatMap { commonTarget in
+            [try createLinkedDependenciesResults(commonTarget: commonTarget),
+             try createEmbeddedFrameworksResults(commonTarget: commonTarget)]
         }
 
-        return compareResults
+        return results
+    }
+
+    private func createLinkedDependenciesResults(commonTarget: TargetPair) throws -> CompareResult {
+        let firstDependencies = try targetsHelper.dependencies(from: commonTarget.first)
+        let secondDependencies = try targetsHelper.dependencies(from: commonTarget.second)
+
+        let firstPaths = Set(firstDependencies.compactMap { dependencyKey(dependency: $0) })
+        let secondPaths = Set(secondDependencies.compactMap { dependencyKey(dependency: $0) })
+
+        let descriptorPairs = commonDependencyDescriptorPairs(first: firstDependencies,
+                                                              second: secondDependencies)
+
+        let differences = attributesDifferences(in: descriptorPairs)
+
+        return result(context: ["\"\(commonTarget.first.name)\" target"] + ["Linked Dependencies"],
+                      first: firstPaths,
+                      second: secondPaths,
+                      differentValues: differences)
+    }
+
+    private func createEmbeddedFrameworksResults(commonTarget: TargetPair) throws -> CompareResult {
+        let firstEmbeddedFrameworks = try targetsHelper.embeddedFrameworks(from: commonTarget.first)
+        let secondEmbeddedFrameworks = try targetsHelper.embeddedFrameworks(from: commonTarget.second)
+
+        let firstEmbeddedPaths = Set(firstEmbeddedFrameworks.map { $0.path })
+        let secondEmbeddedPaths = Set(secondEmbeddedFrameworks.map { $0.path })
+
+        let commonEmbeddedFrameworkPairs = commonEmbeddedFrameworkDescriptorPairs(first: firstEmbeddedFrameworks,
+                                                                                  second: secondEmbeddedFrameworks)
+
+        let differences = attributesDifferences(in: commonEmbeddedFrameworkPairs)
+
+        return result(context: ["\"\(commonTarget.first.name)\" target"] + ["Embedded Frameworks"],
+                      first: firstEmbeddedPaths,
+                      second: secondEmbeddedPaths,
+                      differentValues: differences)
+    }
+
+    private func commonEmbeddedFrameworkDescriptorPairs(first: [EmbeddedFrameworksDescriptor],
+                                                        second: [EmbeddedFrameworksDescriptor])
+        -> [EmbeddedFrameworksDescriptorPair] {
+        let firstEmbeddedFrameworkDescriptionMap = embeddedFrameworksPathMap(from: first)
+        let secondEmbeddedFrameworkDescriptionMap = embeddedFrameworksPathMap(from: second)
+
+        let firstPaths = Set(firstEmbeddedFrameworkDescriptionMap.keys)
+        let secondPaths = Set(secondEmbeddedFrameworkDescriptionMap.keys)
+
+        let commonSources = firstPaths
+            .intersection(secondPaths)
+            .map { (firstEmbeddedFrameworkDescriptionMap[$0]!, secondEmbeddedFrameworkDescriptionMap[$0]!) }
+            .sorted { left, right in
+                left.0.path < right.0.path
+            }
+        return commonSources
     }
 
     private func dependencyKey(dependency: DependencyDescriptor) -> String? {
@@ -74,11 +118,22 @@ final class DependenciesComparator: Comparator {
         return commonSources
     }
 
+    private func attributesDifferences(in embeddedFrameworkDescriptorPairs: [EmbeddedFrameworksDescriptorPair])
+        -> [CompareResult.DifferentValues] {
+        return embeddedFrameworkDescriptorPairs
+            .filter { $0.codeSignOnCopy != $1.codeSignOnCopy }
+            .map { first, second -> CompareResult.DifferentValues in
+                .init(context: "\(first.path) Code Sign on Copy",
+                      first: first.codeSignOnCopy.description,
+                      second: second.codeSignOnCopy.description)
+            }
+    }
+
     private func attributesDifferences(in dependencyDescriptorPairs: [DependencyDescriptorPair])
         -> [CompareResult.DifferentValues] {
         return dependencyDescriptorPairs
             .filter { $0.type != $1.type }
-            .compactMap { (first, second) -> CompareResult.DifferentValues? in
+            .compactMap { first, second -> CompareResult.DifferentValues? in
                 if let key = dependencyKey(dependency: first) {
                     return .init(context: "\(key) attributes",
                                  first: first.type.rawValue,
@@ -93,6 +148,14 @@ final class DependenciesComparator: Comparator {
         return Dictionary(dependencyDescriptors.compactMap {
             if let key = dependencyKey(dependency: $0) { return (key, $0) }
             return nil
+        },
+                          uniquingKeysWith: { first, _ in first })
+    }
+
+    private func embeddedFrameworksPathMap(from embeddedFrameworkDescriptors: [EmbeddedFrameworksDescriptor])
+        -> [String: EmbeddedFrameworksDescriptor] {
+        return Dictionary(embeddedFrameworkDescriptors.map {
+            ($0.path, $0)
         },
                           uniquingKeysWith: { first, _ in first })
     }

@@ -9,7 +9,10 @@
 # Expected output
 ```
 
-## ❌ DEPENDENCIES > "Project" target
+## ❌ DEPENDENCIES > "Project" target > Linked Dependencies
+
+
+## ❌ DEPENDENCIES > "Project" target > Embedded Frameworks
 
 
 

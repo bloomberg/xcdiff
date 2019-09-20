@@ -178,7 +178,7 @@ Output format: (<path>, <name>, <source_tree>)
 
 
 
-## ❌ DEPENDENCIES > "Project" target
+## ❌ DEPENDENCIES > "Project" target > Linked Dependencies
 
 
 ### ⚠️  Only in second (1):
@@ -191,6 +191,15 @@ Output format: (<path>, <name>, <source_tree>)
   - `ARKit.framework attributes`
     - `required`
     - `optional`
+
+
+
+## ❌ DEPENDENCIES > "Project" target > Embedded Frameworks
+
+
+### ⚠️  Only in second (1):
+
+  - `NewFramework.framework`
 
 
 

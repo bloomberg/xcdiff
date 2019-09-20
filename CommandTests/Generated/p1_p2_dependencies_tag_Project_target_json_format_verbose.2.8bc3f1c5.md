@@ -11,7 +11,8 @@
 [
   {
     "context" : [
-      "\"Project\" target"
+      "\"Project\" target",
+      "Linked Dependencies"
     ],
     "differentValues" : [
       {
@@ -19,6 +20,22 @@
         "first" : "required",
         "second" : "optional"
       }
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "NewFramework.framework"
+    ],
+    "tag" : "dependencies"
+  },
+  {
+    "context" : [
+      "\"Project\" target",
+      "Embedded Frameworks"
+    ],
+    "differentValues" : [
+
     ],
     "onlyInFirst" : [
 
