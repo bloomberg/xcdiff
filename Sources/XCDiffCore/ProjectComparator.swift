@@ -24,31 +24,67 @@ public enum Format: String, RawRepresentable, CaseIterable {
     case json
 }
 
+public struct Mode {
+    public static let `default` = Mode()
+
+    public let format: Format
+    public let verbose: Bool
+    public let differencesOnly: Bool
+
+    public init(format: Format = .console, verbose: Bool = false, differencesOnly: Bool = false) {
+        self.format = format
+        self.verbose = verbose
+        self.differencesOnly = differencesOnly
+    }
+}
+
 public struct Result {
     public let success: Bool
     public let output: String
 }
 
-public class ProjectComparator {
+public protocol ProjectComparator {
+    func compare(_ firstPath: Path,
+                 _ secondPath: Path,
+                 parameters: ComparatorParameters) throws -> Result
+}
+
+public final class ProjectComparatorFactory {
+    public static func create(comparators: [ComparatorType] = .allAvailableComparators,
+                              mode: Mode = .default) -> ProjectComparator {
+        let resultRenderer = UniversalResultRenderer(format: mode.format,
+                                                     verbose: mode.verbose)
+        let xcodeProjLoader = DefaultXcodeProjLoader()
+        return DefaultProjectComparator(comparators: comparators.map { $0.comparator() },
+                                        resultRenderer: resultRenderer,
+                                        xcodeProjLoader: xcodeProjLoader,
+                                        differencesOnly: mode.differencesOnly)
+    }
+}
+
+final class DefaultProjectComparator: ProjectComparator {
     private let comparators: [Comparator]
     private let resultRenderer: ResultRenderer
     private let xcodeProjLoader: XcodeProjLoader
+    private let differencesOnly: Bool
 
     // MARK: - Lifecycle
 
     init(comparators: [Comparator],
          resultRenderer: ResultRenderer,
-         xcodeProjLoader: XcodeProjLoader) {
+         xcodeProjLoader: XcodeProjLoader,
+         differencesOnly: Bool) {
         self.comparators = comparators
         self.resultRenderer = resultRenderer
         self.xcodeProjLoader = xcodeProjLoader
+        self.differencesOnly = differencesOnly
     }
 
-    // MARK: - Public
+    // MARK: - ProjectComparator
 
-    public func compare(_ firstPath: Path,
-                        _ secondPath: Path,
-                        parameters: ComparatorParameters) throws -> Result {
+    func compare(_ firstPath: Path,
+                 _ secondPath: Path,
+                 parameters: ComparatorParameters) throws -> Result {
         let xcodeProj1 = try createProjectDescriptor(with: firstPath)
         let xcodeProj2 = try createProjectDescriptor(with: secondPath)
         let result = try compare(xcodeProj1, xcodeProj2, parameters: parameters)
@@ -62,25 +98,14 @@ public class ProjectComparator {
     private func compare(_ first: ProjectDescriptor,
                          _ second: ProjectDescriptor,
                          parameters: ComparatorParameters) throws -> ProjectCompareResult {
-        let results = try comparators.flatMap { try $0.compare(first, second, parameters: parameters) }
+        let results = try comparators
+            .flatMap { try $0.compare(first, second, parameters: parameters) }
+            .filter { !differencesOnly || !$0.same() }
         return ProjectCompareResult(first: first, second: second, results: results)
     }
 
     private func createProjectDescriptor(with path: Path) throws -> ProjectDescriptor {
         let xcodeProj = try xcodeProjLoader.load(at: path)
         return ProjectDescriptor(path: path, xcodeProj: xcodeProj)
-    }
-}
-
-public extension ProjectComparator {
-    static func create(comparators: [ComparatorType] = .allAvailableComparators,
-                       format: Format,
-                       verbose: Bool) -> ProjectComparator {
-        let resultRenderer = UniversalResultRenderer(format: format,
-                                                     verbose: verbose)
-        let xcodeProjLoader = DefaultXcodeProjLoader()
-        return ProjectComparator(comparators: comparators.map { $0.comparator() },
-                                 resultRenderer: resultRenderer,
-                                 xcodeProjLoader: xcodeProjLoader)
     }
 }

@@ -32,6 +32,7 @@ public final class CommandRunner {
     private let tagOption: OptionArgument<String>
     private let configurationOption: OptionArgument<String>
     private let verboseOption: OptionArgument<Bool>
+    private let differencesOnlyOption: OptionArgument<Bool>
     private let listOption: OptionArgument<Bool>
     private let command: String
     private let allComparators: [ComparatorType] = .allAvailableComparators
@@ -90,6 +91,10 @@ public final class CommandRunner {
                                    shortName: "-v",
                                    kind: Bool.self,
                                    usage: "Verbose mode")
+        differencesOnlyOption = parser.add(option: "--differences-only",
+                                           shortName: "-d",
+                                           kind: Bool.self,
+                                           usage: "Differences only in the output")
         listOption = parser.add(option: "--list",
                                 shortName: "-l",
                                 kind: Bool.self,
@@ -155,13 +160,15 @@ public final class CommandRunner {
         let tags = getTags(from: arguments)
         let configurations = getConfigurations(from: arguments)
         let verbose = getVerbose(from: arguments)
-        let parameters = ComparatorParameters(targets: targets, configurations: configurations)
+        let differencesOnly = getDifferencesOnly(from: arguments)
+        let parameters = ComparatorParameters(targets: targets,
+                                              configurations: configurations)
 
         // Set up project comparator
         let (path1, path2) = try getPaths(from: arguments)
-        let projectComparator = ProjectComparator.create(comparators: try allComparators.filter(by: tags),
-                                                         format: format,
-                                                         verbose: verbose)
+        let mode = Mode(format: format, verbose: verbose, differencesOnly: differencesOnly)
+        let projectComparator = ProjectComparatorFactory.create(comparators: try allComparators.filter(by: tags),
+                                                                mode: mode)
 
         // Run compare
         let result = try projectComparator.compare(path1, path2, parameters: parameters)
@@ -244,6 +251,13 @@ public final class CommandRunner {
             return false
         }
         return verbose
+    }
+
+    private func getDifferencesOnly(from arguments: ArgumentParser.Result) -> Bool {
+        guard let differencesOnly = arguments.get(differencesOnlyOption) else {
+            return false
+        }
+        return differencesOnly
     }
 
     private func getList(from arguments: ArgumentParser.Result) -> Bool {

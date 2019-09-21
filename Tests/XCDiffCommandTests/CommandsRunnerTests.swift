@@ -98,6 +98,22 @@ final class CommandsRunnerTests: XCTestCase {
         XCTAssertEqual(code, 0)
     }
 
+    func testRun_whenSameProjectsWithQuietOption() {
+        // Given
+        let command: [String] = ["-d"]
+        fileSystem.listCurrentDirectoryReturn = [
+            fixtures.project.ios_project_1().string,
+            fixtures.project.ios_project_1().string,
+        ]
+
+        // When
+        let code = subject.run(with: command)
+
+        // Then
+        XCTAssertEqual(printer.output, "\n")
+        XCTAssertEqual(code, 0)
+    }
+
     func testRun_whenProjectsNotSpecifiedAndNotExistInCurrentDirectory() {
         // Given
         let command: [String] = []
