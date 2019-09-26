@@ -1,157 +1,56 @@
 <p align="center">
-    <img src="Documentation/Resources/xcdiff.png" alt="xcdiff logo" />
+   <img src="Documentation/Resources/xcdiff.png" alt="xcdiff logo" />
 </p>
 
-xcdiff is an extensible tool that finds differences between your `.xcodeproj` project files. It allows you add comparators of your own very easily.
+*xcdiff* is an extensible tool that **finds differences between your .xcodeproj project files**. It can be thought of as git diff for your .xcodeproj files, can be used directly from the command line as well as a library supporting your own set of tools.
 
-## How to Use
+## How to use xcdiff
 
-Running the command xcdiff in your project directory will search for two `.xcodeproj` files in this directory and use all of `xcdiff`'s comparators on the projects (some of which are file references, targets and headers for example).
+Running the command `xcdiff` in your project directory will search for two `.xcodeproj` files in this directory and use all of xcdiff's comparators on the projects (e.g. targets, sources and headers).
 
-You can specify two particular projects `xcdiff` will compare.
-```
-xcdiff -p1 "path/to/project1.xcodeproj" -p2 "path/to/project2.xcodeproj"
-```
+You can also specify two particular projects for xcdiff to compare.
 
-### Output a Different Format
-
-Since there is a lot of information stored in a `.xcodeproj` file comparisons can get verbose. We provide output format options to make reading the output easier.
-```
-xcdiff -f markdown # alternatively json or console
+```sh
+xcdiff -p1 OriginalProject.xcodeproj -p2 GeneratedProject.xcodeproj
 ```
 
-### View a List of All Comparators
+Here is an example output:
 
-`xcdiff` has an option to view all the comparators currently implemented.
-```
-xcdiff -l
-```
+<p align="center">
+   <img src="Documentation/Resources/xcdiff-demo.png" alt="xcdiff demo" />
+</p>
 
-###  Compare Specific Configurations
+To see a defailed report of differences you can specify the `--verbose` (`-v`) option.
 
-Xcode projects can have a lot of configurations so you can specify a particular configuration to compare.
-```
-xcdiff -c "Beta"
+```sh
+xcdiff -p1 OriginalProject.xcodeproj -p2 GeneratedProject.xcodeproj -v
 ```
 
-### Compare Specific Targets
+<p align="center">
+   <img src="Documentation/Resources/xcdiff-demo-v.png" alt="xcdiff demo -v" />
+</p>
 
-Large projects can have many targets and you may be interested in only a few of them. Use a comma seperated list to specify many targets.
-```
-xcdiff -t "Target1, Target2"
-```
+## Installation
 
-### Compare Any Specific Difference Type
+- [Install xcdiff](Documentation/Installation.md#CLI) and use from the command line.
+- [Add as a dependency](Documentation/Installation.md#Framework) of your macOS project (xcdiff follows the [semantic versioning][3]).
 
-xcdiff uses the notion of `tags` to identify the different types of comparisons it can make. Since you might be interested in looking for a specific type of difference whether it is `targets` or `file references` we added the ability to compare by tag.
+## Documentation
 
-```
-xcdiff -l # you can use -l to find all the comparators available
-xcdiff -g "TARGETS"
-xcdiff -g "CONFIGURATIONS"
-```
+- Read [xcdiff CLI](Documentation/CLI.md) documentation or try `xcdiff --help`.
+- Check out how to use [XCDiffCore Framework](Documentation/Framework.md) in your own project.
 
-## Development
+## Contributions
 
-### Project Structure
+All improvements to xcdiff are very welcome!
 
-The file structure of `xcdiff` with comments is below.
+If you see an issue that you would like to see fixed, the best way to make it happen is to help out by submitting a [Pull Request](../../pulls) implementing it. **Before sending a [Pull Request](../../pulls), please make sure you read our [Contribution Guidelines][2]**. Information in [Development Documentation](Documentation/Development.md) can help you to set up your local development environment.
 
-```
-.
-├── CommandTests
-│   ├── Generated
-│   └── Manual
-├── Fixtures
-├── Sources
-│   ├── XCDiff # main.swift
-│   ├── XCDiffCommand # command line interface
-│   └── XCDiffCore
-│       ├── Comparator # each difference type has it's own comparator
-│       ├── Library # core comparator
-│       └── ResultRenderer # format the output of xcdiff
-│           ├── Output
-│           ├── ProjectResultRenderer
-│           └── Renderer
-└── Tests
-    ├── XCDiffCommandTests
-    └── XCDiffCoreTests
-```
-
-### SwiftLint
-
-We've set up SwiftLint (https://github.com/realm/SwiftLint) to enforce Swift style and conventions.
-You can run the following command to check if your code does not violate any of the rules.
-
-```
-swiftlint
-```
-
-### SwiftFormat
-
-We've set up SwiftFormat (https://github.com/nicklockwood/SwiftFormat) to enforce consistent code formatting.
-
-You can run the following command to format your code.
-
-```
-swiftformat .
-```
-
-### Command Tests
-
-All markdown files in `CommandTests/Manual` were created manually, `CommandTests/Generated` contains test files that are auto-generated by the script `Scripts/generate_tests_commands_files.py`. Thanks to those tests, there is no need to write any new manual tests. We need to just focus on reviewing the new markdown files generated in `CommandTests/Generated` to make sure the files contain the expected output of your new comparator. Scan the file names in `CommandTests/Generated` for your new dependency tag name or check `git status` for new markdown files if you have trouble finding the newly generated files by the script.
-
-**IMPORTANT:** To add a new comparator add the comparator's tag to `Scripts/generate_tests_commands_files.py` and run the script to generate the tests. The script needs to be updated and run every time we add a new comparator.
-
-Each markdown file in `CommandTests` represents a single integration test. Those files follow a very specific pattern:
-
-```
-    # Command
-    ```json
-    <JSON REPRESENTATION OF THE COMMAND>
-    ```
-
-    # Expected exit code
-    <NUMBER>
-
-    # Expected output
-    ```
-    <CONTENT OF THE OUTPUT>
-    ```
-```
-
-i.e.
-
-```
-    # Command
-    ```json
-    ["-p1", "{ios_project_1}", "-p2", "{ios_project_2}"]
-    ```
-
-    # Expected exit code
-    1
-
-    # Expected output
-    ```
-    ❌ TARGETS > NATIVE targets
-    ❌ TARGETS > AGGREGATE targets
-    ❌ SOURCES > "Project" target
-    ❌ SOURCES > "ProjectTests" target
-    ❌ SOURCES > "ProjectUITests" target
-    ❌ RESOURCES > "Project" target
-    ❌ RESOURCES > "ProjectTests" target
-    ❌ RESOURCES > "ProjectUITests" target
-
-
-    ```
-```
-
-`generate_tests_commands_files.py` helps to generate the most obvious cases, like different permutations of the verbose or format options.
+We also welcome [Issue Reports](../../issues). Be sure to choose the proper issue template for your issue, so that all necessary details are provided.
 
 ## Code of Conduct
 
-This project has adopted a
-[Code of Conduct](https://github.com/bloomberg/.github/blob/master/CODE_OF_CONDUCT.md).
+This project has adopted a [Code of Conduct][1].
 If you have any concerns about the Code, or behavior which you have experienced
 in the project, please contact us at opensource@bloomberg.net.
 
@@ -167,4 +66,9 @@ address them.
 
 ## License
 
-xcdiff is released under version 2.0 of the [Apache License](License.txt).
+xcdiff is released under version 2.0 of the [Apache License](LICENSE.txt).
+
+
+[1]: https://github.com/bloomberg/.github/blob/master/CODE_OF_CONDUCT.md
+[2]: https://github.com/bloomberg/.github/blob/master/CONTRIBUTING.md
+[3]: https://semver.org

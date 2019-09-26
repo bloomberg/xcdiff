@@ -116,7 +116,7 @@ public final class CommandRunner {
             return runPrintAvailableOperators()
         }
 
-        // Run comare
+        // Run compare
         do {
             return try runPrintCompare(with: arguments)
         } catch {
