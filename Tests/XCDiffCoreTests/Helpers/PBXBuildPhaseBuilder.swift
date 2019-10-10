@@ -50,8 +50,6 @@ final class PBXBuildPhaseBuilder {
         case .embedFrameworks:
             buildPhase = PBXCopyFilesBuildPhase(dstSubfolderSpec: .frameworks,
                                                 files: buildFiles)
-        default:
-            fatalError("Unsupported BuildPhase type \(type)")
         }
         return (buildPhase, objects + [buildPhase])
     }
