@@ -2,6 +2,14 @@
 
 ## Options
 
+### Compare Two Projects
+
+By default xcdiff will try to search your current directory for two projects (in alphabetical order). You can however specify `-p1`, `-p2` paths explicitly.
+
+```sh
+xcdiff -p1 <path_to_first_project> -p2 <path_to_second_project>
+```
+
 ### View a List of All Comparators
 
 `xcdiff` has an option to view all the comparators currently implemented.
@@ -31,9 +39,11 @@ xcdiff -c "Beta"
 xcdiff uses the notion of tags to identify the different types of comparisons it can make. Since you might be interested in looking for a specific type of difference whether it is targets or file references we added the ability to compare by tag.
 
 ```sh
-xcdiff -l # you can use -l to find all the comparators available
+xcdiff -l # you can use -l to list all the comparators available
 xcdiff -g "targets, configurations"
 ```
+
+For more information on what each of the comparators does, see [Comparators](Comparators.md).
 
 ### Output Format
 
