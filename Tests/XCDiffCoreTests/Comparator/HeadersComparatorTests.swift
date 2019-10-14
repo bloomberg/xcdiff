@@ -51,12 +51,12 @@ final class HeadersComparatorTests: XCTestCase {
         // Given
         let first = project()
             .addTargets(names: ["A"]) {
-                $0.addHeaders([("A.h", .public), ("B.h", .private), ("C.h", .project)])
+                $0.addHeaders([("A.h", .public), ("B.h", .private), ("C.h", nil)])
             }
             .projectDescriptor()
         let second = project()
             .addTargets(names: ["A"]) {
-                $0.addHeaders([("A.h", .public), ("B.h", .private), ("C.h", .project)])
+                $0.addHeaders([("A.h", .public), ("B.h", .private), ("C.h", nil)])
             }
             .projectDescriptor()
 
@@ -71,12 +71,12 @@ final class HeadersComparatorTests: XCTestCase {
         // Given
         let first = project()
             .addTargets(names: ["A"]) {
-                $0.addHeaders([("A1.h", .public), ("B.h", .private), ("C.h", .project)])
+                $0.addHeaders([("A1.h", .public), ("B.h", .private), ("C.h", nil)])
             }
             .projectDescriptor()
         let second = project()
             .addTargets(names: ["A"]) {
-                $0.addHeaders([("A2.h", .public), ("B.h", .private), ("C.h", .project)])
+                $0.addHeaders([("A2.h", .public), ("B.h", .private), ("C.h", nil)])
             }
             .projectDescriptor()
 
@@ -96,7 +96,7 @@ final class HeadersComparatorTests: XCTestCase {
         // Given
         let first = project()
             .addTargets(names: ["A"]) {
-                $0.addHeaders([("A.h", .public), ("B.h", .private), ("C.h", .project), ("D.h", .private)])
+                $0.addHeaders([("A.h", .public), ("B.h", .private), ("C.h", nil), ("D.h", .private)])
             }
             .projectDescriptor()
         let second = project()
@@ -123,7 +123,7 @@ final class HeadersComparatorTests: XCTestCase {
                                                 second: "Private"),
                                           .init(context: "D.h attributes",
                                                 first: "Private",
-                                                second: "nil (Project)"),
+                                                second: "Project"),
                                       ])]
         XCTAssertEqual(actual, expected)
     }
