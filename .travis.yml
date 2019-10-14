@@ -1,0 +1,6 @@
+language: swift
+os: osx
+osx_image: xcode10.3
+script:
+  - ./Scripts/build.sh
+  - ./Scripts/test.sh
