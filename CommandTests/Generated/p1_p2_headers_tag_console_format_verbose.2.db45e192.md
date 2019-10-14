@@ -20,11 +20,11 @@
 
   • ProjectFramework/Header1.h attributes
     ◦ Public
-    ◦ nil (Project)
+    ◦ Project
 
   • ProjectFramework/Header2.h attributes
     ◦ Private
-    ◦ nil (Project)
+    ◦ Project
 
 
 ✅ HEADERS > "ProjectTests" target

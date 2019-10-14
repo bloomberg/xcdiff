@@ -74,13 +74,13 @@ final class HeadersComparator: Comparator {
                                                                   first: first.attributes ?? "Project",
                                                                   second: second.attributes ?? "Project") }
     }
-    
+
     private func checkHeaderAttributesDifference(first: String?, second: String?) -> Bool {
-        if first == "Private" && second == "Private" {
+        if first == "Private", second == "Private" {
             return false
-        } else if first == "Public" && second == "Public" {
+        } else if first == "Public", second == "Public" {
             return false
-        } else if first == nil && second  == nil {
+        } else if first == nil, second == nil {
             return false
         }
         return true
