@@ -17,5 +17,4 @@
 enum PBXHeaderAccessLevel: String {
     case `public` = "Public"
     case `private` = "Private"
-    case project = "Project"
 }
