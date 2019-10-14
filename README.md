@@ -20,7 +20,7 @@ Here is an example output:
    <img src="Documentation/Resources/xcdiff-demo.png" alt="xcdiff demo" />
 </p>
 
-To see a defailed report of differences you can specify the `--verbose` (`-v`) option.
+To see a detailed report of differences you can specify the `--verbose` (`-v`) option.
 
 ```sh
 xcdiff -p1 OriginalProject.xcodeproj -p2 GeneratedProject.xcodeproj -v
@@ -47,6 +47,13 @@ All improvements to xcdiff are very welcome!
 If you see an issue that you would like to see fixed, the best way to make it happen is to help out by submitting a [Pull Request](../../pulls) implementing it. **Before sending a [Pull Request](../../pulls), please make sure you read our [Contribution Guidelines][2]**. Information in [Development Documentation](Documentation/Development.md) can help you to set up your local development environment.
 
 We also welcome [Issue Reports](../../issues). Be sure to choose the proper issue template for your issue, so that all necessary details are provided.
+
+## Attributions
+
+We would like to thank the authors and contributors of the following projects:
+
+- [XcodeProj](https://github.com/tuist/xcodeproj)
+- [SwiftPM](https://github.com/apple/swift-package-manager) (Utility Library)
 
 ## Code of Conduct
 
