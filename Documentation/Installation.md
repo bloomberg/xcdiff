@@ -2,7 +2,7 @@
 
 ## CLI
 
-### Building from sources
+### Building from source
 
 1. Clone the repository
 ```sh
@@ -27,7 +27,23 @@ export PATH="$PATH:$(swift -c release --show-bin-path)"
 
 ### Mint
 
-*TODO*
+To run xcdiff using [Mint](https://github.com/yonaskolb/Mint):
+
+```sh
+mint run bloomberg/xcdiff xcdiff --help
+```
+
+To install xcdiff using [Mint](https://github.com/yonaskolb/Mint):
+
+```sh
+mint install bloomberg/xcdiff
+```
+
+Once installed, you can use xcdiff directly:
+
+```sh
+xcdiff --help
+```
 
 ## Framework
 
