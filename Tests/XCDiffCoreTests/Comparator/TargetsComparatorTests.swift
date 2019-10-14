@@ -122,4 +122,23 @@ final class TargetsComparatorTests: XCTestCase {
         ]
         XCTAssertEqual(actual, expected)
     }
+
+    func testCompare_whenFilterNonExistingTargetName() {
+        // Given
+        let first = project()
+            .addTargets(names: ["A", "B", "C"])
+            .addAggregateTargets(names: ["D", "E"])
+            .projectDescriptor()
+        let second = project()
+            .addTargets(names: ["A", "B", "C"])
+            .addAggregateTargets(names: ["D", "E"])
+            .projectDescriptor()
+        let parameters = ComparatorParameters(targets: .only("NOT_EXISTING"),
+                                              configurations: .all)
+
+        // When / Then
+        XCTAssertThrowsError(try sut.compare(first, second, parameters: parameters)) { error in
+            XCTAssertEqual(error.localizedDescription, "Cannot find target \"NOT_EXISTING\"")
+        }
+    }
 }

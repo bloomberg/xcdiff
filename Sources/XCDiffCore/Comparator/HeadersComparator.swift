@@ -25,10 +25,7 @@ final class HeadersComparator: Comparator {
     func compare(_ first: ProjectDescriptor,
                  _ second: ProjectDescriptor,
                  parameters: ComparatorParameters) throws -> [CompareResult] {
-        let commonTargets = try targetsHelper
-            .commonTargets(first, second)
-            .filter(by: parameters.targets)
-
+        let commonTargets = try targetsHelper.commonTargets(first, second, parameters: parameters)
         return try commonTargets.map { firstTarget, secondTarget -> CompareResult in
             let firstHeaders = try targetsHelper.headers(from: firstTarget, sourceRoot: first.sourceRoot)
             let secondHeaders = try targetsHelper.headers(from: secondTarget, sourceRoot: second.sourceRoot)

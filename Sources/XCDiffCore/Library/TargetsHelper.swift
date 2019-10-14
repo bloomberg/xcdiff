@@ -49,6 +49,10 @@ enum DependencyDescriptorType: String {
 final class TargetsHelper {
     private let pathHelper = PathHelper()
 
+    func targets(from projectDescription: ProjectDescriptor) -> Set<String> {
+        return native(from: projectDescription).union(aggregate(from: projectDescription))
+    }
+
     func native(from projectDescriptor: ProjectDescriptor) -> Set<String> {
         return Set(projectDescriptor.pbxproj.nativeTargets.map { $0.name })
     }
@@ -58,22 +62,17 @@ final class TargetsHelper {
     }
 
     /// Find common targets
-    func commonTargets(_ first: ProjectDescriptor,
-                       _ second: ProjectDescriptor) throws -> [TargetPair] {
-        let firstTargetNames = native(from: first).union(aggregate(from: first))
-        let secondTargetNames = native(from: second).union(aggregate(from: second))
-        let commonTargetNames = firstTargetNames.union(secondTargetNames).sorted()
-        return commonTargetNames.compactMap { name -> TargetPair? in
-            let firstTargets = first.pbxproj.targets(named: name)
-            let secondTargets = second.pbxproj.targets(named: name)
-            guard let firstTarget = firstTargets.first else {
-                return nil
-            }
-            guard let secondTarget = secondTargets.first else {
-                return nil
-            }
-            return (first: firstTarget, second: secondTarget)
-        }
+    func commonTargets(_ first: ProjectDescriptor, _ second: ProjectDescriptor,
+                       parameters: ComparatorParameters) throws -> [TargetPair] {
+        try targets(from: first)
+            .intersection(targets(from: second))
+            .validateTargetsOption(parameters)
+        return targets(from: first)
+            .intersection(targets(from: second))
+            .filter(by: parameters.targets)
+            .sorted()
+            .map { (first: first.pbxproj.targets(named: $0)[0],
+                    second: second.pbxproj.targets(named: $0)[0]) }
     }
 
     func headers(from target: PBXTarget, sourceRoot: Path) throws -> [HeaderDescriptor] {
@@ -91,8 +90,8 @@ final class TargetsHelper {
     /// Find common configurations
     func commonConfigurations(_ first: ProjectDescriptor,
                               _ second: ProjectDescriptor) -> [String] {
-        let firstConfigurations = Set(configurations(from: first))
-        let secondConfigurations = Set(configurations(from: second))
+        let firstConfigurations = configurations(from: first)
+        let secondConfigurations = configurations(from: second)
         return firstConfigurations.intersectionSorted(secondConfigurations)
     }
 
@@ -198,17 +197,19 @@ private extension PBXBuildFile {
     }
 }
 
-extension Array where Array.Element == TargetPair {
-    func filter(by option: ComparatorParameters.Option<String>) throws -> [TargetPair] {
+extension Set where Set.Element == String {
+    func validateTargetsOption(_ parameters: ComparatorParameters) throws {
+        try validate(type: "target", option: parameters.targets)
+    }
+
+    private func validate(type: String, option: ComparatorParameters.Option<String>) throws {
         guard let allOptions = option.values() else {
-            return self
+            return
         }
-        let names = map { $0.first.name }
-        let unknownTargets = Set(allOptions).subtracting(names)
-        guard unknownTargets.isEmpty else {
-            throw ComparatorError.cannotFind(type: "target", elements: unknownTargets.sorted())
+        let unknown = Set(allOptions).subtracting(self)
+        guard unknown.isEmpty else {
+            throw ComparatorError.cannotFind(type: type, elements: unknown.sorted())
         }
-        return filter { option.contains($0.first.name) }
     }
 }
 
