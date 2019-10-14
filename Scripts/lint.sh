@@ -6,10 +6,15 @@ set -o pipefail
 # exit on error
 trap 'exit' ERR
 
-# run swiftlint
+# Print versions
+echo "SwiftLint version"
 swiftlint version
+
+echo "SwiftFormat version"
+swiftformat --version
+
+# run swiftlint
 swiftlint --strict --quiet
 
 # run swiftformat
-swiftformat --version
 swiftformat . --lint

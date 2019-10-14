@@ -1,16 +1,29 @@
-#!/bin/zsh
+#!/bin/bash
 
-# don't pipe on failure
-set -o pipefail
+function install_formula {
+    brew list $1 2> /dev/null
+    if [[ $? == 0 ]] ; then
+        brew outdated "$2" || brew reinstall "$2"
+    else
+        brew install "$2"
+    fi
+}
 
-# exit on error
-trap 'exit' ERR
+function main {
+    # 0.35.0
+    SWIFTLINT_FORMULA="https://raw.githubusercontent.com/Homebrew/homebrew-core/a150ab2162228b957db1871947315f2278b21252/Formula/swiftlint.rb"
 
-# disable homebrew auto update
-export HOMEBREW_NO_AUTO_UPDATE=1
+    # 0.40.13
+    SWIFTFORMAT_FORMULA="https://raw.githubusercontent.com/Homebrew/homebrew-core/cd3ba980c503d06fdc8daf796e2ddb795685b555/Formula/swiftformat.rb"
 
-# 0.35.0
-brew outdated swiftlint || brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/c6e596c7d301099a6f1d81c5e9a74a27dea0ade4/Formula/swiftlint.rb
+    # disable homebrew auto update
+    export HOMEBREW_NO_AUTO_UPDATE=1
 
-# 0.40.13
-brew outdated swiftformat || brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/0e69da465c5f1187521e9fa156639cd48d405f50/Formula/swiftformat.rb
+    # install (or reinstall) swiftlint
+    install_formula swiftlint $SWIFTLINT_FORMULA
+
+    # install (or reinstall) swiftformat
+    install_formula swiftformat $SWIFTFORMAT_FORMULA
+}
+
+main
