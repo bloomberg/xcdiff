@@ -1,6 +1,6 @@
 # Command
 ```json
-["-p1", "/not/existing/project1.xcodeproj", "-p2", "/not/existing/project2.xcodeproj"]
+["-p1", "/not/existing/project1.xcodeproj", "-p2", "{ios_project_2}"]
 ```
 
 # Expected exit code
@@ -11,4 +11,3 @@
 ERROR: -p1 "/not/existing/project1.xcodeproj" project does not exist
 
 ```
-

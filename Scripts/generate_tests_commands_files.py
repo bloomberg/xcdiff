@@ -6,16 +6,61 @@ import subprocess
 import sys
 import os
 
-TAGS = ["",
-        "file_references",
-        "targets",
-        "headers",
-        "resources",
-        "configurations",
-        "settings",
-        "sources",
-        "source_trees",
-        "dependencies"]
+#
+# Manually Specified Commands
+#
+# The following commands will be used as tests.
+#
+# format: tuple `(alias_string, [command])`
+#
+# - note: aliases need to be unique, otherwise the generated tests may overwrite one another!
+#
+COMMANDS = [
+    # list
+    ("list", ["-l"]),
+
+    # unknown option
+    ("unknown", ["-unknown"]),
+
+    # non existing tags
+    ("non_existing_tag", ["-p1", "{ios_project_1}", "-p2", "{ios_project_2}", "-g", "targets, unsupported, unsupported_too"]),
+
+    # non existing target
+    ("non_existing_target", ["-p1", "{ios_project_1}", "-p2", "{ios_project_2}", "-t", "NON_EXISTING"]),
+
+    # differences only
+    ("differences_only", ["-p1", "{ios_project_1}", "-p2", "{ios_project_2}", "-d"]),
+
+    # non existing projects
+    ("p1_does_not_exist", ["-p1", "/not/existing/project1.xcodeproj", "-p2", "{ios_project_2}"]),
+    ("p2_does_not_exist", ["-p1", "{ios_project_1}", "-p2", "/not/existing/project2.xcodeproj"]),
+    ("p1_p2_do_not_exist", ["-p1", "/not/existing/project1.xcodeproj", "-p2", "/not/existing/project2.xcodeproj"]),
+
+    # target only in second project (targets tag)
+    ("target_only_in_second_g_targets", ["-p1", "{ios_project_1}", "-p2", "{ios_project_2}", "-g", "targets", "-t", "NewFramework", "-v"]),
+
+    # target only in second project (headers tag)
+    ("target_only_in_second_g_headers", ["-p1", "{ios_project_1}", "-p2", "{ios_project_2}", "-g", "headers", "-t", "NewFramework", "-v"]),
+]
+
+# 
+# Auto generated command parameters
+#
+# The following parameters are used to auto generate command combinations
+# to use as tests.
+#
+TAGS = [
+    "",
+    "file_references",
+    "targets",
+    "headers",
+    "resources",
+    "configurations",
+    "settings",
+    "sources",
+    "source_trees",
+    "dependencies"
+]
 TARGETS = ["", "Project", "NewFramework"]
 FORMATS = ["", "console", "json", "markdown"]
 VERBOSE = ["", "-v"]
@@ -43,7 +88,7 @@ def generate_command(tag, target, format, verbose):
         command += ["-v"]
         alias += "_verbose"
 
-    return (command, alias)
+    return (alias, command)
 
 def generate_commands():
     commands = []
@@ -73,13 +118,13 @@ def run_command(arguments):
 def generate_command_tests_files():
     dirname = os.path.dirname(sys.argv[0])
     command_tests_path = os.path.join(dirname, "../CommandTests/Generated")
-    commands = generate_commands()
+    commands = generate_commands() + COMMANDS
     command_run = ["swift", "run", "xcdiff"]
 
     remove_all_command_tests_files(command_tests_path)
     for command_tuple in commands:
-        command = command_tuple[0]
-        alias = command_tuple[1]
+        alias = command_tuple[0]
+        command = command_tuple[1]
         out = run_command(command_run + command)
         output, _ = out.communicate()
         output_string = output.decode(sys.stdout.encoding)
