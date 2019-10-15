@@ -2,6 +2,6 @@ language: swift
 os: osx
 osx_image: xcode10.3
 script:
-  - ./Scripts/brew.sh ; ./Scripts/lint.sh
-  - ./Scripts/build.sh
-  - ./Scripts/test.sh
+  - ./Scripts/brew.sh ; make lint
+  - make clean build
+  - make clean test
