@@ -51,12 +51,12 @@ final class HeadersComparatorTests: XCTestCase {
         // Given
         let first = project()
             .addTargets(names: ["A"]) {
-                $0.addHeaders([("A.h", .public), ("B.h", .private), ("C.h", nil)])
+                $0.addHeaders([("A.h", .public), ("B.h", .private), ("C.h", .project)])
             }
             .projectDescriptor()
         let second = project()
             .addTargets(names: ["A"]) {
-                $0.addHeaders([("A.h", .public), ("B.h", .private), ("C.h", nil)])
+                $0.addHeaders([("A.h", .public), ("B.h", .private), ("C.h", .project)])
             }
             .projectDescriptor()
 
@@ -71,12 +71,12 @@ final class HeadersComparatorTests: XCTestCase {
         // Given
         let first = project()
             .addTargets(names: ["A"]) {
-                $0.addHeaders([("A1.h", .public), ("B.h", .private), ("C.h", nil)])
+                $0.addHeaders([("A1.h", .public), ("B.h", .private), ("C.h", .project)])
             }
             .projectDescriptor()
         let second = project()
             .addTargets(names: ["A"]) {
-                $0.addHeaders([("A2.h", .public), ("B.h", .private), ("C.h", nil)])
+                $0.addHeaders([("A2.h", .public), ("B.h", .private), ("C.h", .project)])
             }
             .projectDescriptor()
 
@@ -92,16 +92,36 @@ final class HeadersComparatorTests: XCTestCase {
                                               differentValues: [])])
     }
 
-    func testCompare_whenSameFilesButDifferentAccessLevels() throws {
+    func testCompare_whenSamePublicHeadersPackage() throws {
         // Given
         let first = project()
             .addTargets(names: ["A"]) {
-                $0.addHeaders([("A.h", .public), ("B.h", .private), ("C.h", nil), ("D.h", .private)])
+                $0.addHeaders([("A1.h", .custom("Something")), ("B.h", .private), ("C.h", .project)])
             }
             .projectDescriptor()
         let second = project()
             .addTargets(names: ["A"]) {
-                $0.addHeaders([("A.h", .private), ("B.h", .private), ("C.h", .private), ("D.h", nil)])
+                $0.addHeaders([("A1.h", .custom("Something")), ("B.h", .private), ("C.h", .project)])
+            }
+            .projectDescriptor()
+
+        // When
+        let actual = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(actual, noDifference(targets: ["A"]))
+    }
+
+    func testCompare_whenSameFilesButDifferentAccessLevels() throws {
+        // Given
+        let first = project()
+            .addTargets(names: ["A"]) {
+                $0.addHeaders([("A.h", .public), ("B.h", .private), ("C.h", .project), ("D.h", .private)])
+            }
+            .projectDescriptor()
+        let second = project()
+            .addTargets(names: ["A"]) {
+                $0.addHeaders([("A.h", .private), ("B.h", .private), ("C.h", .private), ("D.h", .project)])
             }
             .projectDescriptor()
 
@@ -119,11 +139,11 @@ final class HeadersComparatorTests: XCTestCase {
                                                 first: "Public",
                                                 second: "Private"),
                                           .init(context: "C.h attributes",
-                                                first: "Project",
+                                                first: "nil (Project)",
                                                 second: "Private"),
                                           .init(context: "D.h attributes",
                                                 first: "Private",
-                                                second: "Project"),
+                                                second: "nil (Project)"),
                                       ])]
         XCTAssertEqual(actual, expected)
     }

@@ -93,6 +93,7 @@ final class CommandsRunnerTests: XCTestCase {
         ✅ DEPENDENCIES > "ProjectUITests" target > Linked Dependencies
         ✅ DEPENDENCIES > "ProjectUITests" target > Embedded Frameworks
 
+
         """)
         XCTAssertEqual(code, 0)
     }

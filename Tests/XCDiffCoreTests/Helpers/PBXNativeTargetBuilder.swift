@@ -86,8 +86,8 @@ final class PBXNativeTargetBuilder {
             headers.forEach { header in
                 buildPhaseBuilder.addBuildFile { buildFileBuilder in
                     buildFileBuilder.setPath(header.path)
-                    if let accessLevel = header.accessLevel {
-                        buildFileBuilder.setSettings(["ATTRIBUTES": accessLevel.rawValue])
+                    if let accessLevel = header.accessLevel?.pbxAttributes() {
+                        buildFileBuilder.setSettings(["ATTRIBUTES": accessLevel])
                     }
                 }
             }

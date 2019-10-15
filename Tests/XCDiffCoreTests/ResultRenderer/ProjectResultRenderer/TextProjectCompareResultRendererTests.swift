@@ -112,11 +112,13 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
           • OIF1
           • OIF2
 
+
         ⚠️  Only in second (3):
 
           • OIS1
           • OIS2
           • OIS3
+
 
         ⚠️  Value mismatch (4):
 
@@ -136,6 +138,7 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
             ◦ DV4_V1
             ◦ DV4_V2
 
+
         ❌ TAG2 > Context1 > Context2
 
         ⚠️  Only in first (2):
@@ -143,11 +146,13 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
           • OIF1
           • OIF2
 
+
         ⚠️  Only in second (3):
 
           • OIS1
           • OIS2
           • OIS3
+
 
         ⚠️  Value mismatch (4):
 
@@ -204,16 +209,19 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
 
         ## ❌ TAG1 > Context1 > Context2
 
+
         ### ⚠️  Only in first (2):
 
           - `OIF1`
           - `OIF2`
+
 
         ### ⚠️  Only in second (3):
 
           - `OIS1`
           - `OIS2`
           - `OIS3`
+
 
         ### ⚠️  Value mismatch (4):
 
@@ -233,18 +241,23 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
             - `DV4_V1`
             - `DV4_V2`
 
+
+
         ## ❌ TAG2 > Context1 > Context2
+
 
         ### ⚠️  Only in first (2):
 
           - `OIF1`
           - `OIF2`
 
+
         ### ⚠️  Only in second (3):
 
           - `OIS1`
           - `OIS2`
           - `OIS3`
+
 
         ### ⚠️  Value mismatch (4):
 

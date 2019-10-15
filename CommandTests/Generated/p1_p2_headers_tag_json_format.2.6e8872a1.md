@@ -32,12 +32,12 @@
       {
         "context" : "ProjectFramework\/Header1.h attributes",
         "first" : "Public",
-        "second" : "Project"
+        "second" : "nil (Project)"
       },
       {
         "context" : "ProjectFramework\/Header2.h attributes",
         "first" : "Private",
-        "second" : "Project"
+        "second" : "nil (Project)"
       }
     ],
     "onlyInFirst" : [
