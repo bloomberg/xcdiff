@@ -68,7 +68,7 @@ final class HeadersComparator: Comparator {
         return headerDescriptorPairs
             .filter { $0.attributes != $1.attributes }
             .map { first, second in CompareResult.DifferentValues(context: "\(first.path) attributes",
-                                                                  first: first.attributes,
+                                                                  first: first.attributes ?? "nil (Project)",
                                                                   second: second.attributes ?? "nil (Project)") }
     }
 

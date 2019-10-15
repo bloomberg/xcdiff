@@ -14,8 +14,22 @@
 // limitations under the License.
 //
 
-enum PBXHeaderAccessLevel: String {
-    case `public` = "Public"
-    case `private` = "Private"
-    case project = "Project"
+enum PBXHeaderAccessLevel {
+    case `public`
+    case `private`
+    case project
+    case custom(String?)
+
+    func pbxAttributes() -> String? {
+        switch self {
+        case .public:
+            return "Public"
+        case .private:
+            return "Private"
+        case let .custom(value):
+            return value
+        default:
+            return nil
+        }
+    }
 }
