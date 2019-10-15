@@ -147,7 +147,7 @@ final class CommandsRunnerTests: XCTestCase {
 
         // Then
         let expected = """
-        ERROR: Could not find 2 projects in the current directory, 
+        ERROR: Could not find 2 projects in the current directory,
         use `-p1` and `-p2` to specify the projects paths to compare\n
         """
         XCTAssertEqual(printer.output, expected)
