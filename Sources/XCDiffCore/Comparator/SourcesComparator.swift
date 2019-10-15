@@ -19,20 +19,17 @@ import Foundation
 final class SourcesComparator: Comparator {
     private typealias SourcePair = (first: SourceDescriptor, second: SourceDescriptor)
 
-    var tag = "sources"
-    private let helper = TargetsHelper()
+    let tag = "sources"
+    private let targetsHelper = TargetsHelper()
 
     func compare(_ first: ProjectDescriptor,
                  _ second: ProjectDescriptor,
                  parameters: ComparatorParameters) throws -> [CompareResult] {
-        let commonTargets = try helper
-            .commonTargets(first, second)
-            .filter(by: parameters.targets)
-
-        let sourcesResults = try commonTargets
+        let commonTargets = try targetsHelper.commonTargets(first, second, parameters: parameters)
+        return try commonTargets
             .map { firstTarget, secondTarget -> CompareResult in
-                let firstSources = try helper.sources(from: firstTarget, sourceRoot: first.sourceRoot)
-                let secondSources = try helper.sources(from: secondTarget, sourceRoot: second.sourceRoot)
+                let firstSources = try targetsHelper.sources(from: firstTarget, sourceRoot: first.sourceRoot)
+                let secondSources = try targetsHelper.sources(from: secondTarget, sourceRoot: second.sourceRoot)
 
                 let firstPaths = Set(firstSources.map { $0.path })
                 let secondPaths = Set(secondSources.map { $0.path })
@@ -45,7 +42,6 @@ final class SourcesComparator: Comparator {
                               second: secondPaths,
                               differentValues: difference)
             }
-        return sourcesResults
     }
 
     /// Returns common sources as a source pair

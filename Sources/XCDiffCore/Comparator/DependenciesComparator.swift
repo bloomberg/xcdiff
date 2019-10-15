@@ -28,8 +28,7 @@ final class DependenciesComparator: Comparator {
     func compare(_ first: ProjectDescriptor,
                  _ second: ProjectDescriptor,
                  parameters: ComparatorParameters) throws -> [CompareResult] {
-        let commonTargets = try targetsHelper.commonTargets(first, second).filter(by: parameters.targets)
-
+        let commonTargets = try targetsHelper.commonTargets(first, second, parameters: parameters)
         let results = try commonTargets.flatMap { commonTarget in
             [try createLinkedDependenciesResults(commonTarget: commonTarget),
              try createEmbeddedFrameworksResults(commonTarget: commonTarget)]

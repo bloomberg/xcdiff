@@ -19,16 +19,19 @@ import Foundation
 final class TargetsComparator: Comparator {
     let tag = "targets"
 
-    private let targets = TargetsHelper()
+    private let targetsHelper = TargetsHelper()
 
     func compare(_ first: ProjectDescriptor,
                  _ second: ProjectDescriptor,
                  parameters: ComparatorParameters) throws -> [CompareResult] {
+        try targetsHelper.targets(from: first)
+            .union(targetsHelper.targets(from: second))
+            .validateTargetsOption(parameters)
         return results(context: ["NATIVE targets"],
-                       first: targets.native(from: first).filter(by: parameters.targets),
-                       second: targets.native(from: second).filter(by: parameters.targets))
+                       first: targetsHelper.native(from: first).filter(by: parameters.targets),
+                       second: targetsHelper.native(from: second).filter(by: parameters.targets))
             + results(context: ["AGGREGATE targets"],
-                      first: targets.aggregate(from: first).filter(by: parameters.targets),
-                      second: targets.aggregate(from: second).filter(by: parameters.targets))
+                      first: targetsHelper.aggregate(from: first).filter(by: parameters.targets),
+                      second: targetsHelper.aggregate(from: second).filter(by: parameters.targets))
     }
 }

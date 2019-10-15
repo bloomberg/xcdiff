@@ -17,19 +17,16 @@
 import Foundation
 
 final class ResourcesComparator: Comparator {
-    var tag = "resources"
-    private let helper = TargetsHelper()
+    let tag = "resources"
+    private let targetsHelper = TargetsHelper()
 
     func compare(_ first: ProjectDescriptor,
                  _ second: ProjectDescriptor,
                  parameters: ComparatorParameters) throws -> [CompareResult] {
-        let commonTargets = try helper
-            .commonTargets(first, second)
-            .filter(by: parameters.targets)
-
+        let commonTargets = try targetsHelper.commonTargets(first, second, parameters: parameters)
         let compareResults = try commonTargets.map { firstTarget, secondTarget -> CompareResult in
-            let firstPaths = Set(try helper.resources(from: firstTarget, sourceRoot: first.sourceRoot))
-            let secondPaths = Set(try helper.resources(from: secondTarget, sourceRoot: second.sourceRoot))
+            let firstPaths = Set(try targetsHelper.resources(from: firstTarget, sourceRoot: first.sourceRoot))
+            let secondPaths = Set(try targetsHelper.resources(from: secondTarget, sourceRoot: second.sourceRoot))
 
             return result(context: ["\"\(firstTarget.name)\" target"],
                           first: firstPaths,

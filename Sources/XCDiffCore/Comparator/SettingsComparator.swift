@@ -44,9 +44,7 @@ final class SettingsComparator: Comparator {
     private func createTargetRawSettingsResult(_ first: ProjectDescriptor,
                                                _ second: ProjectDescriptor,
                                                parameters: ComparatorParameters) throws -> [CompareResult] {
-        let commonTargets = try targetHelper
-            .commonTargets(first, second)
-            .filter(by: parameters.targets)
+        let commonTargets = try targetHelper.commonTargets(first, second, parameters: parameters)
         let commonConfigurations = targetHelper
             .commonConfigurations(first, second)
             .filter(by: parameters.configurations)
