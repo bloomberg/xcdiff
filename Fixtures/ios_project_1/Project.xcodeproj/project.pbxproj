@@ -21,6 +21,7 @@
 		2EB291EA230B29C500C9EB4A /* Header2.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EB291D5230B296500C9EB4A /* Header2.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2EB291EB230B29CA00C9EB4A /* Header3.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EB291D6230B296D00C9EB4A /* Header3.h */; };
 		DC89DE912321357200352EFE /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC89DE902321357200352EFE /* ARKit.framework */; };
+		FB8D0EEB2355C7C100AB8723 /* MismatchingLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8D0EEA2355C7C100AB8723 /* MismatchingLibrary.swift */; };
 		FBAE6F0A22F02523004B7BDB /* ObjcClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F0922F02523004B7BDB /* ObjcClass.m */; };
 		FBAE6F0E22F02550004B7BDB /* AnotherObjcClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F0D22F02550004B7BDB /* AnotherObjcClass.m */; };
 		FBAE6F1122F0263D004B7BDB /* BarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAE6F1022F0263D004B7BDB /* BarTests.swift */; };
@@ -67,6 +68,15 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FB8D0EE62355C7C100AB8723 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +100,9 @@
 		2EB291DE230B29B300C9EB4A /* ProjectFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectFramework.h; sourceTree = "<group>"; };
 		2EB291DF230B29B300C9EB4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC89DE902321357200352EFE /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
+		FB8D0EE82355C7C100AB8723 /* libMismatchingLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMismatchingLibrary.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB8D0EEA2355C7C100AB8723 /* MismatchingLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MismatchingLibrary.swift; sourceTree = "<group>"; };
+		FB8D0EF12355C82500AB8723 /* MismatchingLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MismatchingLibrary.h; sourceTree = "<group>"; };
 		FBAE6F0822F02523004B7BDB /* ObjcClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcClass.h; sourceTree = "<group>"; };
 		FBAE6F0922F02523004B7BDB /* ObjcClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjcClass.m; sourceTree = "<group>"; };
 		FBAE6F0C22F02550004B7BDB /* AnotherObjcClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnotherObjcClass.h; sourceTree = "<group>"; };
@@ -133,6 +146,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FB8D0EE52355C7C100AB8723 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -143,6 +163,7 @@
 				2E26638B22B7F52600BA59BC /* ProjectTests */,
 				2E26639622B7F52600BA59BC /* ProjectUITests */,
 				2EB291DD230B29B300C9EB4A /* ProjectFramework */,
+				FB8D0EE92355C7C100AB8723 /* MismatchingLibrary */,
 				2E26637522B7F52500BA59BC /* Products */,
 				DC89DE8F2321357200352EFE /* Frameworks */,
 			);
@@ -155,6 +176,7 @@
 				2E26638822B7F52600BA59BC /* ProjectTests.xctest */,
 				2E26639322B7F52600BA59BC /* ProjectUITests.xctest */,
 				2EB291DC230B29B300C9EB4A /* ProjectFramework.framework */,
+				FB8D0EE82355C7C100AB8723 /* libMismatchingLibrary.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,6 +236,15 @@
 				DC89DE902321357200352EFE /* ARKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FB8D0EE92355C7C100AB8723 /* MismatchingLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				FB8D0EF12355C82500AB8723 /* MismatchingLibrary.h */,
+				FB8D0EEA2355C7C100AB8723 /* MismatchingLibrary.swift */,
+			);
+			path = MismatchingLibrary;
 			sourceTree = "<group>";
 		};
 		FBAE6F0722F0250D004B7BDB /* Group A */ = {
@@ -342,13 +373,30 @@
 			productReference = 2EB291DC230B29B300C9EB4A /* ProjectFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		FB8D0EE72355C7C100AB8723 /* MismatchingLibrary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB8D0EEE2355C7C100AB8723 /* Build configuration list for PBXNativeTarget "MismatchingLibrary" */;
+			buildPhases = (
+				FB8D0EE42355C7C100AB8723 /* Sources */,
+				FB8D0EE52355C7C100AB8723 /* Frameworks */,
+				FB8D0EE62355C7C100AB8723 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MismatchingLibrary;
+			productName = MismatchingLibrary;
+			productReference = FB8D0EE82355C7C100AB8723 /* libMismatchingLibrary.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		2E26636C22B7F52500BA59BC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
+				LastSwiftUpdateCheck = 1110;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Bloomberg LP";
 				TargetAttributes = {
@@ -366,6 +414,9 @@
 					};
 					2EB291DB230B29B300C9EB4A = {
 						CreatedOnToolsVersion = 10.2.1;
+					};
+					FB8D0EE72355C7C100AB8723 = {
+						CreatedOnToolsVersion = 11.1;
 					};
 				};
 			};
@@ -386,6 +437,7 @@
 				2E26638722B7F52600BA59BC /* ProjectTests */,
 				2E26639222B7F52600BA59BC /* ProjectUITests */,
 				2EB291DB230B29B300C9EB4A /* ProjectFramework */,
+				FB8D0EE72355C7C100AB8723 /* MismatchingLibrary */,
 			);
 		};
 /* End PBXProject section */
@@ -462,6 +514,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB8D0EE42355C7C100AB8723 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB8D0EEB2355C7C100AB8723 /* MismatchingLibrary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,7 +815,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bloomberg.mobile.anywhere.testprovisioning.ProjectFramework;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bloomberg.xcdiff.Project.testprovisioning.ProjectFramework;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -782,13 +842,39 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bloomberg.mobile.anywhere.testprovisioning.ProjectFramework;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bloomberg.xcdiff.Project.testprovisioning.ProjectFramework;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		FB8D0EEC2355C7C100AB8723 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FB8D0EED2355C7C100AB8723 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -836,6 +922,15 @@
 			buildConfigurations = (
 				2EB291E6230B29B300C9EB4A /* Debug */,
 				2EB291E7230B29B300C9EB4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FB8D0EEE2355C7C100AB8723 /* Build configuration list for PBXNativeTarget "MismatchingLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB8D0EEC2355C7C100AB8723 /* Debug */,
+				FB8D0EED2355C7C100AB8723 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

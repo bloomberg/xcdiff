@@ -11,6 +11,21 @@
 [
   {
     "context" : [
+      "\"MismatchingLibrary\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "resources"
+  },
+  {
+    "context" : [
       "\"Project\" target"
     ],
     "differentValues" : [

@@ -27,7 +27,7 @@ public enum ComparatorError: LocalizedError {
             return message
         case let .cannotFind(type, elements):
             let formattedElemenets = elements.map { "\"\($0)\"" }.joined(separator: ", ")
-            return "Cannot find \(type)\(elements.count > 1 ? "s" : "") \(formattedElemenets)"
+            return "Cannot find \(type)\(elements.count > 1 ? "s" : "") \(formattedElemenets) in both projects"
         }
     }
 }

@@ -11,6 +11,7 @@
 ❌ FILE_REFERENCES
 ❌ TARGETS > NATIVE targets
 ❌ TARGETS > AGGREGATE targets
+❌ HEADERS > "MismatchingLibrary" target
 ❌ HEADERS > "ProjectFramework" target
 ❌ SOURCES > "Project" target
 ❌ SOURCES > "ProjectTests" target
@@ -22,9 +23,13 @@
 ❌ SETTINGS > Root project > "Debug" configuration > Base configuration
 ❌ SETTINGS > Root project > "Debug" configuration > Values
 ❌ SETTINGS > Root project > "Release" configuration > Values
+❌ SETTINGS > "MismatchingLibrary" target > "Debug" configuration > Values
+❌ SETTINGS > "MismatchingLibrary" target > "Release" configuration > Values
 ❌ SETTINGS > "Project" target > "Debug" configuration > Base configuration
 ❌ SETTINGS > "Project" target > "Debug" configuration > Values
 ❌ SETTINGS > "Project" target > "Release" configuration > Values
+❌ SETTINGS > "ProjectFramework" target > "Debug" configuration > Values
+❌ SETTINGS > "ProjectFramework" target > "Release" configuration > Values
 ❌ SOURCE_TREES > Root project
 ❌ DEPENDENCIES > "Project" target > Linked Dependencies
 ❌ DEPENDENCIES > "Project" target > Embedded Frameworks

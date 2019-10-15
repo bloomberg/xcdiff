@@ -50,14 +50,17 @@ final class CommandsRunnerTests: XCTestCase {
         ✅ FILE_REFERENCES
         ✅ TARGETS > NATIVE targets
         ✅ TARGETS > AGGREGATE targets
+        ✅ HEADERS > "MismatchingLibrary" target
         ✅ HEADERS > "Project" target
         ✅ HEADERS > "ProjectFramework" target
         ✅ HEADERS > "ProjectTests" target
         ✅ HEADERS > "ProjectUITests" target
+        ✅ SOURCES > "MismatchingLibrary" target
         ✅ SOURCES > "Project" target
         ✅ SOURCES > "ProjectFramework" target
         ✅ SOURCES > "ProjectTests" target
         ✅ SOURCES > "ProjectUITests" target
+        ✅ RESOURCES > "MismatchingLibrary" target
         ✅ RESOURCES > "Project" target
         ✅ RESOURCES > "ProjectFramework" target
         ✅ RESOURCES > "ProjectTests" target
@@ -67,6 +70,10 @@ final class CommandsRunnerTests: XCTestCase {
         ✅ SETTINGS > Root project > "Debug" configuration > Values
         ✅ SETTINGS > Root project > "Release" configuration > Base configuration
         ✅ SETTINGS > Root project > "Release" configuration > Values
+        ✅ SETTINGS > "MismatchingLibrary" target > "Debug" configuration > Base configuration
+        ✅ SETTINGS > "MismatchingLibrary" target > "Debug" configuration > Values
+        ✅ SETTINGS > "MismatchingLibrary" target > "Release" configuration > Base configuration
+        ✅ SETTINGS > "MismatchingLibrary" target > "Release" configuration > Values
         ✅ SETTINGS > "Project" target > "Debug" configuration > Base configuration
         ✅ SETTINGS > "Project" target > "Debug" configuration > Values
         ✅ SETTINGS > "Project" target > "Release" configuration > Base configuration
@@ -84,6 +91,8 @@ final class CommandsRunnerTests: XCTestCase {
         ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Base configuration
         ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Values
         ✅ SOURCE_TREES > Root project
+        ✅ DEPENDENCIES > "MismatchingLibrary" target > Linked Dependencies
+        ✅ DEPENDENCIES > "MismatchingLibrary" target > Embedded Frameworks
         ✅ DEPENDENCIES > "Project" target > Linked Dependencies
         ✅ DEPENDENCIES > "Project" target > Embedded Frameworks
         ✅ DEPENDENCIES > "ProjectFramework" target > Linked Dependencies

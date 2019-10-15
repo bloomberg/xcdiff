@@ -12,7 +12,7 @@
 ## ❌ FILE_REFERENCES
 
 
-### ⚠️  Only in first (7):
+### ⚠️  Only in first (8):
 
   - `Project/Group B/AViewController.xib`
   - `Project/Group B/AnotherObjcClass.h`
@@ -21,10 +21,13 @@
   - `ProjectTests/BarTests.swift`
   - `ProjectUITests/LoginTests.swift`
   - `ProjectUITests/Screenshots/empty.png`
+  - `libMismatchingLibrary.a`
 
 
-### ⚠️  Only in second (9):
+### ⚠️  Only in second (11):
 
+  - `MismatchingLibrary.framework`
+  - `MismatchingLibrary/MismatchingLibrary-Info.plist`
   - `NewFramework.framework`
   - `NewFramework/Info.plist`
   - `NewFramework/NewFramework.h`
@@ -45,6 +48,13 @@
   - `NewFramework`
 
 
+### ⚠️  Value mismatch (1):
+
+  - `MismatchingLibrary product type`
+    - `com.apple.product-type.library.static`
+    - `com.apple.product-type.framework`
+
+
 
 ## ❌ TARGETS > AGGREGATE targets
 
@@ -52,6 +62,15 @@
 ### ⚠️  Only in second (1):
 
   - `NewAggregate`
+
+
+
+## ❌ HEADERS > "MismatchingLibrary" target
+
+
+### ⚠️  Only in second (1):
+
+  - `MismatchingLibrary/MismatchingLibrary.h`
 
 
 
@@ -82,6 +101,9 @@
 
 
 ## ✅ HEADERS > "ProjectUITests" target
+
+
+## ✅ SOURCES > "MismatchingLibrary" target
 
 
 ## ❌ SOURCES > "Project" target
@@ -124,6 +146,9 @@
 
   - `ProjectUITests/MetricsTests.swift`
 
+
+
+## ✅ RESOURCES > "MismatchingLibrary" target
 
 
 ## ❌ RESOURCES > "Project" target
@@ -198,6 +223,77 @@
 
 
 
+## ✅ SETTINGS > "MismatchingLibrary" target > "Debug" configuration > Base configuration
+
+
+## ❌ SETTINGS > "MismatchingLibrary" target > "Debug" configuration > Values
+
+
+### ⚠️  Only in first (1):
+
+  - `OTHER_LDFLAGS`
+
+
+### ⚠️  Only in second (13):
+
+  - `CLANG_ENABLE_MODULES`
+  - `CURRENT_PROJECT_VERSION`
+  - `DEFINES_MODULE`
+  - `DYLIB_COMPATIBILITY_VERSION`
+  - `DYLIB_CURRENT_VERSION`
+  - `DYLIB_INSTALL_NAME_BASE`
+  - `INFOPLIST_FILE`
+  - `INSTALL_PATH`
+  - `LD_RUNPATH_SEARCH_PATHS`
+  - `PRODUCT_BUNDLE_IDENTIFIER`
+  - `SWIFT_OPTIMIZATION_LEVEL`
+  - `VERSIONING_SYSTEM`
+  - `VERSION_INFO_PREFIX`
+
+
+### ⚠️  Value mismatch (1):
+
+  - `PRODUCT_NAME`
+    - `$(TARGET_NAME)`
+    - `$(TARGET_NAME:c99extidentifier)`
+
+
+
+## ✅ SETTINGS > "MismatchingLibrary" target > "Release" configuration > Base configuration
+
+
+## ❌ SETTINGS > "MismatchingLibrary" target > "Release" configuration > Values
+
+
+### ⚠️  Only in first (1):
+
+  - `OTHER_LDFLAGS`
+
+
+### ⚠️  Only in second (12):
+
+  - `CLANG_ENABLE_MODULES`
+  - `CURRENT_PROJECT_VERSION`
+  - `DEFINES_MODULE`
+  - `DYLIB_COMPATIBILITY_VERSION`
+  - `DYLIB_CURRENT_VERSION`
+  - `DYLIB_INSTALL_NAME_BASE`
+  - `INFOPLIST_FILE`
+  - `INSTALL_PATH`
+  - `LD_RUNPATH_SEARCH_PATHS`
+  - `PRODUCT_BUNDLE_IDENTIFIER`
+  - `VERSIONING_SYSTEM`
+  - `VERSION_INFO_PREFIX`
+
+
+### ⚠️  Value mismatch (1):
+
+  - `PRODUCT_NAME`
+    - `$(TARGET_NAME)`
+    - `$(TARGET_NAME:c99extidentifier)`
+
+
+
 ## ❌ SETTINGS > "Project" target > "Debug" configuration > Base configuration
 
 
@@ -210,6 +306,11 @@
 
 
 ## ❌ SETTINGS > "Project" target > "Debug" configuration > Values
+
+
+### ⚠️  Only in second (1):
+
+  - `ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES`
 
 
 ### ⚠️  Value mismatch (1):
@@ -226,6 +327,11 @@
 ## ❌ SETTINGS > "Project" target > "Release" configuration > Values
 
 
+### ⚠️  Only in second (1):
+
+  - `ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES`
+
+
 ### ⚠️  Value mismatch (1):
 
   - `CUSTOM_SETTING_COMMON`
@@ -237,13 +343,29 @@
 ## ✅ SETTINGS > "ProjectFramework" target > "Debug" configuration > Base configuration
 
 
-## ✅ SETTINGS > "ProjectFramework" target > "Debug" configuration > Values
+## ❌ SETTINGS > "ProjectFramework" target > "Debug" configuration > Values
+
+
+### ⚠️  Value mismatch (1):
+
+  - `PRODUCT_BUNDLE_IDENTIFIER`
+    - `com.bloomberg.xcdiff.Project.testprovisioning.ProjectFramework`
+    - `com.bloomberg.xcdiff.Project.ProjectFramework`
+
 
 
 ## ✅ SETTINGS > "ProjectFramework" target > "Release" configuration > Base configuration
 
 
-## ✅ SETTINGS > "ProjectFramework" target > "Release" configuration > Values
+## ❌ SETTINGS > "ProjectFramework" target > "Release" configuration > Values
+
+
+### ⚠️  Value mismatch (1):
+
+  - `PRODUCT_BUNDLE_IDENTIFIER`
+    - `com.bloomberg.xcdiff.Project.testprovisioning.ProjectFramework`
+    - `com.bloomberg.xcdiff.Project.ProjectFramework`
+
 
 
 ## ✅ SETTINGS > "ProjectTests" target > "Debug" configuration > Base configuration
@@ -274,7 +396,7 @@
 
 Output format: (<path>, <name>, <source_tree>)
 
-### ⚠️  Only in first (7):
+### ⚠️  Only in first (8):
 
   - `(AViewController.xib, nil, <group>) → (Group B, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)`
   - `(AnotherObjcClass.h, nil, <group>) → (Group B, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)`
@@ -282,15 +404,18 @@ Output format: (<path>, <name>, <source_tree>)
   - `(BarTests.swift, nil, <group>) → (ProjectTests, nil, <group>) → (nil, nil, <group>)`
   - `(LoginTests.swift, nil, <group>) → (ProjectUITests, nil, <group>) → (nil, nil, <group>)`
   - `(empty.png, nil, <group>) → (Screenshots, nil, <group>) → (ProjectUITests, nil, <group>) → (nil, nil, <group>)`
+  - `(libMismatchingLibrary.a, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)`
   - `(time.png, nil, <group>) → (Resources, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)`
 
 
-### ⚠️  Only in second (9):
+### ⚠️  Only in second (11):
 
   - `(Header4.h, nil, <group>) → (ProjectFramework, nil, <group>) → (nil, nil, <group>)`
   - `(Info.plist, nil, <group>) → (NewFramework, nil, <group>) → (nil, nil, <group>)`
   - `(ListResponse.json, nil, <group>) → (Responses, nil, <group>) → (ProjectTests, nil, <group>) → (nil, nil, <group>)`
   - `(MetricsTests.swift, nil, <group>) → (ProjectUITests, nil, <group>) → (nil, nil, <group>)`
+  - `(MismatchingLibrary-Info.plist, nil, <group>) → (MismatchingLibrary, nil, <group>) → (nil, nil, <group>)`
+  - `(MismatchingLibrary.framework, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)`
   - `(NewFramework.framework, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)`
   - `(NewFramework.h, nil, <group>) → (NewFramework, nil, <group>) → (nil, nil, <group>)`
   - `(Project.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)`
@@ -299,11 +424,18 @@ Output format: (<path>, <name>, <source_tree>)
 
 
 
+## ✅ DEPENDENCIES > "MismatchingLibrary" target > Linked Dependencies
+
+
+## ✅ DEPENDENCIES > "MismatchingLibrary" target > Embedded Frameworks
+
+
 ## ❌ DEPENDENCIES > "Project" target > Linked Dependencies
 
 
-### ⚠️  Only in second (1):
+### ⚠️  Only in second (2):
 
+  - `MismatchingLibrary.framework`
   - `NewFramework.framework`
 
 
@@ -318,8 +450,9 @@ Output format: (<path>, <name>, <source_tree>)
 ## ❌ DEPENDENCIES > "Project" target > Embedded Frameworks
 
 
-### ⚠️  Only in second (1):
+### ⚠️  Only in second (2):
 
+  - `MismatchingLibrary.framework`
   - `NewFramework.framework`
 
 

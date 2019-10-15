@@ -12,7 +12,7 @@
 ## ❌ FILE_REFERENCES
 
 
-### ⚠️  Only in first (7):
+### ⚠️  Only in first (8):
 
   - `Project/Group B/AViewController.xib`
   - `Project/Group B/AnotherObjcClass.h`
@@ -21,10 +21,13 @@
   - `ProjectTests/BarTests.swift`
   - `ProjectUITests/LoginTests.swift`
   - `ProjectUITests/Screenshots/empty.png`
+  - `libMismatchingLibrary.a`
 
 
-### ⚠️  Only in second (9):
+### ⚠️  Only in second (11):
 
+  - `MismatchingLibrary.framework`
+  - `MismatchingLibrary/MismatchingLibrary-Info.plist`
   - `NewFramework.framework`
   - `NewFramework/Info.plist`
   - `NewFramework/NewFramework.h`

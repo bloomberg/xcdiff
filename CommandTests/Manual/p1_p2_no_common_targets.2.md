@@ -8,6 +8,6 @@
 
 # Expected output
 ```
-ERROR: Cannot find target "NON_EXISTING"
+ERROR: Cannot find target "NON_EXISTING" in both projects
 
 ```

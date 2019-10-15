@@ -12,14 +12,18 @@
 ❌ SETTINGS > Root project > "Debug" configuration > Values
 ✅ SETTINGS > Root project > "Release" configuration > Base configuration
 ❌ SETTINGS > Root project > "Release" configuration > Values
+✅ SETTINGS > "MismatchingLibrary" target > "Debug" configuration > Base configuration
+❌ SETTINGS > "MismatchingLibrary" target > "Debug" configuration > Values
+✅ SETTINGS > "MismatchingLibrary" target > "Release" configuration > Base configuration
+❌ SETTINGS > "MismatchingLibrary" target > "Release" configuration > Values
 ❌ SETTINGS > "Project" target > "Debug" configuration > Base configuration
 ❌ SETTINGS > "Project" target > "Debug" configuration > Values
 ✅ SETTINGS > "Project" target > "Release" configuration > Base configuration
 ❌ SETTINGS > "Project" target > "Release" configuration > Values
 ✅ SETTINGS > "ProjectFramework" target > "Debug" configuration > Base configuration
-✅ SETTINGS > "ProjectFramework" target > "Debug" configuration > Values
+❌ SETTINGS > "ProjectFramework" target > "Debug" configuration > Values
 ✅ SETTINGS > "ProjectFramework" target > "Release" configuration > Base configuration
-✅ SETTINGS > "ProjectFramework" target > "Release" configuration > Values
+❌ SETTINGS > "ProjectFramework" target > "Release" configuration > Values
 ✅ SETTINGS > "ProjectTests" target > "Debug" configuration > Base configuration
 ✅ SETTINGS > "ProjectTests" target > "Debug" configuration > Values
 ✅ SETTINGS > "ProjectTests" target > "Release" configuration > Base configuration

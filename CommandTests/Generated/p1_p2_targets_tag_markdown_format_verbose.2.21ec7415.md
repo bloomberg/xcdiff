@@ -17,6 +17,13 @@
   - `NewFramework`
 
 
+### ⚠️  Value mismatch (1):
+
+  - `MismatchingLibrary product type`
+    - `com.apple.product-type.library.static`
+    - `com.apple.product-type.framework`
+
+
 
 ## ❌ TARGETS > AGGREGATE targets
 

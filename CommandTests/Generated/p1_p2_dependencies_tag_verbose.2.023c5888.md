@@ -8,10 +8,13 @@
 
 # Expected output
 ```
+✅ DEPENDENCIES > "MismatchingLibrary" target > Linked Dependencies
+✅ DEPENDENCIES > "MismatchingLibrary" target > Embedded Frameworks
 ❌ DEPENDENCIES > "Project" target > Linked Dependencies
 
-⚠️  Only in second (1):
+⚠️  Only in second (2):
 
+  • MismatchingLibrary.framework
   • NewFramework.framework
 
 
@@ -24,8 +27,9 @@
 
 ❌ DEPENDENCIES > "Project" target > Embedded Frameworks
 
-⚠️  Only in second (1):
+⚠️  Only in second (2):
 
+  • MismatchingLibrary.framework
   • NewFramework.framework
 
 

@@ -10,7 +10,7 @@
 ```
 ❌ FILE_REFERENCES
 
-⚠️  Only in first (7):
+⚠️  Only in first (8):
 
   • Project/Group B/AViewController.xib
   • Project/Group B/AnotherObjcClass.h
@@ -19,10 +19,13 @@
   • ProjectTests/BarTests.swift
   • ProjectUITests/LoginTests.swift
   • ProjectUITests/Screenshots/empty.png
+  • libMismatchingLibrary.a
 
 
-⚠️  Only in second (9):
+⚠️  Only in second (11):
 
+  • MismatchingLibrary.framework
+  • MismatchingLibrary/MismatchingLibrary-Info.plist
   • NewFramework.framework
   • NewFramework/Info.plist
   • NewFramework/NewFramework.h
@@ -101,6 +104,11 @@
 
 ❌ SETTINGS > "Project" target > "Debug" configuration > Values
 
+⚠️  Only in second (1):
+
+  • ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES
+
+
 ⚠️  Value mismatch (1):
 
   • CUSTOM_SETTING_COMMON
@@ -110,6 +118,11 @@
 
 ✅ SETTINGS > "Project" target > "Release" configuration > Base configuration
 ❌ SETTINGS > "Project" target > "Release" configuration > Values
+
+⚠️  Only in second (1):
+
+  • ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES
+
 
 ⚠️  Value mismatch (1):
 
@@ -121,7 +134,7 @@
 ❌ SOURCE_TREES > Root project
 Output format: (<path>, <name>, <source_tree>)
 
-⚠️  Only in first (7):
+⚠️  Only in first (8):
 
   • (AViewController.xib, nil, <group>) → (Group B, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)
   • (AnotherObjcClass.h, nil, <group>) → (Group B, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)
@@ -129,15 +142,18 @@ Output format: (<path>, <name>, <source_tree>)
   • (BarTests.swift, nil, <group>) → (ProjectTests, nil, <group>) → (nil, nil, <group>)
   • (LoginTests.swift, nil, <group>) → (ProjectUITests, nil, <group>) → (nil, nil, <group>)
   • (empty.png, nil, <group>) → (Screenshots, nil, <group>) → (ProjectUITests, nil, <group>) → (nil, nil, <group>)
+  • (libMismatchingLibrary.a, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)
   • (time.png, nil, <group>) → (Resources, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)
 
 
-⚠️  Only in second (9):
+⚠️  Only in second (11):
 
   • (Header4.h, nil, <group>) → (ProjectFramework, nil, <group>) → (nil, nil, <group>)
   • (Info.plist, nil, <group>) → (NewFramework, nil, <group>) → (nil, nil, <group>)
   • (ListResponse.json, nil, <group>) → (Responses, nil, <group>) → (ProjectTests, nil, <group>) → (nil, nil, <group>)
   • (MetricsTests.swift, nil, <group>) → (ProjectUITests, nil, <group>) → (nil, nil, <group>)
+  • (MismatchingLibrary-Info.plist, nil, <group>) → (MismatchingLibrary, nil, <group>) → (nil, nil, <group>)
+  • (MismatchingLibrary.framework, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)
   • (NewFramework.framework, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)
   • (NewFramework.h, nil, <group>) → (NewFramework, nil, <group>) → (nil, nil, <group>)
   • (Project.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)
@@ -147,8 +163,9 @@ Output format: (<path>, <name>, <source_tree>)
 
 ❌ DEPENDENCIES > "Project" target > Linked Dependencies
 
-⚠️  Only in second (1):
+⚠️  Only in second (2):
 
+  • MismatchingLibrary.framework
   • NewFramework.framework
 
 
@@ -161,8 +178,9 @@ Output format: (<path>, <name>, <source_tree>)
 
 ❌ DEPENDENCIES > "Project" target > Embedded Frameworks
 
-⚠️  Only in second (1):
+⚠️  Only in second (2):
 
+  • MismatchingLibrary.framework
   • NewFramework.framework
 
 

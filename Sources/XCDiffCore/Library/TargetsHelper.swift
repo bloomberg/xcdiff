@@ -197,6 +197,17 @@ private extension PBXBuildFile {
     }
 }
 
+private extension PBXTarget {
+    func headersBuildPhase() -> PBXHeadersBuildPhase? {
+        return buildPhases
+            .filter { $0.buildPhase == .headers }
+            .compactMap { $0 as? PBXHeadersBuildPhase }
+            .first
+    }
+}
+
+// MARK: - Collection Extensions
+
 extension Set where Set.Element == String {
     func validateTargetsOption(_ parameters: ComparatorParameters) throws {
         try validate(type: "target", option: parameters.targets)
@@ -213,11 +224,8 @@ extension Set where Set.Element == String {
     }
 }
 
-private extension PBXTarget {
-    func headersBuildPhase() -> PBXHeadersBuildPhase? {
-        return buildPhases
-            .filter { $0.buildPhase == .headers }
-            .compactMap { $0 as? PBXHeadersBuildPhase }
-            .first
+extension Array where Array.Element == TargetPair {
+    func filter(by option: ComparatorParameters.Option<String>) -> [TargetPair] {
+        return filter { option.contains($0.first.name) && option.contains($0.second.name) }
     }
 }

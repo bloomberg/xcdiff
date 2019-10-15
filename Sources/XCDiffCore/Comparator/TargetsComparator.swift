@@ -27,11 +27,51 @@ final class TargetsComparator: Comparator {
         try targetsHelper.targets(from: first)
             .union(targetsHelper.targets(from: second))
             .validateTargetsOption(parameters)
+        let nativeTargetResults = try compareNativeTargets(first, second, parameters: parameters)
+        let aggregateTargetResults = compareAggregateTargets(first, second, parameters: parameters)
+        return nativeTargetResults + aggregateTargetResults
+    }
+
+    private func compareNativeTargets(_ first: ProjectDescriptor,
+                                      _ second: ProjectDescriptor,
+                                      parameters: ComparatorParameters) throws -> [CompareResult] {
+        let firstTargets = targetsHelper.native(from: first).filter(by: parameters.targets)
+        let secondTargets = targetsHelper.native(from: second).filter(by: parameters.targets)
+        let commonTargets = try filteredCommonTargets(first, second, parameters: parameters)
+
+        let commonTargetDifferences = commonTargets.filter {
+            $0.first.productType != $0.second.productType
+        }.map {
+            CompareResult.DifferentValues(context: "\($0.first.name) product type",
+                                          first: $0.first.productType?.rawValue,
+                                          second: $0.second.productType?.rawValue)
+        }
+
         return results(context: ["NATIVE targets"],
-                       first: targetsHelper.native(from: first).filter(by: parameters.targets),
-                       second: targetsHelper.native(from: second).filter(by: parameters.targets))
-            + results(context: ["AGGREGATE targets"],
-                      first: targetsHelper.aggregate(from: first).filter(by: parameters.targets),
-                      second: targetsHelper.aggregate(from: second).filter(by: parameters.targets))
+                       first: firstTargets,
+                       second: secondTargets,
+                       differentValues: commonTargetDifferences)
+    }
+
+    private func compareAggregateTargets(_ first: ProjectDescriptor,
+                                         _ second: ProjectDescriptor,
+                                         parameters: ComparatorParameters) -> [CompareResult] {
+        return results(context: ["AGGREGATE targets"],
+                       first: targetsHelper.aggregate(from: first).filter(by: parameters.targets),
+                       second: targetsHelper.aggregate(from: second).filter(by: parameters.targets))
+    }
+
+    // A relaxed version of common targets that doesn't require
+    // the specified targets filter (via parameters) to exist in both
+    // targets.
+    //
+    // The specified targets could exist in both Native and Aggregate targets
+    // hence why within this comparator we use this slightly more relaxed approach.
+    private func filteredCommonTargets(_ first: ProjectDescriptor,
+                                       _ second: ProjectDescriptor,
+                                       parameters: ComparatorParameters) throws -> [TargetPair] {
+        let allTargetsOption = ComparatorParameters(targets: .all, configurations: .all)
+        let allCommonTargets = try targetsHelper.commonTargets(first, second, parameters: allTargetsOption)
+        return allCommonTargets.filter(by: parameters.targets)
     }
 }

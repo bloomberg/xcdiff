@@ -11,6 +11,38 @@
 [
   {
     "context" : [
+      "\"MismatchingLibrary\" target",
+      "Linked Dependencies"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "dependencies"
+  },
+  {
+    "context" : [
+      "\"MismatchingLibrary\" target",
+      "Embedded Frameworks"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "dependencies"
+  },
+  {
+    "context" : [
       "\"Project\" target",
       "Linked Dependencies"
     ],
@@ -25,6 +57,7 @@
 
     ],
     "onlyInSecond" : [
+      "MismatchingLibrary.framework",
       "NewFramework.framework"
     ],
     "tag" : "dependencies"
@@ -41,6 +74,7 @@
 
     ],
     "onlyInSecond" : [
+      "MismatchingLibrary.framework",
       "NewFramework.framework"
     ],
     "tag" : "dependencies"

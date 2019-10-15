@@ -138,7 +138,46 @@ final class TargetsComparatorTests: XCTestCase {
 
         // When / Then
         XCTAssertThrowsError(try sut.compare(first, second, parameters: parameters)) { error in
-            XCTAssertEqual(error.localizedDescription, "Cannot find target \"NOT_EXISTING\"")
+            XCTAssertEqual(error.localizedDescription, "Cannot find target \"NOT_EXISTING\" in both projects")
         }
+    }
+
+    func testCompare_whenCommonTargetHaveDifferentProductTypes() throws {
+        // Given
+        let first = project()
+            .addTarget(name: "A", productType: .application)
+            .addTarget(name: "B", productType: .framework)
+            .addTarget(name: "C", productType: .unitTestBundle)
+            .projectDescriptor()
+        let second = project()
+            .addTarget(name: "A", productType: .application)
+            .addTarget(name: "B", productType: .staticLibrary)
+            .addTarget(name: "C", productType: .uiTestBundle)
+            .projectDescriptor()
+
+        // When
+        let actual = try sut.compare(first, second,
+                                     parameters: .all)
+
+        // Then
+        let expected = [
+            CompareResult(tag: "targets",
+                          context: ["NATIVE targets"],
+                          onlyInFirst: [],
+                          onlyInSecond: [],
+                          differentValues: [
+                              .init(context: "B product type",
+                                    first: "com.apple.product-type.framework",
+                                    second: "com.apple.product-type.library.static"),
+                              .init(context: "C product type",
+                                    first: "com.apple.product-type.bundle.unit-test",
+                                    second: "com.apple.product-type.bundle.ui-testing"),
+                          ]),
+            CompareResult(tag: "targets",
+                          context: ["AGGREGATE targets"],
+                          onlyInFirst: [],
+                          onlyInSecond: []),
+        ]
+        XCTAssertEqual(actual, expected)
     }
 }
