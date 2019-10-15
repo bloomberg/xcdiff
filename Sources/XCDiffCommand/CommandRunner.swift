@@ -210,7 +210,7 @@ public final class CommandRunner {
 
         // error, one of the paths is not defined, and cannot find 2 projects
         // in the current directory
-        throw CommandError.generic("Could not find 2 projects in the current directory")
+        throw CommandError.generic("Could not find 2 projects in the current directory, use `-p1` and `-p2` to specify the projects paths to compare")
     }
 
     private func getFormat(from arguments: ArgumentParser.Result) throws -> XCDiffCore.Format {
