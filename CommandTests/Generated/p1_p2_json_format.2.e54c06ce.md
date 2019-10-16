@@ -23,9 +23,12 @@
       "Project\/Resources\/time.png",
       "ProjectTests\/BarTests.swift",
       "ProjectUITests\/LoginTests.swift",
-      "ProjectUITests\/Screenshots\/empty.png"
+      "ProjectUITests\/Screenshots\/empty.png",
+      "libMismatchingLibrary.a"
     ],
     "onlyInSecond" : [
+      "MismatchingLibrary.framework",
+      "MismatchingLibrary\/MismatchingLibrary-Info.plist",
       "NewFramework.framework",
       "NewFramework\/Info.plist",
       "NewFramework\/NewFramework.h",
@@ -43,7 +46,11 @@
       "NATIVE targets"
     ],
     "differentValues" : [
-
+      {
+        "context" : "MismatchingLibrary product type",
+        "first" : "com.apple.product-type.library.static",
+        "second" : "com.apple.product-type.framework"
+      }
     ],
     "onlyInFirst" : [
 
@@ -67,6 +74,21 @@
       "NewAggregate"
     ],
     "tag" : "targets"
+  },
+  {
+    "context" : [
+      "\"MismatchingLibrary\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "MismatchingLibrary\/MismatchingLibrary.h"
+    ],
+    "tag" : "headers"
   },
   {
     "context" : [
@@ -139,6 +161,21 @@
   },
   {
     "context" : [
+      "\"MismatchingLibrary\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "sources"
+  },
+  {
+    "context" : [
       "\"Project\" target"
     ],
     "differentValues" : [
@@ -200,6 +237,21 @@
       "ProjectUITests\/MetricsTests.swift"
     ],
     "tag" : "sources"
+  },
+  {
+    "context" : [
+      "\"MismatchingLibrary\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "resources"
   },
   {
     "context" : [
@@ -351,6 +403,105 @@
   },
   {
     "context" : [
+      "\"MismatchingLibrary\" target",
+      "\"Debug\" configuration",
+      "Base configuration"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "settings"
+  },
+  {
+    "context" : [
+      "\"MismatchingLibrary\" target",
+      "\"Debug\" configuration",
+      "Values"
+    ],
+    "differentValues" : [
+      {
+        "context" : "PRODUCT_NAME",
+        "first" : "$(TARGET_NAME)",
+        "second" : "$(TARGET_NAME:c99extidentifier)"
+      }
+    ],
+    "onlyInFirst" : [
+      "OTHER_LDFLAGS"
+    ],
+    "onlyInSecond" : [
+      "CLANG_ENABLE_MODULES",
+      "CURRENT_PROJECT_VERSION",
+      "DEFINES_MODULE",
+      "DYLIB_COMPATIBILITY_VERSION",
+      "DYLIB_CURRENT_VERSION",
+      "DYLIB_INSTALL_NAME_BASE",
+      "INFOPLIST_FILE",
+      "INSTALL_PATH",
+      "LD_RUNPATH_SEARCH_PATHS",
+      "PRODUCT_BUNDLE_IDENTIFIER",
+      "SWIFT_OPTIMIZATION_LEVEL",
+      "VERSIONING_SYSTEM",
+      "VERSION_INFO_PREFIX"
+    ],
+    "tag" : "settings"
+  },
+  {
+    "context" : [
+      "\"MismatchingLibrary\" target",
+      "\"Release\" configuration",
+      "Base configuration"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "settings"
+  },
+  {
+    "context" : [
+      "\"MismatchingLibrary\" target",
+      "\"Release\" configuration",
+      "Values"
+    ],
+    "differentValues" : [
+      {
+        "context" : "PRODUCT_NAME",
+        "first" : "$(TARGET_NAME)",
+        "second" : "$(TARGET_NAME:c99extidentifier)"
+      }
+    ],
+    "onlyInFirst" : [
+      "OTHER_LDFLAGS"
+    ],
+    "onlyInSecond" : [
+      "CLANG_ENABLE_MODULES",
+      "CURRENT_PROJECT_VERSION",
+      "DEFINES_MODULE",
+      "DYLIB_COMPATIBILITY_VERSION",
+      "DYLIB_CURRENT_VERSION",
+      "DYLIB_INSTALL_NAME_BASE",
+      "INFOPLIST_FILE",
+      "INSTALL_PATH",
+      "LD_RUNPATH_SEARCH_PATHS",
+      "PRODUCT_BUNDLE_IDENTIFIER",
+      "VERSIONING_SYSTEM",
+      "VERSION_INFO_PREFIX"
+    ],
+    "tag" : "settings"
+  },
+  {
+    "context" : [
       "\"Project\" target",
       "\"Debug\" configuration",
       "Base configuration"
@@ -387,7 +538,7 @@
 
     ],
     "onlyInSecond" : [
-
+      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES"
     ],
     "tag" : "settings"
   },
@@ -425,7 +576,7 @@
 
     ],
     "onlyInSecond" : [
-
+      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES"
     ],
     "tag" : "settings"
   },
@@ -453,7 +604,11 @@
       "Values"
     ],
     "differentValues" : [
-
+      {
+        "context" : "PRODUCT_BUNDLE_IDENTIFIER",
+        "first" : "com.bloomberg.xcdiff.Project.testprovisioning.ProjectFramework",
+        "second" : "com.bloomberg.xcdiff.Project.ProjectFramework"
+      }
     ],
     "onlyInFirst" : [
 
@@ -487,7 +642,11 @@
       "Values"
     ],
     "differentValues" : [
-
+      {
+        "context" : "PRODUCT_BUNDLE_IDENTIFIER",
+        "first" : "com.bloomberg.xcdiff.Project.testprovisioning.ProjectFramework",
+        "second" : "com.bloomberg.xcdiff.Project.ProjectFramework"
+      }
     ],
     "onlyInFirst" : [
 
@@ -648,6 +807,7 @@
       "(BarTests.swift, nil, <group>) → (ProjectTests, nil, <group>) → (nil, nil, <group>)",
       "(LoginTests.swift, nil, <group>) → (ProjectUITests, nil, <group>) → (nil, nil, <group>)",
       "(empty.png, nil, <group>) → (Screenshots, nil, <group>) → (ProjectUITests, nil, <group>) → (nil, nil, <group>)",
+      "(libMismatchingLibrary.a, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)",
       "(time.png, nil, <group>) → (Resources, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)"
     ],
     "onlyInSecond" : [
@@ -655,6 +815,8 @@
       "(Info.plist, nil, <group>) → (NewFramework, nil, <group>) → (nil, nil, <group>)",
       "(ListResponse.json, nil, <group>) → (Responses, nil, <group>) → (ProjectTests, nil, <group>) → (nil, nil, <group>)",
       "(MetricsTests.swift, nil, <group>) → (ProjectUITests, nil, <group>) → (nil, nil, <group>)",
+      "(MismatchingLibrary-Info.plist, nil, <group>) → (MismatchingLibrary, nil, <group>) → (nil, nil, <group>)",
+      "(MismatchingLibrary.framework, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)",
       "(NewFramework.framework, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)",
       "(NewFramework.h, nil, <group>) → (NewFramework, nil, <group>) → (nil, nil, <group>)",
       "(Project.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)",
@@ -662,6 +824,38 @@
       "(Target.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)"
     ],
     "tag" : "source_trees"
+  },
+  {
+    "context" : [
+      "\"MismatchingLibrary\" target",
+      "Linked Dependencies"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "dependencies"
+  },
+  {
+    "context" : [
+      "\"MismatchingLibrary\" target",
+      "Embedded Frameworks"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "dependencies"
   },
   {
     "context" : [
@@ -679,6 +873,7 @@
 
     ],
     "onlyInSecond" : [
+      "MismatchingLibrary.framework",
       "NewFramework.framework"
     ],
     "tag" : "dependencies"
@@ -695,6 +890,7 @@
 
     ],
     "onlyInSecond" : [
+      "MismatchingLibrary.framework",
       "NewFramework.framework"
     ],
     "tag" : "dependencies"

@@ -25,6 +25,7 @@
 
     ],
     "onlyInSecond" : [
+      "MismatchingLibrary.framework",
       "NewFramework.framework"
     ],
     "tag" : "dependencies"
@@ -41,6 +42,7 @@
 
     ],
     "onlyInSecond" : [
+      "MismatchingLibrary.framework",
       "NewFramework.framework"
     ],
     "tag" : "dependencies"

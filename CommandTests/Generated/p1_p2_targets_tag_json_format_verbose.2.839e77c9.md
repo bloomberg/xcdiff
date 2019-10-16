@@ -14,7 +14,11 @@
       "NATIVE targets"
     ],
     "differentValues" : [
-
+      {
+        "context" : "MismatchingLibrary product type",
+        "first" : "com.apple.product-type.library.static",
+        "second" : "com.apple.product-type.framework"
+      }
     ],
     "onlyInFirst" : [
 

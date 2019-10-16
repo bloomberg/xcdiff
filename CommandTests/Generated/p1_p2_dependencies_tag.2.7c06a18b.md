@@ -8,6 +8,8 @@
 
 # Expected output
 ```
+✅ DEPENDENCIES > "MismatchingLibrary" target > Linked Dependencies
+✅ DEPENDENCIES > "MismatchingLibrary" target > Embedded Frameworks
 ❌ DEPENDENCIES > "Project" target > Linked Dependencies
 ❌ DEPENDENCIES > "Project" target > Embedded Frameworks
 ✅ DEPENDENCIES > "ProjectFramework" target > Linked Dependencies

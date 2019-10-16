@@ -11,6 +11,21 @@
 [
   {
     "context" : [
+      "\"MismatchingLibrary\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "MismatchingLibrary\/MismatchingLibrary.h"
+    ],
+    "tag" : "headers"
+  },
+  {
+    "context" : [
       "\"Project\" target"
     ],
     "differentValues" : [

@@ -8,6 +8,7 @@
 
 # Expected output
 ```
+❌ HEADERS > "MismatchingLibrary" target
 ✅ HEADERS > "Project" target
 ❌ HEADERS > "ProjectFramework" target
 ✅ HEADERS > "ProjectTests" target

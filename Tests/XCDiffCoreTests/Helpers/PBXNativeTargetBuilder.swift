@@ -36,8 +36,8 @@ final class PBXNativeTargetBuilder {
     private var objects: [PBXObject] = []
     private var fileElements: [PBXFileElement] = []
 
-    init(name: String) {
-        pbxtarget = PBXNativeTarget(name: name)
+    init(name: String, productType: PBXProductType?) {
+        pbxtarget = PBXNativeTarget(name: name, productType: productType)
         objects.append(pbxtarget)
     }
 

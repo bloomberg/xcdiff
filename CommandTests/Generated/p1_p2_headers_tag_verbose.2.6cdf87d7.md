@@ -8,6 +8,13 @@
 
 # Expected output
 ```
+❌ HEADERS > "MismatchingLibrary" target
+
+⚠️  Only in second (1):
+
+  • MismatchingLibrary/MismatchingLibrary.h
+
+
 ✅ HEADERS > "Project" target
 ❌ HEADERS > "ProjectFramework" target
 

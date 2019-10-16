@@ -8,6 +8,6 @@
 
 # Expected output
 ```
-ERROR: Cannot find target "NewFramework"
+ERROR: Cannot find target "NewFramework" in both projects
 
 ```

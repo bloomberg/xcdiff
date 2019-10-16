@@ -119,7 +119,7 @@
 
     ],
     "onlyInSecond" : [
-
+      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES"
     ],
     "tag" : "settings"
   },
@@ -157,7 +157,7 @@
 
     ],
     "onlyInSecond" : [
-
+      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES"
     ],
     "tag" : "settings"
   }

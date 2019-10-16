@@ -43,6 +43,11 @@
 
 ❌ SETTINGS > "Project" target > "Debug" configuration > Values
 
+⚠️  Only in second (1):
+
+  • ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES
+
+
 ⚠️  Value mismatch (1):
 
   • CUSTOM_SETTING_COMMON
@@ -52,6 +57,11 @@
 
 ✅ SETTINGS > "Project" target > "Release" configuration > Base configuration
 ❌ SETTINGS > "Project" target > "Release" configuration > Values
+
+⚠️  Only in second (1):
+
+  • ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES
+
 
 ⚠️  Value mismatch (1):
 

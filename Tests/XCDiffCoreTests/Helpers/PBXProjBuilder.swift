@@ -46,8 +46,10 @@ final class PBXProjBuilder {
     }
 
     @discardableResult
-    func addTarget(name: String = "Target", _ closure: ((PBXNativeTargetBuilder) -> Void)? = nil) -> PBXProjBuilder {
-        let builder = PBXNativeTargetBuilder(name: name)
+    func addTarget(name: String = "Target",
+                   productType: PBXProductType? = nil,
+                   _ closure: ((PBXNativeTargetBuilder) -> Void)? = nil) -> PBXProjBuilder {
+        let builder = PBXNativeTargetBuilder(name: name, productType: productType)
         closure?(builder)
         let nativeTargetPrototype = builder.build()
         pbxproject.targets.append(nativeTargetPrototype.pbxtarget)

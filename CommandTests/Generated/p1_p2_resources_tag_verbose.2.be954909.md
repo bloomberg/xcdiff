@@ -8,6 +8,7 @@
 
 # Expected output
 ```
+✅ RESOURCES > "MismatchingLibrary" target
 ❌ RESOURCES > "Project" target
 
 ⚠️  Only in first (2):

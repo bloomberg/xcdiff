@@ -23,9 +23,12 @@
       "Project\/Resources\/time.png",
       "ProjectTests\/BarTests.swift",
       "ProjectUITests\/LoginTests.swift",
-      "ProjectUITests\/Screenshots\/empty.png"
+      "ProjectUITests\/Screenshots\/empty.png",
+      "libMismatchingLibrary.a"
     ],
     "onlyInSecond" : [
+      "MismatchingLibrary.framework",
+      "MismatchingLibrary\/MismatchingLibrary-Info.plist",
       "NewFramework.framework",
       "NewFramework\/Info.plist",
       "NewFramework\/NewFramework.h",
