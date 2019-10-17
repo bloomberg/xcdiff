@@ -1,0 +1,52 @@
+[
+    {
+        "alias": "list",
+        "command": ["-l"],
+        "comment": "List comparators"
+    },
+    {
+        "alias": "unknown",
+        "command": ["-unknown"],
+        "comment": "Unknown option"
+    },
+    {
+        "alias": "non_existing_tag",
+        "command": ["-p1", "{ios_project_1}", "-p2", "{ios_project_2}", "-g", "targets, unsupported, unsupported_too"],
+        "comment": "Non-existing tags"
+    },
+    {
+        "alias": "non_existing_target",
+        "command": ["-p1", "{ios_project_1}", "-p2", "{ios_project_2}", "-t", "NON_EXISTING"],
+        "comment": "Non-existing target"
+    },
+    {
+        "alias": "differences_only",
+        "command": ["-p1", "{ios_project_1}", "-p2", "{ios_project_2}", "-d"],
+        "comment": "Differences only"
+    },
+    {
+        "alias": "p1_does_not_exist",
+        "command": ["-p1", "/not/existing/project1.xcodeproj", "-p2", "{ios_project_2}"],
+        "comment": "Project one does not exist"
+    },
+    {
+        "alias": "p2_does_not_exist",
+        "command": ["-p1", "{ios_project_1}", "-p2", "/not/existing/project2.xcodeproj"],
+        "comment": "Project two does not exist"
+    },
+    {
+        "alias": "p1_p2_do_not_exist",
+        "command": ["-p1", "/not/existing/project1.xcodeproj", "-p2", "/not/existing/project2.xcodeproj"],
+        "comment": "Project one and two do not exist"
+    },
+    {
+        "alias": "target_only_in_second_g_targets",
+        "command": ["-p1", "{ios_project_1}", "-p2", "{ios_project_2}", "-g", "targets", "-t", "NewFramework", "-v"],
+        "comment": "Target is only in second project when comparing targets"
+    },
+    {
+        "alias": "target_only_in_second_g_headers",
+        "command": ["-p1", "{ios_project_1}", "-p2", "{ios_project_2}", "-g", "headers", "-t", "NewFramework", "-v"],
+        "comment": "Target is only in second project when comparing headers"
+    }
+]
