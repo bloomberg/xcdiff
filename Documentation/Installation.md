@@ -49,12 +49,23 @@ xcdiff --help
 
 ### Swift Package Manager
 
-*TODO*
+Add xcdiff to your `Package.swift` file:
 
-### CocoaPods
+```swift
+dependencies: [
+    // ...
+    .package(url: "https://github.com/bloomberg/xcdiff", .upToNextMinor(from: "0.2.0")),
+]
+```
 
-*TODO*
+Then add `XCDiffCore` as a dependency of your target:
 
-### Carthage
+```swift
+// ...
+.target(
+    name: "MyTool",
+    dependencies: ["XCDiffCore"]
+)
+```
 
-*TODO*
+See the [Framework](Framework.md) documentation for more details on how to leverage `XCDiffCore`.
