@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.com/bloomberg/xcdiff.svg?branch=master)](https://travis-ci.com/bloomberg/xcdiff)
 
-*xcdiff* is an extensible tool that **finds differences between your .xcodeproj project files**. It can be thought of as git diff for your .xcodeproj files, can be used directly from the command line as well as a library supporting your own set of tools.
+*xcdiff* is an extensible tool that **finds differences between two .xcodeproj project files**. It can be thought of as git diff for .xcodeproj files, which can be used directly from the command line as well as a library supporting your own set of tools.
 
 ## How to use xcdiff
 
@@ -31,6 +31,11 @@ xcdiff -p1 OriginalProject.xcodeproj -p2 GeneratedProject.xcodeproj -v
 <p align="center">
    <img src="Documentation/Resources/xcdiff-demo-v.png" alt="xcdiff demo -v" />
 </p>
+
+## Use Cases
+
+- When adopting project generation (e.g. using tools like [XcodeGen](https://github.com/yonaskolb/XcodeGen) or [Tuist](https://github.com/tuist/tuist)), comparing the generated xcodeproj files against the original ones can help boost confidence in the migration process.
+- _Probably a few more we haven't thought of yet!..._
 
 ## Installation
 
