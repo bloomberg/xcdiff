@@ -16,6 +16,7 @@
 
 import Foundation
 
-protocol ResultRenderer {
-    func render(_ result: ProjectCompareResult) throws -> String
+public protocol ResultRenderer {
+    associatedtype RenderedResult
+    func render(_ result: ProjectCompareResult) throws -> RenderedResult
 }

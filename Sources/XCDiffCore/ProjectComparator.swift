@@ -38,40 +38,90 @@ public struct Mode {
     }
 }
 
-public struct Result {
+public struct Result<RenderedResult> {
     public let success: Bool
-    public let output: String
+    public let output: RenderedResult
+}
+
+public struct AnyProjectComparator<RenderedResult> {
+    public func compare(_ firstPath: Path,
+                        _ secondPath: Path,
+                        parameters: ComparatorParameters) throws -> Result<RenderedResult> {
+        try upstream.compare(firstPath,
+                             secondPath,
+                             parameters: parameters)
+    }
+
+    private class Container<RenderedResult> {
+        func compare(_: Path,
+                     _: Path,
+                     parameters _: ComparatorParameters) throws -> Result<RenderedResult> {
+            fatalError()
+        }
+    }
+
+    private final class _Container<Upstream: ProjectComparator>: Container<Upstream.RenderedResult> {
+        let upstream: Upstream
+        init(upstream: Upstream) {
+            self.upstream = upstream
+        }
+
+        override func compare(_ firstPath: Path,
+                              _ secondPath: Path,
+                              parameters: ComparatorParameters) throws -> Result<Upstream.RenderedResult> {
+            return try upstream.compare(firstPath,
+                                        secondPath,
+                                        parameters: parameters)
+        }
+    }
+
+    private let upstream: Container<RenderedResult>
+    init<Upstream: ProjectComparator>(upstream: Upstream) where Upstream.RenderedResult == RenderedResult {
+        self.upstream = _Container(upstream: upstream)
+    }
 }
 
 public protocol ProjectComparator {
+    associatedtype RenderedResult
     func compare(_ firstPath: Path,
                  _ secondPath: Path,
-                 parameters: ComparatorParameters) throws -> Result
+                 parameters: ComparatorParameters) throws -> Result<RenderedResult>
 }
 
 public final class ProjectComparatorFactory {
     public static func create(comparators: [ComparatorType] = .allAvailableComparators,
-                              mode: Mode = .default) -> ProjectComparator {
+                              mode: Mode = .default) -> AnyProjectComparator<String> {
         let resultRenderer = UniversalResultRenderer(format: mode.format,
                                                      verbose: mode.verbose)
         let xcodeProjLoader = DefaultXcodeProjLoader()
-        return DefaultProjectComparator(comparators: comparators.map { $0.comparator() },
-                                        resultRenderer: resultRenderer,
-                                        xcodeProjLoader: xcodeProjLoader,
-                                        differencesOnly: mode.differencesOnly)
+        return AnyProjectComparator(upstream: DefaultProjectComparator(comparators: comparators.map { $0.comparator() },
+                                                                       resultRenderer: resultRenderer,
+                                                                       xcodeProjLoader: xcodeProjLoader,
+                                                                       differencesOnly: mode.differencesOnly))
+    }
+
+    public static func create<R: ResultRenderer>(comparators: [ComparatorType] = .allAvailableComparators,
+                                                 differencesOnly: Bool = true,
+                                                 resultRenderer: R) -> AnyProjectComparator<R.RenderedResult> {
+        let xcodeProjLoader = DefaultXcodeProjLoader()
+        return AnyProjectComparator(upstream: DefaultProjectComparator(comparators: comparators.map { $0.comparator() },
+                                                                       resultRenderer: resultRenderer,
+                                                                       xcodeProjLoader: xcodeProjLoader,
+                                                                       differencesOnly: differencesOnly))
     }
 }
 
-final class DefaultProjectComparator: ProjectComparator {
+final class DefaultProjectComparator<RendererType: ResultRenderer>: ProjectComparator {
+    typealias RenderedResult = RendererType.RenderedResult
     private let comparators: [Comparator]
-    private let resultRenderer: ResultRenderer
+    private let resultRenderer: RendererType
     private let xcodeProjLoader: XcodeProjLoader
     private let differencesOnly: Bool
 
     // MARK: - Lifecycle
 
     init(comparators: [Comparator],
-         resultRenderer: ResultRenderer,
+         resultRenderer: RendererType,
          xcodeProjLoader: XcodeProjLoader,
          differencesOnly: Bool) {
         self.comparators = comparators
@@ -84,7 +134,7 @@ final class DefaultProjectComparator: ProjectComparator {
 
     func compare(_ firstPath: Path,
                  _ secondPath: Path,
-                 parameters: ComparatorParameters) throws -> Result {
+                 parameters: ComparatorParameters) throws -> Result<RenderedResult> {
         let xcodeProj1 = try createProjectDescriptor(with: firstPath)
         let xcodeProj2 = try createProjectDescriptor(with: secondPath)
         let result = try compare(xcodeProj1, xcodeProj2, parameters: parameters)
