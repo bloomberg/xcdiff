@@ -17,7 +17,7 @@
 import Foundation
 
 final class TargetsComparator: Comparator {
-    let tag = "targets"
+    let tag = ComparatorTag.targets
 
     private let targetsHelper = TargetsHelper()
 

@@ -18,7 +18,7 @@ import Foundation
 import XcodeProj
 
 class SettingsHelper {
-    func compareSettingsValues(tag: String,
+    func compareSettingsValues(tag: ComparatorTag,
                                parentContext: [String],
                                _ first: BuildSettings,
                                _ second: BuildSettings) throws -> CompareResult {

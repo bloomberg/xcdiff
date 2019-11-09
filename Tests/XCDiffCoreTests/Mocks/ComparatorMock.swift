@@ -18,11 +18,11 @@
 
 final class ComparatorMock: Comparator {
     typealias CompareClosure = (ProjectDescriptor, ProjectDescriptor, ComparatorParameters) -> [CompareResult]
-    var tag: String
+    var tag: ComparatorTag
 
     private let compareClosure: CompareClosure
 
-    init(tag: String, compare: @escaping CompareClosure = { _, _, _ in [] }) {
+    init(tag: ComparatorTag, compare: @escaping CompareClosure = { _, _, _ in [] }) {
         self.tag = tag
         compareClosure = compare
     }

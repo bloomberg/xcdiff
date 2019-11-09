@@ -16,8 +16,32 @@
 
 import Foundation
 
+public struct ComparatorTag: RawRepresentable, ExpressibleByStringLiteral, Equatable, Encodable {
+    static let fileReferences: ComparatorTag = "file_references"
+    static let targets: ComparatorTag = "targets"
+    static let headers: ComparatorTag = "headers"
+    static let sources: ComparatorTag = "sources"
+    static let resources: ComparatorTag = "resources"
+    static let configurations: ComparatorTag = "configurations"
+    static let settings: ComparatorTag = "settings"
+    static let resolvedSettings: ComparatorTag = "resolved_settings"
+    static let sourceTrees: ComparatorTag = "source_trees"
+    static let dependencies: ComparatorTag = "dependencies"
+
+    public typealias RawValue = String
+    public var rawValue: String
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    public typealias StringLiteralType = String
+    public init(stringLiteral value: String) {
+        rawValue = value
+    }
+}
+
 public protocol Comparator {
-    var tag: String { get }
+    var tag: ComparatorTag { get }
 
     func compare(_ first: ProjectDescriptor,
                  _ second: ProjectDescriptor,

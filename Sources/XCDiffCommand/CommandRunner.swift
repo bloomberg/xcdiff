@@ -237,7 +237,7 @@ public final class CommandRunner {
 
     private func getTags(from arguments: ArgumentParser.Result) -> ComparatorParameters.Option<String> {
         guard let tags = arguments.get(tagOption) else {
-            return .some(defaultComparators.map { $0.tag })
+            return .some(defaultComparators.map { $0.tag.rawValue })
         }
         return option(from: tags)
     }
@@ -324,14 +324,14 @@ private extension Array where Element == ComparatorType {
         case .all:
             return self
         case let .only(tag):
-            let formattedTag = ComparatorType.displayName(tag)
+            let formattedTag = ComparatorType.displayName(ComparatorTag(rawValue: tag))
             let tags = filter { $0.displayName == formattedTag }
             guard !tags.isEmpty else {
                 throw CommandError.generic("Unsupported tag \"\(formattedTag)\"")
             }
             return tags
         case let .some(tags):
-            let formattedTags = Set(tags.map(ComparatorType.displayName))
+            let formattedTags = Set(tags.map { ComparatorTag(rawValue: $0) }.map(ComparatorType.displayName))
             let formattedCompartorsTags = Set(map { $0.displayName })
             let unsupportedTags = formattedTags
                 .subtracting(formattedCompartorsTags)
@@ -352,8 +352,8 @@ private extension ComparatorType {
         return ComparatorType.displayName(tag)
     }
 
-    static func displayName(_ tag: String) -> String {
-        return tag.uppercased().replacingOccurrences(of: " ", with: "_")
+    static func displayName(_ tag: ComparatorTag) -> String {
+        return tag.rawValue.uppercased().replacingOccurrences(of: " ", with: "_")
     }
 }
 

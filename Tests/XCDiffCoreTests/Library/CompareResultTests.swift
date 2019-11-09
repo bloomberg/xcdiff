@@ -105,7 +105,7 @@ final class CompareResultTests: XCTestCase {
         return CompareResult.DifferentValues(context: context, first: first, second: second)
     }
 
-    private func compareResult(tag: String = "tag",
+    private func compareResult(tag: ComparatorTag = "tag",
                                context: [String] = ["context", "nexted"],
                                description: String? = nil,
                                onlyInFirst: [String] = [],

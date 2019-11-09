@@ -29,7 +29,7 @@ final class ConfigurationsComparatorTests: XCTestCase {
 
     func testTag() {
         // When / Then
-        XCTAssertEqual(subject.tag, "configurations")
+        XCTAssertEqual(subject.tag, ComparatorTag.configurations)
     }
 
     func test_whenNoConfigurations() throws {
@@ -44,7 +44,7 @@ final class ConfigurationsComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "configurations", context: ["Root project"]),
+            .init(tag: ComparatorTag.configurations, context: ["Root project"]),
         ])
     }
 
@@ -64,7 +64,7 @@ final class ConfigurationsComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "configurations", context: ["Root project"]),
+            .init(tag: ComparatorTag.configurations, context: ["Root project"]),
         ])
     }
 
@@ -83,7 +83,7 @@ final class ConfigurationsComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "configurations", context: ["Root project"], onlyInFirst: ["Release"]),
+            .init(tag: ComparatorTag.configurations, context: ["Root project"], onlyInFirst: ["Release"]),
         ])
     }
 
@@ -102,7 +102,7 @@ final class ConfigurationsComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "configurations", context: ["Root project"], onlyInSecond: ["Release"]),
+            .init(tag: ComparatorTag.configurations, context: ["Root project"], onlyInSecond: ["Release"]),
         ])
     }
 
@@ -122,7 +122,7 @@ final class ConfigurationsComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "configurations", context: ["Root project"]),
+            .init(tag: ComparatorTag.configurations, context: ["Root project"]),
         ])
     }
 }

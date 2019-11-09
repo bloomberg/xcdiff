@@ -45,7 +45,7 @@ final class ProjectCompareResultFixtures {
 }
 
 final class CompareResultFixtures {
-    func singleWithMultipleDifferences(tag: String) -> CompareResult {
+    func singleWithMultipleDifferences(tag: ComparatorTag) -> CompareResult {
         return CompareResult(tag: tag,
                              context: ["Context1", "Context2"],
                              description: nil,

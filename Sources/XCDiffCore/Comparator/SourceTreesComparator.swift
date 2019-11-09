@@ -19,7 +19,7 @@ import PathKit
 import XcodeProj
 
 final class SourceTreesComparator: Comparator {
-    let tag = "source_trees"
+    let tag = ComparatorTag.sourceTrees
 
     private let targetsHelper = TargetsHelper()
     private let pathHelper = PathHelper()

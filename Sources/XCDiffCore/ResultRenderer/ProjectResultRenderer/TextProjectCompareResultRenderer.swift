@@ -83,7 +83,7 @@ final class TextProjectCompareResultRenderer: ProjectCompareResultRenderer {
     }
 
     private func title(from result: CompareResult) -> String {
-        let rootContext = result.tag.uppercased()
+        let rootContext = result.tag.rawValue.uppercased()
         let subContext = !result.context.isEmpty ? " > " + result.context.joined(separator: " > ") : ""
         return rootContext + subContext
     }

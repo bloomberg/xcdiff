@@ -29,7 +29,7 @@ public enum ComparatorType {
     case dependencies
     case custom(Comparator)
 
-    public var tag: String {
+    public var tag: ComparatorTag {
         return comparator().tag
     }
 

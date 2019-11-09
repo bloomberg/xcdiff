@@ -19,7 +19,7 @@ import Foundation
 final class HeadersComparator: Comparator {
     private typealias HeaderDescriptorPair = (first: HeaderDescriptor, second: HeaderDescriptor)
 
-    let tag = "headers"
+    let tag = ComparatorTag.headers
     private let targetsHelper = TargetsHelper()
 
     func compare(_ first: ProjectDescriptor,

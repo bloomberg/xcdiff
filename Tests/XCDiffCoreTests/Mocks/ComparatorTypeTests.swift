@@ -22,16 +22,16 @@ final class ComperatorTypeTests: XCTestCase {
     func testAllAvailableComparators() {
         // When / Then
         XCTAssertEqual([ComparatorType].allAvailableComparators.map { $0.tag }, [
-            "file_references",
-            "targets",
-            "headers",
-            "sources",
-            "resources",
-            "configurations",
-            "settings",
-            "resolved_settings",
-            "source_trees",
-            "dependencies",
+            ComparatorTag.fileReferences,
+            ComparatorTag.targets,
+            ComparatorTag.headers,
+            ComparatorTag.sources,
+            ComparatorTag.resources,
+            ComparatorTag.configurations,
+            ComparatorTag.settings,
+            ComparatorTag.resolvedSettings,
+            ComparatorTag.sourceTrees,
+            ComparatorTag.dependencies,
         ])
     }
 

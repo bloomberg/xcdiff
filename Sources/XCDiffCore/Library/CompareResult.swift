@@ -32,14 +32,14 @@ public struct CompareResult: GenericCompareResult, Equatable {
         }
     }
 
-    public let tag: String
+    public let tag: ComparatorTag
     public let context: [String]
     public let description: String?
     public let onlyInFirst: [String]
     public let onlyInSecond: [String]
     public let differentValues: [DifferentValues]
 
-    public init(tag: String,
+    public init(tag: ComparatorTag,
                 context: [String] = [],
                 description: String? = nil,
                 onlyInFirst: [String] = [],

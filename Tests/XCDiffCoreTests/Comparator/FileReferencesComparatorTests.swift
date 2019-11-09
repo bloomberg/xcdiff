@@ -31,7 +31,7 @@ final class FileReferencesComparatorTests: XCTestCase {
 
     func testTag() {
         // When / Then
-        XCTAssertEqual(subject.tag, "file_references")
+        XCTAssertEqual(subject.tag, ComparatorTag.fileReferences)
     }
 
     func testCompare_whenNoFileReferences_noDifference() throws {
@@ -50,7 +50,7 @@ final class FileReferencesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "file_references"),
+            .init(tag: ComparatorTag.fileReferences),
         ])
     }
 
@@ -70,7 +70,7 @@ final class FileReferencesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "file_references",
+            .init(tag: ComparatorTag.fileReferences,
                   onlyInFirst: ["B1.md"],
                   onlyInSecond: ["B2.md"]),
         ])

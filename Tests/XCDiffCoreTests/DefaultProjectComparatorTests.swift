@@ -58,7 +58,7 @@ final class DefaultProjectComparatorTests: XCTestCase {
 
     func testCompare_whenCustomComparatorAndNoDifference_success() throws {
         // Given
-        let tag = "Comparator1"
+        let tag: ComparatorTag = "Comparator1"
         let comparator = ComparatorMock(tag: tag) { _, _, _ in [CompareResult(tag: tag)] }
         let comparators: [XCDiffCore.Comparator] = [comparator]
         let sut = DefaultProjectComparator(comparators: comparators,
@@ -76,7 +76,7 @@ final class DefaultProjectComparatorTests: XCTestCase {
 
     func testCompare_whenDifferencesOnlyCustomComparatorAndNoDifference_emptyOutput() throws {
         // Given
-        let tag = "Comparator1"
+        let tag: ComparatorTag = "Comparator1"
         let comparator = ComparatorMock(tag: tag) { _, _, _ in [CompareResult(tag: tag)] }
         let comparators: [XCDiffCore.Comparator] = [comparator]
         let sut = DefaultProjectComparator(comparators: comparators,
@@ -94,7 +94,7 @@ final class DefaultProjectComparatorTests: XCTestCase {
 
     func testCompare_whenCustomComparatorAndSomeDifferences_error() throws {
         // Given
-        let tag = "Comparator1"
+        let tag: ComparatorTag = "Comparator1"
         let comparator = ComparatorMock(tag: tag) { _, _, _ in [CompareResult(tag: tag, onlyInFirst: ["file.txt"])] }
         let comparators: [XCDiffCore.Comparator] = [comparator]
         let sut = DefaultProjectComparator(comparators: comparators,
@@ -119,7 +119,7 @@ final class DefaultProjectComparatorTests: XCTestCase {
 
     func testCompare_whenDifferencesOnlyCustomComparatorAndSomeDifferences_error() throws {
         // Given
-        let tag = "Comparator1"
+        let tag: ComparatorTag = "Comparator1"
         let comparator = ComparatorMock(tag: tag) { _, _, _ in [CompareResult(tag: tag, onlyInFirst: ["file.txt"])] }
         let comparators: [XCDiffCore.Comparator] = [comparator]
         let sut = DefaultProjectComparator(comparators: comparators,
