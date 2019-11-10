@@ -17,16 +17,16 @@
 import Foundation
 
 public struct ComparatorTag: RawRepresentable, ExpressibleByStringLiteral, Equatable, Encodable {
-    static let fileReferences: ComparatorTag = "file_references"
-    static let targets: ComparatorTag = "targets"
-    static let headers: ComparatorTag = "headers"
-    static let sources: ComparatorTag = "sources"
-    static let resources: ComparatorTag = "resources"
-    static let configurations: ComparatorTag = "configurations"
-    static let settings: ComparatorTag = "settings"
-    static let resolvedSettings: ComparatorTag = "resolved_settings"
-    static let sourceTrees: ComparatorTag = "source_trees"
-    static let dependencies: ComparatorTag = "dependencies"
+    public static let fileReferences: ComparatorTag = "file_references"
+    public static let targets: ComparatorTag = "targets"
+    public static let headers: ComparatorTag = "headers"
+    public static let sources: ComparatorTag = "sources"
+    public static let resources: ComparatorTag = "resources"
+    public static let configurations: ComparatorTag = "configurations"
+    public static let settings: ComparatorTag = "settings"
+    public static let resolvedSettings: ComparatorTag = "resolved_settings"
+    public static let sourceTrees: ComparatorTag = "source_trees"
+    public static let dependencies: ComparatorTag = "dependencies"
 
     public typealias RawValue = String
     public var rawValue: String
