@@ -33,7 +33,7 @@ final class DependenciesComparatorTests: XCTestCase {
 
     func testTag() {
         // When / Then
-        XCTAssertEqual(subject.tag, "dependencies")
+        XCTAssertEqual(subject.tag, Comparators.Tags.dependencies)
     }
 
     func testCompare_whenSameDependencies_noDifferences() throws {
@@ -123,14 +123,14 @@ final class DependenciesComparatorTests: XCTestCase {
                                          parameters: .all)
 
         // Then
-        XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
+        XCTAssertEqual(actual, [CompareResult(tag: Comparators.Tags.dependencies,
                                               context: ["\"T1\" target", "Linked Dependencies"],
                                               description: nil,
                                               onlyInFirst: ["Test1.framework"],
                                               onlyInSecond: ["Test2.framework"],
                                               differentValues: []),
                                 noDifferenceEmbeddedFrameworks(target: "T1"),
-                                CompareResult(tag: "dependencies",
+                                CompareResult(tag: Comparators.Tags.dependencies,
                                               context: ["\"T2\" target", "Linked Dependencies"],
                                               description: nil,
                                               onlyInFirst: [],
@@ -167,7 +167,7 @@ final class DependenciesComparatorTests: XCTestCase {
                                          parameters: .only(target: "T1"))
 
         // Then
-        XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
+        XCTAssertEqual(actual, [CompareResult(tag: Comparators.Tags.dependencies,
                                               context: ["\"T1\" target", "Linked Dependencies"],
                                               description: nil,
                                               onlyInFirst: ["Test100.framework", "Test101.framework"],
@@ -202,7 +202,7 @@ final class DependenciesComparatorTests: XCTestCase {
                                          parameters: .all)
 
         // Then
-        XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
+        XCTAssertEqual(actual, [CompareResult(tag: Comparators.Tags.dependencies,
                                               context: ["\"T1\" target", "Linked Dependencies"],
                                               description: nil,
                                               onlyInFirst: [],
@@ -213,7 +213,7 @@ final class DependenciesComparatorTests: XCTestCase {
                                                                                 second: "required"),
                                               ]),
                                 noDifferenceEmbeddedFrameworks(target: "T1"),
-                                CompareResult(tag: "dependencies",
+                                CompareResult(tag: Comparators.Tags.dependencies,
                                               context: ["\"T2\" target", "Linked Dependencies"],
                                               description: nil,
                                               onlyInFirst: [],
@@ -241,7 +241,7 @@ final class DependenciesComparatorTests: XCTestCase {
                                          parameters: .all)
 
         // Then
-        XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
+        XCTAssertEqual(actual, [CompareResult(tag: Comparators.Tags.dependencies,
                                               context: ["\"T1\" target", "Linked Dependencies"],
                                               description: nil,
                                               onlyInFirst: ["Test1.framework"],
@@ -270,7 +270,7 @@ final class DependenciesComparatorTests: XCTestCase {
                                          parameters: .all)
 
         // Then
-        XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
+        XCTAssertEqual(actual, [CompareResult(tag: Comparators.Tags.dependencies,
                                               context: ["\"T1\" target", "Linked Dependencies"],
                                               description: nil,
                                               onlyInFirst: [],
@@ -363,7 +363,7 @@ final class DependenciesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [noDifferenceLinkedDependencies(target: "T1"),
-                                CompareResult(tag: "dependencies",
+                                CompareResult(tag: Comparators.Tags.dependencies,
                                               context: ["\"T1\" target"] + ["Embedded Frameworks"],
                                               description: nil,
                                               onlyInFirst: ["Test1.framework"],
@@ -394,7 +394,7 @@ final class DependenciesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [noDifferenceLinkedDependencies(target: "T1"),
-                                CompareResult(tag: "dependencies",
+                                CompareResult(tag: Comparators.Tags.dependencies,
                                               context: ["\"T1\" target", "Embedded Frameworks"],
                                               description: nil,
                                               onlyInFirst: [],
@@ -428,13 +428,13 @@ final class DependenciesComparatorTests: XCTestCase {
                                          parameters: .all)
 
         // Then
-        XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
+        XCTAssertEqual(actual, [CompareResult(tag: Comparators.Tags.dependencies,
                                               context: ["\"T1\" target", "Linked Dependencies"],
                                               description: nil,
                                               onlyInFirst: ["Test1.framework"],
                                               onlyInSecond: ["Test2.framework"],
                                               differentValues: []),
-                                CompareResult(tag: "dependencies",
+                                CompareResult(tag: Comparators.Tags.dependencies,
                                               context: ["\"T1\" target", "Embedded Frameworks"],
                                               description: nil,
                                               onlyInFirst: ["Test2.framework"],
@@ -451,7 +451,7 @@ final class DependenciesComparatorTests: XCTestCase {
     }
 
     private func noDifferenceLinkedDependencies(target: String) -> CompareResult {
-        return CompareResult(tag: "dependencies",
+        return CompareResult(tag: Comparators.Tags.dependencies,
                              context: ["\"\(target)\" target"] + ["Linked Dependencies"],
                              description: nil,
                              onlyInFirst: [],
@@ -460,7 +460,7 @@ final class DependenciesComparatorTests: XCTestCase {
     }
 
     private func noDifferenceEmbeddedFrameworks(target: String) -> CompareResult {
-        return CompareResult(tag: "dependencies",
+        return CompareResult(tag: Comparators.Tags.dependencies,
                              context: ["\"\(target)\" target"] + ["Embedded Frameworks"],
                              description: nil,
                              onlyInFirst: [],

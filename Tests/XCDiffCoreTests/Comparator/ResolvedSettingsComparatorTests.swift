@@ -34,7 +34,7 @@ final class ResolvedSettingsComparatorTests: XCTestCase {
 
     func testTag() {
         // When / Then
-        XCTAssertEqual(subject.tag, "resolved_settings")
+        XCTAssertEqual(subject.tag, Comparators.Tags.resolvedSettings)
     }
 
     func testCompare_whenNoDifference() throws {
@@ -80,7 +80,7 @@ final class ResolvedSettingsComparatorTests: XCTestCase {
              "-showBuildSettings"],
         ])
         XCTAssertEqual(actual, [
-            .init(tag: "resolved_settings",
+            .init(tag: Comparators.Tags.resolvedSettings,
                   context: ["\"Target1\" target", "\"Debug\" configuration", "Values"]),
         ])
     }
@@ -175,7 +175,7 @@ final class ResolvedSettingsComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "resolved_settings",
+            .init(tag: Comparators.Tags.resolvedSettings,
                   context: ["\"Target1\" target", "\"Debug\" configuration", "Values"],
                   onlyInFirst: ["TARGETED_DEVICE_FAMILY", "TARGETNAME"]),
         ])
@@ -210,7 +210,7 @@ final class ResolvedSettingsComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "resolved_settings",
+            .init(tag: Comparators.Tags.resolvedSettings,
                   context: ["\"Target1\" target", "\"Debug\" configuration", "Values"],
                   onlyInSecond: ["TARGETED_DEVICE_FAMILY", "TARGETNAME"]),
         ])
@@ -243,7 +243,7 @@ final class ResolvedSettingsComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "resolved_settings",
+            .init(tag: Comparators.Tags.resolvedSettings,
                   context: ["\"Target1\" target", "\"Debug\" configuration", "Values"],
                   differentValues: [
                       .init(context: "TARGETED_DEVICE_FAMILY", first: "1,2", second: "1"),
@@ -280,7 +280,7 @@ final class ResolvedSettingsComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "resolved_settings",
+            .init(tag: Comparators.Tags.resolvedSettings,
                   context: ["\"Target1\" target", "\"Debug\" configuration", "Values"],
                   differentValues: [
                       .init(context: "CUSTOM", first: "VALUE=1", second: "VALUE=2"),
@@ -315,7 +315,7 @@ final class ResolvedSettingsComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "resolved_settings",
+            .init(tag: Comparators.Tags.resolvedSettings,
                   context: ["\"Target1\" target", "\"Debug\" configuration", "Values"]),
         ])
     }

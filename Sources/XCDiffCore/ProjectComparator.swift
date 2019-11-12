@@ -50,12 +50,12 @@ public protocol ProjectComparator {
 }
 
 public final class ProjectComparatorFactory {
-    public static func create(comparators: [ComparatorType] = .allAvailableComparators,
+    public static func create(comparators: [() -> Comparator] = Comparators.allAvailableComparators,
                               mode: Mode = .default) -> ProjectComparator {
         let resultRenderer = UniversalResultRenderer(format: mode.format,
                                                      verbose: mode.verbose)
         let xcodeProjLoader = DefaultXcodeProjLoader()
-        return DefaultProjectComparator(comparators: comparators.map { $0.comparator() },
+        return DefaultProjectComparator(comparators: comparators.map { $0() },
                                         resultRenderer: resultRenderer,
                                         xcodeProjLoader: xcodeProjLoader,
                                         differencesOnly: mode.differencesOnly)

@@ -28,7 +28,7 @@ final class HeadersComparatorTests: XCTestCase {
 
     func testTag() {
         // When / Then
-        XCTAssertEqual(subject.tag, ComparatorTag.headers)
+        XCTAssertEqual(subject.tag, Comparators.Tags.headers)
     }
 
     func testCompare_whenNoHeaders_noDifference() throws {
@@ -84,7 +84,7 @@ final class HeadersComparatorTests: XCTestCase {
         let actual = try subject.compare(first, second, parameters: .all)
 
         // Then
-        XCTAssertEqual(actual, [CompareResult(tag: ComparatorTag.headers,
+        XCTAssertEqual(actual, [CompareResult(tag: Comparators.Tags.headers,
                                               context: ["\"A\" target"],
                                               description: nil,
                                               onlyInFirst: ["A1.h"],
@@ -129,7 +129,7 @@ final class HeadersComparatorTests: XCTestCase {
         let actual = try subject.compare(first, second, parameters: .all)
 
         // Then
-        let expected = [CompareResult(tag: "headers",
+        let expected = [CompareResult(tag: Comparators.Tags.headers,
                                       context: ["\"A\" target"],
                                       description: nil,
                                       onlyInFirst: [],
@@ -152,7 +152,7 @@ final class HeadersComparatorTests: XCTestCase {
 
     private func noDifference(targets: [String] = []) -> [CompareResult] {
         return targets.map {
-            CompareResult(tag: "headers",
+            CompareResult(tag: Comparators.Tags.headers,
                           context: ["\"\($0)\" target"],
                           description: nil,
                           onlyInFirst: [],

@@ -29,7 +29,7 @@ final class SourceTreesComparatorTests: XCTestCase {
 
     func testTag() {
         // When / Then
-        XCTAssertEqual(subject.tag, "source_trees")
+        XCTAssertEqual(subject.tag, Comparators.Tags.sourceTrees)
     }
 
     func testCompare_whenHaveNoTargetsAndNoFiles() throws {
@@ -44,7 +44,7 @@ final class SourceTreesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "source_trees",
+            .init(tag: Comparators.Tags.sourceTrees,
                   context: ["Root project"],
                   description: "Output format: (<path>, <name>, <source_tree>)"),
         ])
@@ -74,7 +74,7 @@ final class SourceTreesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "source_trees",
+            .init(tag: Comparators.Tags.sourceTrees,
                   context: ["Root project"],
                   description: "Output format: (<path>, <name>, <source_tree>)"),
         ])
@@ -104,7 +104,7 @@ final class SourceTreesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "source_trees",
+            .init(tag: Comparators.Tags.sourceTrees,
                   context: ["Root project"],
                   description: "Output format: (<path>, <name>, <source_tree>)",
                   onlyInFirst: ["(Path2.swift, nil, <group>) → (nil, Target, <group>) → (nil, nil, nil)"],
@@ -136,7 +136,7 @@ final class SourceTreesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "source_trees",
+            .init(tag: Comparators.Tags.sourceTrees,
                   context: ["Root project"],
                   description: "Output format: (<path>, <name>, <source_tree>)",
                   differentValues: [
@@ -171,7 +171,7 @@ final class SourceTreesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "source_trees",
+            .init(tag: Comparators.Tags.sourceTrees,
                   context: ["Root project"],
                   description: "Output format: (<path>, <name>, <source_tree>)",
                   differentValues: [

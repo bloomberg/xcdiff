@@ -19,7 +19,7 @@ import Foundation
 final class SourcesComparator: Comparator {
     private typealias SourcePair = (first: SourceDescriptor, second: SourceDescriptor)
 
-    let tag = ComparatorTag.sources
+    let tag = Comparators.Tags.sources
     private let targetsHelper = TargetsHelper()
 
     func compare(_ first: ProjectDescriptor,

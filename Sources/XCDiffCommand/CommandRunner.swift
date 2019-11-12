@@ -35,8 +35,8 @@ public final class CommandRunner {
     private let differencesOnlyOption: OptionArgument<Bool>
     private let listOption: OptionArgument<Bool>
     private let command: String
-    private let allComparators: [ComparatorType] = .allAvailableComparators
-    private let defaultComparators: [ComparatorType] = .defaultComparators
+    private let allComparators = Comparators.allAvailableComparators
+    private let defaultComparators = Comparators.defaultComparators
 
     // MARK: - Public
 
@@ -141,13 +141,13 @@ public final class CommandRunner {
     }
 
     private func runPrintAvailableOperators() -> Int32 {
-        let comparators = [ComparatorType].allAvailableComparators
+        let comparators = Comparators.allAvailableComparators
         guard !comparators.isEmpty else {
             printer.text("No available comparators")
             return 0
         }
         let output = "- " + comparators
-            .map { $0.displayName }
+            .map { $0().displayName }
             .joined(separator: "\n- ")
         printer.text(output)
         return 0
@@ -237,7 +237,7 @@ public final class CommandRunner {
 
     private func getTags(from arguments: ArgumentParser.Result) -> ComparatorParameters.Option<String> {
         guard let tags = arguments.get(tagOption) else {
-            return .some(defaultComparators.map { $0.tag.rawValue })
+            return .some(defaultComparators.map { $0().tag })
         }
         return option(from: tags)
     }
@@ -318,42 +318,44 @@ public final class CommandRunner {
     }
 }
 
-private extension Array where Element == ComparatorType {
-    func filter(by option: ComparatorParameters.Option<String>) throws -> [ComparatorType] {
+private extension Array where Element == () -> XCDiffCore.Comparator {
+    func filter(by option: ComparatorParameters.Option<String>) throws -> [() -> XCDiffCore.Comparator] {
         switch option {
         case .all:
             return self
         case let .only(tag):
-            let formattedTag = ComparatorType.displayName(ComparatorTag(rawValue: tag))
-            let tags = filter { $0.displayName == formattedTag }
+            let formattedTag = Comparators.displayName(tag)
+            let tags = filter { $0().displayName == formattedTag }
             guard !tags.isEmpty else {
                 throw CommandError.generic("Unsupported tag \"\(formattedTag)\"")
             }
             return tags
         case let .some(tags):
-            let formattedTags = Set(tags.map { ComparatorTag(rawValue: $0) }.map(ComparatorType.displayName))
-            let formattedCompartorsTags = Set(map { $0.displayName })
+            let formattedTags = Set(tags.map(Comparators.displayName))
+            let formattedComparatorsTags = Set(map { $0().displayName })
             let unsupportedTags = formattedTags
-                .subtracting(formattedCompartorsTags)
+                .subtracting(formattedComparatorsTags)
                 .sorted()
                 .map { "\"\($0)\"" }
             guard unsupportedTags.isEmpty else {
                 throw CommandError.generic("Unsupported tag(s) \(unsupportedTags.joined(separator: ", "))")
             }
-            return filter { formattedTags.contains($0.displayName) }
+            return filter { formattedTags.contains($0().displayName) }
         case .none:
             throw CommandError.generic("Comparator required")
         }
     }
 }
 
-private extension ComparatorType {
+private extension XCDiffCore.Comparator {
     var displayName: String {
-        return ComparatorType.displayName(tag)
+        return Comparators.displayName(tag)
     }
+}
 
-    static func displayName(_ tag: ComparatorTag) -> String {
-        return tag.rawValue.uppercased().replacingOccurrences(of: " ", with: "_")
+private extension Comparators {
+    static func displayName(_ identifier: String) -> String {
+        return identifier.uppercased().replacingOccurrences(of: " ", with: "_")
     }
 }
 

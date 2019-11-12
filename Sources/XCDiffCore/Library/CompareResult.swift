@@ -17,7 +17,7 @@
 import Foundation
 import XcodeProj
 
-public struct CompareResult: GenericCompareResult, Equatable {
+public struct CompareResult: AnyCompareResult, Equatable {
     public struct DifferentValues: Encodable, Equatable {
         public let context: String
         public let first: String
@@ -32,14 +32,14 @@ public struct CompareResult: GenericCompareResult, Equatable {
         }
     }
 
-    public let tag: ComparatorTag
+    public let tag: String
     public let context: [String]
     public let description: String?
     public let onlyInFirst: [String]
     public let onlyInSecond: [String]
     public let differentValues: [DifferentValues]
 
-    public init(tag: ComparatorTag,
+    public init(tag: String,
                 context: [String] = [],
                 description: String? = nil,
                 onlyInFirst: [String] = [],

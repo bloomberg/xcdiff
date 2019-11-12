@@ -17,7 +17,7 @@
 import Foundation
 import XcodeProj
 
-public struct ProjectCompareResult: GenericCompareResult {
+public struct ProjectCompareResult: AnyCompareResult {
     public let first: ProjectDescriptor
     public let second: ProjectDescriptor
     public let results: [CompareResult]

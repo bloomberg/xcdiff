@@ -23,7 +23,7 @@ final class DependenciesComparator: Comparator {
                                                           second: EmbeddedFrameworksDescriptor)
     private let targetsHelper = TargetsHelper()
 
-    let tag = ComparatorTag.dependencies
+    let tag = Comparators.Tags.dependencies
 
     func compare(_ first: ProjectDescriptor,
                  _ second: ProjectDescriptor,

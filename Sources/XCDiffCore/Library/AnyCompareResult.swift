@@ -16,6 +16,6 @@
 
 import Foundation
 
-public protocol GenericCompareResult: Encodable {
+public protocol AnyCompareResult: Encodable {
     func same() -> Bool
 }
