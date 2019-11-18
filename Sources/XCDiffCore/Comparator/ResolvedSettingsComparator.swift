@@ -15,7 +15,6 @@
 //
 
 import Foundation
-import SPMUtility
 import XcodeProj
 
 final class ResolvedSettingsComparator: Comparator {
@@ -99,7 +98,7 @@ final class ResolvedSettingsComparator: Comparator {
         rawBuildSettings.components(separatedBy: NSCharacterSet.newlines)
             .filter { !$0.isEmpty }
             .forEach { line in
-                let (key, value) = line.spm_split(around: "=")
+                let (key, value) = line.split(around: "=")
                 if let value = value {
                     buildSettings[key.trimmingCharacters(in: .whitespaces)] = value.trimmingCharacters(in: .whitespaces)
                 }

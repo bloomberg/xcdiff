@@ -14,7 +14,6 @@
 // limitations under the License.
 //
 
-import Basic
 import Foundation
 import PathKit
 import XcodeProj
@@ -27,9 +26,6 @@ class PathHelper {
         guard path.isAbsolute else {
             return path.string
         }
-        let absolutePath = AbsolutePath(path.string)
-        let sourceRootAbsolutePath = AbsolutePath(sourceRoot.absolute().string)
-        let relativePath = absolutePath.relative(to: sourceRootAbsolutePath)
-        return relativePath.pathString
+        return path.url.relative(to: sourceRoot.absolute().url)
     }
 }
