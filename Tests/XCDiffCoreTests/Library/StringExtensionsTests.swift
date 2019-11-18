@@ -26,47 +26,47 @@ final class StringExtensionsTests: XCTestCase {
 
         delimiter = "::"
     }
-    
+
     func test_split_empty_string() {
         //Given
         let testString = ""
-        
+
         //Then
         equal(testString.split(around: delimiter), ("", nil))
     }
-    
+
     func test_split_string_not_contain_delimiter() {
         //Given
         let testString = "foo"
-        
+
         //Then
         equal(testString.split(around: delimiter), ("foo", nil))
     }
-    
+
     func test_split_string_has_delimiter_end() {
         //Given
         let testString = "foo::"
-        
+
         //Then
         equal(testString.split(around: delimiter), ("foo", ""))
     }
-    
+
     func test_split_string_starting_delimiter() {
         //Given
         let testString = "::bar"
-        
+
         //Then
         equal(testString.split(around: delimiter), ("", "bar"))
     }
-    
+
     func test_split_string_mid_delimiter() {
         //Given
         let testString = "foo::bar"
-        
+
         //Then
         equal(testString.split(around: delimiter), ("foo", "bar"))
     }
-    
+
     func equal(_ lhs: (String, String?), _ rhs: (String, String?), file: StaticString = #file, line: UInt = #line) {
         XCTAssertEqual(lhs.0, rhs.0, file: file, line: line)
         XCTAssertEqual(lhs.1, rhs.1, file: file, line: line)

@@ -19,20 +19,20 @@ import Foundation
 import XCTest
 
 final class URLExtensionsTests: XCTestCase {
-    
+
     func test_relative_path_longer() {
         XCTAssertEqual(generateRelative("/usr/bin/agent/demo.gz", "/usr/bin"), "agent/demo.gz")
         XCTAssertEqual(generateRelative("/user/db/demo.exe", "/user/tb"), "../db/demo.exe")
     }
-    
+
     func test_empty_path() {
         XCTAssertEqual(generateRelative("/", "/"), "")
     }
-    
+
     func test_relative_path_shorter() {
         XCTAssertEqual(generateRelative("/user/x/y", "/user/x/y/a/b/c"), "../../..")
     }
-    
+
     func generateRelative(_ first: String, _ second: String) -> String? {
         let firstLink = URL(fileURLWithPath: first)
         let secondLink = URL(fileURLWithPath: second)
