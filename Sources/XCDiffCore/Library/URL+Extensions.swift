@@ -18,20 +18,20 @@ import Foundation
 
 extension URL {
     func relative(to baseURL: URL) -> String? {
-        guard self.isFileURL && baseURL.isFileURL else {
+        guard isFileURL, baseURL.isFileURL else {
             return nil
         }
-        guard self.baseURL == nil && baseURL.baseURL == nil else {
+        guard self.baseURL == nil, baseURL.baseURL == nil else {
             return nil
         }
         let baseComp = baseURL.standardizedFileURL.pathComponents
-        let destinationComp = self.standardizedFileURL.pathComponents
+        let destinationComp = standardizedFileURL.pathComponents
 
         var index = 0
-        while  index < destinationComp.count
-            && index < baseComp.count
-            && destinationComp[index] == baseComp[index] {
-                index += 1
+        while index < destinationComp.count,
+            index < baseComp.count,
+            destinationComp[index] == baseComp[index] {
+            index += 1
         }
 
         var relComponents = Array(repeating: "..", count: baseComp.count - index)

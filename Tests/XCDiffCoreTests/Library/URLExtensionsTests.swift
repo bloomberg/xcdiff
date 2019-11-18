@@ -19,7 +19,6 @@ import Foundation
 import XCTest
 
 final class URLExtensionsTests: XCTestCase {
-
     func test_relative_path_longer() {
         XCTAssertEqual(generateRelative("/usr/bin/agent/demo.gz", "/usr/bin"), "agent/demo.gz")
         XCTAssertEqual(generateRelative("/user/db/demo.exe", "/user/tb"), "../db/demo.exe")

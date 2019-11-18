@@ -28,42 +28,42 @@ final class StringExtensionsTests: XCTestCase {
     }
 
     func test_split_empty_string() {
-        //Given
+        // Given
         let testString = ""
 
-        //Then
+        // Then
         equal(testString.split(around: delimiter), ("", nil))
     }
 
     func test_split_string_not_contain_delimiter() {
-        //Given
+        // Given
         let testString = "foo"
 
-        //Then
+        // Then
         equal(testString.split(around: delimiter), ("foo", nil))
     }
 
     func test_split_string_has_delimiter_end() {
-        //Given
+        // Given
         let testString = "foo::"
 
-        //Then
+        // Then
         equal(testString.split(around: delimiter), ("foo", ""))
     }
 
     func test_split_string_starting_delimiter() {
-        //Given
+        // Given
         let testString = "::bar"
 
-        //Then
+        // Then
         equal(testString.split(around: delimiter), ("", "bar"))
     }
 
     func test_split_string_mid_delimiter() {
-        //Given
+        // Given
         let testString = "foo::bar"
 
-        //Then
+        // Then
         equal(testString.split(around: delimiter), ("foo", "bar"))
     }
 
