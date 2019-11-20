@@ -19,56 +19,53 @@ import Foundation
 import XCTest
 
 final class StringExtensionsTests: XCTestCase {
-    private var delimiter: String!
-
-    override func setUp() {
-        super.setUp()
-
-        delimiter = "::"
-    }
-
-    func test_split_empty_string() {
+    func testSplit_whenEmptyString() {
         // Given
         let testString = ""
 
         // Then
-        equal(testString.split(around: delimiter), ("", nil))
+        assertEqual(testString.split(around: "::"), ("", nil))
     }
 
-    func test_split_string_not_contain_delimiter() {
+    func testSplit_whenStringNotContainDelimiter() {
         // Given
         let testString = "foo"
 
         // Then
-        equal(testString.split(around: delimiter), ("foo", nil))
+        assertEqual(testString.split(around: "::"), ("foo", nil))
     }
 
-    func test_split_string_has_delimiter_end() {
+    func testSplit_whenStringHasDelimiterEnding() {
         // Given
         let testString = "foo::"
 
         // Then
-        equal(testString.split(around: delimiter), ("foo", ""))
+        assertEqual(testString.split(around: "::"), ("foo", ""))
     }
 
-    func test_split_string_starting_delimiter() {
+    func testSplit_whenStringHasStartingDelimiter() {
         // Given
         let testString = "::bar"
 
         // Then
-        equal(testString.split(around: delimiter), ("", "bar"))
+        assertEqual(testString.split(around: "::"), ("", "bar"))
     }
 
-    func test_split_string_mid_delimiter() {
+    func testSplit_whenStringHasMidDelimiter() {
         // Given
         let testString = "foo::bar"
 
         // Then
-        equal(testString.split(around: delimiter), ("foo", "bar"))
+        assertEqual(testString.split(around: "::"), ("foo", "bar"))
     }
 
-    func equal(_ lhs: (String, String?), _ rhs: (String, String?), file: StaticString = #file, line: UInt = #line) {
-        XCTAssertEqual(lhs.0, rhs.0, file: file, line: line)
-        XCTAssertEqual(lhs.1, rhs.1, file: file, line: line)
+    // MARK: - Private
+
+    private func assertEqual(_ actual: (String, String?),
+                             _ expected: (String, String?),
+                             file: StaticString = #file,
+                             line: UInt = #line) {
+        XCTAssertEqual(actual.0, expected.0, file: file, line: line)
+        XCTAssertEqual(actual.1, expected.1, file: file, line: line)
     }
 }
