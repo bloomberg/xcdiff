@@ -125,10 +125,24 @@ final class PBXNativeTargetBuilder {
     @discardableResult
     func addResources(_ resources: [String]) -> PBXNativeTargetBuilder {
         addBuildPhase(.resources) { buildPhaseBuilder in
-            resources.forEach { source in
+            resources.forEach { resource in
                 buildPhaseBuilder.addBuildFile { buildFileBuilder in
-                    buildFileBuilder.setName(source)
-                    buildFileBuilder.setPath(source)
+                    buildFileBuilder.setName(resource)
+                    buildFileBuilder.setPath(resource)
+                }
+            }
+        }
+        return self
+    }
+
+    @discardableResult
+    func addResources(_ resources: [(name: String, sourceTree: SourceTree)]) -> PBXNativeTargetBuilder {
+        addBuildPhase(.resources) { buildPhaseBuilder in
+            resources.forEach { resource in
+                buildPhaseBuilder.addBuildFile { buildFileBuilder in
+                    buildFileBuilder.setName(resource.name)
+                    buildFileBuilder.setPath(resource.name)
+                    buildFileBuilder.setSourceTree(resource.sourceTree.pbxSourceTree)
                 }
             }
         }
@@ -180,4 +194,16 @@ struct DependencyData {
 struct EmbeddedFrameworksData {
     let path: String
     let settings: [String: [String]]
+}
+
+enum SourceTree {
+    case buildProducts
+    case group
+
+    fileprivate var pbxSourceTree: PBXSourceTree {
+        switch self {
+        case .buildProducts: return .buildProductsDir
+        case .group: return .group
+        }
+    }
 }

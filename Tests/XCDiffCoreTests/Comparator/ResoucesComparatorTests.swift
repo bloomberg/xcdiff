@@ -153,6 +153,41 @@ final class ResourcesComparatorTests: XCTestCase {
         ])
     }
 
+    func testCompare_bundleReferences() throws {
+        // Given
+        let first = project(name: "P1")
+            .addTarget(name: "T1") {
+                $0.addResources([
+                    (name: "A.bundle", sourceTree: .buildProducts),
+                    (name: "B.bundle", sourceTree: .buildProducts),
+                ])
+            }
+            .projectDescriptor()
+        let second = project(name: "P2")
+            .addTarget(name: "T1") {
+                $0.addResources([
+                    (name: "A.bundle", sourceTree: .buildProducts),
+                    (name: "C.bundle", sourceTree: .buildProducts),
+                ])
+            }
+            .projectDescriptor()
+
+        // When
+        let actual = try subject.compare(first,
+                                         second,
+                                         parameters: .all)
+
+        // Then
+        XCTAssertEqual(actual, [
+            CompareResult(tag: "resources",
+                          context: ["\"T1\" target"],
+                          description: nil,
+                          onlyInFirst: ["B.bundle"],
+                          onlyInSecond: ["C.bundle"],
+                          differentValues: []),
+        ])
+    }
+
     // MARK: - Helpers
 
     private func noDifference(targets: [String] = []) -> [CompareResult] {

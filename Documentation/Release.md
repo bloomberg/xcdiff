@@ -1,6 +1,6 @@
 # Release Process
 
-1. Bump the version number in [Makefile](/Makefile)
+1. Bump the version number in [Makefile](../Makefile)
 2. Run `make update_version` to update version references in various source and markdown files
 3. Make a pull request with the changes
 4. Once merged, [draft a new release](https://github.com/bloomberg/xcdiff/releases/new)
