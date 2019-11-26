@@ -38,7 +38,7 @@ let package = Package(
         ),
         .target(
             name: "XCDiffCore",
-            dependencies: ["XcodeProj", "SPMUtility"]
+            dependencies: ["XcodeProj"]
         ),
         .testTarget(
             name: "XCDiffCommandTests",
