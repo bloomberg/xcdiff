@@ -162,7 +162,7 @@ final class TargetsHelper {
     }
 
     private func path(from fileElement: PBXFileElement?, sourceRoot: Path) throws -> String? {
-        return try pathHelper.fullPath(from: fileElement, sourceRoot: sourceRoot)
+        return try pathHelper.fullPath(from: fileElement, sourceRoot: sourceRoot) ?? fileElement?.path
     }
 }
 
