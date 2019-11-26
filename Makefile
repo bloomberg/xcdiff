@@ -12,11 +12,11 @@ BUILD_PATH = .build/release/$(TOOL_NAME)
 clean:
 	xcrun swift package clean
 
-install: build
+install: clean build
 	mkdir -p $(PREFIX)/bin
 	cp -f $(BUILD_PATH) $(INSTALL_PATH)
 
-build: clean
+build:
 	xcrun swift build --disable-sandbox -c release
 
 test:

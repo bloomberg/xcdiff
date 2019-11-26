@@ -53,7 +53,7 @@ git clone https://github.com/bloomberg/xcdiff.git
 cd xcdiff
 ```
 
-2. Build and copy to `/usr/local/bin `
+2. Build and copy to `/usr/local/bin`
 ```sh
 make install
 ```
