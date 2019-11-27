@@ -4,8 +4,17 @@ VERSION_PATCH = 0
 VERSION = $(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_PATCH)
 GIT_SHORT_HASH = $(shell git rev-parse --short HEAD)
 
+TOOL_NAME = xcdiff
+PREFIX = /usr/local
+INSTALL_PATH = $(PREFIX)/bin/
+BUILD_PATH = .build/release/$(TOOL_NAME)
+
 clean:
 	xcrun swift package clean
+
+install: clean build
+	mkdir -p $(PREFIX)/bin
+	cp -f $(BUILD_PATH) $(INSTALL_PATH)
 
 build:
 	xcrun swift build --disable-sandbox -c release

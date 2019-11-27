@@ -45,6 +45,19 @@ Once installed, you can use xcdiff directly:
 xcdiff --help
 ```
 
+### Make
+
+1. Clone the repository
+```sh
+git clone https://github.com/bloomberg/xcdiff.git
+cd xcdiff
+```
+
+2. Build and copy to `/usr/local/bin`
+```sh
+make install
+```
+
 ## Framework
 
 ### Swift Package Manager
