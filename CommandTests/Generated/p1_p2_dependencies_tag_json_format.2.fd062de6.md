@@ -68,7 +68,11 @@
       "Embedded Frameworks"
     ],
     "differentValues" : [
-
+      {
+        "context" : "ProjectFramework.framework Code Sign on Copy",
+        "first" : "true",
+        "second" : "false"
+      }
     ],
     "onlyInFirst" : [
 

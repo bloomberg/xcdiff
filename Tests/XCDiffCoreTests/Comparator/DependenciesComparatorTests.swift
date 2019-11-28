@@ -404,6 +404,39 @@ final class DependenciesComparatorTests: XCTestCase {
                                                                       second: "true")])])
     }
 
+    func testCompare_whenDifferentEmbeddedFrameworks_missingCodeSignOnCopy() throws {
+        // Given
+        let first = project(name: "P1")
+            .addTarget(name: "T1") {
+                $0.addEmbeddedFrameworks([EmbeddedFrameworksData(path: "Test1.framework",
+                                                                 settings: nil)])
+            }
+            .projectDescriptor()
+
+        let second = project(name: "P2")
+            .addTarget(name: "T1") {
+                $0.addEmbeddedFrameworks([EmbeddedFrameworksData(path: "Test1.framework",
+                                                                 settings: ["ATTRIBUTES": ["CodeSignOnCopy"]])])
+            }
+            .projectDescriptor()
+
+        // When
+        let actual = try subject.compare(first,
+                                         second,
+                                         parameters: .all)
+
+        // Then
+        XCTAssertEqual(actual, [noDifferenceLinkedDependencies(target: "T1"),
+                                CompareResult(tag: "dependencies",
+                                              context: ["\"T1\" target", "Embedded Frameworks"],
+                                              description: nil,
+                                              onlyInFirst: [],
+                                              onlyInSecond: [],
+                                              differentValues: [.init(context: "Test1.framework Code Sign on Copy",
+                                                                      first: "false",
+                                                                      second: "true")])])
+    }
+
     func testCompare_whenDifferentLinkedDependenciesAndEmbeddedFrameworks() throws {
         // Given
         let first = project(name: "P1")
