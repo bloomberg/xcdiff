@@ -169,7 +169,7 @@ final class PBXNativeTargetBuilder {
             embeddedFrameworks.forEach { embeddedFramework in
                 buildPhaseBuilder.addBuildFile { buildFileBuilder in
                     buildFileBuilder.setPath(embeddedFramework.path)
-                    buildFileBuilder.setSettings(embeddedFramework.settings)
+                    if let settings = embeddedFramework.settings { buildFileBuilder.setSettings(settings) }
                 }
             }
         }
@@ -193,7 +193,7 @@ struct DependencyData {
 
 struct EmbeddedFrameworksData {
     let path: String
-    let settings: [String: [String]]
+    let settings: [String: [String]]?
 }
 
 enum SourceTree {

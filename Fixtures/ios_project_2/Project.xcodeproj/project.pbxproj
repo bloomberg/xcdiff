@@ -29,7 +29,7 @@
 		2E26639822B7F52600BA59BC /* ProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E26639722B7F52600BA59BC /* ProjectUITests.swift */; };
 		2EB29206230B2A3E00C9EB4A /* ProjectFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EB29204230B2A3E00C9EB4A /* ProjectFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2EB29209230B2A3E00C9EB4A /* ProjectFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB29202230B2A3E00C9EB4A /* ProjectFramework.framework */; };
-		2EB2920A230B2A3E00C9EB4A /* ProjectFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB29202230B2A3E00C9EB4A /* ProjectFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2EB2920A230B2A3E00C9EB4A /* ProjectFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB29202230B2A3E00C9EB4A /* ProjectFramework.framework */; };
 		2EB2920F230B2A5100C9EB4A /* Header1.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EB2920E230B2A5100C9EB4A /* Header1.h */; };
 		2EB29213230B2A7800C9EB4A /* Header2.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EB29210230B2A5A00C9EB4A /* Header2.h */; };
 		2EB29214230B2A7C00C9EB4A /* Header3.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EB29212230B2A6C00C9EB4A /* Header3.h */; };

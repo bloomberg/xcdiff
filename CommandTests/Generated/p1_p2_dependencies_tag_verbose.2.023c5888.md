@@ -33,6 +33,13 @@
   • NewFramework.framework
 
 
+⚠️  Value mismatch (1):
+
+  • ProjectFramework.framework Code Sign on Copy
+    ◦ true
+    ◦ false
+
+
 ✅ DEPENDENCIES > "ProjectFramework" target > Linked Dependencies
 ✅ DEPENDENCIES > "ProjectFramework" target > Embedded Frameworks
 ✅ DEPENDENCIES > "ProjectTests" target > Linked Dependencies

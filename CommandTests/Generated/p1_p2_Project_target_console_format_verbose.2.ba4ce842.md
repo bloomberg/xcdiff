@@ -184,6 +184,13 @@ Output format: (<path>, <name>, <source_tree>)
   • NewFramework.framework
 
 
+⚠️  Value mismatch (1):
+
+  • ProjectFramework.framework Code Sign on Copy
+    ◦ true
+    ◦ false
+
+
 
 
 ```

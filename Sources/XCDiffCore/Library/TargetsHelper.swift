@@ -153,12 +153,20 @@ final class TargetsHelper {
             return []
         }
         return embeddedFrameworksFiles.compactMap {
-            if let path = $0.file?.path, let settings = $0.settings {
-                let attributes = (settings["ATTRIBUTES"] as? [String]) ?? []
-                return EmbeddedFrameworksDescriptor(path: path, codeSignOnCopy: attributes.contains("CodeSignOnCopy"))
+            if let path = $0.file?.path {
+                return EmbeddedFrameworksDescriptor(path: path,
+                                                    codeSignOnCopy: codeSignAttributes(for: $0))
             }
             return nil
         }
+    }
+
+    private func codeSignAttributes(for file: PBXBuildFile) -> Bool {
+        guard let settings = file.settings else {
+            return false
+        }
+        let attributes = (settings["ATTRIBUTES"] as? [String]) ?? []
+        return attributes.contains("CodeSignOnCopy")
     }
 
     private func path(from fileElement: PBXFileElement?, sourceRoot: Path) throws -> String? {
