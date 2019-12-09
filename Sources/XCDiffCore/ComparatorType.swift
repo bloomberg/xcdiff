@@ -18,6 +18,7 @@ import Foundation
 
 public enum ComparatorType {
     case fileReferences
+    case buildPhases
     case targets
     case headers
     case sources
@@ -38,6 +39,8 @@ public enum ComparatorType {
         switch self {
         case .fileReferences:
             return FileReferencesComparator()
+        case .buildPhases:
+            return BuildPhasesComparator()
         case .targets:
             return TargetsComparator()
         case .headers:
@@ -66,6 +69,7 @@ public extension Array where Element == ComparatorType {
     static var allAvailableComparators: [ComparatorType] {
         return [
             .fileReferences,
+            .buildPhases,
             .targets,
             .headers,
             .sources,
@@ -81,6 +85,7 @@ public extension Array where Element == ComparatorType {
     static var defaultComparators: [ComparatorType] {
         return [
             .fileReferences,
+            .buildPhases,
             .targets,
             .headers,
             .sources,

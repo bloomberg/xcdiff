@@ -9,6 +9,11 @@
 # Expected output
 ```
 ❌ FILE_REFERENCES
+❌ BUILD_PHASES > "MismatchingLibrary" target
+✅ BUILD_PHASES > "Project" target
+✅ BUILD_PHASES > "ProjectFramework" target
+✅ BUILD_PHASES > "ProjectTests" target
+✅ BUILD_PHASES > "ProjectUITests" target
 ❌ TARGETS > NATIVE targets
 ❌ TARGETS > AGGREGATE targets
 ❌ HEADERS > "MismatchingLibrary" target

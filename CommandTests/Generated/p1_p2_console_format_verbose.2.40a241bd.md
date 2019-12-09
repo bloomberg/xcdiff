@@ -37,6 +37,31 @@
   • README.md
 
 
+❌ BUILD_PHASES > "MismatchingLibrary" target
+
+⚠️  Value mismatch (4):
+
+  • Build Phase 1
+    ◦ name = Sources, type = Sources, runOnlyForDeploymentPostprocessing = false
+    ◦ name = Headers, type = Headers, runOnlyForDeploymentPostprocessing = false
+
+  • Build Phase 2
+    ◦ name = Frameworks, type = Frameworks, runOnlyForDeploymentPostprocessing = false
+    ◦ name = Sources, type = Sources, runOnlyForDeploymentPostprocessing = false
+
+  • Build Phase 3
+    ◦ name = CopyFiles, type = CopyFiles, runOnlyForDeploymentPostprocessing = false
+    ◦ name = Frameworks, type = Frameworks, runOnlyForDeploymentPostprocessing = false
+
+  • Build Phase 4
+    ◦ nil
+    ◦ name = Resources, type = Resources, runOnlyForDeploymentPostprocessing = false
+
+
+✅ BUILD_PHASES > "Project" target
+✅ BUILD_PHASES > "ProjectFramework" target
+✅ BUILD_PHASES > "ProjectTests" target
+✅ BUILD_PHASES > "ProjectUITests" target
 ❌ TARGETS > NATIVE targets
 
 ⚠️  Only in second (1):

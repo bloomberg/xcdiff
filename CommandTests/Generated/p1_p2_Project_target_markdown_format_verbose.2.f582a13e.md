@@ -40,6 +40,9 @@
 
 
 
+## ✅ BUILD_PHASES > "Project" target
+
+
 ## ✅ TARGETS > NATIVE targets
 
 

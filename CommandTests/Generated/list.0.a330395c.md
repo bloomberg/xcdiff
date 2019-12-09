@@ -9,6 +9,7 @@
 # Expected output
 ```
 - FILE_REFERENCES
+- BUILD_PHASES
 - TARGETS
 - HEADERS
 - SOURCES

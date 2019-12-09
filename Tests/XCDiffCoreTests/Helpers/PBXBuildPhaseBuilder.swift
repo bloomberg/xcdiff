@@ -47,10 +47,29 @@ final class PBXBuildPhaseBuilder {
             buildPhase = PBXHeadersBuildPhase(files: buildFiles)
         case .frameworks:
             buildPhase = PBXFrameworksBuildPhase(files: buildFiles)
-        case .embedFrameworks:
-            buildPhase = PBXCopyFilesBuildPhase(dstSubfolderSpec: .frameworks,
-                                                files: buildFiles)
+        case let .copyFiles(copyBuildPhase):
+            buildPhase = PBXCopyFilesBuildPhase(dstPath: copyBuildPhase.dstPath,
+                                                dstSubfolderSpec: .from(copyBuildPhase.dskSubfolderSpec),
+                                                name: copyBuildPhase.name,
+                                                files: buildFiles,
+                                                runOnlyForDeploymentPostprocessing: copyBuildPhase
+                                                    .runOnlyForDeploymentPostprocessing)
         }
         return (buildPhase, objects + [buildPhase])
+    }
+}
+
+private extension PBXCopyFilesBuildPhase.SubFolder {
+    static func from(_ spec: DskSubfolderSpec?) -> PBXCopyFilesBuildPhase.SubFolder? {
+        return spec.map {
+            switch $0 {
+            case .frameworks:
+                return .frameworks
+            case .plugins:
+                return .plugins
+            case .resources:
+                return .resources
+            }
+        }
     }
 }

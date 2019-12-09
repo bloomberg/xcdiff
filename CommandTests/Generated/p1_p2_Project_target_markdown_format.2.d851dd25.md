@@ -12,6 +12,9 @@
 ## ❌ FILE_REFERENCES
 
 
+## ✅ BUILD_PHASES > "Project" target
+
+
 ## ✅ TARGETS > NATIVE targets
 
 

@@ -37,6 +37,7 @@
   • README.md
 
 
+✅ BUILD_PHASES > "Project" target
 ✅ TARGETS > NATIVE targets
 ✅ TARGETS > AGGREGATE targets
 ✅ HEADERS > "Project" target
