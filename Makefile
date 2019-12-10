@@ -20,7 +20,7 @@ build:
 	xcrun swift build --disable-sandbox -c release
 
 test:
-	xcrun swift test
+	xcrun swift test --enable-code-coverage
 
 update_version:
 	sed -i '' 's/\(Version(\)\(.*\)\(, \)/\1$(VERSION_MAJOR), $(VERSION_MINOR), $(VERSION_PATCH)\3/' Sources/XCDiffCommand/Constants.swift
