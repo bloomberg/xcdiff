@@ -101,20 +101,31 @@ final class SettingsComparator: Comparator {
             return results(context: context,
                            onlyInSecond: ["\"\(configurationName)\" configuration"])
         default:
-            guard let firstConfiguration = first?.configuration(name: configurationName) else {
-                throw ComparatorError.generic("Configuration not found")
-            }
-            guard let secondConfiguration = second?.configuration(name: configurationName) else {
-                throw ComparatorError.generic("Configuration not found")
-            }
-            let baseConfigurations = try compareBaseConfigurations(parentContext: context,
-                                                                   firstConfiguration, secondConfiguration,
-                                                                   firstSourceRoot: firstSourceRoot,
-                                                                   secondSourceRoot: secondSourceRoot)
-            let settingsValues = try compareSettingsValues(parentContext: context,
-                                                           firstConfiguration, secondConfiguration)
-            return [baseConfigurations, settingsValues]
+            break
         }
+        let firstConfigurationOptional = first?.configuration(name: configurationName)
+        let secondConfigurationOptional = second?.configuration(name: configurationName)
+        guard let firstConfiguration = firstConfigurationOptional,
+            let secondConfiguration = secondConfigurationOptional else {
+            if firstConfigurationOptional == nil, secondConfigurationOptional == nil {
+                return [CompareResult(tag: tag, context: context)]
+            }
+            if firstConfigurationOptional == nil {
+                return results(context: context,
+                               onlyInSecond: ["\"\(configurationName)\" configuration"])
+            } else {
+                return results(context: context,
+                               onlyInFirst: ["\"\(configurationName)\" configuration"])
+            }
+        }
+
+        let baseConfigurations = try compareBaseConfigurations(parentContext: context,
+                                                               firstConfiguration, secondConfiguration,
+                                                               firstSourceRoot: firstSourceRoot,
+                                                               secondSourceRoot: secondSourceRoot)
+        let settingsValues = try compareSettingsValues(parentContext: context,
+                                                       firstConfiguration, secondConfiguration)
+        return [baseConfigurations, settingsValues]
     }
 
     private func compareSettingsValues(parentContext: [String],

@@ -416,6 +416,95 @@ final class SettingsComparatorTests: XCTestCase {
                   context: ["\"Target\" target", "\"Debug\" configuration"]),
         ])
     }
+
+    func testCompare_whenFirstHasEmptyConfigurationList() throws {
+        // Given
+        let first = project()
+            .addBuildConfiguration(name: "Debug")
+            .addTarget {
+                $0.addBuildConfigurationList()
+            }
+            .projectDescriptor()
+        let second = project()
+            .addBuildConfiguration(name: "Debug")
+            .addTarget {
+                $0.addBuildConfiguration(name: "Debug")
+            }
+            .projectDescriptor()
+
+        // When
+        let actual = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(actual, [
+            .init(tag: "settings",
+                  context: ["Root project", "\"Debug\" configuration", "Base configuration"]),
+            .init(tag: "settings",
+                  context: ["Root project", "\"Debug\" configuration", "Values"]),
+            .init(tag: "settings",
+                  context: ["\"Target\" target", "\"Debug\" configuration"],
+                  onlyInSecond: ["\"Debug\" configuration"]),
+        ])
+    }
+
+    func testCompare_whenSecondHasEmptyConfigurationList() throws {
+        // Given
+        let first = project()
+            .addBuildConfiguration(name: "Debug")
+            .addTarget {
+                $0.addBuildConfiguration(name: "Debug")
+            }
+            .projectDescriptor()
+        let second = project()
+            .addBuildConfiguration(name: "Debug")
+            .addTarget {
+                $0.addBuildConfigurationList()
+            }
+            .projectDescriptor()
+
+        // When
+        let actual = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(actual, [
+            .init(tag: "settings",
+                  context: ["Root project", "\"Debug\" configuration", "Base configuration"]),
+            .init(tag: "settings",
+                  context: ["Root project", "\"Debug\" configuration", "Values"]),
+            .init(tag: "settings",
+                  context: ["\"Target\" target", "\"Debug\" configuration"],
+                  onlyInFirst: ["\"Debug\" configuration"]),
+        ])
+    }
+
+    func testCompare_whenBothHaveEmptyConfigurationList() throws {
+        // Given
+        let first = project()
+            .addBuildConfiguration(name: "Debug")
+            .addTarget {
+                $0.addBuildConfigurationList()
+            }
+            .projectDescriptor()
+        let second = project()
+            .addBuildConfiguration(name: "Debug")
+            .addTarget {
+                $0.addBuildConfigurationList()
+            }
+            .projectDescriptor()
+
+        // When
+        let actual = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(actual, [
+            .init(tag: "settings",
+                  context: ["Root project", "\"Debug\" configuration", "Base configuration"]),
+            .init(tag: "settings",
+                  context: ["Root project", "\"Debug\" configuration", "Values"]),
+            .init(tag: "settings",
+                  context: ["\"Target\" target", "\"Debug\" configuration"]),
+        ])
+    }
 }
 
 // swiftlint:enable type_body_length
