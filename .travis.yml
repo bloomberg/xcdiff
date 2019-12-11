@@ -4,4 +4,4 @@ osx_image: xcode11.1
 script:
   - ./Scripts/brew.sh ; make lint
   - make clean build
-  - make clean test
+  - make clean test ; ./Scripts/coverage.sh
