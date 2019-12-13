@@ -2,6 +2,10 @@
 
 The list of built-in comparators available in xcdiff.
 
+### `build_phases`
+
+Compares build phases i.e. dependencies, sources, headers, to ensure all are present in both projects in the same order.
+
 ### `configurations`
 
 Compares build configurations i.e. Debug, Release.
