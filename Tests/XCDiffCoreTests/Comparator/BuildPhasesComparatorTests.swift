@@ -94,7 +94,44 @@ final class BuildPhasesComparatorTests: XCTestCase {
         ])
     }
 
-    func testCompare_whenMissingCopyFilesBuildPhase() throws {
+    func testCompare_whenMissingCopyFilesBuildPhasesInFirst() throws {
+        // Given
+        let first = project()
+            .addTarget(name: "Target1", productType: .application) { target in
+                target.addBuildPhase(.copyFiles(.plugins)) { _ in }
+            }
+            .projectDescriptor()
+        let second = project()
+            .addTarget(name: "Target1", productType: .application) { target in
+                target.addBuildPhase(.copyFiles(.plugins)) { _ in }
+                target.addBuildPhase(.copyFiles(.plugins)) { _ in }
+                target.addBuildPhase(.copyFiles(.init(name: "Custom Copy Files",
+                                                      runOnlyForDeploymentPostprocessing: false,
+                                                      dskSubfolderSpec: nil,
+                                                      dstPath: nil))) { _ in }
+            }
+            .projectDescriptor()
+
+        // When
+        let actual = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(actual, [
+            .init(tag: "build_phases",
+                  context: ["\"Target1\" target"],
+                  differentValues: [
+                      .init(context: "Build Phase 2",
+                            first: nil,
+                            second: "name = CopyFiles, type = CopyFiles, runOnlyForDeploymentPostprocessing = false"),
+                      .init(context: "Build Phase 3",
+                            first: nil,
+                            second:
+                            "name = Custom Copy Files, type = CopyFiles, runOnlyForDeploymentPostprocessing = false"),
+                  ]),
+        ])
+    }
+
+    func testCompare_whenMissingCopyFilesBuildPhasesInSecond() throws {
         // Given
         let first = project()
             .addTarget(name: "Target1", productType: .application) { target in

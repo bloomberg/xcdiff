@@ -59,7 +59,7 @@ final class BuildPhasesComparator: Comparator {
 private extension PBXBuildPhase {
     func descriptor() -> BuildPhaseDescriptor {
         return BuildPhaseDescriptor(name: name(),
-                                    type: type(),
+                                    type: buildPhase,
                                     inputFileListPaths: inputFileListPaths,
                                     outputFileListPaths: outputFileListPaths,
                                     runOnlyForDeploymentPostprocessing: runOnlyForDeploymentPostprocessing)
@@ -68,7 +68,7 @@ private extension PBXBuildPhase {
 
 private struct BuildPhaseDescriptor: Equatable, CustomStringConvertible {
     let name: String?
-    let type: BuildPhase?
+    let type: BuildPhase
     let inputFileListPaths: [String]?
     let outputFileListPaths: [String]?
     let runOnlyForDeploymentPostprocessing: Bool
@@ -76,7 +76,7 @@ private struct BuildPhaseDescriptor: Equatable, CustomStringConvertible {
     var description: String {
         var elements = [String]()
         elements.append("name = \(name ?? "nil")")
-        elements.append("type = \(type?.rawValue ?? "nil")")
+        elements.append("type = \(type)")
         elements.append("runOnlyForDeploymentPostprocessing = \(runOnlyForDeploymentPostprocessing)")
         if let inputFileListPaths = inputFileListPaths {
             elements.append("inputFileListPaths = \(inputFileListPaths.description)")
