@@ -130,4 +130,49 @@ final class BuildPhasesComparatorTests: XCTestCase {
                   ]),
         ])
     }
+
+    func testCompare_whenDifferentOutputInputFileListPaths() throws {
+        // Given
+        let first = project()
+            .addTarget(name: "Target1", productType: .application) { target in
+                target.addBuildPhase(.copyFiles(.plugins)) {
+                    $0.setInputFileListPaths(["input1.txt", "input2.txt", "input3.txt"])
+                }
+                target.addBuildPhase(.copyFiles(.plugins)) {
+                    $0.setOutputFileListPaths(["output1.txt", "output2.txt", "output3.txt"])
+                }
+            }
+            .projectDescriptor()
+        let second = project()
+            .addTarget(name: "Target1", productType: .application) { target in
+                target.addBuildPhase(.copyFiles(.plugins)) {
+                    $0.setInputFileListPaths(["input1.txt"])
+                }
+                target.addBuildPhase(.copyFiles(.plugins)) {
+                    $0.setOutputFileListPaths(["output1.txt"])
+                }
+            }
+            .projectDescriptor()
+
+        // When
+        let actual = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(actual, [
+            .init(tag: "build_phases",
+                  context: ["\"Target1\" target"],
+                  differentValues: [
+                      .init(context: "Build Phase 1",
+                            first: "name = CopyFiles, type = CopyFiles, runOnlyForDeploymentPostprocessing = false, "
+                                + "inputFileListPaths = [\"input1.txt\", \"input2.txt\", \"input3.txt\"]",
+                            second: "name = CopyFiles, type = CopyFiles, runOnlyForDeploymentPostprocessing = false, "
+                                + "inputFileListPaths = [\"input1.txt\"]"),
+                      .init(context: "Build Phase 2",
+                            first: "name = CopyFiles, type = CopyFiles, runOnlyForDeploymentPostprocessing = false, "
+                                + "outputFileListPaths = [\"output1.txt\", \"output2.txt\", \"output3.txt\"]",
+                            second: "name = CopyFiles, type = CopyFiles, runOnlyForDeploymentPostprocessing = false, "
+                                + "outputFileListPaths = [\"output1.txt\"]"),
+                  ]),
+        ])
+    }
 }

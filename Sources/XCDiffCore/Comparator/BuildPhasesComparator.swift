@@ -36,20 +36,14 @@ final class BuildPhasesComparator: Comparator {
         let differentValues: [CompareResult.DifferentValues] = (0 ..< count).compactMap { index in
             let context = "Build Phase \(index + 1)"
             guard let firstDescriptor = firstDescriptors[safe: index] else {
-                if let secondDescriptor = secondDescriptors[safe: index] {
-                    return .init(context: context,
-                                 first: nil,
-                                 second: secondDescriptor.description)
-                }
-                return nil
+                return .init(context: context,
+                             first: nil,
+                             second: secondDescriptors[index].description)
             }
             guard let secondDescriptor = secondDescriptors[safe: index] else {
-                if let firstDescriptor = firstDescriptors[safe: index] {
-                    return .init(context: context,
-                                 first: firstDescriptor.description,
-                                 second: nil)
-                }
-                return nil
+                return .init(context: context,
+                             first: firstDescriptors[index].description,
+                             second: nil)
             }
             guard firstDescriptor == secondDescriptor else {
                 return .init(context: context,

@@ -20,6 +20,8 @@ import XcodeProj
 final class PBXBuildPhaseBuilder {
     private var buildFiles: [PBXBuildFile] = []
     private var objects: [PBXObject] = []
+    private var inputFileListPaths: [String]?
+    private var outputFileListPaths: [String]?
     private let type: BuildPhase
 
     init(type: BuildPhase) {
@@ -33,6 +35,18 @@ final class PBXBuildPhaseBuilder {
         let (buildFile, buildFileObjects) = builder.build()
         buildFiles.append(buildFile)
         objects.append(contentsOf: buildFileObjects)
+        return self
+    }
+
+    @discardableResult
+    func setInputFileListPaths(_ paths: [String]) -> PBXBuildPhaseBuilder {
+        inputFileListPaths = paths
+        return self
+    }
+
+    @discardableResult
+    func setOutputFileListPaths(_ paths: [String]) -> PBXBuildPhaseBuilder {
+        outputFileListPaths = paths
         return self
     }
 
@@ -55,6 +69,8 @@ final class PBXBuildPhaseBuilder {
                                                 runOnlyForDeploymentPostprocessing: copyBuildPhase
                                                     .runOnlyForDeploymentPostprocessing)
         }
+        buildPhase.inputFileListPaths = inputFileListPaths
+        buildPhase.outputFileListPaths = outputFileListPaths
         return (buildPhase, objects + [buildPhase])
     }
 }
