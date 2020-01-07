@@ -43,6 +43,7 @@ enum BuildPhase {
     case sources
     case frameworks
     case resources
+    case shellScripts
     case copyFiles(CopyFilesBuildPhase)
     case headers
 }

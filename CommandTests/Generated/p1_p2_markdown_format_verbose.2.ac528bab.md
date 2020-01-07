@@ -43,23 +43,15 @@
 ## ❌ BUILD_PHASES > "MismatchingLibrary" target
 
 
-### ⚠️  Value mismatch (4):
+### ⚠️  Only in first (1):
 
-  - `Build Phase 1`
-    - `name = Sources, type = Sources, runOnlyForDeploymentPostprocessing = false`
-    - `name = Headers, type = Headers, runOnlyForDeploymentPostprocessing = false`
+  - `CopyFiles`
 
-  - `Build Phase 2`
-    - `name = Frameworks, type = Frameworks, runOnlyForDeploymentPostprocessing = false`
-    - `name = Sources, type = Sources, runOnlyForDeploymentPostprocessing = false`
 
-  - `Build Phase 3`
-    - `name = CopyFiles, type = CopyFiles, runOnlyForDeploymentPostprocessing = false`
-    - `name = Frameworks, type = Frameworks, runOnlyForDeploymentPostprocessing = false`
+### ⚠️  Only in second (2):
 
-  - `Build Phase 4`
-    - `nil`
-    - `name = Resources, type = Resources, runOnlyForDeploymentPostprocessing = false`
+  - `Headers`
+  - `Resources`
 
 
 

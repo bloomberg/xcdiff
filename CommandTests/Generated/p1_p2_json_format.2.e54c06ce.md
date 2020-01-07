@@ -46,32 +46,14 @@
       "\"MismatchingLibrary\" target"
     ],
     "differentValues" : [
-      {
-        "context" : "Build Phase 1",
-        "first" : "name = Sources, type = Sources, runOnlyForDeploymentPostprocessing = false",
-        "second" : "name = Headers, type = Headers, runOnlyForDeploymentPostprocessing = false"
-      },
-      {
-        "context" : "Build Phase 2",
-        "first" : "name = Frameworks, type = Frameworks, runOnlyForDeploymentPostprocessing = false",
-        "second" : "name = Sources, type = Sources, runOnlyForDeploymentPostprocessing = false"
-      },
-      {
-        "context" : "Build Phase 3",
-        "first" : "name = CopyFiles, type = CopyFiles, runOnlyForDeploymentPostprocessing = false",
-        "second" : "name = Frameworks, type = Frameworks, runOnlyForDeploymentPostprocessing = false"
-      },
-      {
-        "context" : "Build Phase 4",
-        "first" : "nil",
-        "second" : "name = Resources, type = Resources, runOnlyForDeploymentPostprocessing = false"
-      }
+
     ],
     "onlyInFirst" : [
-
+      "CopyFiles"
     ],
     "onlyInSecond" : [
-
+      "Headers",
+      "Resources"
     ],
     "tag" : "build_phases"
   },
