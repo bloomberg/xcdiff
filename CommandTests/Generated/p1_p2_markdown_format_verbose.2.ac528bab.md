@@ -40,6 +40,33 @@
 
 
 
+## ❌ BUILD_PHASES > "MismatchingLibrary" target
+
+
+### ⚠️  Only in first (1):
+
+  - `CopyFiles`
+
+
+### ⚠️  Only in second (2):
+
+  - `Headers`
+  - `Resources`
+
+
+
+## ✅ BUILD_PHASES > "Project" target
+
+
+## ✅ BUILD_PHASES > "ProjectFramework" target
+
+
+## ✅ BUILD_PHASES > "ProjectTests" target
+
+
+## ✅ BUILD_PHASES > "ProjectUITests" target
+
+
 ## ❌ TARGETS > NATIVE targets
 
 

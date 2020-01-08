@@ -20,23 +20,23 @@ import XcodeProj
 
 typealias TargetPair = (first: PBXTarget, second: PBXTarget)
 
-struct SourceDescriptor: Equatable, Hashable {
+struct SourceDescriptor: Hashable {
     let path: String
     let flags: String?
 }
 
-struct HeaderDescriptor: Equatable, Hashable {
+struct HeaderDescriptor: Hashable {
     let path: String
     let attributes: String?
 }
 
-struct DependencyDescriptor: Equatable, Hashable {
+struct DependencyDescriptor: Hashable {
     let name: String?
     let path: String?
     let type: DependencyDescriptorType
 }
 
-struct EmbeddedFrameworksDescriptor: Equatable, Hashable {
+struct EmbeddedFrameworksDescriptor: Hashable {
     let path: String
     let codeSignOnCopy: Bool
 }
@@ -160,6 +160,8 @@ final class TargetsHelper {
             return nil
         }
     }
+
+    // MARK: - Private
 
     private func codeSignAttributes(for file: PBXBuildFile) -> Bool {
         guard let settings = file.settings else {

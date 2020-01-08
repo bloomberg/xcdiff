@@ -43,6 +43,82 @@
   },
   {
     "context" : [
+      "\"MismatchingLibrary\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+      "CopyFiles"
+    ],
+    "onlyInSecond" : [
+      "Headers",
+      "Resources"
+    ],
+    "tag" : "build_phases"
+  },
+  {
+    "context" : [
+      "\"Project\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "build_phases"
+  },
+  {
+    "context" : [
+      "\"ProjectFramework\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "build_phases"
+  },
+  {
+    "context" : [
+      "\"ProjectTests\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "build_phases"
+  },
+  {
+    "context" : [
+      "\"ProjectUITests\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "build_phases"
+  },
+  {
+    "context" : [
       "NATIVE targets"
     ],
     "differentValues" : [

@@ -43,6 +43,21 @@
   },
   {
     "context" : [
+      "\"Project\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "build_phases"
+  },
+  {
+    "context" : [
       "NATIVE targets"
     ],
     "differentValues" : [

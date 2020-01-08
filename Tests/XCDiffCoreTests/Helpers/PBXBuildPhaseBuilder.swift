@@ -18,8 +18,11 @@ import Foundation
 import XcodeProj
 
 final class PBXBuildPhaseBuilder {
+    private var name: String?
     private var buildFiles: [PBXBuildFile] = []
     private var objects: [PBXObject] = []
+    private var inputFileListPaths: [String]?
+    private var outputFileListPaths: [String]?
     private let type: BuildPhase
 
     init(type: BuildPhase) {
@@ -36,6 +39,24 @@ final class PBXBuildPhaseBuilder {
         return self
     }
 
+    @discardableResult
+    func setName(_ name: String) -> PBXBuildPhaseBuilder {
+        self.name = name
+        return self
+    }
+
+    @discardableResult
+    func setInputFileListPaths(_ paths: [String]) -> PBXBuildPhaseBuilder {
+        inputFileListPaths = paths
+        return self
+    }
+
+    @discardableResult
+    func setOutputFileListPaths(_ paths: [String]) -> PBXBuildPhaseBuilder {
+        outputFileListPaths = paths
+        return self
+    }
+
     func build() -> (PBXBuildPhase, [PBXObject]) {
         let buildPhase: PBXBuildPhase
         switch type {
@@ -47,10 +68,33 @@ final class PBXBuildPhaseBuilder {
             buildPhase = PBXHeadersBuildPhase(files: buildFiles)
         case .frameworks:
             buildPhase = PBXFrameworksBuildPhase(files: buildFiles)
-        case .embedFrameworks:
-            buildPhase = PBXCopyFilesBuildPhase(dstSubfolderSpec: .frameworks,
-                                                files: buildFiles)
+        case .shellScripts:
+            buildPhase = PBXShellScriptBuildPhase(files: buildFiles, name: name)
+        case let .copyFiles(copyBuildPhase):
+            buildPhase = PBXCopyFilesBuildPhase(dstPath: copyBuildPhase.dstPath,
+                                                dstSubfolderSpec: .from(copyBuildPhase.dskSubfolderSpec),
+                                                name: copyBuildPhase.name,
+                                                files: buildFiles,
+                                                runOnlyForDeploymentPostprocessing: copyBuildPhase
+                                                    .runOnlyForDeploymentPostprocessing)
         }
+        buildPhase.inputFileListPaths = inputFileListPaths
+        buildPhase.outputFileListPaths = outputFileListPaths
         return (buildPhase, objects + [buildPhase])
+    }
+}
+
+private extension PBXCopyFilesBuildPhase.SubFolder {
+    static func from(_ spec: DskSubfolderSpec?) -> PBXCopyFilesBuildPhase.SubFolder? {
+        return spec.map {
+            switch $0 {
+            case .frameworks:
+                return .frameworks
+            case .plugins:
+                return .plugins
+            case .resources:
+                return .resources
+            }
+        }
     }
 }

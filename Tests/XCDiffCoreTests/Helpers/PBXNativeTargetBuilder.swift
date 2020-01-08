@@ -23,12 +23,29 @@ struct PBXNativeTargetPrototype {
     let fileElements: [PBXFileElement] // need to be added to the main group
 }
 
-public enum BuildPhase: String {
-    case sources = "Sources"
-    case frameworks = "Frameworks"
-    case resources = "Resources"
-    case embedFrameworks = "EmbedFrameworks"
-    case headers = "Headers"
+enum DskSubfolderSpec {
+    case frameworks
+    case plugins
+    case resources
+}
+
+struct CopyFilesBuildPhase {
+    static let frameworks = CopyFilesBuildPhase(dskSubfolderSpec: .frameworks)
+    static let plugins = CopyFilesBuildPhase(dskSubfolderSpec: .plugins)
+
+    var name: String?
+    var runOnlyForDeploymentPostprocessing: Bool = false
+    var dskSubfolderSpec: DskSubfolderSpec?
+    var dstPath: String?
+}
+
+enum BuildPhase {
+    case sources
+    case frameworks
+    case resources
+    case shellScripts
+    case copyFiles(CopyFilesBuildPhase)
+    case headers
 }
 
 final class PBXNativeTargetBuilder {
@@ -176,7 +193,7 @@ final class PBXNativeTargetBuilder {
 
     @discardableResult
     func addEmbeddedFrameworks(_ embeddedFrameworks: [EmbeddedFrameworksData]) -> PBXNativeTargetBuilder {
-        addBuildPhase(.embedFrameworks) { buildPhaseBuilder in
+        addBuildPhase(.copyFiles(.frameworks)) { buildPhaseBuilder in
             embeddedFrameworks.forEach { embeddedFramework in
                 buildPhaseBuilder.addBuildFile { buildFileBuilder in
                     buildFileBuilder.setPath(embeddedFramework.path)
