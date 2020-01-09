@@ -23,10 +23,12 @@ final class PBXBuildPhaseBuilder {
     private var objects: [PBXObject] = []
     private var inputFileListPaths: [String]?
     private var outputFileListPaths: [String]?
+    private var runOnlyForDeploymentPostprocessing: Bool
     private let type: BuildPhase
 
     init(type: BuildPhase) {
         self.type = type
+        runOnlyForDeploymentPostprocessing = false
     }
 
     @discardableResult
@@ -57,6 +59,12 @@ final class PBXBuildPhaseBuilder {
         return self
     }
 
+    @discardableResult
+    func setRunOnlyForDeploymentPostprocessing(_ value: Bool) -> PBXBuildPhaseBuilder {
+        runOnlyForDeploymentPostprocessing = value
+        return self
+    }
+
     func build() -> (PBXBuildPhase, [PBXObject]) {
         let buildPhase: PBXBuildPhase
         switch type {
@@ -72,20 +80,19 @@ final class PBXBuildPhaseBuilder {
             buildPhase = PBXShellScriptBuildPhase(files: buildFiles, name: name)
         case let .copyFiles(copyBuildPhase):
             buildPhase = PBXCopyFilesBuildPhase(dstPath: copyBuildPhase.dstPath,
-                                                dstSubfolderSpec: .from(copyBuildPhase.dskSubfolderSpec),
+                                                dstSubfolderSpec: .from(copyBuildPhase.dstSubfolderSpec),
                                                 name: copyBuildPhase.name,
-                                                files: buildFiles,
-                                                runOnlyForDeploymentPostprocessing: copyBuildPhase
-                                                    .runOnlyForDeploymentPostprocessing)
+                                                files: buildFiles)
         }
         buildPhase.inputFileListPaths = inputFileListPaths
         buildPhase.outputFileListPaths = outputFileListPaths
+        buildPhase.runOnlyForDeploymentPostprocessing = runOnlyForDeploymentPostprocessing
         return (buildPhase, objects + [buildPhase])
     }
 }
 
 private extension PBXCopyFilesBuildPhase.SubFolder {
-    static func from(_ spec: DskSubfolderSpec?) -> PBXCopyFilesBuildPhase.SubFolder? {
+    static func from(_ spec: DstSubfolderSpec?) -> PBXCopyFilesBuildPhase.SubFolder? {
         return spec.map {
             switch $0 {
             case .frameworks:

@@ -53,6 +53,11 @@ final class CommandsRunnerTests: XCTestCase {
         ✅ BUILD_PHASES > "ProjectFramework" target
         ✅ BUILD_PHASES > "ProjectTests" target
         ✅ BUILD_PHASES > "ProjectUITests" target
+        ✅ COPY_FILES > "MismatchingLibrary" target > CopyFiles
+        ✅ COPY_FILES > "Project" target > Embed Frameworks
+        ✅ COPY_FILES > "ProjectFramework" target
+        ✅ COPY_FILES > "ProjectTests" target
+        ✅ COPY_FILES > "ProjectUITests" target
         ✅ TARGETS > NATIVE targets
         ✅ TARGETS > AGGREGATE targets
         ✅ HEADERS > "MismatchingLibrary" target

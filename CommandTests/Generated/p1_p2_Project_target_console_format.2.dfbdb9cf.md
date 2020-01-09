@@ -10,6 +10,7 @@
 ```
 ❌ FILE_REFERENCES
 ✅ BUILD_PHASES > "Project" target
+❌ COPY_FILES > "Project" target > Embed Frameworks
 ✅ TARGETS > NATIVE targets
 ✅ TARGETS > AGGREGATE targets
 ✅ HEADERS > "Project" target

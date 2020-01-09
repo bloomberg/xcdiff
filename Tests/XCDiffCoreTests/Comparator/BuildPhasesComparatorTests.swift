@@ -309,16 +309,18 @@ final class BuildPhasesComparatorTests: XCTestCase {
         // Given
         let first = project()
             .addTarget(name: "Target1", productType: .application) { target in
-                let copyBuildPhase = CopyFilesBuildPhase(runOnlyForDeploymentPostprocessing: true,
-                                                         dskSubfolderSpec: .plugins)
-                target.addBuildPhase(.copyFiles(copyBuildPhase)) { _ in }
+                let copyBuildPhase = CopyFilesBuildPhase(dstSubfolderSpec: .plugins)
+                target.addBuildPhase(.copyFiles(copyBuildPhase)) { buildPhase in
+                    buildPhase.setRunOnlyForDeploymentPostprocessing(true)
+                }
             }
             .projectDescriptor()
         let second = project()
             .addTarget(name: "Target1", productType: .application) { target in
-                let copyBuildPhase = CopyFilesBuildPhase(runOnlyForDeploymentPostprocessing: false,
-                                                         dskSubfolderSpec: .plugins)
-                target.addBuildPhase(.copyFiles(copyBuildPhase)) { _ in }
+                let copyBuildPhase = CopyFilesBuildPhase(dstSubfolderSpec: .plugins)
+                target.addBuildPhase(.copyFiles(copyBuildPhase)) { buildPhase in
+                    buildPhase.setRunOnlyForDeploymentPostprocessing(false)
+                }
             }
             .projectDescriptor()
 

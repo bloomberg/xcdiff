@@ -166,10 +166,10 @@ private struct BuildPhaseDescriptor: Equatable {
             elements.append("runOnlyForDeploymentPostprocessing = \(runOnlyForDeploymentPostprocessing)")
         }
         if inputFileListPaths != second.inputFileListPaths {
-            elements.append("inputFileListPaths = \(inputFileListPaths?.description ?? "nil")")
+            elements.append("inputFileListPaths = \(describe(inputFileListPaths?.description))")
         }
         if outputFileListPaths != second.outputFileListPaths {
-            elements.append("outputFileListPaths = \(outputFileListPaths?.description ?? "nil")")
+            elements.append("outputFileListPaths = \(describe(outputFileListPaths?.description))")
         }
         return elements.joined(separator: ", ")
     }

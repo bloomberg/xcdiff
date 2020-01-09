@@ -58,6 +58,27 @@
   },
   {
     "context" : [
+      "\"Project\" target",
+      "Embed Frameworks"
+    ],
+    "differentValues" : [
+      {
+        "context" : "ProjectFramework.framework",
+        "first" : "attributes = [\"CodeSignOnCopy\", \"RemoveHeadersOnCopy\"]",
+        "second" : "attributes = []"
+      }
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "MismatchingLibrary.framework",
+      "NewFramework.framework"
+    ],
+    "tag" : "copy_files"
+  },
+  {
+    "context" : [
       "NATIVE targets"
     ],
     "differentValues" : [

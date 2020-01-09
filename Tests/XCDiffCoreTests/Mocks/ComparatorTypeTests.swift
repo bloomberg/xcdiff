@@ -24,6 +24,7 @@ final class ComperatorTypeTests: XCTestCase {
         XCTAssertEqual([ComparatorType].allAvailableComparators.map { $0.tag }, [
             "file_references",
             "build_phases",
+            "copy_files",
             "targets",
             "headers",
             "sources",

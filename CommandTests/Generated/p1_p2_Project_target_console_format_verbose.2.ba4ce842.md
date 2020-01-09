@@ -38,6 +38,21 @@
 
 
 ✅ BUILD_PHASES > "Project" target
+❌ COPY_FILES > "Project" target > Embed Frameworks
+
+⚠️  Only in second (2):
+
+  • MismatchingLibrary.framework
+  • NewFramework.framework
+
+
+⚠️  Value mismatch (1):
+
+  • ProjectFramework.framework
+    ◦ attributes = ["CodeSignOnCopy", "RemoveHeadersOnCopy"]
+    ◦ attributes = []
+
+
 ✅ TARGETS > NATIVE targets
 ✅ TARGETS > AGGREGATE targets
 ✅ HEADERS > "Project" target

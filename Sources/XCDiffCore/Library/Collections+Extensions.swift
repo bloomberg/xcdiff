@@ -40,8 +40,12 @@ extension Array where Element == String {
     }
 }
 
-extension Collection {
-    subscript(safe index: Index) -> Element? {
-        return indices.contains(index) ? self[index] : nil
+extension Array {
+    subscript(safe index: Int) -> Element? {
+        guard index >= 0, index < endIndex else {
+            return nil
+        }
+
+        return self[index]
     }
 }

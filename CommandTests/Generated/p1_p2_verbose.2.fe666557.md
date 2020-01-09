@@ -54,6 +54,25 @@
 ✅ BUILD_PHASES > "ProjectFramework" target
 ✅ BUILD_PHASES > "ProjectTests" target
 ✅ BUILD_PHASES > "ProjectUITests" target
+✅ COPY_FILES > "MismatchingLibrary" target
+❌ COPY_FILES > "Project" target > Embed Frameworks
+
+⚠️  Only in second (2):
+
+  • MismatchingLibrary.framework
+  • NewFramework.framework
+
+
+⚠️  Value mismatch (1):
+
+  • ProjectFramework.framework
+    ◦ attributes = ["CodeSignOnCopy", "RemoveHeadersOnCopy"]
+    ◦ attributes = []
+
+
+✅ COPY_FILES > "ProjectFramework" target
+✅ COPY_FILES > "ProjectTests" target
+✅ COPY_FILES > "ProjectUITests" target
 ❌ TARGETS > NATIVE targets
 
 ⚠️  Only in second (1):

@@ -23,19 +23,18 @@ struct PBXNativeTargetPrototype {
     let fileElements: [PBXFileElement] // need to be added to the main group
 }
 
-enum DskSubfolderSpec {
+enum DstSubfolderSpec {
     case frameworks
     case plugins
     case resources
 }
 
 struct CopyFilesBuildPhase {
-    static let frameworks = CopyFilesBuildPhase(dskSubfolderSpec: .frameworks)
-    static let plugins = CopyFilesBuildPhase(dskSubfolderSpec: .plugins)
+    static let frameworks = CopyFilesBuildPhase(dstSubfolderSpec: .frameworks)
+    static let plugins = CopyFilesBuildPhase(dstSubfolderSpec: .plugins)
 
     var name: String?
-    var runOnlyForDeploymentPostprocessing: Bool = false
-    var dskSubfolderSpec: DskSubfolderSpec?
+    var dstSubfolderSpec: DstSubfolderSpec?
     var dstPath: String?
 }
 
