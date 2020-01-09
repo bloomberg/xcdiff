@@ -10,9 +10,13 @@ Compares build phases i.e. dependencies, sources, headers, to ensure all are pre
 
 Compares build configurations i.e. Debug, Release.
 
+### `copy_files`
+
+Compares copy files build phases i.e. embed frameworks, extensions
+
 ### `dependencies`
 
-Compares linked and embedded frameworks.
+Compares linked dependencies
 
 ### `file_references`
 
