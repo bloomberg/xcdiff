@@ -8,9 +8,8 @@
 
 # Expected output
 ```
-✅ DEPENDENCIES > "MismatchingLibrary" target > Linked Dependencies
-✅ DEPENDENCIES > "MismatchingLibrary" target > Embedded Frameworks
-❌ DEPENDENCIES > "Project" target > Linked Dependencies
+✅ DEPENDENCIES > "MismatchingLibrary" target
+❌ DEPENDENCIES > "Project" target
 
 ⚠️  Only in second (2):
 
@@ -25,27 +24,9 @@
     ◦ optional
 
 
-❌ DEPENDENCIES > "Project" target > Embedded Frameworks
-
-⚠️  Only in second (2):
-
-  • MismatchingLibrary.framework
-  • NewFramework.framework
-
-
-⚠️  Value mismatch (1):
-
-  • ProjectFramework.framework Code Sign on Copy
-    ◦ true
-    ◦ false
-
-
-✅ DEPENDENCIES > "ProjectFramework" target > Linked Dependencies
-✅ DEPENDENCIES > "ProjectFramework" target > Embedded Frameworks
-✅ DEPENDENCIES > "ProjectTests" target > Linked Dependencies
-✅ DEPENDENCIES > "ProjectTests" target > Embedded Frameworks
-✅ DEPENDENCIES > "ProjectUITests" target > Linked Dependencies
-✅ DEPENDENCIES > "ProjectUITests" target > Embedded Frameworks
+✅ DEPENDENCIES > "ProjectFramework" target
+✅ DEPENDENCIES > "ProjectTests" target
+✅ DEPENDENCIES > "ProjectUITests" target
 
 
 ```

@@ -984,8 +984,7 @@
   },
   {
     "context" : [
-      "\"MismatchingLibrary\" target",
-      "Linked Dependencies"
+      "\"MismatchingLibrary\" target"
     ],
     "differentValues" : [
 
@@ -1000,24 +999,7 @@
   },
   {
     "context" : [
-      "\"MismatchingLibrary\" target",
-      "Embedded Frameworks"
-    ],
-    "differentValues" : [
-
-    ],
-    "onlyInFirst" : [
-
-    ],
-    "onlyInSecond" : [
-
-    ],
-    "tag" : "dependencies"
-  },
-  {
-    "context" : [
-      "\"Project\" target",
-      "Linked Dependencies"
+      "\"Project\" target"
     ],
     "differentValues" : [
       {
@@ -1037,29 +1019,7 @@
   },
   {
     "context" : [
-      "\"Project\" target",
-      "Embedded Frameworks"
-    ],
-    "differentValues" : [
-      {
-        "context" : "ProjectFramework.framework Code Sign on Copy",
-        "first" : "true",
-        "second" : "false"
-      }
-    ],
-    "onlyInFirst" : [
-
-    ],
-    "onlyInSecond" : [
-      "MismatchingLibrary.framework",
-      "NewFramework.framework"
-    ],
-    "tag" : "dependencies"
-  },
-  {
-    "context" : [
-      "\"ProjectFramework\" target",
-      "Linked Dependencies"
+      "\"ProjectFramework\" target"
     ],
     "differentValues" : [
 
@@ -1074,8 +1034,7 @@
   },
   {
     "context" : [
-      "\"ProjectFramework\" target",
-      "Embedded Frameworks"
+      "\"ProjectTests\" target"
     ],
     "differentValues" : [
 
@@ -1090,56 +1049,7 @@
   },
   {
     "context" : [
-      "\"ProjectTests\" target",
-      "Linked Dependencies"
-    ],
-    "differentValues" : [
-
-    ],
-    "onlyInFirst" : [
-
-    ],
-    "onlyInSecond" : [
-
-    ],
-    "tag" : "dependencies"
-  },
-  {
-    "context" : [
-      "\"ProjectTests\" target",
-      "Embedded Frameworks"
-    ],
-    "differentValues" : [
-
-    ],
-    "onlyInFirst" : [
-
-    ],
-    "onlyInSecond" : [
-
-    ],
-    "tag" : "dependencies"
-  },
-  {
-    "context" : [
-      "\"ProjectUITests\" target",
-      "Linked Dependencies"
-    ],
-    "differentValues" : [
-
-    ],
-    "onlyInFirst" : [
-
-    ],
-    "onlyInSecond" : [
-
-    ],
-    "tag" : "dependencies"
-  },
-  {
-    "context" : [
-      "\"ProjectUITests\" target",
-      "Embedded Frameworks"
+      "\"ProjectUITests\" target"
     ],
     "differentValues" : [
 

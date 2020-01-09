@@ -171,34 +171,19 @@
 ## ❌ SOURCE_TREES > Root project
 
 
-## ✅ DEPENDENCIES > "MismatchingLibrary" target > Linked Dependencies
+## ✅ DEPENDENCIES > "MismatchingLibrary" target
 
 
-## ✅ DEPENDENCIES > "MismatchingLibrary" target > Embedded Frameworks
+## ❌ DEPENDENCIES > "Project" target
 
 
-## ❌ DEPENDENCIES > "Project" target > Linked Dependencies
+## ✅ DEPENDENCIES > "ProjectFramework" target
 
 
-## ❌ DEPENDENCIES > "Project" target > Embedded Frameworks
+## ✅ DEPENDENCIES > "ProjectTests" target
 
 
-## ✅ DEPENDENCIES > "ProjectFramework" target > Linked Dependencies
-
-
-## ✅ DEPENDENCIES > "ProjectFramework" target > Embedded Frameworks
-
-
-## ✅ DEPENDENCIES > "ProjectTests" target > Linked Dependencies
-
-
-## ✅ DEPENDENCIES > "ProjectTests" target > Embedded Frameworks
-
-
-## ✅ DEPENDENCIES > "ProjectUITests" target > Linked Dependencies
-
-
-## ✅ DEPENDENCIES > "ProjectUITests" target > Embedded Frameworks
+## ✅ DEPENDENCIES > "ProjectUITests" target
 
 
 
