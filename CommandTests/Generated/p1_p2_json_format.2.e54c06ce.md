@@ -119,6 +119,87 @@
   },
   {
     "context" : [
+      "\"MismatchingLibrary\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "copy_files"
+  },
+  {
+    "context" : [
+      "\"Project\" target",
+      "Embed Frameworks"
+    ],
+    "differentValues" : [
+      {
+        "context" : "ProjectFramework.framework",
+        "first" : "attributes = [\"CodeSignOnCopy\", \"RemoveHeadersOnCopy\"]",
+        "second" : "attributes = []"
+      }
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "MismatchingLibrary.framework",
+      "NewFramework.framework"
+    ],
+    "tag" : "copy_files"
+  },
+  {
+    "context" : [
+      "\"ProjectFramework\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "copy_files"
+  },
+  {
+    "context" : [
+      "\"ProjectTests\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "copy_files"
+  },
+  {
+    "context" : [
+      "\"ProjectUITests\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "copy_files"
+  },
+  {
+    "context" : [
       "NATIVE targets"
     ],
     "differentValues" : [
@@ -903,8 +984,7 @@
   },
   {
     "context" : [
-      "\"MismatchingLibrary\" target",
-      "Linked Dependencies"
+      "\"MismatchingLibrary\" target"
     ],
     "differentValues" : [
 
@@ -919,24 +999,7 @@
   },
   {
     "context" : [
-      "\"MismatchingLibrary\" target",
-      "Embedded Frameworks"
-    ],
-    "differentValues" : [
-
-    ],
-    "onlyInFirst" : [
-
-    ],
-    "onlyInSecond" : [
-
-    ],
-    "tag" : "dependencies"
-  },
-  {
-    "context" : [
-      "\"Project\" target",
-      "Linked Dependencies"
+      "\"Project\" target"
     ],
     "differentValues" : [
       {
@@ -956,29 +1019,7 @@
   },
   {
     "context" : [
-      "\"Project\" target",
-      "Embedded Frameworks"
-    ],
-    "differentValues" : [
-      {
-        "context" : "ProjectFramework.framework Code Sign on Copy",
-        "first" : "true",
-        "second" : "false"
-      }
-    ],
-    "onlyInFirst" : [
-
-    ],
-    "onlyInSecond" : [
-      "MismatchingLibrary.framework",
-      "NewFramework.framework"
-    ],
-    "tag" : "dependencies"
-  },
-  {
-    "context" : [
-      "\"ProjectFramework\" target",
-      "Linked Dependencies"
+      "\"ProjectFramework\" target"
     ],
     "differentValues" : [
 
@@ -993,8 +1034,7 @@
   },
   {
     "context" : [
-      "\"ProjectFramework\" target",
-      "Embedded Frameworks"
+      "\"ProjectTests\" target"
     ],
     "differentValues" : [
 
@@ -1009,56 +1049,7 @@
   },
   {
     "context" : [
-      "\"ProjectTests\" target",
-      "Linked Dependencies"
-    ],
-    "differentValues" : [
-
-    ],
-    "onlyInFirst" : [
-
-    ],
-    "onlyInSecond" : [
-
-    ],
-    "tag" : "dependencies"
-  },
-  {
-    "context" : [
-      "\"ProjectTests\" target",
-      "Embedded Frameworks"
-    ],
-    "differentValues" : [
-
-    ],
-    "onlyInFirst" : [
-
-    ],
-    "onlyInSecond" : [
-
-    ],
-    "tag" : "dependencies"
-  },
-  {
-    "context" : [
-      "\"ProjectUITests\" target",
-      "Linked Dependencies"
-    ],
-    "differentValues" : [
-
-    ],
-    "onlyInFirst" : [
-
-    ],
-    "onlyInSecond" : [
-
-    ],
-    "tag" : "dependencies"
-  },
-  {
-    "context" : [
-      "\"ProjectUITests\" target",
-      "Embedded Frameworks"
+      "\"ProjectUITests\" target"
     ],
     "differentValues" : [
 

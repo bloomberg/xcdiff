@@ -15,6 +15,9 @@
 ## ✅ BUILD_PHASES > "Project" target
 
 
+## ❌ COPY_FILES > "Project" target > Embed Frameworks
+
+
 ## ✅ TARGETS > NATIVE targets
 
 
@@ -60,10 +63,7 @@
 ## ❌ SOURCE_TREES > Root project
 
 
-## ❌ DEPENDENCIES > "Project" target > Linked Dependencies
-
-
-## ❌ DEPENDENCIES > "Project" target > Embedded Frameworks
+## ❌ DEPENDENCIES > "Project" target
 
 
 

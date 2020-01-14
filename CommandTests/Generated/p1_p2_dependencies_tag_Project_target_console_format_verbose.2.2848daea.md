@@ -8,7 +8,7 @@
 
 # Expected output
 ```
-❌ DEPENDENCIES > "Project" target > Linked Dependencies
+❌ DEPENDENCIES > "Project" target
 
 ⚠️  Only in second (2):
 
@@ -21,21 +21,6 @@
   • ARKit.framework attributes
     ◦ required
     ◦ optional
-
-
-❌ DEPENDENCIES > "Project" target > Embedded Frameworks
-
-⚠️  Only in second (2):
-
-  • MismatchingLibrary.framework
-  • NewFramework.framework
-
-
-⚠️  Value mismatch (1):
-
-  • ProjectFramework.framework Code Sign on Copy
-    ◦ true
-    ◦ false
 
 
 

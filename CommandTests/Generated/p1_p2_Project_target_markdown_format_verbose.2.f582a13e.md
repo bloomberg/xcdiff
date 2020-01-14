@@ -43,6 +43,23 @@
 ## ✅ BUILD_PHASES > "Project" target
 
 
+## ❌ COPY_FILES > "Project" target > Embed Frameworks
+
+
+### ⚠️  Only in second (2):
+
+  - `MismatchingLibrary.framework`
+  - `NewFramework.framework`
+
+
+### ⚠️  Value mismatch (1):
+
+  - `ProjectFramework.framework`
+    - `attributes = ["CodeSignOnCopy", "RemoveHeadersOnCopy"]`
+    - `attributes = []`
+
+
+
 ## ✅ TARGETS > NATIVE targets
 
 
@@ -197,7 +214,7 @@ Output format: (<path>, <name>, <source_tree>)
 
 
 
-## ❌ DEPENDENCIES > "Project" target > Linked Dependencies
+## ❌ DEPENDENCIES > "Project" target
 
 
 ### ⚠️  Only in second (2):
@@ -211,23 +228,6 @@ Output format: (<path>, <name>, <source_tree>)
   - `ARKit.framework attributes`
     - `required`
     - `optional`
-
-
-
-## ❌ DEPENDENCIES > "Project" target > Embedded Frameworks
-
-
-### ⚠️  Only in second (2):
-
-  - `MismatchingLibrary.framework`
-  - `NewFramework.framework`
-
-
-### ⚠️  Value mismatch (1):
-
-  - `ProjectFramework.framework Code Sign on Copy`
-    - `true`
-    - `false`
 
 
 

@@ -57,15 +57,4 @@ class SettingValueComparator: ValueComparator {
         let settingValuesDifference = stringDiff.diff(lha, rha)
         return projectNameDifference == settingValuesDifference
     }
-
-    func removeMultipleOccurences(of token: String, in value: String) -> String {
-        guard let firstSubstringRange = value.range(of: token) else {
-            return value
-        }
-
-        return value.replacingOccurrences(of: token,
-                                          with: "",
-                                          options: [],
-                                          range: firstSubstringRange.upperBound ..< value.endIndex)
-    }
 }

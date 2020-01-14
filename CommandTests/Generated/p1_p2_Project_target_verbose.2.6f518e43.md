@@ -38,6 +38,21 @@
 
 
 ✅ BUILD_PHASES > "Project" target
+❌ COPY_FILES > "Project" target > Embed Frameworks
+
+⚠️  Only in second (2):
+
+  • MismatchingLibrary.framework
+  • NewFramework.framework
+
+
+⚠️  Value mismatch (1):
+
+  • ProjectFramework.framework
+    ◦ attributes = ["CodeSignOnCopy", "RemoveHeadersOnCopy"]
+    ◦ attributes = []
+
+
 ✅ TARGETS > NATIVE targets
 ✅ TARGETS > AGGREGATE targets
 ✅ HEADERS > "Project" target
@@ -162,7 +177,7 @@ Output format: (<path>, <name>, <source_tree>)
   • (Target.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)
 
 
-❌ DEPENDENCIES > "Project" target > Linked Dependencies
+❌ DEPENDENCIES > "Project" target
 
 ⚠️  Only in second (2):
 
@@ -175,21 +190,6 @@ Output format: (<path>, <name>, <source_tree>)
   • ARKit.framework attributes
     ◦ required
     ◦ optional
-
-
-❌ DEPENDENCIES > "Project" target > Embedded Frameworks
-
-⚠️  Only in second (2):
-
-  • MismatchingLibrary.framework
-  • NewFramework.framework
-
-
-⚠️  Value mismatch (1):
-
-  • ProjectFramework.framework Code Sign on Copy
-    ◦ true
-    ◦ false
 
 
 

@@ -27,6 +27,21 @@
 ## ✅ BUILD_PHASES > "ProjectUITests" target
 
 
+## ✅ COPY_FILES > "MismatchingLibrary" target
+
+
+## ❌ COPY_FILES > "Project" target > Embed Frameworks
+
+
+## ✅ COPY_FILES > "ProjectFramework" target
+
+
+## ✅ COPY_FILES > "ProjectTests" target
+
+
+## ✅ COPY_FILES > "ProjectUITests" target
+
+
 ## ❌ TARGETS > NATIVE targets
 
 
@@ -156,34 +171,19 @@
 ## ❌ SOURCE_TREES > Root project
 
 
-## ✅ DEPENDENCIES > "MismatchingLibrary" target > Linked Dependencies
+## ✅ DEPENDENCIES > "MismatchingLibrary" target
 
 
-## ✅ DEPENDENCIES > "MismatchingLibrary" target > Embedded Frameworks
+## ❌ DEPENDENCIES > "Project" target
 
 
-## ❌ DEPENDENCIES > "Project" target > Linked Dependencies
+## ✅ DEPENDENCIES > "ProjectFramework" target
 
 
-## ❌ DEPENDENCIES > "Project" target > Embedded Frameworks
+## ✅ DEPENDENCIES > "ProjectTests" target
 
 
-## ✅ DEPENDENCIES > "ProjectFramework" target > Linked Dependencies
-
-
-## ✅ DEPENDENCIES > "ProjectFramework" target > Embedded Frameworks
-
-
-## ✅ DEPENDENCIES > "ProjectTests" target > Linked Dependencies
-
-
-## ✅ DEPENDENCIES > "ProjectTests" target > Embedded Frameworks
-
-
-## ✅ DEPENDENCIES > "ProjectUITests" target > Linked Dependencies
-
-
-## ✅ DEPENDENCIES > "ProjectUITests" target > Embedded Frameworks
+## ✅ DEPENDENCIES > "ProjectUITests" target
 
 
 

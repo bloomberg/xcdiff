@@ -34,3 +34,7 @@ extension String {
         return (self, nil)
     }
 }
+
+func describe<T: CustomStringConvertible>(_ value: T?) -> String {
+    return value?.description ?? "nil"
+}

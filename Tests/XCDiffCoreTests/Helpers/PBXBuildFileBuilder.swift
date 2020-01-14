@@ -20,6 +20,7 @@ final class PBXBuildFileBuilder {
     private var sourceTree: PBXSourceTree = .absolute
     private var path: String?
     private var name: String?
+    private var platformFilter: String?
     private var settings: [String: Any]?
 
     @discardableResult
@@ -52,11 +53,18 @@ final class PBXBuildFileBuilder {
         return self
     }
 
+    @discardableResult
+    func setPlatformFilter(_ platformFilter: String?) -> PBXBuildFileBuilder {
+        self.platformFilter = platformFilter
+        return self
+    }
+
     func build() -> (PBXBuildFile, [PBXObject]) {
         let fileReference = PBXFileReference(sourceTree: sourceTree,
                                              name: name,
                                              path: path)
         let buildFile = PBXBuildFile(file: fileReference, settings: settings)
+        buildFile.platformFilter = platformFilter
         let objects: [PBXObject] = [buildFile, fileReference]
         return (buildFile, objects)
     }

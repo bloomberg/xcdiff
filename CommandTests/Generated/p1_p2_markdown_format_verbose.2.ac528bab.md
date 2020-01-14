@@ -67,6 +67,35 @@
 ## ✅ BUILD_PHASES > "ProjectUITests" target
 
 
+## ✅ COPY_FILES > "MismatchingLibrary" target
+
+
+## ❌ COPY_FILES > "Project" target > Embed Frameworks
+
+
+### ⚠️  Only in second (2):
+
+  - `MismatchingLibrary.framework`
+  - `NewFramework.framework`
+
+
+### ⚠️  Value mismatch (1):
+
+  - `ProjectFramework.framework`
+    - `attributes = ["CodeSignOnCopy", "RemoveHeadersOnCopy"]`
+    - `attributes = []`
+
+
+
+## ✅ COPY_FILES > "ProjectFramework" target
+
+
+## ✅ COPY_FILES > "ProjectTests" target
+
+
+## ✅ COPY_FILES > "ProjectUITests" target
+
+
 ## ❌ TARGETS > NATIVE targets
 
 
@@ -451,13 +480,10 @@ Output format: (<path>, <name>, <source_tree>)
 
 
 
-## ✅ DEPENDENCIES > "MismatchingLibrary" target > Linked Dependencies
+## ✅ DEPENDENCIES > "MismatchingLibrary" target
 
 
-## ✅ DEPENDENCIES > "MismatchingLibrary" target > Embedded Frameworks
-
-
-## ❌ DEPENDENCIES > "Project" target > Linked Dependencies
+## ❌ DEPENDENCIES > "Project" target
 
 
 ### ⚠️  Only in second (2):
@@ -474,39 +500,13 @@ Output format: (<path>, <name>, <source_tree>)
 
 
 
-## ❌ DEPENDENCIES > "Project" target > Embedded Frameworks
+## ✅ DEPENDENCIES > "ProjectFramework" target
 
 
-### ⚠️  Only in second (2):
-
-  - `MismatchingLibrary.framework`
-  - `NewFramework.framework`
+## ✅ DEPENDENCIES > "ProjectTests" target
 
 
-### ⚠️  Value mismatch (1):
-
-  - `ProjectFramework.framework Code Sign on Copy`
-    - `true`
-    - `false`
-
-
-
-## ✅ DEPENDENCIES > "ProjectFramework" target > Linked Dependencies
-
-
-## ✅ DEPENDENCIES > "ProjectFramework" target > Embedded Frameworks
-
-
-## ✅ DEPENDENCIES > "ProjectTests" target > Linked Dependencies
-
-
-## ✅ DEPENDENCIES > "ProjectTests" target > Embedded Frameworks
-
-
-## ✅ DEPENDENCIES > "ProjectUITests" target > Linked Dependencies
-
-
-## ✅ DEPENDENCIES > "ProjectUITests" target > Embedded Frameworks
+## ✅ DEPENDENCIES > "ProjectUITests" target
 
 
 

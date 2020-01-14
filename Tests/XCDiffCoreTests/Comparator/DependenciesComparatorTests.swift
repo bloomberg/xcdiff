@@ -124,19 +124,17 @@ final class DependenciesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
-                                              context: ["\"T1\" target", "Linked Dependencies"],
+                                              context: ["\"T1\" target"],
                                               description: nil,
                                               onlyInFirst: ["Test1.framework"],
                                               onlyInSecond: ["Test2.framework"],
                                               differentValues: []),
-                                noDifferenceEmbeddedFrameworks(target: "T1"),
                                 CompareResult(tag: "dependencies",
-                                              context: ["\"T2\" target", "Linked Dependencies"],
+                                              context: ["\"T2\" target"],
                                               description: nil,
                                               onlyInFirst: [],
                                               onlyInSecond: [],
-                                              differentValues: []),
-                                noDifferenceEmbeddedFrameworks(target: "T2")])
+                                              differentValues: [])])
     }
 
     func testCompare_whenTwoDifferentDependenciesSameTarget() throws {
@@ -168,12 +166,11 @@ final class DependenciesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
-                                              context: ["\"T1\" target", "Linked Dependencies"],
+                                              context: ["\"T1\" target"],
                                               description: nil,
                                               onlyInFirst: ["Test100.framework", "Test101.framework"],
                                               onlyInSecond: ["Test200.framework", "Test201.framework"],
-                                              differentValues: []),
-                                noDifferenceEmbeddedFrameworks(target: "T1")])
+                                              differentValues: [])])
     }
 
     func testCompare_whenSingleDifferentDependencyType() throws {
@@ -203,7 +200,7 @@ final class DependenciesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
-                                              context: ["\"T1\" target", "Linked Dependencies"],
+                                              context: ["\"T1\" target"],
                                               description: nil,
                                               onlyInFirst: [],
                                               onlyInSecond: [],
@@ -212,14 +209,12 @@ final class DependenciesComparatorTests: XCTestCase {
                                                                                 first: "optional",
                                                                                 second: "required"),
                                               ]),
-                                noDifferenceEmbeddedFrameworks(target: "T1"),
                                 CompareResult(tag: "dependencies",
-                                              context: ["\"T2\" target", "Linked Dependencies"],
+                                              context: ["\"T2\" target"],
                                               description: nil,
                                               onlyInFirst: [],
                                               onlyInSecond: [],
-                                              differentValues: []),
-                                noDifferenceEmbeddedFrameworks(target: "T2")])
+                                              differentValues: [])])
     }
 
     func testCompare_whenSingleDifferentDependencyName() throws {
@@ -242,12 +237,11 @@ final class DependenciesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
-                                              context: ["\"T1\" target", "Linked Dependencies"],
+                                              context: ["\"T1\" target"],
                                               description: nil,
                                               onlyInFirst: ["Test1.framework"],
                                               onlyInSecond: ["Test2.framework"],
-                                              differentValues: []),
-                                noDifferenceEmbeddedFrameworks(target: "T1")])
+                                              differentValues: [])])
     }
 
     func testCompare_whenSingleSameDependencyNameDifferentType() throws {
@@ -271,7 +265,7 @@ final class DependenciesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
-                                              context: ["\"T1\" target", "Linked Dependencies"],
+                                              context: ["\"T1\" target"],
                                               description: nil,
                                               onlyInFirst: [],
                                               onlyInSecond: [],
@@ -279,8 +273,7 @@ final class DependenciesComparatorTests: XCTestCase {
                                                   CompareResult.DifferentValues(context: "Test1.framework attributes",
                                                                                 first: "optional",
                                                                                 second: "required"),
-                                              ]),
-                                noDifferenceEmbeddedFrameworks(target: "T1")])
+                                              ])])
     }
 
     func testCompare_whenAllSameDependenciesMixedNamesAndPaths() throws {
@@ -362,79 +355,8 @@ final class DependenciesComparatorTests: XCTestCase {
                                          parameters: .all)
 
         // Then
-        XCTAssertEqual(actual, [noDifferenceLinkedDependencies(target: "T1"),
-                                CompareResult(tag: "dependencies",
-                                              context: ["\"T1\" target"] + ["Embedded Frameworks"],
-                                              description: nil,
-                                              onlyInFirst: ["Test1.framework"],
-                                              onlyInSecond: ["Test2.framework"],
-                                              differentValues: [])])
-    }
-
-    func testCompare_whenDifferentEmbeddedFrameworksCodeSignOnCopy() throws {
-        // Given
-        let first = project(name: "P1")
-            .addTarget(name: "T1") {
-                $0.addEmbeddedFrameworks([EmbeddedFrameworksData(path: "Test1.framework",
-                                                                 settings: ["ATTRIBUTES": []])])
-            }
-            .projectDescriptor()
-
-        let second = project(name: "P2")
-            .addTarget(name: "T1") {
-                $0.addEmbeddedFrameworks([EmbeddedFrameworksData(path: "Test1.framework",
-                                                                 settings: ["ATTRIBUTES": ["CodeSignOnCopy"]])])
-            }
-            .projectDescriptor()
-
-        // When
-        let actual = try subject.compare(first,
-                                         second,
-                                         parameters: .all)
-
-        // Then
-        XCTAssertEqual(actual, [noDifferenceLinkedDependencies(target: "T1"),
-                                CompareResult(tag: "dependencies",
-                                              context: ["\"T1\" target", "Embedded Frameworks"],
-                                              description: nil,
-                                              onlyInFirst: [],
-                                              onlyInSecond: [],
-                                              differentValues: [.init(context: "Test1.framework Code Sign on Copy",
-                                                                      first: "false",
-                                                                      second: "true")])])
-    }
-
-    func testCompare_whenDifferentEmbeddedFrameworks_missingCodeSignOnCopy() throws {
-        // Given
-        let first = project(name: "P1")
-            .addTarget(name: "T1") {
-                $0.addEmbeddedFrameworks([EmbeddedFrameworksData(path: "Test1.framework",
-                                                                 settings: nil)])
-            }
-            .projectDescriptor()
-
-        let second = project(name: "P2")
-            .addTarget(name: "T1") {
-                $0.addEmbeddedFrameworks([EmbeddedFrameworksData(path: "Test1.framework",
-                                                                 settings: ["ATTRIBUTES": ["CodeSignOnCopy"]])])
-            }
-            .projectDescriptor()
-
-        // When
-        let actual = try subject.compare(first,
-                                         second,
-                                         parameters: .all)
-
-        // Then
-        XCTAssertEqual(actual, [noDifferenceLinkedDependencies(target: "T1"),
-                                CompareResult(tag: "dependencies",
-                                              context: ["\"T1\" target", "Embedded Frameworks"],
-                                              description: nil,
-                                              onlyInFirst: [],
-                                              onlyInSecond: [],
-                                              differentValues: [.init(context: "Test1.framework Code Sign on Copy",
-                                                                      first: "false",
-                                                                      second: "true")])])
+        XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
+                                              context: ["\"T1\" target"])])
     }
 
     func testCompare_whenDifferentLinkedDependenciesAndEmbeddedFrameworks() throws {
@@ -462,42 +384,19 @@ final class DependenciesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
-                                              context: ["\"T1\" target", "Linked Dependencies"],
+                                              context: ["\"T1\" target"],
                                               description: nil,
                                               onlyInFirst: ["Test1.framework"],
                                               onlyInSecond: ["Test2.framework"],
-                                              differentValues: []),
-                                CompareResult(tag: "dependencies",
-                                              context: ["\"T1\" target", "Embedded Frameworks"],
-                                              description: nil,
-                                              onlyInFirst: ["Test2.framework"],
-                                              onlyInSecond: ["Test3.framework"],
                                               differentValues: [])])
     }
 
     // MARK: - Helpers
 
     private func noDifference(targets: [String] = []) -> [CompareResult] {
-        return targets.flatMap {
-            [noDifferenceLinkedDependencies(target: $0), noDifferenceEmbeddedFrameworks(target: $0)]
+        return targets.map { target in
+            .init(tag: "dependencies",
+                  context: ["\"\(target)\" target"])
         }
-    }
-
-    private func noDifferenceLinkedDependencies(target: String) -> CompareResult {
-        return CompareResult(tag: "dependencies",
-                             context: ["\"\(target)\" target"] + ["Linked Dependencies"],
-                             description: nil,
-                             onlyInFirst: [],
-                             onlyInSecond: [],
-                             differentValues: [])
-    }
-
-    private func noDifferenceEmbeddedFrameworks(target: String) -> CompareResult {
-        return CompareResult(tag: "dependencies",
-                             context: ["\"\(target)\" target"] + ["Embedded Frameworks"],
-                             description: nil,
-                             onlyInFirst: [],
-                             onlyInSecond: [],
-                             differentValues: [])
     }
 }

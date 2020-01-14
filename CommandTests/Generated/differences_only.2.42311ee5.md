@@ -10,6 +10,7 @@
 ```
 ❌ FILE_REFERENCES
 ❌ BUILD_PHASES > "MismatchingLibrary" target
+❌ COPY_FILES > "Project" target > Embed Frameworks
 ❌ TARGETS > NATIVE targets
 ❌ TARGETS > AGGREGATE targets
 ❌ HEADERS > "MismatchingLibrary" target
@@ -32,8 +33,7 @@
 ❌ SETTINGS > "ProjectFramework" target > "Debug" configuration > Values
 ❌ SETTINGS > "ProjectFramework" target > "Release" configuration > Values
 ❌ SOURCE_TREES > Root project
-❌ DEPENDENCIES > "Project" target > Linked Dependencies
-❌ DEPENDENCIES > "Project" target > Embedded Frameworks
+❌ DEPENDENCIES > "Project" target
 
 
 ```

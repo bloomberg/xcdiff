@@ -11,35 +11,13 @@
 [
   {
     "context" : [
-      "\"Project\" target",
-      "Linked Dependencies"
+      "\"Project\" target"
     ],
     "differentValues" : [
       {
         "context" : "ARKit.framework attributes",
         "first" : "required",
         "second" : "optional"
-      }
-    ],
-    "onlyInFirst" : [
-
-    ],
-    "onlyInSecond" : [
-      "MismatchingLibrary.framework",
-      "NewFramework.framework"
-    ],
-    "tag" : "dependencies"
-  },
-  {
-    "context" : [
-      "\"Project\" target",
-      "Embedded Frameworks"
-    ],
-    "differentValues" : [
-      {
-        "context" : "ProjectFramework.framework Code Sign on Copy",
-        "first" : "true",
-        "second" : "false"
       }
     ],
     "onlyInFirst" : [
