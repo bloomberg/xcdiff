@@ -177,13 +177,13 @@ final class PBXNativeTargetBuilder {
     }
 
     @discardableResult
-    func addDependencies(_ dependencies: [DependencyData]) -> PBXNativeTargetBuilder {
+    func addLinkedDependencies(_ linkedDependencies: [LinkedDependenciesData]) -> PBXNativeTargetBuilder {
         addBuildPhase(.frameworks) { buildPhaseBuilder in
-            dependencies.forEach { dependency in
+            linkedDependencies.forEach { linkedDependency in
                 buildPhaseBuilder.addBuildFile { buildFileBuilder in
-                    if let name = dependency.name { buildFileBuilder.setName(name) }
-                    if let path = dependency.path { buildFileBuilder.setPath(path) }
-                    if let settings = dependency.settings { buildFileBuilder.setSettings(settings) }
+                    if let name = linkedDependency.name { buildFileBuilder.setName(name) }
+                    if let path = linkedDependency.path { buildFileBuilder.setPath(path) }
+                    if let settings = linkedDependency.settings { buildFileBuilder.setSettings(settings) }
                 }
             }
         }
@@ -204,7 +204,7 @@ final class PBXNativeTargetBuilder {
     }
 }
 
-struct DependencyData {
+struct LinkedDependenciesData {
     init(name: String? = nil,
          path: String? = nil,
          settings: [String: [String]]? = nil) {

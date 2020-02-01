@@ -375,7 +375,7 @@
       "MismatchingLibrary.framework",
       "NewFramework.framework"
     ],
-    "tag" : "dependencies"
+    "tag" : "linked_dependencies"
   }
 ]
 

@@ -9,7 +9,7 @@
         "settings",
         "sources",
         "source_trees",
-        "dependencies"
+        "linked_dependencies"
     ],
     "targets": [
         "",

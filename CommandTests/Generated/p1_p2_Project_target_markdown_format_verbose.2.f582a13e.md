@@ -214,7 +214,7 @@ Output format: (<path>, <name>, <source_tree>)
 
 
 
-## ❌ DEPENDENCIES > "Project" target
+## ❌ LINKED_DEPENDENCIES > "Project" target
 
 
 ### ⚠️  Only in second (2):
