@@ -69,9 +69,9 @@ final class LinkedDependenciesComparatorTests: XCTestCase {
         let first = project(name: "P1")
             .addTarget(name: "T1") {
                 $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]]),
-                                    LinkedDependenciesData(path: "Test100.framework"),
-                                    LinkedDependenciesData(path: "Test101.framework")])
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]]),
+                                          LinkedDependenciesData(path: "Test100.framework"),
+                                          LinkedDependenciesData(path: "Test101.framework")])
             }
             .addTarget(name: "T2") {
                 $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
@@ -80,9 +80,9 @@ final class LinkedDependenciesComparatorTests: XCTestCase {
         let second = project(name: "P2")
             .addTarget(name: "T1") {
                 $0.addLinkedDependencies([LinkedDependenciesData(path: "Test100.framework"),
-                                    LinkedDependenciesData(path: "Test.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]]),
-                                    LinkedDependenciesData(path: "Test101.framework")])
+                                          LinkedDependenciesData(path: "Test.framework",
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]]),
+                                          LinkedDependenciesData(path: "Test101.framework")])
             }
             .addTarget(name: "T2") {
                 $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
@@ -142,7 +142,7 @@ final class LinkedDependenciesComparatorTests: XCTestCase {
         let first = project(name: "P1")
             .addTarget(name: "T1") {
                 $0.addLinkedDependencies([LinkedDependenciesData(path: "Test100.framework"),
-                                    LinkedDependenciesData(path: "Test101.framework")])
+                                          LinkedDependenciesData(path: "Test101.framework")])
             }
             .addTarget(name: "T2") {
                 $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
@@ -151,8 +151,8 @@ final class LinkedDependenciesComparatorTests: XCTestCase {
         let second = project(name: "P2")
             .addTarget(name: "T1") {
                 $0.addLinkedDependencies([LinkedDependenciesData(path: "Test200.framework"),
-                                    LinkedDependenciesData(path: "Test200.framework"),
-                                    LinkedDependenciesData(path: "Test201.framework")])
+                                          LinkedDependenciesData(path: "Test200.framework"),
+                                          LinkedDependenciesData(path: "Test201.framework")])
             }
             .addTarget(name: "T2") {
                 $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
@@ -178,7 +178,7 @@ final class LinkedDependenciesComparatorTests: XCTestCase {
         let first = project(name: "P1")
             .addTarget(name: "T1") {
                 $0.addLinkedDependencies([LinkedDependenciesData(path: "Test1.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]])])
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]])])
             }
             .addTarget(name: "T2") {
                 $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
@@ -249,7 +249,7 @@ final class LinkedDependenciesComparatorTests: XCTestCase {
         let first = project(name: "P1")
             .addTarget(name: "T1") {
                 $0.addLinkedDependencies([LinkedDependenciesData(name: "Test1.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]])])
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]])])
             }
             .projectDescriptor()
         let second = project(name: "P2")
@@ -281,21 +281,21 @@ final class LinkedDependenciesComparatorTests: XCTestCase {
         let first = project(name: "P1")
             .addTarget(name: "T1") {
                 $0.addLinkedDependencies([LinkedDependenciesData(name: "Test1.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]]),
-                                    LinkedDependenciesData(path: "Test2.framework"),
-                                    LinkedDependenciesData(name: "Test3.framework",
-                                                   path: "Test3.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]])])
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]]),
+                                          LinkedDependenciesData(path: "Test2.framework"),
+                                          LinkedDependenciesData(name: "Test3.framework",
+                                                                 path: "Test3.framework",
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]])])
             }
             .projectDescriptor()
         let second = project(name: "P2")
             .addTarget(name: "T1") {
                 $0.addLinkedDependencies([LinkedDependenciesData(name: "Test1.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]]),
-                                    LinkedDependenciesData(path: "Test2.framework"),
-                                    LinkedDependenciesData(name: "Test3.framework",
-                                                   path: "Test3.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]])])
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]]),
+                                          LinkedDependenciesData(path: "Test2.framework"),
+                                          LinkedDependenciesData(name: "Test3.framework",
+                                                                 path: "Test3.framework",
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]])])
             }
             .projectDescriptor()
 
