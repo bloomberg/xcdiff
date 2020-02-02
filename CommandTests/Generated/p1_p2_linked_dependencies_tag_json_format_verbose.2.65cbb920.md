@@ -1,6 +1,6 @@
 # Command
 ```json
-["-p1", "{ios_project_1}", "-p2", "{ios_project_2}", "-g", "dependencies", "-f", "json"]
+["-p1", "{ios_project_1}", "-p2", "{ios_project_2}", "-g", "linked_dependencies", "-f", "json", "-v"]
 ```
 
 # Expected exit code
@@ -22,7 +22,7 @@
     "onlyInSecond" : [
 
     ],
-    "tag" : "dependencies"
+    "tag" : "linked_dependencies"
   },
   {
     "context" : [
@@ -42,7 +42,7 @@
       "MismatchingLibrary.framework",
       "NewFramework.framework"
     ],
-    "tag" : "dependencies"
+    "tag" : "linked_dependencies"
   },
   {
     "context" : [
@@ -57,7 +57,7 @@
     "onlyInSecond" : [
 
     ],
-    "tag" : "dependencies"
+    "tag" : "linked_dependencies"
   },
   {
     "context" : [
@@ -72,7 +72,7 @@
     "onlyInSecond" : [
 
     ],
-    "tag" : "dependencies"
+    "tag" : "linked_dependencies"
   },
   {
     "context" : [
@@ -87,7 +87,7 @@
     "onlyInSecond" : [
 
     ],
-    "tag" : "dependencies"
+    "tag" : "linked_dependencies"
   }
 ]
 

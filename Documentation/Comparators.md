@@ -14,10 +14,6 @@ Compares build configurations i.e. Debug, Release.
 
 Compares copy files build phases i.e. embed frameworks, extensions
 
-### `dependencies`
-
-Compares linked dependencies
-
 ### `file_references`
 
 Compares all file references in the Xcode project.
@@ -27,6 +23,10 @@ As the comparator is very sensitive, it's likely that differences from other com
 ### `headers`
 
 Compares headers including their visibility attributes i.e. Public, Project, and Private.
+
+### `linked_dependencies`
+
+Compares linked dependencies
 
 ### `resolved_settings` (optional)
 

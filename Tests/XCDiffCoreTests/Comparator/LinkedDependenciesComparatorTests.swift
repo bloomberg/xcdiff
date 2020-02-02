@@ -20,38 +20,38 @@ import XCTest
 
 // swiftlint:disable file_length
 // swiftlint:disable type_body_length
-final class DependenciesComparatorTests: XCTestCase {
-    private var subject: DependenciesComparator!
+final class LinkedDependenciesComparatorTests: XCTestCase {
+    private var subject: LinkedDependenciesComparator!
 
     override func setUp() {
         super.setUp()
 
-        subject = DependenciesComparator()
+        subject = LinkedDependenciesComparator()
     }
 
     // MARK: - Tests
 
     func testTag() {
         // When / Then
-        XCTAssertEqual(subject.tag, "dependencies")
+        XCTAssertEqual(subject.tag, "linked_dependencies")
     }
 
     func testCompare_whenSameDependencies_noDifferences() throws {
         // Given
         let first = project(name: "P1")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(path: "Test.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
             }
             .addTarget(name: "T2") {
-                $0.addDependencies([DependencyData(path: "Test.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
             }
             .projectDescriptor()
         let second = project(name: "P2")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(path: "Test.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
             }
             .addTarget(name: "T2") {
-                $0.addDependencies([DependencyData(path: "Test.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
             }
             .projectDescriptor()
 
@@ -68,24 +68,24 @@ final class DependenciesComparatorTests: XCTestCase {
         // Given
         let first = project(name: "P1")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(path: "Test.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]]),
-                                    DependencyData(path: "Test100.framework"),
-                                    DependencyData(path: "Test101.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework",
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]]),
+                                          LinkedDependenciesData(path: "Test100.framework"),
+                                          LinkedDependenciesData(path: "Test101.framework")])
             }
             .addTarget(name: "T2") {
-                $0.addDependencies([DependencyData(path: "Test.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
             }
             .projectDescriptor()
         let second = project(name: "P2")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(path: "Test100.framework"),
-                                    DependencyData(path: "Test.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]]),
-                                    DependencyData(path: "Test101.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test100.framework"),
+                                          LinkedDependenciesData(path: "Test.framework",
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]]),
+                                          LinkedDependenciesData(path: "Test101.framework")])
             }
             .addTarget(name: "T2") {
-                $0.addDependencies([DependencyData(path: "Test.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
             }
             .projectDescriptor()
 
@@ -102,18 +102,18 @@ final class DependenciesComparatorTests: XCTestCase {
         // Given
         let first = project(name: "P1")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(path: "Test1.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test1.framework")])
             }
             .addTarget(name: "T2") {
-                $0.addDependencies([DependencyData(path: "Test.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
             }
             .projectDescriptor()
         let second = project(name: "P2")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(path: "Test2.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test2.framework")])
             }
             .addTarget(name: "T2") {
-                $0.addDependencies([DependencyData(path: "Test.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
             }
             .projectDescriptor()
 
@@ -123,13 +123,13 @@ final class DependenciesComparatorTests: XCTestCase {
                                          parameters: .all)
 
         // Then
-        XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
+        XCTAssertEqual(actual, [CompareResult(tag: "linked_dependencies",
                                               context: ["\"T1\" target"],
                                               description: nil,
                                               onlyInFirst: ["Test1.framework"],
                                               onlyInSecond: ["Test2.framework"],
                                               differentValues: []),
-                                CompareResult(tag: "dependencies",
+                                CompareResult(tag: "linked_dependencies",
                                               context: ["\"T2\" target"],
                                               description: nil,
                                               onlyInFirst: [],
@@ -141,21 +141,21 @@ final class DependenciesComparatorTests: XCTestCase {
         // Given
         let first = project(name: "P1")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(path: "Test100.framework"),
-                                    DependencyData(path: "Test101.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test100.framework"),
+                                          LinkedDependenciesData(path: "Test101.framework")])
             }
             .addTarget(name: "T2") {
-                $0.addDependencies([DependencyData(path: "Test.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
             }
             .projectDescriptor()
         let second = project(name: "P2")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(path: "Test200.framework"),
-                                    DependencyData(path: "Test200.framework"),
-                                    DependencyData(path: "Test201.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test200.framework"),
+                                          LinkedDependenciesData(path: "Test200.framework"),
+                                          LinkedDependenciesData(path: "Test201.framework")])
             }
             .addTarget(name: "T2") {
-                $0.addDependencies([DependencyData(path: "Test.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
             }
             .projectDescriptor()
 
@@ -165,7 +165,7 @@ final class DependenciesComparatorTests: XCTestCase {
                                          parameters: .only(target: "T1"))
 
         // Then
-        XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
+        XCTAssertEqual(actual, [CompareResult(tag: "linked_dependencies",
                                               context: ["\"T1\" target"],
                                               description: nil,
                                               onlyInFirst: ["Test100.framework", "Test101.framework"],
@@ -177,19 +177,19 @@ final class DependenciesComparatorTests: XCTestCase {
         // Given
         let first = project(name: "P1")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(path: "Test1.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]])])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test1.framework",
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]])])
             }
             .addTarget(name: "T2") {
-                $0.addDependencies([DependencyData(path: "Test.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
             }
             .projectDescriptor()
         let second = project(name: "P2")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(path: "Test1.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test1.framework")])
             }
             .addTarget(name: "T2") {
-                $0.addDependencies([DependencyData(path: "Test.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test.framework")])
             }
             .projectDescriptor()
 
@@ -199,7 +199,7 @@ final class DependenciesComparatorTests: XCTestCase {
                                          parameters: .all)
 
         // Then
-        XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
+        XCTAssertEqual(actual, [CompareResult(tag: "linked_dependencies",
                                               context: ["\"T1\" target"],
                                               description: nil,
                                               onlyInFirst: [],
@@ -209,7 +209,7 @@ final class DependenciesComparatorTests: XCTestCase {
                                                                                 first: "optional",
                                                                                 second: "required"),
                                               ]),
-                                CompareResult(tag: "dependencies",
+                                CompareResult(tag: "linked_dependencies",
                                               context: ["\"T2\" target"],
                                               description: nil,
                                               onlyInFirst: [],
@@ -221,12 +221,12 @@ final class DependenciesComparatorTests: XCTestCase {
         // Given
         let first = project(name: "P1")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(name: "Test1.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(name: "Test1.framework")])
             }
             .projectDescriptor()
         let second = project(name: "P2")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(name: "Test2.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(name: "Test2.framework")])
             }
             .projectDescriptor()
 
@@ -236,7 +236,7 @@ final class DependenciesComparatorTests: XCTestCase {
                                          parameters: .all)
 
         // Then
-        XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
+        XCTAssertEqual(actual, [CompareResult(tag: "linked_dependencies",
                                               context: ["\"T1\" target"],
                                               description: nil,
                                               onlyInFirst: ["Test1.framework"],
@@ -248,13 +248,13 @@ final class DependenciesComparatorTests: XCTestCase {
         // Given
         let first = project(name: "P1")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(name: "Test1.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]])])
+                $0.addLinkedDependencies([LinkedDependenciesData(name: "Test1.framework",
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]])])
             }
             .projectDescriptor()
         let second = project(name: "P2")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(name: "Test1.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(name: "Test1.framework")])
             }
             .projectDescriptor()
 
@@ -264,7 +264,7 @@ final class DependenciesComparatorTests: XCTestCase {
                                          parameters: .all)
 
         // Then
-        XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
+        XCTAssertEqual(actual, [CompareResult(tag: "linked_dependencies",
                                               context: ["\"T1\" target"],
                                               description: nil,
                                               onlyInFirst: [],
@@ -280,22 +280,22 @@ final class DependenciesComparatorTests: XCTestCase {
         // Given
         let first = project(name: "P1")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(name: "Test1.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]]),
-                                    DependencyData(path: "Test2.framework"),
-                                    DependencyData(name: "Test3.framework",
-                                                   path: "Test3.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]])])
+                $0.addLinkedDependencies([LinkedDependenciesData(name: "Test1.framework",
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]]),
+                                          LinkedDependenciesData(path: "Test2.framework"),
+                                          LinkedDependenciesData(name: "Test3.framework",
+                                                                 path: "Test3.framework",
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]])])
             }
             .projectDescriptor()
         let second = project(name: "P2")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(name: "Test1.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]]),
-                                    DependencyData(path: "Test2.framework"),
-                                    DependencyData(name: "Test3.framework",
-                                                   path: "Test3.framework",
-                                                   settings: ["ATTRIBUTES": ["WEAK"]])])
+                $0.addLinkedDependencies([LinkedDependenciesData(name: "Test1.framework",
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]]),
+                                          LinkedDependenciesData(path: "Test2.framework"),
+                                          LinkedDependenciesData(name: "Test3.framework",
+                                                                 path: "Test3.framework",
+                                                                 settings: ["ATTRIBUTES": ["WEAK"]])])
             }
             .projectDescriptor()
 
@@ -355,7 +355,7 @@ final class DependenciesComparatorTests: XCTestCase {
                                          parameters: .all)
 
         // Then
-        XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
+        XCTAssertEqual(actual, [CompareResult(tag: "linked_dependencies",
                                               context: ["\"T1\" target"])])
     }
 
@@ -363,7 +363,7 @@ final class DependenciesComparatorTests: XCTestCase {
         // Given
         let first = project(name: "P1")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(path: "Test1.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test1.framework")])
                 $0.addEmbeddedFrameworks([EmbeddedFrameworksData(path: "Test2.framework",
                                                                  settings: ["ATTRIBUTES": []])])
             }
@@ -371,7 +371,7 @@ final class DependenciesComparatorTests: XCTestCase {
 
         let second = project(name: "P2")
             .addTarget(name: "T1") {
-                $0.addDependencies([DependencyData(path: "Test2.framework")])
+                $0.addLinkedDependencies([LinkedDependenciesData(path: "Test2.framework")])
                 $0.addEmbeddedFrameworks([EmbeddedFrameworksData(path: "Test3.framework",
                                                                  settings: ["ATTRIBUTES": []])])
             }
@@ -383,7 +383,7 @@ final class DependenciesComparatorTests: XCTestCase {
                                          parameters: .all)
 
         // Then
-        XCTAssertEqual(actual, [CompareResult(tag: "dependencies",
+        XCTAssertEqual(actual, [CompareResult(tag: "linked_dependencies",
                                               context: ["\"T1\" target"],
                                               description: nil,
                                               onlyInFirst: ["Test1.framework"],
@@ -395,7 +395,7 @@ final class DependenciesComparatorTests: XCTestCase {
 
     private func noDifference(targets: [String] = []) -> [CompareResult] {
         return targets.map { target in
-            .init(tag: "dependencies",
+            .init(tag: "linked_dependencies",
                   context: ["\"\(target)\" target"])
         }
     }

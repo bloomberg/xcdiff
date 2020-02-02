@@ -177,7 +177,7 @@ Output format: (<path>, <name>, <source_tree>)
   • (Target.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)
 
 
-❌ DEPENDENCIES > "Project" target
+❌ LINKED_DEPENDENCIES > "Project" target
 
 ⚠️  Only in second (2):
 

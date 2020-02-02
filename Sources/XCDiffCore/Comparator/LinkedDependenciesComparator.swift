@@ -16,14 +16,14 @@
 
 import Foundation
 
-final class DependenciesComparator: Comparator {
+final class LinkedDependenciesComparator: Comparator {
     private typealias DependencyDescriptorPair = (first: DependencyDescriptor,
                                                   second: DependencyDescriptor)
     private typealias EmbeddedFrameworksDescriptorPair = (first: EmbeddedFrameworksDescriptor,
                                                           second: EmbeddedFrameworksDescriptor)
     private let targetsHelper = TargetsHelper()
 
-    let tag = "dependencies"
+    let tag = "linked_dependencies"
 
     func compare(_ first: ProjectDescriptor,
                  _ second: ProjectDescriptor,
