@@ -32,11 +32,11 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
     func testRender_whenConsoleRendererAndEmptyContext() {
         // Given
         let renderer = ConsoleRenderer(output: outputBuffer.any())
-        let sut = TextProjectCompareResultRenderer(renderer: renderer, verbose: false)
+        let subject = TextProjectCompareResultRenderer(renderer: renderer, verbose: false)
         let result = fixtures.projectCompareResult.create([CompareResult(tag: "Tag1"), CompareResult(tag: "Tag2")])
 
         // When
-        sut.render(result)
+        subject.render(result)
 
         // Then
         XCTAssertEqual(content, """
@@ -48,14 +48,14 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
 
     func testRender_whenConsoleRendererAndDescription() {
         let renderer = ConsoleRenderer(output: outputBuffer.any())
-        let sut = TextProjectCompareResultRenderer(renderer: renderer, verbose: true)
+        let subject = TextProjectCompareResultRenderer(renderer: renderer, verbose: true)
         let result = fixtures.projectCompareResult.create([
             CompareResult(tag: "Tag1", description: "Description1", onlyInFirst: ["OIF1"]),
             CompareResult(tag: "Tag2", description: "Description2", onlyInFirst: ["OIF1"]),
         ])
 
         // When
-        sut.render(result)
+        subject.render(result)
 
         // Then
         XCTAssertEqual(content, """
@@ -79,11 +79,11 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
     func testRender_whenConsoleRendererAndVerboseFalse() {
         // Given
         let renderer = ConsoleRenderer(output: outputBuffer.any())
-        let sut = TextProjectCompareResultRenderer(renderer: renderer, verbose: false)
+        let subject = TextProjectCompareResultRenderer(renderer: renderer, verbose: false)
         let result = fixtures.projectCompareResult.sample1()
 
         // When
-        sut.render(result)
+        subject.render(result)
 
         // Then
         XCTAssertEqual(content, """
@@ -97,11 +97,11 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
     func testRender_whenConsoleRendererAndVerboseTrue() {
         // Given
         let renderer = ConsoleRenderer(output: outputBuffer.any())
-        let sut = TextProjectCompareResultRenderer(renderer: renderer, verbose: true)
+        let subject = TextProjectCompareResultRenderer(renderer: renderer, verbose: true)
         let result = fixtures.projectCompareResult.sample1()
 
         // When
-        sut.render(result)
+        subject.render(result)
 
         // Then
         XCTAssertEqual(content, """
@@ -178,11 +178,11 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
     func testRender_whenMarkdownRendererAndVerboseFalse() {
         // Given
         let renderer = MarkdownRenderer(output: outputBuffer.any())
-        let sut = TextProjectCompareResultRenderer(renderer: renderer, verbose: false)
+        let subject = TextProjectCompareResultRenderer(renderer: renderer, verbose: false)
         let result = fixtures.projectCompareResult.sample1()
 
         // When
-        sut.render(result)
+        subject.render(result)
 
         // Then
         XCTAssertEqual(content, """
@@ -198,11 +198,11 @@ final class TextProjectCompareResultRendererTests: XCTestCase {
     func testRender_whenMarkdownRendererAndVerboseTrue() {
         // Given
         let renderer = MarkdownRenderer(output: outputBuffer.any())
-        let sut = TextProjectCompareResultRenderer(renderer: renderer, verbose: true)
+        let subject = TextProjectCompareResultRenderer(renderer: renderer, verbose: true)
         let result = fixtures.projectCompareResult.sample1()
 
         // When
-        sut.render(result)
+        subject.render(result)
 
         // Then
         XCTAssertEqual(content, """

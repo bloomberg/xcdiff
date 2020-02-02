@@ -40,9 +40,9 @@ final class ComperatorTypeTests: XCTestCase {
     func testTag_whenCustom() {
         // Given
         let comparator = ComparatorMock(tag: "Tag1")
-        let sut = ComparatorType.custom(comparator)
+        let subject = ComparatorType.custom(comparator)
 
         // When / Then
-        XCTAssertEqual(sut.tag, "Tag1")
+        XCTAssertEqual(subject.tag, "Tag1")
     }
 }

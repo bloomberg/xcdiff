@@ -19,13 +19,13 @@ import Foundation
 import XCTest
 
 final class DefaultXcodeProjLoaderTests: XCTestCase {
-    private var sut: DefaultXcodeProjLoader!
+    private var subject: DefaultXcodeProjLoader!
     private let fixtures = Fixtures()
 
     override func setUp() {
         super.setUp()
 
-        sut = DefaultXcodeProjLoader()
+        subject = DefaultXcodeProjLoader()
     }
 
     func testLoad_whenProjectExists() throws {
@@ -33,7 +33,7 @@ final class DefaultXcodeProjLoaderTests: XCTestCase {
         let path = fixtures.project.ios_project_1()
 
         // When
-        let xcodeProj = try sut.load(at: path)
+        let xcodeProj = try subject.load(at: path)
 
         // Then
         XCTAssertNotNil(xcodeProj)
@@ -45,7 +45,7 @@ final class DefaultXcodeProjLoaderTests: XCTestCase {
         let path = fixtures.project.non_existing()
 
         // When / Then
-        XCTAssertThrowsError(try sut.load(at: path)) { error in
+        XCTAssertThrowsError(try subject.load(at: path)) { error in
             guard let error = error as? ComparatorError else {
                 XCTFail("Expected ComparatorError")
                 return

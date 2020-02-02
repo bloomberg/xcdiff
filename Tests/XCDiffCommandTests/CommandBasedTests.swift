@@ -29,8 +29,8 @@ final class CommandBasedTests: XCTestCase {
         commands.forEach { command in
             print("Checking '\(command)'.")
             let printer = PrinterMock()
-            let sut = CommandRunner(printer: printer)
-            let exitCode = sut.run(with: command.command)
+            let subject = CommandRunner(printer: printer)
+            let exitCode = subject.run(with: command.command)
 
             XCTAssertEqual(printer.output, command.expectedOutput,
                            "'\(command)' didn't produce expected output.")

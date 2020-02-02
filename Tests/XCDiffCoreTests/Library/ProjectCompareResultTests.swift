@@ -21,31 +21,31 @@ import XCTest
 final class ProjectCompareResultTests: XCTestCase {
     func testSame_whenNoResults_true() {
         // Given
-        let sut = ProjectCompareResult(first: project(name: "Project1").projectDescriptor(),
-                                       second: project(name: "Project2").projectDescriptor(),
-                                       results: [])
+        let subject = ProjectCompareResult(first: project(name: "Project1").projectDescriptor(),
+                                           second: project(name: "Project2").projectDescriptor(),
+                                           results: [])
 
         // When / Then
-        XCTAssertTrue(sut.same())
+        XCTAssertTrue(subject.same())
     }
 
     func testSame_whenNoDifferences_true() {
         // Given
-        let sut = ProjectCompareResult(first: project(name: "Project1").projectDescriptor(),
-                                       second: project(name: "Project2").projectDescriptor(),
-                                       results: [CompareResult(tag: "Tag1"), CompareResult(tag: "Tag2")])
+        let subject = ProjectCompareResult(first: project(name: "Project1").projectDescriptor(),
+                                           second: project(name: "Project2").projectDescriptor(),
+                                           results: [CompareResult(tag: "Tag1"), CompareResult(tag: "Tag2")])
 
         // When / Then
-        XCTAssertTrue(sut.same())
+        XCTAssertTrue(subject.same())
     }
 
     func testSame_whenDifferences_false() {
         // Given
-        let sut = ProjectCompareResult(first: project(name: "Project1").projectDescriptor(),
-                                       second: project(name: "Project2").projectDescriptor(),
-                                       results: [CompareResult(tag: "Tag1", onlyInFirst: ["OIF1"])])
+        let subject = ProjectCompareResult(first: project(name: "Project1").projectDescriptor(),
+                                           second: project(name: "Project2").projectDescriptor(),
+                                           results: [CompareResult(tag: "Tag1", onlyInFirst: ["OIF1"])])
 
         // When / Then
-        XCTAssertFalse(sut.same())
+        XCTAssertFalse(subject.same())
     }
 }

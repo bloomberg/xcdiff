@@ -19,21 +19,21 @@ import Foundation
 import XCTest
 
 final class MarkdownRendererTests: XCTestCase {
-    private var sut: MarkdownRenderer!
+    private var subject: MarkdownRenderer!
     private var outputBuffer: StringOutputBuffer!
 
     override func setUp() {
         super.setUp()
 
         outputBuffer = StringOutputBuffer()
-        sut = MarkdownRenderer(output: outputBuffer.any())
+        subject = MarkdownRenderer(output: outputBuffer.any())
     }
 
     func testText() {
         // When
-        sut.text("1")
-        sut.text("2")
-        sut.text("3")
+        subject.text("1")
+        subject.text("2")
+        subject.text("3")
 
         // Then
         XCTAssertEqual(content, "1\n2\n3\n")
@@ -41,7 +41,7 @@ final class MarkdownRendererTests: XCTestCase {
 
     func testList_whenBegin() {
         // When
-        sut.list(.begin)
+        subject.list(.begin)
 
         // Then
         XCTAssertEqual(content, "")
@@ -49,7 +49,7 @@ final class MarkdownRendererTests: XCTestCase {
 
     func testList_whenEnd() {
         // When
-        sut.list(.end)
+        subject.list(.end)
 
         // Then
         XCTAssertEqual(content, "\n")
@@ -57,12 +57,12 @@ final class MarkdownRendererTests: XCTestCase {
 
     func testListWithBullets() {
         // When
-        sut.list(.begin)
-        sut.bullet("b1", indent: .zero)
-        sut.bullet("b1.1", indent: .one)
-        sut.bullet("b1.2", indent: .one)
-        sut.bullet("b1.2.1", indent: .two)
-        sut.list(.end)
+        subject.list(.begin)
+        subject.bullet("b1", indent: .zero)
+        subject.bullet("b1.1", indent: .one)
+        subject.bullet("b1.2", indent: .one)
+        subject.bullet("b1.2.1", indent: .two)
+        subject.list(.end)
 
         // Then
         XCTAssertEqual(content, """
@@ -75,7 +75,7 @@ final class MarkdownRendererTests: XCTestCase {
 
     func testNewLine() {
         // When
-        sut.newLine(3)
+        subject.newLine(3)
 
         // Then
         XCTAssertEqual(content, "\n\n\n")
@@ -83,7 +83,7 @@ final class MarkdownRendererTests: XCTestCase {
 
     func testHeader_whenH1() {
         // When
-        sut.header("H1", .h1)
+        subject.header("H1", .h1)
 
         // Then
         XCTAssertEqual(content, """
@@ -93,7 +93,7 @@ final class MarkdownRendererTests: XCTestCase {
 
     func testHeader_whenH2() {
         // When
-        sut.header("H2", .h2)
+        subject.header("H2", .h2)
 
         // Then
         XCTAssertEqual(content, """
@@ -103,7 +103,7 @@ final class MarkdownRendererTests: XCTestCase {
 
     func testHeader_whenH3() {
         // When
-        sut.header("H3", .h3)
+        subject.header("H3", .h3)
 
         // Then
         XCTAssertEqual(content, """
@@ -113,17 +113,17 @@ final class MarkdownRendererTests: XCTestCase {
 
     func testSample1() {
         // When
-        sut.header("Header", .h3)
-        sut.list(.begin)
-        sut.bullet("Different Values 1", indent: .one)
-        sut.bullet("Value1", indent: .two)
-        sut.bullet("Value2", indent: .two)
-        sut.list(.end)
-        sut.list(.begin)
-        sut.bullet("Different Values 2", indent: .one)
-        sut.bullet("Value1", indent: .two)
-        sut.bullet("Value2", indent: .two)
-        sut.list(.end)
+        subject.header("Header", .h3)
+        subject.list(.begin)
+        subject.bullet("Different Values 1", indent: .one)
+        subject.bullet("Value1", indent: .two)
+        subject.bullet("Value2", indent: .two)
+        subject.list(.end)
+        subject.list(.begin)
+        subject.bullet("Different Values 2", indent: .one)
+        subject.bullet("Value1", indent: .two)
+        subject.bullet("Value2", indent: .two)
+        subject.list(.end)
 
         // Then
         XCTAssertEqual(content, """
