@@ -30,7 +30,7 @@ struct HeaderDescriptor: Hashable {
     let attributes: String?
 }
 
-struct DependencyDescriptor: Hashable {
+struct LinkedDependencyDescriptor: Hashable {
     let name: String?
     let path: String?
     let type: DependencyDescriptorType
@@ -132,16 +132,16 @@ final class TargetsHelper {
             .map { $0.name })
     }
 
-    func dependencies(from target: PBXTarget) throws -> [DependencyDescriptor] {
-        guard let dependencies = target.buildPhases.compactMap({ $0 as? PBXFrameworksBuildPhase }).first,
-            let dependencyFiles = dependencies.files else {
+    func linkedDependencies(from target: PBXTarget) throws -> [LinkedDependencyDescriptor] {
+        guard let linkedDependencies = target.buildPhases.compactMap({ $0 as? PBXFrameworksBuildPhase }).first,
+            let dependencyFiles = linkedDependencies.files else {
             return []
         }
         return dependencyFiles.compactMap {
             if $0.file?.name != nil || $0.file?.path != nil {
-                return DependencyDescriptor(name: $0.file?.name,
-                                            path: $0.file?.path,
-                                            type: $0.settings == nil ? .required : .optional)
+                return LinkedDependencyDescriptor(name: $0.file?.name,
+                                                  path: $0.file?.path,
+                                                  type: $0.settings == nil ? .required : .optional)
             }
             return nil
         }

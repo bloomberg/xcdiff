@@ -17,8 +17,8 @@
 import Foundation
 
 final class LinkedDependenciesComparator: Comparator {
-    private typealias DependencyDescriptorPair = (first: DependencyDescriptor,
-                                                  second: DependencyDescriptor)
+    private typealias DependencyDescriptorPair = (first: LinkedDependencyDescriptor,
+                                                  second: LinkedDependencyDescriptor)
     private typealias EmbeddedFrameworksDescriptorPair = (first: EmbeddedFrameworksDescriptor,
                                                           second: EmbeddedFrameworksDescriptor)
     private let targetsHelper = TargetsHelper()
@@ -37,8 +37,8 @@ final class LinkedDependenciesComparator: Comparator {
     }
 
     private func createLinkedDependenciesResults(commonTarget: TargetPair) throws -> CompareResult {
-        let firstDependencies = try targetsHelper.dependencies(from: commonTarget.first)
-        let secondDependencies = try targetsHelper.dependencies(from: commonTarget.second)
+        let firstDependencies = try targetsHelper.linkedDependencies(from: commonTarget.first)
+        let secondDependencies = try targetsHelper.linkedDependencies(from: commonTarget.second)
 
         let firstPaths = Set(firstDependencies.compactMap { dependencyKey(dependency: $0) })
         let secondPaths = Set(secondDependencies.compactMap { dependencyKey(dependency: $0) })
@@ -54,13 +54,13 @@ final class LinkedDependenciesComparator: Comparator {
                       differentValues: differences)
     }
 
-    private func dependencyKey(dependency: DependencyDescriptor) -> String? {
+    private func dependencyKey(dependency: LinkedDependencyDescriptor) -> String? {
         if let key = dependency.name ?? dependency.path { return key }
         return nil
     }
 
-    private func commonDependencyDescriptorPairs(first: [DependencyDescriptor],
-                                                 second: [DependencyDescriptor]) -> [DependencyDescriptorPair] {
+    private func commonDependencyDescriptorPairs(first: [LinkedDependencyDescriptor],
+                                                 second: [LinkedDependencyDescriptor]) -> [DependencyDescriptorPair] {
         let firstDependencyDescriptorMap = dependencyPathMap(from: first)
         let secondDependencyDescriptorMap = dependencyPathMap(from: second)
 
@@ -94,8 +94,8 @@ final class LinkedDependenciesComparator: Comparator {
             }
     }
 
-    private func dependencyPathMap(from dependencyDescriptors: [DependencyDescriptor])
-        -> [String: DependencyDescriptor] {
+    private func dependencyPathMap(from dependencyDescriptors: [LinkedDependencyDescriptor])
+        -> [String: LinkedDependencyDescriptor] {
         return Dictionary(dependencyDescriptors.compactMap {
             if let key = dependencyKey(dependency: $0) { return (key, $0) }
             return nil

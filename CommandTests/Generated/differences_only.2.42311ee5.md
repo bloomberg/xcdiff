@@ -33,6 +33,7 @@
 ❌ SETTINGS > "ProjectFramework" target > "Debug" configuration > Values
 ❌ SETTINGS > "ProjectFramework" target > "Release" configuration > Values
 ❌ SOURCE_TREES > Root project
+❌ DEPENDENCIES > "Project" target
 ❌ LINKED_DEPENDENCIES > "Project" target
 
 

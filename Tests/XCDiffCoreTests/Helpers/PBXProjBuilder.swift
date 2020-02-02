@@ -20,6 +20,7 @@ import PathKit
 import XcodeProj
 import XCTest
 
+// swiftlint:disable force_cast force_try
 final class PBXProjBuilder {
     private var pbxproj: PBXProj
     private var pbxproject: PBXProject
@@ -98,6 +99,26 @@ final class PBXProjBuilder {
         return self
     }
 
+    @discardableResult
+    func make(target targetName: String, dependOn dependencyTargetNames: [String]) -> PBXProjBuilder {
+        let target = pbxproj.targets(named: targetName).first as! PBXNativeTarget
+        dependencyTargetNames.forEach {
+            let dependencyTarget = pbxproj.targets(named: $0).first!
+            _ = try! target.addDependency(target: dependencyTarget)
+        }
+        return self
+    }
+
+    @discardableResult
+    func make(target targetName: String, dependOn dependency: DependencyData) -> PBXProjBuilder {
+        let target = pbxproj.targets(named: targetName).first as! PBXNativeTarget
+        let dependencyTarget = pbxproj.targets(named: dependency.targetName).first!
+        let targetDependency = PBXTargetDependency(name: dependency.name, target: dependencyTarget)
+        pbxproj.add(object: targetDependency)
+        target.dependencies.append(targetDependency)
+        return self
+    }
+
     func build() -> PBXProj {
         return pbxproj
     }
@@ -124,6 +145,13 @@ final class PBXProjBuilder {
     private static func createMainGroup() -> PBXGroup {
         return PBXGroup()
     }
+}
+
+// swiftlint:enable force_cast force_try
+
+struct DependencyData {
+    let name: String?
+    let targetName: String
 }
 
 extension PBXProjBuilder {

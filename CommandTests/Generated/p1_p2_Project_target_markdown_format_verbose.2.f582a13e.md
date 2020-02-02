@@ -214,6 +214,16 @@ Output format: (<path>, <name>, <source_tree>)
 
 
 
+## ❌ DEPENDENCIES > "Project" target
+
+
+### ⚠️  Only in second (2):
+
+  - `MismatchingLibrary`
+  - `NewFramework`
+
+
+
 ## ❌ LINKED_DEPENDENCIES > "Project" target
 
 

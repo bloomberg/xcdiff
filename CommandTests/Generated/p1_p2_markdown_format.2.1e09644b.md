@@ -171,6 +171,21 @@
 ## ❌ SOURCE_TREES > Root project
 
 
+## ✅ DEPENDENCIES > "MismatchingLibrary" target
+
+
+## ❌ DEPENDENCIES > "Project" target
+
+
+## ✅ DEPENDENCIES > "ProjectFramework" target
+
+
+## ✅ DEPENDENCIES > "ProjectTests" target
+
+
+## ✅ DEPENDENCIES > "ProjectUITests" target
+
+
 ## ✅ LINKED_DEPENDENCIES > "MismatchingLibrary" target
 
 

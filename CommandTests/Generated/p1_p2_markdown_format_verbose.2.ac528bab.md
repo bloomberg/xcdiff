@@ -480,6 +480,28 @@ Output format: (<path>, <name>, <source_tree>)
 
 
 
+## ✅ DEPENDENCIES > "MismatchingLibrary" target
+
+
+## ❌ DEPENDENCIES > "Project" target
+
+
+### ⚠️  Only in second (2):
+
+  - `MismatchingLibrary`
+  - `NewFramework`
+
+
+
+## ✅ DEPENDENCIES > "ProjectFramework" target
+
+
+## ✅ DEPENDENCIES > "ProjectTests" target
+
+
+## ✅ DEPENDENCIES > "ProjectUITests" target
+
+
 ## ✅ LINKED_DEPENDENCIES > "MismatchingLibrary" target
 
 
