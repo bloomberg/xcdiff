@@ -21,33 +21,33 @@ import XCTest
 final class StringOutputBufferTests: XCTestCase {
     func testInit_empty() {
         // When
-        let sut = StringOutputBuffer()
+        let subject = StringOutputBuffer()
 
         // Then
-        XCTAssertEqual(sut.flush(), "")
+        XCTAssertEqual(subject.flush(), "")
     }
 
     func testWrite_whenSingleString() {
         // Given
-        let sut = StringOutputBuffer()
+        let subject = StringOutputBuffer()
 
         // When
-        sut.write("ABC")
+        subject.write("ABC")
 
         // Then
-        XCTAssertEqual(sut.flush(), "ABC")
+        XCTAssertEqual(subject.flush(), "ABC")
     }
 
     func testWrite_whenMultipleStrings() {
         // Given
-        let sut = StringOutputBuffer()
+        let subject = StringOutputBuffer()
 
         // When
-        sut.write("A")
-        sut.write("B")
-        sut.write("C")
+        subject.write("A")
+        subject.write("B")
+        subject.write("C")
 
         // Then
-        XCTAssertEqual(sut.flush(), "ABC")
+        XCTAssertEqual(subject.flush(), "ABC")
     }
 }

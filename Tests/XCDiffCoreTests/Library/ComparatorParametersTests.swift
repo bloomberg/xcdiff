@@ -21,74 +21,74 @@ import XCTest
 final class ComparatorParametersTests: XCTestCase {
     func testInit() {
         // When
-        let sut = ComparatorParameters(targets: .all, configurations: .none)
+        let subject = ComparatorParameters(targets: .all, configurations: .none)
 
         // Then
-        XCTAssertEqual(sut.targets, .all)
-        XCTAssertEqual(sut.configurations, .none)
+        XCTAssertEqual(subject.targets, .all)
+        XCTAssertEqual(subject.configurations, .none)
     }
 
     func testOptionFilter_whenNone() {
         // Given
-        let sut: ComparatorParameters.Option<String> = .none
+        let subject: ComparatorParameters.Option<String> = .none
         let data = ["A", "B", "C"]
 
         // When / Then
-        XCTAssertEqual(data.filter(by: sut), [])
+        XCTAssertEqual(data.filter(by: subject), [])
     }
 
     func testOptionFilter_whenOnly() {
         // Given
-        let sut: ComparatorParameters.Option<String> = .only("B")
+        let subject: ComparatorParameters.Option<String> = .only("B")
         let data = ["A", "B", "C"]
 
         // When / Then
-        XCTAssertEqual(data.filter(by: sut), ["B"])
+        XCTAssertEqual(data.filter(by: subject), ["B"])
     }
 
     func testOptionFilter_whenSome() {
         // Given
-        let sut: ComparatorParameters.Option<String> = .some(["B", "C"])
+        let subject: ComparatorParameters.Option<String> = .some(["B", "C"])
         let data = ["A", "B", "C"]
 
         // When / Then
-        XCTAssertEqual(data.filter(by: sut), ["B", "C"])
+        XCTAssertEqual(data.filter(by: subject), ["B", "C"])
     }
 
     func testOptionFilter_whenAll() {
         // Given
-        let sut: ComparatorParameters.Option<String> = .all
+        let subject: ComparatorParameters.Option<String> = .all
         let data = ["A", "B", "C"]
 
         // When / Then
-        XCTAssertEqual(data.filter(by: sut), ["A", "B", "C"])
+        XCTAssertEqual(data.filter(by: subject), ["A", "B", "C"])
     }
 
     func testValues() {
         // Given
-        let sut1: ComparatorParameters.Option<String> = .all
-        let sut2: ComparatorParameters.Option<String> = .only("A")
-        let sut3: ComparatorParameters.Option<String> = .some(["A", "B"])
-        let sut4: ComparatorParameters.Option<String> = .none
+        let subject1: ComparatorParameters.Option<String> = .all
+        let subject2: ComparatorParameters.Option<String> = .only("A")
+        let subject3: ComparatorParameters.Option<String> = .some(["A", "B"])
+        let subject4: ComparatorParameters.Option<String> = .none
 
         // When / Then
-        XCTAssertNil(sut1.values())
-        XCTAssertEqual(sut2.values(), ["A"])
-        XCTAssertEqual(sut3.values(), ["A", "B"])
-        XCTAssertEqual(sut4.values(), [])
+        XCTAssertNil(subject1.values())
+        XCTAssertEqual(subject2.values(), ["A"])
+        XCTAssertEqual(subject3.values(), ["A", "B"])
+        XCTAssertEqual(subject4.values(), [])
     }
 
     func testContains() {
         // Given
-        let sut1: ComparatorParameters.Option<String> = .all
-        let sut2: ComparatorParameters.Option<String> = .only("A")
-        let sut3: ComparatorParameters.Option<String> = .some(["A", "B"])
-        let sut4: ComparatorParameters.Option<String> = .none
+        let subject1: ComparatorParameters.Option<String> = .all
+        let subject2: ComparatorParameters.Option<String> = .only("A")
+        let subject3: ComparatorParameters.Option<String> = .some(["A", "B"])
+        let subject4: ComparatorParameters.Option<String> = .none
 
         // When / Then
-        XCTAssertTrue(sut1.contains("A"))
-        XCTAssertTrue(sut2.contains("A"))
-        XCTAssertTrue(sut3.contains("A"))
-        XCTAssertFalse(sut4.contains("A"))
+        XCTAssertTrue(subject1.contains("A"))
+        XCTAssertTrue(subject2.contains("A"))
+        XCTAssertTrue(subject3.contains("A"))
+        XCTAssertFalse(subject4.contains("A"))
     }
 }

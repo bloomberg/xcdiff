@@ -26,13 +26,13 @@ final class DefaultProjectComparatorTests: XCTestCase {
 
     func testCompare_whenNoComparators_success() throws {
         // Given
-        let sut = DefaultProjectComparator(comparators: [],
-                                           resultRenderer: UniversalResultRenderer(format: .console, verbose: true),
-                                           xcodeProjLoader: XcodeProjLoaderMock(),
-                                           differencesOnly: false)
+        let subject = DefaultProjectComparator(comparators: [],
+                                               resultRenderer: UniversalResultRenderer(format: .console, verbose: true),
+                                               xcodeProjLoader: XcodeProjLoaderMock(),
+                                               differencesOnly: false)
 
         // When
-        let result = try sut.compare(firstPath, secondPath, parameters: parametersAll)
+        let result = try subject.compare(firstPath, secondPath, parameters: parametersAll)
 
         // Then
         XCTAssertTrue(result.success)
@@ -43,13 +43,13 @@ final class DefaultProjectComparatorTests: XCTestCase {
         // Given
         let comparator = ComparatorMock(tag: "Comparator1") { _, _, _ in [] }
         let comparators: [XCDiffCore.Comparator] = [comparator]
-        let sut = DefaultProjectComparator(comparators: comparators,
-                                           resultRenderer: UniversalResultRenderer(format: .console, verbose: true),
-                                           xcodeProjLoader: XcodeProjLoaderMock(),
-                                           differencesOnly: false)
+        let subject = DefaultProjectComparator(comparators: comparators,
+                                               resultRenderer: UniversalResultRenderer(format: .console, verbose: true),
+                                               xcodeProjLoader: XcodeProjLoaderMock(),
+                                               differencesOnly: false)
 
         // When
-        let result = try sut.compare(firstPath, secondPath, parameters: parametersAll)
+        let result = try subject.compare(firstPath, secondPath, parameters: parametersAll)
 
         // Then
         XCTAssertTrue(result.success)
@@ -61,13 +61,13 @@ final class DefaultProjectComparatorTests: XCTestCase {
         let tag = "Comparator1"
         let comparator = ComparatorMock(tag: tag) { _, _, _ in [CompareResult(tag: tag)] }
         let comparators: [XCDiffCore.Comparator] = [comparator]
-        let sut = DefaultProjectComparator(comparators: comparators,
-                                           resultRenderer: UniversalResultRenderer(format: .console, verbose: true),
-                                           xcodeProjLoader: XcodeProjLoaderMock(),
-                                           differencesOnly: false)
+        let subject = DefaultProjectComparator(comparators: comparators,
+                                               resultRenderer: UniversalResultRenderer(format: .console, verbose: true),
+                                               xcodeProjLoader: XcodeProjLoaderMock(),
+                                               differencesOnly: false)
 
         // When
-        let result = try sut.compare(firstPath, secondPath, parameters: parametersAll)
+        let result = try subject.compare(firstPath, secondPath, parameters: parametersAll)
 
         // Then
         XCTAssertTrue(result.success)
@@ -79,13 +79,13 @@ final class DefaultProjectComparatorTests: XCTestCase {
         let tag = "Comparator1"
         let comparator = ComparatorMock(tag: tag) { _, _, _ in [CompareResult(tag: tag)] }
         let comparators: [XCDiffCore.Comparator] = [comparator]
-        let sut = DefaultProjectComparator(comparators: comparators,
-                                           resultRenderer: UniversalResultRenderer(format: .console, verbose: true),
-                                           xcodeProjLoader: XcodeProjLoaderMock(),
-                                           differencesOnly: true)
+        let subject = DefaultProjectComparator(comparators: comparators,
+                                               resultRenderer: UniversalResultRenderer(format: .console, verbose: true),
+                                               xcodeProjLoader: XcodeProjLoaderMock(),
+                                               differencesOnly: true)
 
         // When
-        let result = try sut.compare(firstPath, secondPath, parameters: parametersAll)
+        let result = try subject.compare(firstPath, secondPath, parameters: parametersAll)
 
         // Then
         XCTAssertTrue(result.success)
@@ -97,13 +97,13 @@ final class DefaultProjectComparatorTests: XCTestCase {
         let tag = "Comparator1"
         let comparator = ComparatorMock(tag: tag) { _, _, _ in [CompareResult(tag: tag, onlyInFirst: ["file.txt"])] }
         let comparators: [XCDiffCore.Comparator] = [comparator]
-        let sut = DefaultProjectComparator(comparators: comparators,
-                                           resultRenderer: UniversalResultRenderer(format: .console, verbose: true),
-                                           xcodeProjLoader: XcodeProjLoaderMock(),
-                                           differencesOnly: false)
+        let subject = DefaultProjectComparator(comparators: comparators,
+                                               resultRenderer: UniversalResultRenderer(format: .console, verbose: true),
+                                               xcodeProjLoader: XcodeProjLoaderMock(),
+                                               differencesOnly: false)
 
         // When
-        let result = try sut.compare(firstPath, secondPath, parameters: parametersAll)
+        let result = try subject.compare(firstPath, secondPath, parameters: parametersAll)
 
         // Then
         XCTAssertFalse(result.success)
@@ -122,13 +122,13 @@ final class DefaultProjectComparatorTests: XCTestCase {
         let tag = "Comparator1"
         let comparator = ComparatorMock(tag: tag) { _, _, _ in [CompareResult(tag: tag, onlyInFirst: ["file.txt"])] }
         let comparators: [XCDiffCore.Comparator] = [comparator]
-        let sut = DefaultProjectComparator(comparators: comparators,
-                                           resultRenderer: UniversalResultRenderer(format: .console, verbose: true),
-                                           xcodeProjLoader: XcodeProjLoaderMock(),
-                                           differencesOnly: true)
+        let subject = DefaultProjectComparator(comparators: comparators,
+                                               resultRenderer: UniversalResultRenderer(format: .console, verbose: true),
+                                               xcodeProjLoader: XcodeProjLoaderMock(),
+                                               differencesOnly: true)
 
         // When
-        let result = try sut.compare(firstPath, secondPath, parameters: parametersAll)
+        let result = try subject.compare(firstPath, secondPath, parameters: parametersAll)
 
         // Then
         XCTAssertFalse(result.success)

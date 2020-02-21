@@ -32,11 +32,11 @@ final class JSONProjectCompareResultRendererTests: XCTestCase {
 
     func testRender_whenVerboseTrue() throws {
         // Given
-        let sut = JSONProjectCompareResultRenderer(output: outputBuffer.any(), verbose: true)
+        let subject = JSONProjectCompareResultRenderer(output: outputBuffer.any(), verbose: true)
         let result = fixtures.projectCompareResult.sample1()
 
         // When
-        try sut.render(result)
+        try subject.render(result)
 
         // Then
         XCTAssertEqual(content, expectedContent)
@@ -45,11 +45,11 @@ final class JSONProjectCompareResultRendererTests: XCTestCase {
     // The result is the same as for Verbose=true case, JSON format always contains all the details
     func testRender_whenVerboseFalse() throws {
         // Given
-        let sut = JSONProjectCompareResultRenderer(output: outputBuffer.any(), verbose: false)
+        let subject = JSONProjectCompareResultRenderer(output: outputBuffer.any(), verbose: false)
         let result = fixtures.projectCompareResult.sample1()
 
         // When
-        try sut.render(result)
+        try subject.render(result)
 
         // Then
         XCTAssertEqual(content, expectedContent)

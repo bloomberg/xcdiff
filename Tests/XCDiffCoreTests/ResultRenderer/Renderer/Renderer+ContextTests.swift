@@ -25,7 +25,7 @@ final class RendererContextTests: XCTestCase {
     private var markdownOutputBuffer: StringOutputBuffer!
     private var markdownRenderer: MarkdownRenderer!
 
-    private var sut: ForwardRenderer!
+    private var subject: ForwardRenderer!
 
     override func setUp() {
         super.setUp()
@@ -36,12 +36,12 @@ final class RendererContextTests: XCTestCase {
         markdownOutputBuffer = StringOutputBuffer()
         markdownRenderer = MarkdownRenderer(output: markdownOutputBuffer.any())
 
-        sut = ForwardRenderer(consoleRenderer, markdownRenderer)
+        subject = ForwardRenderer(consoleRenderer, markdownRenderer)
     }
 
     func testOnlyInFirstHeader_whenNoCount() {
         // When
-        sut.onlyInFirstHeader()
+        subject.onlyInFirstHeader()
 
         // Then
         XCTAssertEqual(consoleContent, """
@@ -55,7 +55,7 @@ final class RendererContextTests: XCTestCase {
 
     func testOnlyInFirstHeader_whenCount5() {
         // When
-        sut.onlyInFirstHeader(count: 5)
+        subject.onlyInFirstHeader(count: 5)
 
         // Then
         XCTAssertEqual(consoleContent, """
@@ -69,7 +69,7 @@ final class RendererContextTests: XCTestCase {
 
     func testOnlyInSecondHeader_whenNoCount() {
         // When
-        sut.onlyInSecondHeader()
+        subject.onlyInSecondHeader()
 
         // Then
         XCTAssertEqual(consoleContent, """
@@ -83,7 +83,7 @@ final class RendererContextTests: XCTestCase {
 
     func testOnlyInSecondHeader_whenCount5() {
         // When
-        sut.onlyInSecondHeader(count: 5)
+        subject.onlyInSecondHeader(count: 5)
 
         // Then
         XCTAssertEqual(consoleContent, """
@@ -97,7 +97,7 @@ final class RendererContextTests: XCTestCase {
 
     func testDifferentValuesHeader_whenNoCount() {
         // When
-        sut.differentValuesHeader()
+        subject.differentValuesHeader()
 
         // Then
         XCTAssertEqual(consoleContent, """
@@ -111,7 +111,7 @@ final class RendererContextTests: XCTestCase {
 
     func testDifferentValuesHeader_whenCount5() {
         // When
-        sut.differentValuesHeader(count: 5)
+        subject.differentValuesHeader(count: 5)
 
         // Then
         XCTAssertEqual(consoleContent, """
@@ -125,7 +125,7 @@ final class RendererContextTests: XCTestCase {
 
     func testSuccessHeader() {
         // When
-        sut.successHeader("Header")
+        subject.successHeader("Header")
 
         // Then
         XCTAssertEqual(consoleContent, """
@@ -139,7 +139,7 @@ final class RendererContextTests: XCTestCase {
 
     func testErrorHeader() {
         // When
-        sut.errorHeader("Header")
+        subject.errorHeader("Header")
 
         // Then
         XCTAssertEqual(consoleContent, """
@@ -225,32 +225,32 @@ final class RendererContextTests: XCTestCase {
     // MARK: - Private
 
     private func setupSample1() {
-        sut.successHeader("Success1")
-        sut.successHeader("Success2")
-        sut.errorHeader("Error1")
-        sut.onlyInFirstHeader(count: 2)
-        sut.list(.begin)
-        sut.bullet("B1", indent: .one)
-        sut.bullet("B2", indent: .one)
-        sut.list(.end)
-        sut.onlyInSecondHeader(count: 2)
-        sut.list(.begin)
-        sut.bullet("C1", indent: .one)
-        sut.bullet("C2", indent: .one)
-        sut.list(.end)
-        sut.differentValuesHeader(count: 2)
-        sut.list(.begin)
-        sut.bullet("Context1", indent: .one)
-        sut.bullet("V1.1", indent: .two)
-        sut.bullet("V1.1", indent: .two)
-        sut.list(.end)
-        sut.list(.begin)
-        sut.bullet("Context2", indent: .one)
-        sut.bullet("V2.1", indent: .two)
-        sut.bullet("V2.1", indent: .two)
-        sut.list(.end)
-        sut.newLine(1)
-        sut.successHeader("Success3")
+        subject.successHeader("Success1")
+        subject.successHeader("Success2")
+        subject.errorHeader("Error1")
+        subject.onlyInFirstHeader(count: 2)
+        subject.list(.begin)
+        subject.bullet("B1", indent: .one)
+        subject.bullet("B2", indent: .one)
+        subject.list(.end)
+        subject.onlyInSecondHeader(count: 2)
+        subject.list(.begin)
+        subject.bullet("C1", indent: .one)
+        subject.bullet("C2", indent: .one)
+        subject.list(.end)
+        subject.differentValuesHeader(count: 2)
+        subject.list(.begin)
+        subject.bullet("Context1", indent: .one)
+        subject.bullet("V1.1", indent: .two)
+        subject.bullet("V1.1", indent: .two)
+        subject.list(.end)
+        subject.list(.begin)
+        subject.bullet("Context2", indent: .one)
+        subject.bullet("V2.1", indent: .two)
+        subject.bullet("V2.1", indent: .two)
+        subject.list(.end)
+        subject.newLine(1)
+        subject.successHeader("Success3")
     }
 
     private var consoleContent: String {

@@ -19,17 +19,17 @@ import Foundation
 import XCTest
 
 final class TargetsComparatorTests: XCTestCase {
-    private var sut: TargetsComparator!
+    private var subject: TargetsComparator!
 
     override func setUp() {
         super.setUp()
 
-        sut = TargetsComparator()
+        subject = TargetsComparator()
     }
 
     func testTag() {
         // When / Then
-        XCTAssertEqual(sut.tag, "targets")
+        XCTAssertEqual(subject.tag, "targets")
     }
 
     func testCompare_whenHaveNoTargets() throws {
@@ -40,7 +40,7 @@ final class TargetsComparatorTests: XCTestCase {
             .projectDescriptor()
 
         // When
-        let actual = try sut.compare(first, second, parameters: .all)
+        let actual = try subject.compare(first, second, parameters: .all)
 
         // Then
         XCTAssertEqual(actual, [
@@ -59,7 +59,7 @@ final class TargetsComparatorTests: XCTestCase {
             .projectDescriptor()
 
         // When
-        let actual = try sut.compare(first, second, parameters: .all)
+        let actual = try subject.compare(first, second, parameters: .all)
 
         // Then
         XCTAssertEqual(actual, [
@@ -79,7 +79,7 @@ final class TargetsComparatorTests: XCTestCase {
             .projectDescriptor()
 
         // When
-        let actual = try sut.compare(first, second, parameters: .all)
+        let actual = try subject.compare(first, second, parameters: .all)
 
         // Then
         let expected = [
@@ -106,8 +106,8 @@ final class TargetsComparatorTests: XCTestCase {
             .projectDescriptor()
 
         // When
-        let actual = try sut.compare(first, second,
-                                     parameters: .init(targets: .some(["A", "B", "C", "D"]), configurations: .none))
+        let actual = try subject.compare(first, second,
+                                         parameters: .init(targets: .some(["A", "B", "C", "D"]), configurations: .none))
 
         // Then
         let expected = [
@@ -137,7 +137,7 @@ final class TargetsComparatorTests: XCTestCase {
                                               configurations: .all)
 
         // When / Then
-        XCTAssertThrowsError(try sut.compare(first, second, parameters: parameters)) { error in
+        XCTAssertThrowsError(try subject.compare(first, second, parameters: parameters)) { error in
             XCTAssertEqual(error.localizedDescription, "Cannot find target \"NOT_EXISTING\" in both projects")
         }
     }
@@ -156,8 +156,8 @@ final class TargetsComparatorTests: XCTestCase {
             .projectDescriptor()
 
         // When
-        let actual = try sut.compare(first, second,
-                                     parameters: .all)
+        let actual = try subject.compare(first, second,
+                                         parameters: .all)
 
         // Then
         let expected = [

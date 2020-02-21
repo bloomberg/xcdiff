@@ -29,10 +29,10 @@ final class ProjectDescriptorTests: XCTestCase {
         let xcodeProj = try xcodeProjLoaderMock.load(at: path)
 
         // When
-        let sut = ProjectDescriptor(path: path, xcodeProj: xcodeProj)
+        let subject = ProjectDescriptor(path: path, xcodeProj: xcodeProj)
 
         // Then
-        XCTAssertEqual(sut.path, path)
-        XCTAssertTrue(xcodeProj.pbxproj === sut.pbxproj)
+        XCTAssertEqual(subject.path, path)
+        XCTAssertTrue(xcodeProj.pbxproj === subject.pbxproj)
     }
 }

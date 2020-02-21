@@ -23,11 +23,11 @@ final class UniversalResultRendererTests: XCTestCase {
 
     func testRender_whenConsoleAndVerboseFalse() throws {
         // Given
-        let sut = UniversalResultRenderer(format: .console, verbose: false)
+        let subject = UniversalResultRenderer(format: .console, verbose: false)
         let result = fixtures.projectCompareResult.sample1()
 
         // When
-        let actual = try sut.render(result)
+        let actual = try subject.render(result)
 
         // Then
         XCTAssertEqual(actual, """
@@ -39,11 +39,11 @@ final class UniversalResultRendererTests: XCTestCase {
 
     func testRender_whenMarkdownAndVerboseFalse() throws {
         // Given
-        let sut = UniversalResultRenderer(format: .markdown, verbose: false)
+        let subject = UniversalResultRenderer(format: .markdown, verbose: false)
         let result = fixtures.projectCompareResult.sample1()
 
         // When
-        let actual = try sut.render(result)
+        let actual = try subject.render(result)
 
         // Then
         XCTAssertEqual(actual, """
@@ -57,11 +57,11 @@ final class UniversalResultRendererTests: XCTestCase {
     // swiftlint:disable:next function_body_length
     func testRender_whenJSONAndVerboseFalse() throws {
         // Given
-        let sut = UniversalResultRenderer(format: .json, verbose: false)
+        let subject = UniversalResultRenderer(format: .json, verbose: false)
         let result = fixtures.projectCompareResult.sample1()
 
         // When
-        let actual = try sut.render(result)
+        let actual = try subject.render(result)
 
         // Then
         XCTAssertEqual(actual, """

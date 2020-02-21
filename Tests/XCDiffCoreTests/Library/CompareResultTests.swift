@@ -21,43 +21,43 @@ import XCTest
 final class CompareResultTests: XCTestCase {
     func testSame_whenEmptyArrays_true() {
         // Given
-        let sut = compareResult(onlyInFirst: [], onlyInSecond: [], differentValues: [])
+        let subject = compareResult(onlyInFirst: [], onlyInSecond: [], differentValues: [])
 
         // When / Then
-        XCTAssertTrue(sut.same())
+        XCTAssertTrue(subject.same())
     }
 
     func testSame_whenEmpty_true() {
         // Given
-        let sut = compareResult(onlyInFirst: [], onlyInSecond: [], differentValues: [])
+        let subject = compareResult(onlyInFirst: [], onlyInSecond: [], differentValues: [])
 
         // When / Then
-        XCTAssertTrue(sut.same())
+        XCTAssertTrue(subject.same())
     }
 
     func testSame_whenOnlyInFirst_false() {
         // Given
-        let sut = compareResult(onlyInFirst: ["A"], onlyInSecond: [], differentValues: [])
+        let subject = compareResult(onlyInFirst: ["A"], onlyInSecond: [], differentValues: [])
 
         // When / Then
-        XCTAssertFalse(sut.same())
+        XCTAssertFalse(subject.same())
     }
 
     func testSame_whenOnlyInSecond_false() {
         // Given
-        let sut = compareResult(onlyInFirst: [], onlyInSecond: ["A"], differentValues: [])
+        let subject = compareResult(onlyInFirst: [], onlyInSecond: ["A"], differentValues: [])
 
         // When / Then
-        XCTAssertFalse(sut.same())
+        XCTAssertFalse(subject.same())
     }
 
     func testSame_whenOnlyDifferentValues_false() {
         // Given
         let differentValues = self.differentValues(context: "context", first: "A", second: "B")
-        let sut = compareResult(onlyInFirst: [], onlyInSecond: [], differentValues: [differentValues])
+        let subject = compareResult(onlyInFirst: [], onlyInSecond: [], differentValues: [differentValues])
 
         // When / Then
-        XCTAssertFalse(sut.same())
+        XCTAssertFalse(subject.same())
     }
 
     func testEqual_whenSameObject_true() {
