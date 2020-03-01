@@ -488,8 +488,8 @@ Output format: (<path>, <name>, <source_tree>)
 
 ### ⚠️  Only in second (2):
 
-  - `MismatchingLibrary`
-  - `NewFramework`
+  - `(target=MismatchingLibrary)`
+  - `(target=NewFramework)`
 
 
 

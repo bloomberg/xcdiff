@@ -119,6 +119,19 @@ final class PBXProjBuilder {
         return self
     }
 
+    @discardableResult
+    func make(target targetName: String, dependOn dependency: ProxyDependencyData) -> PBXProjBuilder {
+        let target = pbxproj.targets(named: targetName).first as! PBXNativeTarget
+        let targetProxy = PBXContainerItemProxy(containerPortal: dependency.containerPortal,
+                                                proxyType: dependency.proxyType)
+        pbxproj.add(object: targetProxy)
+        let targetDependency = PBXTargetDependency(name: dependency.name,
+                                                   targetProxy: targetProxy)
+        pbxproj.add(object: targetDependency)
+        target.dependencies.append(targetDependency)
+        return self
+    }
+
     func build() -> PBXProj {
         return pbxproj
     }
@@ -152,6 +165,12 @@ final class PBXProjBuilder {
 struct DependencyData {
     let name: String?
     let targetName: String
+}
+
+struct ProxyDependencyData {
+    let name: String?
+    let proxyType: PBXContainerItemProxy.ProxyType?
+    let containerPortal: PBXContainerItemProxy.ContainerPortal
 }
 
 extension PBXProjBuilder {

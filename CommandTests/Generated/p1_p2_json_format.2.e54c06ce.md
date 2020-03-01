@@ -1008,8 +1008,8 @@
 
     ],
     "onlyInSecond" : [
-      "MismatchingLibrary",
-      "NewFramework"
+      "(target=MismatchingLibrary)",
+      "(target=NewFramework)"
     ],
     "tag" : "dependencies"
   },

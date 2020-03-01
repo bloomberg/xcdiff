@@ -53,7 +53,7 @@ final class DependenciesTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "dependencies", context: ["\"T1\" target"], onlyInFirst: ["T2", "T3"]),
+            .init(tag: "dependencies", context: ["\"T1\" target"], onlyInFirst: ["(target=T2)", "(target=T3)"]),
             .init(tag: "dependencies", context: ["\"T2\" target"]),
             .init(tag: "dependencies", context: ["\"T3\" target"]),
         ])
@@ -79,7 +79,7 @@ final class DependenciesTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "dependencies", context: ["\"T1\" target"], onlyInSecond: ["T3"]),
+            .init(tag: "dependencies", context: ["\"T1\" target"], onlyInSecond: ["(target=T3)"]),
             .init(tag: "dependencies", context: ["\"T2\" target"]),
             .init(tag: "dependencies", context: ["\"T3\" target"]),
         ])
@@ -106,7 +106,7 @@ final class DependenciesTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "dependencies", context: ["\"T1\" target"], onlyInFirst: ["T3"]),
+            .init(tag: "dependencies", context: ["\"T1\" target"], onlyInFirst: ["(target=T3)"]),
             .init(tag: "dependencies", context: ["\"T2\" target"]),
             .init(tag: "dependencies", context: ["\"T3\" target"]),
         ])
@@ -132,9 +132,37 @@ final class DependenciesTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "dependencies", context: ["\"T1\" target"], onlyInSecond: ["T2", "T3"]),
+            .init(tag: "dependencies", context: ["\"T1\" target"], onlyInSecond: ["(target=T2)", "(target=T3)"]),
             .init(tag: "dependencies", context: ["\"T2\" target"]),
             .init(tag: "dependencies", context: ["\"T3\" target"]),
+        ])
+    }
+
+    func testCompare_whenDependeciesOnlyInSecondWithProxy() throws {
+        // Given
+        let other = project(name: "PX")
+            .addTarget(name: "X1")
+            .projectDescriptor()
+        let otherProject = try other.pbxproj.rootProject()!
+        let first = project(name: "P1")
+            .addTarget(name: "T1")
+            .addTarget(name: "T2")
+            .projectDescriptor()
+        let second = project(name: "P2")
+            .addTarget(name: "T1")
+            .addTarget(name: "T2")
+            .make(target: "T1", dependOn: ProxyDependencyData(name: "X1",
+                                                              proxyType: nil,
+                                                              containerPortal: .project(otherProject)))
+            .projectDescriptor()
+
+        // When
+        let actual = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(actual, [
+            .init(tag: "dependencies", context: ["\"T1\" target"], onlyInSecond: ["(name=X1, proxy_project=PX)"]),
+            .init(tag: "dependencies", context: ["\"T2\" target"]),
         ])
     }
 
