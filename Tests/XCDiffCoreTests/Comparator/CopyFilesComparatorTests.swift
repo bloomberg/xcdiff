@@ -311,6 +311,32 @@ final class CopyFilesComparatorTests: XCTestCase {
         ])
     }
 
+    func testCompare_whenEmptyEqualsNilInputAndOutpulFileListPaths() throws {
+        // Given
+        let first = project()
+            .addTarget(name: "Target1", productType: .application) { target in
+                target.addBuildPhase(.copyFiles(.frameworks)) { buildPhase in
+                    buildPhase
+                        .setInputFileListPaths([])
+                        .setOutputFileListPaths([])
+                }
+            }
+            .projectDescriptor()
+        let second = project()
+            .addTarget(name: "Target1", productType: .application) { target in
+                target.addBuildPhase(.copyFiles(.frameworks)) { _ in }
+            }
+            .projectDescriptor()
+
+        // When
+        let actual = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(actual, [
+            .init(tag: "copy_files", context: ["\"Target1\" target", "CopyFiles"]),
+        ])
+    }
+
     func testCompare_whenSameBuildPhaseNameButDifferentDstfolderSpec() throws {
         // Given
         let first = project()

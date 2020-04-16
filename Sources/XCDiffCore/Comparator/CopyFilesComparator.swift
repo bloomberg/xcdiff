@@ -157,12 +157,12 @@ private struct CopyFilesBuildPhaseDescriptor: Equatable {
                                 first: "\(runOnlyForDeploymentPostprocessing)",
                                 second: "\(second.runOnlyForDeploymentPostprocessing)"))
         }
-        if inputFileListPaths != second.inputFileListPaths {
+        if inputFileListPaths.valueOrEmpty != second.inputFileListPaths.valueOrEmpty {
             result.append(.init(context: "inputFileListPaths",
                                 first: "\(describe(inputFileListPaths))",
                                 second: "\(describe(second.inputFileListPaths))"))
         }
-        if outputFileListPaths != second.outputFileListPaths {
+        if outputFileListPaths.valueOrEmpty != second.outputFileListPaths.valueOrEmpty {
             result.append(.init(context: "outputFileListPaths",
                                 first: "\(describe(outputFileListPaths))",
                                 second: "\(describe(second.outputFileListPaths))"))
