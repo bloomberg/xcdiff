@@ -174,7 +174,7 @@ private struct BuildPhaseDescriptor: Equatable {
         return elements.joined(separator: ", ")
     }
 
-    static func ==(lhs: BuildPhaseDescriptor, rhs: BuildPhaseDescriptor) -> Bool {
+    static func == (lhs: BuildPhaseDescriptor, rhs: BuildPhaseDescriptor) -> Bool {
         lhs.identifier == rhs.identifier
             && lhs.runOnlyForDeploymentPostprocessing == rhs.runOnlyForDeploymentPostprocessing
             && lhs.inputFileListPaths.valueOrEmpty == rhs.inputFileListPaths.valueOrEmpty

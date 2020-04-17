@@ -1,5 +1,5 @@
 //
-// Copyright 2019 Bloomberg Finance L.P.
+// Copyright 2020 Bloomberg Finance L.P.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,12 +15,6 @@
 //
 
 import Foundation
-
-extension Optional where Wrapped: Collection {
-    var isNilOrEmpty: Bool {
-        self?.isEmpty ?? true
-    }
-}
 
 // Inspired by http://www.russbishop.net/improving-optionals
 // A type that has an empty value representation, as opposed to `nil`.
@@ -38,7 +32,7 @@ extension Set: EmptyValueRepresentable {
 }
 
 extension Dictionary: EmptyValueRepresentable {
-    public static var emptyValue: Dictionary<Key, Value> { return [:] }
+    public static var emptyValue: [Key: Value] { return [:] }
 }
 
 extension String: EmptyValueRepresentable {
