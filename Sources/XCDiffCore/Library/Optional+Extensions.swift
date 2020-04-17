@@ -43,7 +43,7 @@ extension Optional where Wrapped: EmptyValueRepresentable {
     /// If `self == nil` returns the empty value, otherwise returns the value.
     var valueOrEmpty: Wrapped {
         switch self {
-        case .some(let value):
+        case let .some(value):
             return value
         case .none:
             return Wrapped.emptyValue
