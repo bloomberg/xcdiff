@@ -312,7 +312,11 @@ public final class CommandRunner {
         case let error as ArgumentParserError:
             return (1, error.description)
         default:
-            return (1, error.localizedDescription)
+            if let lError = error as? LocalizedError {
+                return (1, lError.errorDescription ?? lError.localizedDescription)
+            }
+
+            return (1, String(describing: error))
         }
     }
 
