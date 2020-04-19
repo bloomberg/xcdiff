@@ -165,12 +165,19 @@ private struct BuildPhaseDescriptor: Equatable {
         if runOnlyForDeploymentPostprocessing != second.runOnlyForDeploymentPostprocessing {
             elements.append("runOnlyForDeploymentPostprocessing = \(runOnlyForDeploymentPostprocessing)")
         }
-        if inputFileListPaths != second.inputFileListPaths {
+        if inputFileListPaths.valueOrEmpty != second.inputFileListPaths.valueOrEmpty {
             elements.append("inputFileListPaths = \(describe(inputFileListPaths?.description))")
         }
-        if outputFileListPaths != second.outputFileListPaths {
+        if outputFileListPaths.valueOrEmpty != second.outputFileListPaths.valueOrEmpty {
             elements.append("outputFileListPaths = \(describe(outputFileListPaths?.description))")
         }
         return elements.joined(separator: ", ")
+    }
+
+    static func == (lhs: BuildPhaseDescriptor, rhs: BuildPhaseDescriptor) -> Bool {
+        lhs.identifier == rhs.identifier
+            && lhs.runOnlyForDeploymentPostprocessing == rhs.runOnlyForDeploymentPostprocessing
+            && lhs.inputFileListPaths.valueOrEmpty == rhs.inputFileListPaths.valueOrEmpty
+            && lhs.outputFileListPaths.valueOrEmpty == rhs.outputFileListPaths.valueOrEmpty
     }
 }

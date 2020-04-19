@@ -305,6 +305,34 @@ final class BuildPhasesComparatorTests: XCTestCase {
         ])
     }
 
+    func testCompare_whenEmptyEqualsNilInputAndOutpulFileListPaths() throws {
+        // Given
+        let first = project()
+            .addTarget(name: "Target1", productType: .application) { target in
+                target.addBuildPhase(.copyFiles(.plugins)) {
+                    $0.setInputFileListPaths([])
+                }
+                target.addBuildPhase(.copyFiles(.plugins)) {
+                    $0.setOutputFileListPaths([])
+                }
+            }
+            .projectDescriptor()
+        let second = project()
+            .addTarget(name: "Target1", productType: .application) { target in
+                target.addBuildPhase(.copyFiles(.plugins)) { _ in }
+                target.addBuildPhase(.copyFiles(.plugins)) { _ in }
+            }
+            .projectDescriptor()
+
+        // When
+        let actual = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(actual, [
+            .init(tag: "build_phases", context: ["\"Target1\" target"]),
+        ])
+    }
+
     func testCompare_whenDifferentRunOnlyForDeploymentPostprocessing() throws {
         // Given
         let first = project()
