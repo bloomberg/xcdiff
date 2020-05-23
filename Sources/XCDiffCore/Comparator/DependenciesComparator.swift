@@ -105,7 +105,7 @@ private struct DependencyDescriptor {
             case let .fileReference(fileReference):
                 let pathHelper = PathHelper()
                 let path = try? pathHelper.fullPath(from: fileReference, sourceRoot: sourceRoot)
-                return "proxy_file_reference=\(path ?? "nil")"
+                return "proxy_file_reference(path=\(path ?? "nil"))"
             case let .project(project):
                 return "proxy_project=\(project.name)"
             case .unknownObject:

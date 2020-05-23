@@ -110,20 +110,49 @@ final class PBXProjBuilder {
     }
 
     @discardableResult
-    func make(target targetName: String, dependOn dependency: DependencyData) -> PBXProjBuilder {
+    func make(target targetName: String, dependOn dependency: DependencyType) -> PBXProjBuilder {
+        switch dependency {
+        case let .target(value):
+            return make(target: targetName, dependOn: value)
+        case let .targetProxy(value):
+            return make(target: targetName, dependOn: value)
+        case let .swiftPackage(value):
+            return make(target: targetName, dependOn: value)
+        }
+    }
+
+    func build() -> PBXProj {
+        return pbxproj
+    }
+
+    // MARK: - Private
+
+    private func make(target targetName: String, dependOn dependency: TargetDependencyData) -> PBXProjBuilder {
         let target = pbxproj.targets(named: targetName).first as! PBXNativeTarget
-        let dependencyTarget = pbxproj.targets(named: dependency.targetName).first!
+        var dependencyTarget: PBXTarget?
+        if let targetName = dependency.targetName {
+            dependencyTarget = pbxproj.targets(named: targetName).first!
+        }
         let targetDependency = PBXTargetDependency(name: dependency.name, target: dependencyTarget)
         pbxproj.add(object: targetDependency)
         target.dependencies.append(targetDependency)
         return self
     }
 
-    @discardableResult
-    func make(target targetName: String, dependOn dependency: ProxyDependencyData) -> PBXProjBuilder {
+    private func make(target targetName: String, dependOn dependency: TargetProxyDependencyData) -> PBXProjBuilder {
         let target = pbxproj.targets(named: targetName).first as! PBXNativeTarget
-        let targetProxy = PBXContainerItemProxy(containerPortal: dependency.containerPortal,
-                                                proxyType: dependency.proxyType)
+        let containerPortal: PBXContainerItemProxy.ContainerPortal
+        switch dependency.containerPortal {
+        case let .project(descriptor):
+            containerPortal = .project(try! descriptor.pbxproj.rootProject()!)
+        case let .fileReference(path):
+            let fileReference = PBXFileReference(sourceTree: .absolute, path: path)
+            pbxproj.add(object: fileReference)
+            containerPortal = .fileReference(fileReference)
+        case .unknown:
+            containerPortal = .unknownObject(nil)
+        }
+        let targetProxy = PBXContainerItemProxy(containerPortal: containerPortal, proxyType: dependency.proxyType)
         pbxproj.add(object: targetProxy)
         let targetDependency = PBXTargetDependency(name: dependency.name,
                                                    targetProxy: targetProxy)
@@ -132,11 +161,17 @@ final class PBXProjBuilder {
         return self
     }
 
-    func build() -> PBXProj {
-        return pbxproj
+    private func make(target targetName: String,
+                      dependOn dependency: SwiftPackageProductDependencyData) -> PBXProjBuilder {
+        let target = pbxproj.targets(named: targetName).first as! PBXNativeTarget
+        let swiftPackageDependency = XCSwiftPackageProductDependency(productName: dependency.productName)
+        pbxproj.add(object: swiftPackageDependency)
+        let targetDependency = PBXTargetDependency(name: dependency.name,
+                                                   product: swiftPackageDependency)
+        pbxproj.add(object: targetDependency)
+        target.dependencies.append(targetDependency)
+        return self
     }
-
-    // MARK: - Private
 
     private static func createNewProject(name: String,
                                          configurationListBuilder: XCConfigurationListBuilder,
@@ -162,15 +197,32 @@ final class PBXProjBuilder {
 
 // swiftlint:enable force_cast force_try
 
-struct DependencyData {
-    let name: String?
-    let targetName: String
+enum DependencyType {
+    case target(TargetDependencyData)
+    case targetProxy(TargetProxyDependencyData)
+    case swiftPackage(SwiftPackageProductDependencyData)
 }
 
-struct ProxyDependencyData {
+struct TargetDependencyData {
+    let name: String?
+    let targetName: String?
+}
+
+struct TargetProxyDependencyData {
     let name: String?
     let proxyType: PBXContainerItemProxy.ProxyType?
-    let containerPortal: PBXContainerItemProxy.ContainerPortal
+    let containerPortal: ContainerPortal
+}
+
+struct SwiftPackageProductDependencyData {
+    let name: String?
+    let productName: String
+}
+
+enum ContainerPortal {
+    case project(ProjectDescriptor)
+    case fileReference(String)
+    case unknown
 }
 
 extension PBXProjBuilder {
