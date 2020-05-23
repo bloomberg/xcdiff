@@ -8,17 +8,19 @@
 
 # Expected output
 ```
-- FILE_REFERENCES
-- BUILD_PHASES
-- COPY_FILES
-- TARGETS
-- HEADERS
-- SOURCES
-- RESOURCES
-- CONFIGURATIONS
-- SETTINGS
-- RESOLVED_SETTINGS
-- SOURCE_TREES
-- LINKED_DEPENDENCIES
+  COMPARTOR TAG                | DEFAULT  
+------------------------------------------
+- FILE_REFERENCES              | Yes
+- BUILD_PHASES                 | Yes
+- COPY_FILES                   | Yes
+- TARGETS                      | Yes
+- HEADERS                      | Yes
+- SOURCES                      | Yes
+- RESOURCES                    | Yes
+- CONFIGURATIONS               | Yes
+- SETTINGS                     | Yes
+- RESOLVED_SETTINGS            | No
+- SOURCE_TREES                 | Yes
+- LINKED_DEPENDENCIES          | Yes
 
 ```

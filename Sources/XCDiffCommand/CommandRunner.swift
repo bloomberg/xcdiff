@@ -14,6 +14,7 @@
 // limitations under the License.
 //
 
+// swiftlint:disable type_body_length
 import Basic
 import Foundation
 import PathKit
@@ -141,14 +142,27 @@ public final class CommandRunner {
     }
 
     private func runPrintAvailableOperators() -> Int32 {
-        let comparators = [ComparatorType].allAvailableComparators
-        guard !comparators.isEmpty else {
+        let defaultComparatorsTags = Set([ComparatorType].defaultComparators.map { $0.tag })
+        let allAvailableComparators = [ComparatorType].allAvailableComparators
+        guard !allAvailableComparators.isEmpty else {
             printer.text("No available comparators")
             return 0
         }
-        let output = "- " + comparators
-            .map { $0.displayName }
-            .joined(separator: "\n- ")
+        let nameTitleWidth = 30
+        let defaultTitleWidth = 9
+        let nameTitle = "  COMPARTOR TAG"
+        let defaultTitle = "DEFAULT"
+        let columnSeparator = " | "
+        printer.text("\(nameTitle.padding(toLength: nameTitleWidth, withPad: " ", startingAt: 0))"
+            + columnSeparator
+            + "\(defaultTitle.padding(toLength: defaultTitleWidth, withPad: " ", startingAt: 0))")
+        printer.text(String(repeating: "-", count: nameTitleWidth + columnSeparator.count + defaultTitleWidth))
+        let output = allAvailableComparators
+            .map { "- \($0.displayName)".padding(toLength: nameTitleWidth, withPad: " ", startingAt: 0)
+                + columnSeparator
+                + (defaultComparatorsTags.contains($0.tag) ? "Yes" : "No")
+            }
+            .joined(separator: "\n")
         printer.text(output)
         return 0
     }
@@ -367,3 +381,5 @@ enum CommandError: LocalizedError {
         }
     }
 }
+
+// swiftlint:enable type_body_length
