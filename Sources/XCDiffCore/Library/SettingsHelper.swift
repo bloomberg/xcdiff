@@ -25,8 +25,8 @@ class SettingsHelper {
         let firstKeys = Array(first.keys)
         let secondKeys = Array(second.keys)
         let commonKeys = firstKeys.commonSorted(secondKeys)
-        let onlyInFirst = firstKeys.subtractingAndSorted(secondKeys)
-        let onlyInSecond = secondKeys.subtractingAndSorted(firstKeys)
+        let onlyInFirst = firstKeys.subtractingAndSorted(secondKeys).map { keyAndValue($0, buildSettings: first) }
+        let onlyInSecond = secondKeys.subtractingAndSorted(firstKeys).map { keyAndValue($0, buildSettings: second) }
 
         // we attempt to ignore differences that are a result of different project names
         let firstProjectName = first["PROJECT_NAME"] as? String
@@ -55,6 +55,10 @@ class SettingsHelper {
     }
 
     // MARK: - Private
+
+    private func keyAndValue(_ key: String, buildSettings: BuildSettings) -> String {
+        return "\(key) = \(buildSettings[key] ?? "nil")"
+    }
 
     private func stringFromBuildSetting(_ buildSetting: Any?) throws -> String {
         // try to unwrap

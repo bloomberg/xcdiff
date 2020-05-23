@@ -25,7 +25,7 @@
 
 ### ⚠️  Only in second (1):
 
-  - `CUSTOM_SETTGING_1`
+  - `CUSTOM_SETTGING_1 = CS_1_PROJECT_LEVEL`
 
 
 
@@ -37,7 +37,7 @@
 
 ### ⚠️  Only in second (1):
 
-  - `CUSTOM_SETTGING_1`
+  - `CUSTOM_SETTGING_1 = CS_1_PROJECT_LEVEL`
 
 
 
@@ -57,7 +57,7 @@
 
 ### ⚠️  Only in second (1):
 
-  - `ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES`
+  - `ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES`
 
 
 ### ⚠️  Value mismatch (1):
@@ -76,7 +76,7 @@
 
 ### ⚠️  Only in second (1):
 
-  - `ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES`
+  - `ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES`
 
 
 ### ⚠️  Value mismatch (1):

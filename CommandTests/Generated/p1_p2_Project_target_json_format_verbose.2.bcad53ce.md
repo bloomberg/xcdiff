@@ -206,7 +206,7 @@
 
     ],
     "onlyInSecond" : [
-      "CUSTOM_SETTGING_1"
+      "CUSTOM_SETTGING_1 = CS_1_PROJECT_LEVEL"
     ],
     "tag" : "settings"
   },
@@ -240,7 +240,7 @@
 
     ],
     "onlyInSecond" : [
-      "CUSTOM_SETTGING_1"
+      "CUSTOM_SETTGING_1 = CS_1_PROJECT_LEVEL"
     ],
     "tag" : "settings"
   },
@@ -282,7 +282,7 @@
 
     ],
     "onlyInSecond" : [
-      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES"
+      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES"
     ],
     "tag" : "settings"
   },
@@ -320,7 +320,7 @@
 
     ],
     "onlyInSecond" : [
-      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES"
+      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES"
     ],
     "tag" : "settings"
   },
