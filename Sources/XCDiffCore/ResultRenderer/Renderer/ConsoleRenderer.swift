@@ -78,3 +78,85 @@ final class ConsoleRenderer: Renderer {
         output.write(string)
     }
 }
+
+final class ConsoleRenderer2: Renderer2 {
+    private let output: AnyOutput<String>
+    private var indent: Int = 0
+
+    init(output: AnyOutput<String>) {
+        self.output = output
+    }
+
+    func begin() {
+        // nothing
+    }
+
+    func end() {
+        // nothing
+    }
+
+    func section(_ style: RendererElement.Style, _ content: () -> Void) {
+        content()
+    }
+
+    func header(_ text: String, _ header: RendererElement.Header) {
+        switch header {
+        case .h1:
+            write("\n")
+            write("=\n")
+            write("= \(text)\n")
+            write("=\n")
+            write("\n")
+        case .h2:
+            write("\(text)\n")
+        case .h3:
+            write("\n\(text)\n\n")
+        }
+    }
+
+    func text(_ text: String) {
+        write("\(text)\n")
+    }
+
+    func list(_ content: () -> Void) {
+        indent += 1
+        content()
+        indent -= 1
+        line(1)
+    }
+
+    func item(_ text: String) {
+        item {
+            write(text)
+        }
+    }
+
+    func item(_ content: () -> Void) {
+        let spacing = String(repeating: " ", count: 2 * indent)
+        let symbol = bullet(indent: indent)
+        write("\(spacing)\(symbol) ")
+        content()
+        line(1)
+    }
+
+    func line(_ count: Int) {
+        write(String(repeating: "\n", count: count))
+    }
+
+    // MARK: - Private
+
+    private func write(_ string: String) {
+        output.write(string)
+    }
+
+    private func bullet(indent: Int) -> String {
+        switch indent {
+        case 0:
+            return "»"
+        case 1:
+            return "•"
+        default:
+            return "◦"
+        }
+    }
+}

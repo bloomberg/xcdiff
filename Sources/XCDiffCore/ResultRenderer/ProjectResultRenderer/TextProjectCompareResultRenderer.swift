@@ -88,3 +88,104 @@ final class TextProjectCompareResultRenderer: ProjectCompareResultRenderer {
         return rootContext + subContext
     }
 }
+
+
+final class TextProjectCompareResultRenderer2: ProjectCompareResultRenderer {
+    private let renderer: Renderer2
+    private let verbose: Bool
+
+    init(renderer: Renderer2, verbose: Bool) {
+        self.renderer = renderer
+        self.verbose = verbose
+    }
+
+    func render(_ result: ProjectCompareResult) {
+        renderer.begin()
+        result.results.forEach(render)
+        renderer.end()
+    }
+
+    // MARK: - Private
+
+    private func render(_ result: CompareResult) {
+        guard result.same() == false else {
+            renderer.section(.success) {
+                renderer.header("✅ \(title(from: result))", .h2)
+            }
+            return
+        }
+
+        renderer.section(.warning) {
+            renderer.header("❌ \(title(from: result))", .h2)
+            guard verbose else {
+                return
+            }
+
+            // render description
+            if let description = result.description {
+                renderer.text(description)
+            }
+
+            // render only in first
+            let onlyInFirst = result.onlyInFirst
+            if !onlyInFirst.isEmpty {
+                renderer.header("⚠️  Only in first\(string(from: onlyInFirst.count)):", .h3)
+                renderer.section(.default) {
+                    renderer.list {
+                        onlyInFirst.forEach {
+                            renderer.item($0)
+                        }
+                    }
+                }
+            }
+
+            // render only in second
+            let onlyInSecond = result.onlyInSecond
+            if !onlyInSecond.isEmpty {
+                renderer.header("⚠️  Only in second\(string(from: onlyInSecond.count)):", .h3)
+                renderer.section(.default) {
+                    renderer.list {
+                        onlyInSecond.forEach {
+                            renderer.item($0)
+                        }
+                    }
+                }
+            }
+
+            // render different values
+            let differentValues = result.differentValues
+            if !differentValues.isEmpty {
+                renderer.header("⚠️  Value mismatch\(string(from: differentValues.count)):", .h3)
+                renderer.section(.default) {
+                    renderer.list {
+                        differentValues.forEach { item in
+                            renderer.item {
+                                renderer.text(item.context)
+                                renderer.list {
+                                    renderer.item(item.first)
+                                    renderer.item(item.second)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // added for compatibility with the old renderer
+            renderer.line(1)
+        }
+    }
+
+    private func title(from result: CompareResult) -> String {
+        let rootContext = result.tag.uppercased()
+        let subContext = !result.context.isEmpty ? " > " + result.context.joined(separator: " > ") : ""
+        return rootContext + subContext
+    }
+
+    private func string(from count: Int?) -> String {
+        guard let count = count else {
+            return ""
+        }
+        return " (\(count))"
+    }
+}

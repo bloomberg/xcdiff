@@ -33,6 +33,17 @@ struct RendererElement {
         case begin
         case end
     }
+
+    enum Level {
+        case one
+        case two
+    }
+
+    enum Style {
+        case `default`
+        case success
+        case warning
+    }
 }
 
 protocol Renderer {
@@ -41,4 +52,16 @@ protocol Renderer {
     func bullet(_ text: String, indent: RendererElement.Indent)
     func newLine(_ count: Int)
     func header(_ text: String, _ header: RendererElement.Header)
+}
+
+protocol Renderer2 {
+    func begin()
+    func end()
+    func section(_ style: RendererElement.Style, _ content: () -> Void)
+    func header(_ text: String, _ header: RendererElement.Header)
+    func text(_ text: String)
+    func list(_ content: () -> Void)
+    func item(_ text: String)
+    func item(_ content: () -> Void)
+    func line(_ count: Int)
 }
