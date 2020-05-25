@@ -26,80 +26,6 @@ final class TextProjectCompareResultRenderer: ProjectCompareResultRenderer {
     }
 
     func render(_ result: ProjectCompareResult) {
-        result.results.forEach(render)
-    }
-
-    // MARK: - Private
-
-    private func render(_ result: CompareResult) {
-        guard result.same() == false else {
-            renderer.successHeader(title(from: result))
-            return
-        }
-
-        renderer.errorHeader(title(from: result))
-
-        guard verbose else {
-            return
-        }
-
-        if let description = result.description {
-            renderer.text(description)
-        }
-
-        let onlyInFirst = result.onlyInFirst
-        if !onlyInFirst.isEmpty {
-            renderer.onlyInFirstHeader(count: onlyInFirst.count)
-            renderer.list(.begin)
-            onlyInFirst.forEach {
-                renderer.bullet($0, indent: .one)
-            }
-            renderer.list(.end)
-        }
-
-        let onlyInSecond = result.onlyInSecond
-        if !onlyInSecond.isEmpty {
-            renderer.onlyInSecondHeader(count: onlyInSecond.count)
-            renderer.list(.begin)
-            onlyInSecond.forEach {
-                renderer.bullet($0, indent: .one)
-            }
-            renderer.list(.end)
-        }
-
-        let differentValues = result.differentValues
-        if !differentValues.isEmpty {
-            renderer.differentValuesHeader(count: differentValues.count)
-            differentValues.forEach {
-                renderer.list(.begin)
-                renderer.bullet($0.context, indent: .one)
-                renderer.bullet("\($0.first)", indent: .two)
-                renderer.bullet("\($0.second)", indent: .two)
-                renderer.list(.end)
-            }
-        }
-
-        renderer.newLine(1)
-    }
-
-    private func title(from result: CompareResult) -> String {
-        let rootContext = result.tag.uppercased()
-        let subContext = !result.context.isEmpty ? " > " + result.context.joined(separator: " > ") : ""
-        return rootContext + subContext
-    }
-}
-
-
-final class TextProjectCompareResultRenderer2: ProjectCompareResultRenderer {
-    private let renderer: Renderer2
-    private let verbose: Bool
-
-    init(renderer: Renderer2, verbose: Bool) {
-        self.renderer = renderer
-        self.verbose = verbose
-    }
-
-    func render(_ result: ProjectCompareResult) {
         renderer.begin()
         result.results.forEach(render)
         renderer.end()
@@ -160,7 +86,7 @@ final class TextProjectCompareResultRenderer2: ProjectCompareResultRenderer {
                     renderer.list {
                         differentValues.forEach { item in
                             renderer.item {
-                                renderer.text(item.context)
+                                renderer.pre(item.context)
                                 renderer.list {
                                     renderer.item(item.first)
                                     renderer.item(item.second)
@@ -172,7 +98,9 @@ final class TextProjectCompareResultRenderer2: ProjectCompareResultRenderer {
             }
 
             // added for compatibility with the old renderer
-            renderer.line(1)
+            if differentValues.isEmpty {
+                renderer.line(1)
+            }
         }
     }
 

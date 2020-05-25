@@ -52,13 +52,13 @@ final class UniversalResultRenderer: ResultRenderer {
     }
 
     private func createConsoleRenderer(outputBuffer: AnyOutput<String>) -> ProjectCompareResultRenderer {
-        return TextProjectCompareResultRenderer2(renderer: ConsoleRenderer2(output: outputBuffer),
-                                                 verbose: verbose)
+        return TextProjectCompareResultRenderer(renderer: ConsoleRenderer(output: outputBuffer),
+                                                verbose: verbose)
     }
 
     private func createMarkdownRenderer(outputBuffer: AnyOutput<String>) -> ProjectCompareResultRenderer {
-        return TextProjectCompareResultRenderer2(renderer: MarkdownRenderer2(output: outputBuffer),
-                                                 verbose: verbose)
+        return TextProjectCompareResultRenderer(renderer: MarkdownRenderer(output: outputBuffer),
+                                                verbose: verbose)
     }
 
     private func createJSONRenderer(outputBuffer: AnyOutput<String>) -> ProjectCompareResultRenderer {
@@ -67,7 +67,7 @@ final class UniversalResultRenderer: ResultRenderer {
     }
 
     private func createHTMLRenderer(outputBuffer: AnyOutput<String>) -> ProjectCompareResultRenderer {
-        return HTMLProjectCompareResultRenderer(output: outputBuffer,
+        return TextProjectCompareResultRenderer(renderer: HTMLRenderer(output: outputBuffer),
                                                 verbose: verbose)
     }
 }

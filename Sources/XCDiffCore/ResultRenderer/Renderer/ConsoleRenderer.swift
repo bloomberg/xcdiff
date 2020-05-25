@@ -18,69 +18,6 @@ import Foundation
 
 final class ConsoleRenderer: Renderer {
     private let output: AnyOutput<String>
-
-    init(output: AnyOutput<String>) {
-        self.output = output
-    }
-
-    func text(_ text: String) {
-        write("\(text)\n")
-    }
-
-    func list(_ element: RendererElement.List) {
-        switch element {
-        case .begin:
-            return
-        case .end:
-            newLine(1)
-        }
-    }
-
-    func bullet(_ text: String, indent: RendererElement.Indent) {
-        let spacing = String(repeating: " ", count: 2 * indent.rawValue)
-        let symbol = bullet(indent: indent)
-        self.text("\(spacing)\(symbol) \(text)")
-    }
-
-    func newLine(_ count: Int = 1) {
-        write(String(repeating: "\n", count: count))
-    }
-
-    func header(_ text: String, _ header: RendererElement.Header) {
-        switch header {
-        case .h1:
-            write("\n")
-            write("=\n")
-            write("= \(text)\n")
-            write("=\n")
-            write("\n")
-        case .h2:
-            write("\(text)\n")
-        case .h3:
-            write("\n\(text)\n\n")
-        }
-    }
-
-    // MARK: - Private
-
-    private func bullet(indent: RendererElement.Indent) -> String {
-        switch indent {
-        case .zero:
-            return "»"
-        case .one:
-            return "•"
-        case .two:
-            return "◦"
-        }
-    }
-
-    private func write(_ string: String) {
-        output.write(string)
-    }
-}
-
-final class ConsoleRenderer2: Renderer2 {
-    private let output: AnyOutput<String>
     private var indent: Int = 0
 
     init(output: AnyOutput<String>) {
@@ -95,7 +32,7 @@ final class ConsoleRenderer2: Renderer2 {
         // nothing
     }
 
-    func section(_ style: RendererElement.Style, _ content: () -> Void) {
+    func section(_: RendererElement.Style, _ content: () -> Void) {
         content()
     }
 
@@ -118,6 +55,10 @@ final class ConsoleRenderer2: Renderer2 {
         write("\(text)\n")
     }
 
+    func pre(_ text: String) {
+        self.text(text)
+    }
+
     func list(_ content: () -> Void) {
         indent += 1
         content()
@@ -128,6 +69,7 @@ final class ConsoleRenderer2: Renderer2 {
     func item(_ text: String) {
         item {
             write(text)
+            line(1)
         }
     }
 
@@ -136,7 +78,6 @@ final class ConsoleRenderer2: Renderer2 {
         let symbol = bullet(indent: indent)
         write("\(spacing)\(symbol) ")
         content()
-        line(1)
     }
 
     func line(_ count: Int) {
@@ -151,8 +92,6 @@ final class ConsoleRenderer2: Renderer2 {
 
     private func bullet(indent: Int) -> String {
         switch indent {
-        case 0:
-            return "»"
         case 1:
             return "•"
         default:

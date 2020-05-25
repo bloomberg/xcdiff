@@ -17,26 +17,10 @@
 import Foundation
 
 struct RendererElement {
-    enum Indent: Int {
-        case zero = 0
-        case one
-        case two
-    }
-
     enum Header: Int {
         case h1 = 1
         case h2
         case h3
-    }
-
-    enum List {
-        case begin
-        case end
-    }
-
-    enum Level {
-        case one
-        case two
     }
 
     enum Style {
@@ -47,19 +31,12 @@ struct RendererElement {
 }
 
 protocol Renderer {
-    func text(_ text: String)
-    func list(_ element: RendererElement.List)
-    func bullet(_ text: String, indent: RendererElement.Indent)
-    func newLine(_ count: Int)
-    func header(_ text: String, _ header: RendererElement.Header)
-}
-
-protocol Renderer2 {
     func begin()
     func end()
     func section(_ style: RendererElement.Style, _ content: () -> Void)
     func header(_ text: String, _ header: RendererElement.Header)
     func text(_ text: String)
+    func pre(_ text: String)
     func list(_ content: () -> Void)
     func item(_ text: String)
     func item(_ content: () -> Void)
