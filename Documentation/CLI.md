@@ -53,6 +53,7 @@ There are three output formats:
 - `console` (default, if `-f` is not specified)
 - `json`
 - `markdown`
+- `html`
 
 ```sh
 xcdiff -f markdown # alternatively json or console

@@ -114,7 +114,7 @@ final class HTMLRenderer: Renderer {
     <body>
         <div class="container">
             <header>
-                <h1>Diff Results</h1>
+                <h1>Δ xcdiff result</h1>
             </header>
     """
 
@@ -140,11 +140,12 @@ final class HTMLRenderer: Renderer {
     }
 
     func section(_ style: RendererElement.Style, _ content: () -> Void) {
-        switch style {
+        let cssClass = self.cssClass(from: style)
+        switch cssClass {
         case .success, .warning:
-            tag("section", cssClass(from: style), content)
-        case .default:
-            tag("div", .content, content)
+            tag("section", cssClass, content)
+        case .content:
+            tag("div", cssClass, content)
         }
     }
 
@@ -229,10 +230,10 @@ final class HTMLRenderer: Renderer {
         }
     }
 
-    private func cssClass(from style: RendererElement.Style) -> CSSClass? {
+    private func cssClass(from style: RendererElement.Style) -> CSSClass {
         switch style {
-        case .default:
-            return nil
+        case .content:
+            return .content
         case .success:
             return .success
         case .warning:

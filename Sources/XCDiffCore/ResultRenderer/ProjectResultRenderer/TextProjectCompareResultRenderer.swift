@@ -55,8 +55,8 @@ final class TextProjectCompareResultRenderer: ProjectCompareResultRenderer {
             // render only in first
             let onlyInFirst = result.onlyInFirst
             if !onlyInFirst.isEmpty {
-                renderer.header("⚠️  Only in first\(string(from: onlyInFirst.count)):", .h3)
-                renderer.section(.default) {
+                renderer.header("⚠️  Only in first (\(onlyInFirst.count)):", .h3)
+                renderer.section(.content) {
                     renderer.list {
                         onlyInFirst.forEach {
                             renderer.item($0)
@@ -68,8 +68,8 @@ final class TextProjectCompareResultRenderer: ProjectCompareResultRenderer {
             // render only in second
             let onlyInSecond = result.onlyInSecond
             if !onlyInSecond.isEmpty {
-                renderer.header("⚠️  Only in second\(string(from: onlyInSecond.count)):", .h3)
-                renderer.section(.default) {
+                renderer.header("⚠️  Only in second (\(onlyInSecond.count)):", .h3)
+                renderer.section(.content) {
                     renderer.list {
                         onlyInSecond.forEach {
                             renderer.item($0)
@@ -81,8 +81,8 @@ final class TextProjectCompareResultRenderer: ProjectCompareResultRenderer {
             // render different values
             let differentValues = result.differentValues
             if !differentValues.isEmpty {
-                renderer.header("⚠️  Value mismatch\(string(from: differentValues.count)):", .h3)
-                renderer.section(.default) {
+                renderer.header("⚠️  Value mismatch (\(differentValues.count)):", .h3)
+                renderer.section(.content) {
                     renderer.list {
                         differentValues.forEach { item in
                             renderer.item {
@@ -108,12 +108,5 @@ final class TextProjectCompareResultRenderer: ProjectCompareResultRenderer {
         let rootContext = result.tag.uppercased()
         let subContext = !result.context.isEmpty ? " > " + result.context.joined(separator: " > ") : ""
         return rootContext + subContext
-    }
-
-    private func string(from count: Int?) -> String {
-        guard let count = count else {
-            return ""
-        }
-        return " (\(count))"
     }
 }

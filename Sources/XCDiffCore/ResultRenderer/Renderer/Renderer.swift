@@ -24,7 +24,7 @@ struct RendererElement {
     }
 
     enum Style {
-        case `default`
+        case content
         case success
         case warning
     }
