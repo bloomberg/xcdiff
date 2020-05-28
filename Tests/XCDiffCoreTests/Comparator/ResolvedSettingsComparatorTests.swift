@@ -177,7 +177,7 @@ final class ResolvedSettingsComparatorTests: XCTestCase {
         XCTAssertEqual(actual, [
             .init(tag: "resolved_settings",
                   context: ["\"Target1\" target", "\"Debug\" configuration", "Values"],
-                  onlyInFirst: ["TARGETED_DEVICE_FAMILY", "TARGETNAME"]),
+                  onlyInFirst: ["TARGETED_DEVICE_FAMILY = 1,2", "TARGETNAME = Target1"]),
         ])
     }
 
@@ -212,7 +212,7 @@ final class ResolvedSettingsComparatorTests: XCTestCase {
         XCTAssertEqual(actual, [
             .init(tag: "resolved_settings",
                   context: ["\"Target1\" target", "\"Debug\" configuration", "Values"],
-                  onlyInSecond: ["TARGETED_DEVICE_FAMILY", "TARGETNAME"]),
+                  onlyInSecond: ["TARGETED_DEVICE_FAMILY = 1,2", "TARGETNAME = Target1"]),
         ])
     }
 

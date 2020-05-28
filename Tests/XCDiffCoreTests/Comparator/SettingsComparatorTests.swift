@@ -131,8 +131,8 @@ final class SettingsComparatorTests: XCTestCase {
                   context: ["Root project", "\"Release\" configuration", "Base configuration"]),
             .init(tag: "settings",
                   context: ["Root project", "\"Release\" configuration", "Values"],
-                  onlyInFirst: ["B"],
-                  onlyInSecond: ["C"],
+                  onlyInFirst: ["B = B_VALUE"],
+                  onlyInSecond: ["C = C_VALUE"],
                   differentValues: [.init(context: "A", first: "A_VALUE_1", second: "A_VALUE_2")]),
         ])
     }
@@ -250,8 +250,8 @@ final class SettingsComparatorTests: XCTestCase {
                   context: ["\"Target\" target", "\"Release\" configuration", "Base configuration"]),
             .init(tag: "settings",
                   context: ["\"Target\" target", "\"Release\" configuration", "Values"],
-                  onlyInFirst: ["B"],
-                  onlyInSecond: ["C"],
+                  onlyInFirst: ["B = B_VALUE"],
+                  onlyInSecond: ["C = C_VALUE"],
                   differentValues: [.init(context: "A", first: "A_VALUE_1", second: "A_VALUE_2")]),
         ])
     }
@@ -330,8 +330,8 @@ final class SettingsComparatorTests: XCTestCase {
                   context: ["\"Target\" target", "\"Debug\" configuration", "Base configuration"]),
             .init(tag: "settings",
                   context: ["\"Target\" target", "\"Debug\" configuration", "Values"],
-                  onlyInFirst: ["DEBUG_B"],
-                  onlyInSecond: ["DEBUG_C"],
+                  onlyInFirst: ["DEBUG_B = B_VALUE"],
+                  onlyInSecond: ["DEBUG_C = C_VALUE"],
                   differentValues: [.init(context: "DEBUG_A", first: "A_VALUE_1", second: "A_VALUE_2")]),
         ])
     }

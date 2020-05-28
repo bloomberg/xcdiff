@@ -43,7 +43,7 @@
 
     ],
     "onlyInSecond" : [
-      "CUSTOM_SETTGING_1"
+      "CUSTOM_SETTGING_1 = CS_1_PROJECT_LEVEL"
     ],
     "tag" : "settings"
   },
@@ -77,7 +77,7 @@
 
     ],
     "onlyInSecond" : [
-      "CUSTOM_SETTGING_1"
+      "CUSTOM_SETTGING_1 = CS_1_PROJECT_LEVEL"
     ],
     "tag" : "settings"
   },
@@ -112,22 +112,22 @@
       }
     ],
     "onlyInFirst" : [
-      "OTHER_LDFLAGS"
+      "OTHER_LDFLAGS = -ObjC"
     ],
     "onlyInSecond" : [
-      "CLANG_ENABLE_MODULES",
-      "CURRENT_PROJECT_VERSION",
-      "DEFINES_MODULE",
-      "DYLIB_COMPATIBILITY_VERSION",
-      "DYLIB_CURRENT_VERSION",
-      "DYLIB_INSTALL_NAME_BASE",
-      "INFOPLIST_FILE",
-      "INSTALL_PATH",
-      "LD_RUNPATH_SEARCH_PATHS",
-      "PRODUCT_BUNDLE_IDENTIFIER",
-      "SWIFT_OPTIMIZATION_LEVEL",
-      "VERSIONING_SYSTEM",
-      "VERSION_INFO_PREFIX"
+      "CLANG_ENABLE_MODULES = YES",
+      "CURRENT_PROJECT_VERSION = 1",
+      "DEFINES_MODULE = YES",
+      "DYLIB_COMPATIBILITY_VERSION = 1",
+      "DYLIB_CURRENT_VERSION = 1",
+      "DYLIB_INSTALL_NAME_BASE = @rpath",
+      "INFOPLIST_FILE = MismatchingLibrary\/MismatchingLibrary-Info.plist",
+      "INSTALL_PATH = $(LOCAL_LIBRARY_DIR)\/Frameworks",
+      "LD_RUNPATH_SEARCH_PATHS = [\"$(inherited)\", \"@executable_path\/Frameworks\", \"@loader_path\/Frameworks\"]",
+      "PRODUCT_BUNDLE_IDENTIFIER = com.bloomberg.xcdiff.Project.MismatchingLibrary",
+      "SWIFT_OPTIMIZATION_LEVEL = -Onone",
+      "VERSIONING_SYSTEM = apple-generic",
+      "VERSION_INFO_PREFIX = "
     ],
     "tag" : "settings"
   },
@@ -162,21 +162,21 @@
       }
     ],
     "onlyInFirst" : [
-      "OTHER_LDFLAGS"
+      "OTHER_LDFLAGS = -ObjC"
     ],
     "onlyInSecond" : [
-      "CLANG_ENABLE_MODULES",
-      "CURRENT_PROJECT_VERSION",
-      "DEFINES_MODULE",
-      "DYLIB_COMPATIBILITY_VERSION",
-      "DYLIB_CURRENT_VERSION",
-      "DYLIB_INSTALL_NAME_BASE",
-      "INFOPLIST_FILE",
-      "INSTALL_PATH",
-      "LD_RUNPATH_SEARCH_PATHS",
-      "PRODUCT_BUNDLE_IDENTIFIER",
-      "VERSIONING_SYSTEM",
-      "VERSION_INFO_PREFIX"
+      "CLANG_ENABLE_MODULES = YES",
+      "CURRENT_PROJECT_VERSION = 1",
+      "DEFINES_MODULE = YES",
+      "DYLIB_COMPATIBILITY_VERSION = 1",
+      "DYLIB_CURRENT_VERSION = 1",
+      "DYLIB_INSTALL_NAME_BASE = @rpath",
+      "INFOPLIST_FILE = MismatchingLibrary\/MismatchingLibrary-Info.plist",
+      "INSTALL_PATH = $(LOCAL_LIBRARY_DIR)\/Frameworks",
+      "LD_RUNPATH_SEARCH_PATHS = [\"$(inherited)\", \"@executable_path\/Frameworks\", \"@loader_path\/Frameworks\"]",
+      "PRODUCT_BUNDLE_IDENTIFIER = com.bloomberg.xcdiff.Project.MismatchingLibrary",
+      "VERSIONING_SYSTEM = apple-generic",
+      "VERSION_INFO_PREFIX = "
     ],
     "tag" : "settings"
   },
@@ -218,7 +218,7 @@
 
     ],
     "onlyInSecond" : [
-      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES"
+      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES"
     ],
     "tag" : "settings"
   },
@@ -256,7 +256,7 @@
 
     ],
     "onlyInSecond" : [
-      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES"
+      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES"
     ],
     "tag" : "settings"
   },
