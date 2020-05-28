@@ -148,17 +148,26 @@ public final class CommandRunner {
             printer.text("No available comparators")
             return 0
         }
-        let nameTitleWidth = 30
-        let defaultTitleWidth = 9
-        let nameTitle = "  COMPARTOR TAG"
-        let defaultTitle = "DEFAULT"
+        let nameColumnWidth = 30
+        let includedColumnWidth = 10
         let columnSeparator = " | "
-        printer.text("\(nameTitle.padding(toLength: nameTitleWidth, withPad: " ", startingAt: 0))"
+        let padding = "  "
+        let separatorLength = 2 * padding.count + nameColumnWidth + columnSeparator.count + includedColumnWidth
+        let separator = String(repeating: "-", count: separatorLength)
+
+        printer.text("""
+        The following list shows all available comparator tags along with their default
+        inclusion status when tags aren't explicitly specified.
+
+        """)
+        printer.text(padding
+            + "COMPARTOR TAG".padding(toLength: nameColumnWidth, withPad: " ", startingAt: 0)
             + columnSeparator
-            + "\(defaultTitle.padding(toLength: defaultTitleWidth, withPad: " ", startingAt: 0))")
-        printer.text(String(repeating: "-", count: nameTitleWidth + columnSeparator.count + defaultTitleWidth))
+            + "INCLUDED".padding(toLength: includedColumnWidth, withPad: " ", startingAt: 0))
+        printer.text(separator)
         let output = allAvailableComparators
-            .map { "- \($0.displayName)".padding(toLength: nameTitleWidth, withPad: " ", startingAt: 0)
+            .map { "- "
+                + $0.displayName.padding(toLength: nameColumnWidth, withPad: " ", startingAt: 0)
                 + columnSeparator
                 + (defaultComparatorsTags.contains($0.tag) ? "Yes" : "No")
             }
