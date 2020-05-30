@@ -18,32 +18,22 @@ import Foundation
 
 final class ConsoleRenderer: Renderer {
     private let output: AnyOutput<String>
+    private var indent: Int = 0
 
     init(output: AnyOutput<String>) {
         self.output = output
     }
 
-    func text(_ text: String) {
-        write("\(text)\n")
+    func begin() {
+        // nothing
     }
 
-    func list(_ element: RendererElement.List) {
-        switch element {
-        case .begin:
-            return
-        case .end:
-            newLine(1)
-        }
+    func end() {
+        // nothing
     }
 
-    func bullet(_ text: String, indent: RendererElement.Indent) {
-        let spacing = String(repeating: " ", count: 2 * indent.rawValue)
-        let symbol = bullet(indent: indent)
-        self.text("\(spacing)\(symbol) \(text)")
-    }
-
-    func newLine(_ count: Int = 1) {
-        write(String(repeating: "\n", count: count))
+    func section(_: RendererElement.Style, _ content: () -> Void) {
+        content()
     }
 
     func header(_ text: String, _ header: RendererElement.Header) {
@@ -61,20 +51,51 @@ final class ConsoleRenderer: Renderer {
         }
     }
 
-    // MARK: - Private
+    func text(_ text: String) {
+        write("\(text)\n")
+    }
 
-    private func bullet(indent: RendererElement.Indent) -> String {
-        switch indent {
-        case .zero:
-            return "»"
-        case .one:
-            return "•"
-        case .two:
-            return "◦"
+    func pre(_ text: String) {
+        self.text(text)
+    }
+
+    func list(_ content: () -> Void) {
+        indent += 1
+        content()
+        indent -= 1
+        line(1)
+    }
+
+    func item(_ text: String) {
+        item {
+            write(text)
+            line(1)
         }
     }
 
+    func item(_ content: () -> Void) {
+        let spacing = String(repeating: " ", count: 2 * indent)
+        let symbol = bullet(indent: indent)
+        write("\(spacing)\(symbol) ")
+        content()
+    }
+
+    func line(_ count: Int) {
+        write(String(repeating: "\n", count: count))
+    }
+
+    // MARK: - Private
+
     private func write(_ string: String) {
         output.write(string)
+    }
+
+    private func bullet(indent: Int) -> String {
+        switch indent {
+        case 1:
+            return "•"
+        default:
+            return "◦"
+        }
     }
 }

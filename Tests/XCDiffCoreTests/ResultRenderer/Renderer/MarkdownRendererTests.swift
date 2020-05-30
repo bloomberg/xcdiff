@@ -39,43 +39,46 @@ final class MarkdownRendererTests: XCTestCase {
         XCTAssertEqual(content, "1\n2\n3\n")
     }
 
-    func testList_whenBegin() {
+    func testList_whenEmpty() {
         // When
-        subject.list(.begin)
-
-        // Then
-        XCTAssertEqual(content, "")
-    }
-
-    func testList_whenEnd() {
-        // When
-        subject.list(.end)
+        subject.list {}
 
         // Then
         XCTAssertEqual(content, "\n")
     }
 
-    func testListWithBullets() {
+    func testList_whenItems() {
         // When
-        subject.list(.begin)
-        subject.bullet("b1", indent: .zero)
-        subject.bullet("b1.1", indent: .one)
-        subject.bullet("b1.2", indent: .one)
-        subject.bullet("b1.2.1", indent: .two)
-        subject.list(.end)
+        subject.list {
+            subject.item("b1.1")
+            subject.item {
+                subject.pre("b1.2")
+                subject.list {
+                    subject.item("b1.2.1")
+                }
+            }
+            subject.item {
+                subject.pre("b2.2")
+                subject.list {
+                    subject.item("b2.2.1")
+                }
+            }
+        }
 
         // Then
         XCTAssertEqual(content, """
-        - `b1`
           - `b1.1`
           - `b1.2`
-            - `b1.2.1`\n\n
+            - `b1.2.1`
+
+          - `b2.2`
+            - `b2.2.1`\n\n\n
         """)
     }
 
-    func testNewLine() {
+    func testLine() {
         // When
-        subject.newLine(3)
+        subject.line(3)
 
         // Then
         XCTAssertEqual(content, "\n\n\n")
@@ -114,16 +117,26 @@ final class MarkdownRendererTests: XCTestCase {
     func testSample1() {
         // When
         subject.header("Header", .h3)
-        subject.list(.begin)
-        subject.bullet("Different Values 1", indent: .one)
-        subject.bullet("Value1", indent: .two)
-        subject.bullet("Value2", indent: .two)
-        subject.list(.end)
-        subject.list(.begin)
-        subject.bullet("Different Values 2", indent: .one)
-        subject.bullet("Value1", indent: .two)
-        subject.bullet("Value2", indent: .two)
-        subject.list(.end)
+        subject.list {
+            subject.item {
+                subject.pre("Different Values 1")
+                subject.list {
+                    subject.item("Value1")
+                    subject.item("Value2")
+                }
+            }
+            subject.item {
+                subject.pre("Different Values 2")
+                subject.list {
+                    subject.item("Value1")
+                    subject.item("Value2")
+                }
+            }
+        }
+        subject.header("Header 2", .h3)
+        subject.list {
+            subject.item("Test")
+        }
 
         // Then
         XCTAssertEqual(content, """
@@ -136,7 +149,15 @@ final class MarkdownRendererTests: XCTestCase {
 
           - `Different Values 2`
             - `Value1`
-            - `Value2`\n\n
+            - `Value2`
+
+
+
+        ### Header 2
+
+          - `Test`
+
+
         """)
     }
 

@@ -46,6 +46,8 @@ final class UniversalResultRenderer: ResultRenderer {
             return createMarkdownRenderer(outputBuffer: outputBuffer)
         case .json:
             return createJSONRenderer(outputBuffer: outputBuffer)
+        case .html:
+            return createHTMLRenderer(outputBuffer: outputBuffer)
         }
     }
 
@@ -61,6 +63,11 @@ final class UniversalResultRenderer: ResultRenderer {
 
     private func createJSONRenderer(outputBuffer: AnyOutput<String>) -> ProjectCompareResultRenderer {
         return JSONProjectCompareResultRenderer(output: outputBuffer,
+                                                verbose: verbose)
+    }
+
+    private func createHTMLRenderer(outputBuffer: AnyOutput<String>) -> ProjectCompareResultRenderer {
+        return TextProjectCompareResultRenderer(renderer: HTMLRenderer(output: outputBuffer),
                                                 verbose: verbose)
     }
 }

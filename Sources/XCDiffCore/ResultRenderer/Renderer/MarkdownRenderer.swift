@@ -18,34 +18,56 @@ import Foundation
 
 final class MarkdownRenderer: Renderer {
     private let output: AnyOutput<String>
+    private var indent: Int = 0
 
     init(output: AnyOutput<String>) {
         self.output = output
+    }
+
+    func begin() {
+        // nothing
+    }
+
+    func end() {
+        // nothing
+    }
+
+    func section(_: RendererElement.Style, _ content: () -> Void) {
+        content()
+    }
+
+    func header(_ text: String, _ header: RendererElement.Header) {
+        write("\n\(String(repeating: "#", count: header.rawValue)) \(text)\n\n")
     }
 
     func text(_ text: String) {
         write("\(text)\n")
     }
 
-    func list(_ element: RendererElement.List) {
-        switch element {
-        case .begin:
-            return
-        case .end:
-            newLine(1)
+    func pre(_ text: String) {
+        write("`\(text)`\n")
+    }
+
+    func list(_ content: () -> Void) {
+        indent += 1
+        content()
+        indent -= 1
+        line(1)
+    }
+
+    func item(_ text: String) {
+        item {
+            pre(text)
         }
     }
 
-    func bullet(_ text: String, indent: RendererElement.Indent) {
-        write("\(String(repeating: " ", count: 2 * indent.rawValue))- `\(text)`\n")
+    func item(_ content: () -> Void) {
+        write("\(String(repeating: " ", count: 2 * indent))- ")
+        content()
     }
 
-    func newLine(_ count: Int) {
+    func line(_ count: Int) {
         write("\(String(repeating: "\n", count: count))")
-    }
-
-    func header(_ text: String, _ header: RendererElement.Header) {
-        write("\n\(String(repeating: "#", count: header.rawValue)) \(text)\n\n")
     }
 
     // MARK: - Private

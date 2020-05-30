@@ -1,5 +1,5 @@
 //
-// Copyright 2019 Bloomberg Finance L.P.
+// Copyright 2020 Bloomberg Finance L.P.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,15 +18,15 @@ import Foundation
 @testable import XCDiffCore
 import XCTest
 
-final class ConsoleRendererTests: XCTestCase {
-    private var subject: ConsoleRenderer!
+final class HTMLRendererTests: XCTestCase {
+    private var subject: HTMLRenderer!
     private var outputBuffer: StringOutputBuffer!
 
     override func setUp() {
         super.setUp()
 
         outputBuffer = StringOutputBuffer()
-        subject = ConsoleRenderer(output: outputBuffer.any())
+        subject = HTMLRenderer(output: outputBuffer.any())
     }
 
     func testText() {
@@ -36,7 +36,7 @@ final class ConsoleRendererTests: XCTestCase {
         subject.text("3")
 
         // Then
-        XCTAssertEqual(content, "1\n2\n3\n")
+        XCTAssertEqual(content, "<p>1</p><p>2</p><p>3</p>")
     }
 
     func testList_whenEmpty() {
@@ -44,7 +44,7 @@ final class ConsoleRendererTests: XCTestCase {
         subject.list {}
 
         // Then
-        XCTAssertEqual(content, "\n")
+        XCTAssertEqual(content, "<ul></ul>")
     }
 
     func testList_whenItems() {
@@ -52,13 +52,13 @@ final class ConsoleRendererTests: XCTestCase {
         subject.list {
             subject.item("b1.1")
             subject.item {
-                subject.text("b1.2")
+                subject.pre("b1.2")
                 subject.list {
                     subject.item("b1.2.1")
                 }
             }
             subject.item {
-                subject.text("b2.2")
+                subject.pre("b2.2")
                 subject.list {
                     subject.item("b2.2.1")
                 }
@@ -66,14 +66,8 @@ final class ConsoleRendererTests: XCTestCase {
         }
 
         // Then
-        XCTAssertEqual(content, """
-          • b1.1
-          • b1.2
-            ◦ b1.2.1
-
-          • b2.2
-            ◦ b2.2.1\n\n\n
-        """)
+        XCTAssertEqual(content, "<ul><li>b1.1</li><li><p>b1.2</p><ul><li>b1.2.1</li></ul></li>"
+            + "<li><p>b2.2</p><ul><li>b2.2.1</li></ul></li></ul>")
     }
 
     func testLine() {
@@ -81,7 +75,7 @@ final class ConsoleRendererTests: XCTestCase {
         subject.line(3)
 
         // Then
-        XCTAssertEqual(content, "\n\n\n")
+        XCTAssertEqual(content, "")
     }
 
     func testHeader_whenH1() {
@@ -89,12 +83,7 @@ final class ConsoleRendererTests: XCTestCase {
         subject.header("H1", .h1)
 
         // Then
-        XCTAssertEqual(content, """
-
-        =
-        = H1
-        =\n\n
-        """)
+        XCTAssertEqual(content, "<h1>H1</h1>")
     }
 
     func testHeader_whenH2() {
@@ -102,9 +91,7 @@ final class ConsoleRendererTests: XCTestCase {
         subject.header("H2", .h2)
 
         // Then
-        XCTAssertEqual(content, """
-        H2\n
-        """)
+        XCTAssertEqual(content, "<h2>H2</h2>")
     }
 
     func testHeader_whenH3() {
@@ -112,9 +99,7 @@ final class ConsoleRendererTests: XCTestCase {
         subject.header("H3", .h3)
 
         // Then
-        XCTAssertEqual(content, """
-        \nH3\n\n
-        """)
+        XCTAssertEqual(content, "<h3>H3</h3>")
     }
 
     func testSample1() {
@@ -142,23 +127,9 @@ final class ConsoleRendererTests: XCTestCase {
         }
 
         // Then
-        XCTAssertEqual(content, """
-
-        Header
-
-          • Different Values 1
-            ◦ Value1
-            ◦ Value2
-
-          • Different Values 2
-            ◦ Value1
-            ◦ Value2\n
-
-
-        Header 2
-
-          • Test\n\n
-        """)
+        XCTAssertEqual(content, "<h3>Header</h3><ul><li><p>Different Values 1</p>"
+            + "<ul><li>Value1</li><li>Value2</li></ul></li><li><p>Different Values 2</p>"
+            + "<ul><li>Value1</li><li>Value2</li></ul></li></ul><h3>Header 2</h3><ul><li>Test</li></ul>")
     }
 
     // MARK: - Private
