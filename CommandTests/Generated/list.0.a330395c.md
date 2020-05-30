@@ -8,17 +8,22 @@
 
 # Expected output
 ```
-- FILE_REFERENCES
-- BUILD_PHASES
-- COPY_FILES
-- TARGETS
-- HEADERS
-- SOURCES
-- RESOURCES
-- CONFIGURATIONS
-- SETTINGS
-- RESOLVED_SETTINGS
-- SOURCE_TREES
-- LINKED_DEPENDENCIES
+The following list shows all available comparator tags along with their default
+inclusion status when tags aren't explicitly specified.
+
+  COMPARTOR TAG                  | INCLUDED  
+-----------------------------------------------
+- FILE_REFERENCES                | Yes
+- BUILD_PHASES                   | Yes
+- COPY_FILES                     | Yes
+- TARGETS                        | Yes
+- HEADERS                        | Yes
+- SOURCES                        | Yes
+- RESOURCES                      | Yes
+- CONFIGURATIONS                 | Yes
+- SETTINGS                       | Yes
+- RESOLVED_SETTINGS              | No
+- SOURCE_TREES                   | Yes
+- LINKED_DEPENDENCIES            | Yes
 
 ```

@@ -14,6 +14,7 @@
 // limitations under the License.
 //
 
+// swiftlint:disable type_body_length
 import Basic
 import Foundation
 import PathKit
@@ -141,14 +142,36 @@ public final class CommandRunner {
     }
 
     private func runPrintAvailableOperators() -> Int32 {
-        let comparators = [ComparatorType].allAvailableComparators
-        guard !comparators.isEmpty else {
+        let defaultComparatorsTags = Set([ComparatorType].defaultComparators.map { $0.tag })
+        let allAvailableComparators = [ComparatorType].allAvailableComparators
+        guard !allAvailableComparators.isEmpty else {
             printer.text("No available comparators")
             return 0
         }
-        let output = "- " + comparators
-            .map { $0.displayName }
-            .joined(separator: "\n- ")
+        let nameColumnWidth = 30
+        let includedColumnWidth = 10
+        let columnSeparator = " | "
+        let padding = "  "
+        let separatorLength = 2 * padding.count + nameColumnWidth + columnSeparator.count + includedColumnWidth
+        let separator = String(repeating: "-", count: separatorLength)
+
+        printer.text("""
+        The following list shows all available comparator tags along with their default
+        inclusion status when tags aren't explicitly specified.
+
+        """)
+        printer.text(padding
+            + "COMPARTOR TAG".padding(toLength: nameColumnWidth, withPad: " ", startingAt: 0)
+            + columnSeparator
+            + "INCLUDED".padding(toLength: includedColumnWidth, withPad: " ", startingAt: 0))
+        printer.text(separator)
+        let output = allAvailableComparators
+            .map { "- "
+                + $0.displayName.padding(toLength: nameColumnWidth, withPad: " ", startingAt: 0)
+                + columnSeparator
+                + (defaultComparatorsTags.contains($0.tag) ? "Yes" : "No")
+            }
+            .joined(separator: "\n")
         printer.text(output)
         return 0
     }
@@ -367,3 +390,5 @@ enum CommandError: LocalizedError {
         }
     }
 }
+
+// swiftlint:enable type_body_length
