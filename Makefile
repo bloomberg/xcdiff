@@ -22,6 +22,9 @@ build:
 test:
 	xcrun swift test --enable-code-coverage
 
+test_ci: test
+	./Scripts/coverage.sh
+
 update_version:
 	sed -i '' 's/\(Version(\)\(.*\)\(, \)/\1$(VERSION_MAJOR), $(VERSION_MINOR), $(VERSION_PATCH)\3/' Sources/XCDiffCommand/Constants.swift
 	sed -i '' 's/upToNextMinor(from: ".*")/upToNextMinor(from: "${VERSION}")/' Documentation/Installation.md

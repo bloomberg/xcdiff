@@ -1,7 +1,7 @@
 language: swift
 os: osx
-osx_image: xcode11.1
+osx_image: xcode11.5
 script:
-  - ./Scripts/brew.sh ; make lint
+  - ./Scripts/brew.sh && make lint
   - make clean build
-  - make clean test ; ./Scripts/coverage.sh
+  - make clean test_ci
