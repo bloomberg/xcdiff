@@ -14,9 +14,9 @@
 // limitations under the License.
 //
 
-import Basic
 import Foundation
-import SPMUtility
+import TSCBasic
+import TSCUtility
 
 final class Constants {
     static let version: Version = {

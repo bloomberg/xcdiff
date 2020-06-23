@@ -15,10 +15,10 @@
 //
 
 // swiftlint:disable type_body_length
-import Basic
 import Foundation
 import PathKit
-import SPMUtility
+import TSCBasic
+import TSCUtility
 import XCDiffCore
 
 public final class CommandRunner {
