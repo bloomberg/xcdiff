@@ -51,6 +51,7 @@ final class PBXNativeTargetBuilder {
     private var pbxtarget: PBXNativeTarget
     private var objects: [PBXObject] = []
     private var fileElements: [PBXFileElement] = []
+    private var dependencies: [PBXTargetDependency] = []
 
     init(name: String, productType: PBXProductType?) {
         pbxtarget = PBXNativeTarget(name: name, productType: productType)
@@ -205,6 +206,10 @@ final class PBXNativeTargetBuilder {
 }
 
 struct LinkedDependenciesData {
+    let name: String?
+    let path: String?
+    let settings: [String: [String]]?
+
     init(name: String? = nil,
          path: String? = nil,
          settings: [String: [String]]? = nil) {
@@ -212,10 +217,6 @@ struct LinkedDependenciesData {
         self.path = path
         self.settings = settings
     }
-
-    let name: String?
-    let path: String?
-    let settings: [String: [String]]?
 }
 
 struct EmbeddedFrameworksData {

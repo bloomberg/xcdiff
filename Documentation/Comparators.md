@@ -12,7 +12,11 @@ Compares build configurations i.e. Debug, Release.
 
 ### `copy_files`
 
-Compares copy files build phases i.e. embed frameworks, extensions
+Compares copy files build phases i.e. embed frameworks, extensions.
+
+### `dependencies`
+
+Compares dependencies build phases.
 
 ### `file_references`
 

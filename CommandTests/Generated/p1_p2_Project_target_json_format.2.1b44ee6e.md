@@ -362,6 +362,22 @@
       "\"Project\" target"
     ],
     "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "(target=MismatchingLibrary)",
+      "(target=NewFramework)"
+    ],
+    "tag" : "dependencies"
+  },
+  {
+    "context" : [
+      "\"Project\" target"
+    ],
+    "differentValues" : [
       {
         "context" : "ARKit.framework attributes",
         "first" : "required",

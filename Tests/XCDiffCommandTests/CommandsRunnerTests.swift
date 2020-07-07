@@ -101,6 +101,11 @@ final class CommandsRunnerTests: XCTestCase {
         ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Base configuration
         ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Values
         ✅ SOURCE_TREES > Root project
+        ✅ DEPENDENCIES > "MismatchingLibrary" target
+        ✅ DEPENDENCIES > "Project" target
+        ✅ DEPENDENCIES > "ProjectFramework" target
+        ✅ DEPENDENCIES > "ProjectTests" target
+        ✅ DEPENDENCIES > "ProjectUITests" target
         ✅ LINKED_DEPENDENCIES > "MismatchingLibrary" target
         ✅ LINKED_DEPENDENCIES > "Project" target
         ✅ LINKED_DEPENDENCIES > "ProjectFramework" target

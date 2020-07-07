@@ -371,6 +371,18 @@ Output format: (<path>, <name>, <source_tree>)
   • (Target.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)
 
 
+✅ DEPENDENCIES > "MismatchingLibrary" target
+❌ DEPENDENCIES > "Project" target
+
+⚠️  Only in second (2):
+
+  • (target=MismatchingLibrary)
+  • (target=NewFramework)
+
+
+✅ DEPENDENCIES > "ProjectFramework" target
+✅ DEPENDENCIES > "ProjectTests" target
+✅ DEPENDENCIES > "ProjectUITests" target
 ✅ LINKED_DEPENDENCIES > "MismatchingLibrary" target
 ❌ LINKED_DEPENDENCIES > "Project" target
 
