@@ -67,7 +67,7 @@ Add xcdiff to your `Package.swift` file:
 ```swift
 dependencies: [
     // ...
-    .package(url: "https://github.com/bloomberg/xcdiff", .upToNextMinor(from: "0.3.0")),
+    .package(url: "https://github.com/bloomberg/xcdiff", .upToNextMinor(from: "0.4.0")),
 ]
 ```
 
