@@ -459,8 +459,8 @@ final class ResolvedSettingsComparatorTests: XCTestCase {
         // When / Then
         XCTAssertThrowsError(try subject.compare(first, second, parameters: .all)) { error in
             XCTAssertEqual(error.localizedDescription,
-                           "Cannot extract build settings from the project, invalid json output of xcodebuild command " +
-                               "(project = /projectDirPath, target = Target1, configuration = Debug)")
+                           "Cannot extract build settings from the project, invalid json output of xcodebuild " +
+                               "command (project = /projectDirPath, target = Target1, configuration = Debug)")
         }
     }
 }
