@@ -22,6 +22,7 @@ final class ResolvedSettingsComparator: Comparator {
 
     let tag = "resolved_settings"
 
+    private let jsonDecoder = JSONDecoder()
     private let targetHelper = TargetsHelper()
     private let settingsHelper = SettingsHelper()
     private let system: System
@@ -67,13 +68,18 @@ final class ResolvedSettingsComparator: Comparator {
     }
 
     private func buildSettings(path: String, target: String, configuration: String) throws -> [String: String] {
-        let output = try extractBuildSettings(path: path,
-                                              target: target,
-                                              config: configuration)
-        return parseRawBuildSettings(rawBuildSettings: output)
+        let command = extractBuildSettingsCommand(path: path, target: target, config: configuration)
+        let output = try system.execute(arguments: command)
+        do {
+            return try parseRawJsonBuildSettings(output: output)
+        } catch {
+            throw ComparatorError.generic(
+                "Cannot extract build settings from the project, invalid json output of xcodebuild command " +
+                    "(project = \(path), target = \(target), configuration = \(configuration))")
+        }
     }
 
-    private func extractBuildSettings(path: String, target: String? = nil, config: String? = nil) throws -> String {
+    private func extractBuildSettingsCommand(path: String, target: String? = nil, config: String? = nil) -> [String] {
         var arguments = [
             "/usr/bin/xcrun",
             "xcodebuild",
@@ -90,19 +96,14 @@ final class ResolvedSettingsComparator: Comparator {
         }
 
         arguments.append("-showBuildSettings")
-        return try system.execute(arguments: arguments)
+        arguments.append("-json")
+        return arguments
     }
 
-    private func parseRawBuildSettings(rawBuildSettings: String) -> [String: String] {
-        var buildSettings: [String: String] = [:]
-        rawBuildSettings.components(separatedBy: NSCharacterSet.newlines)
-            .filter { !$0.isEmpty }
-            .forEach { line in
-                let (key, value) = line.split(around: "=")
-                if let value = value {
-                    buildSettings[key.trimmingCharacters(in: .whitespaces)] = value.trimmingCharacters(in: .whitespaces)
-                }
-            }
+    private func parseRawJsonBuildSettings(output: String) throws -> [String: String] {
+        let data = output.data(using: .utf8)!
+        let result = try jsonDecoder.decode([RawShowBuildSettingsItem].self, from: data)
+        var buildSettings = result[0].buildSettings
         let replacementKeys: [String] = ["PROJECT_TEMP_DIR", "PROJECT_TEMP_ROOT", "BUILD_DIR", "PROJECT_FILE_PATH"]
         let replacementValues = replacementKeys.compactMap { (key: String) -> (key: String, value: String)? in
             buildSettings[key].map { (key: key, value: $0) }
@@ -115,4 +116,8 @@ final class ResolvedSettingsComparator: Comparator {
         }
         return buildSettings
     }
+}
+
+private struct RawShowBuildSettingsItem: Decodable {
+    let buildSettings: [String: String]
 }
