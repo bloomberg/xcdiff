@@ -200,6 +200,21 @@ final class CommandsRunnerTests: XCTestCase {
         XCTAssertEqual(code, 0)
     }
 
+    func testRun_whenOneProjectHasInvalidElements() {
+        // Given
+        let command: [String] = [
+            "-p1", fixtures.project.ios_project_1().string,
+            "-p2", fixtures.project.ios_project_invalid_paths().string,
+        ]
+
+        // When
+        let code = subject.run(with: command)
+
+        // Then
+        XCTAssertEqual(code, 1)
+        XCTAssertTrue(printer.output.starts(with: "ERROR: Cannot calculate full path for file element"))
+    }
+
     // MARK: - Private
 
     private func buildCommand(p1: String? = nil, p2: String? = nil, _ args: String...) -> [String] {

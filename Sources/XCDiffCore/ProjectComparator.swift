@@ -99,10 +99,16 @@ final class DefaultProjectComparator: ProjectComparator {
     private func compare(_ first: ProjectDescriptor,
                          _ second: ProjectDescriptor,
                          parameters: ComparatorParameters) throws -> ProjectCompareResult {
-        let results = try comparators
-            .flatMap { try $0.compare(first, second, parameters: parameters) }
-            .filter { !differencesOnly || !$0.same() }
-        return ProjectCompareResult(first: first, second: second, results: results)
+        do {
+            let results = try comparators
+                .flatMap { try $0.compare(first, second, parameters: parameters) }
+                .filter { !differencesOnly || !$0.same() }
+            return ProjectCompareResult(first: first, second: second, results: results)
+        } catch let error as CustomStringConvertible {
+            throw ComparatorError.generic(error.description)
+        } catch {
+            throw error
+        }
     }
 
     private func createProjectDescriptor(with path: Path) throws -> ProjectDescriptor {

@@ -27,6 +27,7 @@ final class ProjectFixtures {
         case non_existing
         case ios_project_1
         case ios_project_2
+        case ios_project_invalid_paths
         // swiftlint:enable identifier_name
     }
 
@@ -40,6 +41,10 @@ final class ProjectFixtures {
 
     func ios_project_2() -> Path {
         return path(to: .ios_project_2)
+    }
+
+    func ios_project_invalid_paths() -> Path {
+        return path(to: .ios_project_invalid_paths)
     }
 
     func scenarios() -> [Path] {
