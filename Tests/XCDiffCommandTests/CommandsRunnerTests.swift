@@ -196,7 +196,7 @@ final class CommandsRunnerTests: XCTestCase {
         let code = subject.run(with: command)
 
         // Then
-        XCTAssertEqual(printer.output, "0.4.0+debug.local\n")
+        XCTAssertEqual(printer.output, "0.5.0+debug.local\n")
         XCTAssertEqual(code, 0)
     }
 
