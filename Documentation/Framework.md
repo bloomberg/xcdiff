@@ -22,7 +22,7 @@ func compare() {
                                                             mode: mode)
 
     // prepare parameters
-    let parameters = ComparatorParameters(targets: .all, configuration: .all)
+    let parameters = ComparatorParameters(targets: .all, configurations: .all)
 
     // compare and get the result
     let result = try projectComparator.compare(path1, path2, parameters: parameters)
