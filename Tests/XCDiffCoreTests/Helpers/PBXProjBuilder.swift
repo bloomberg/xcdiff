@@ -100,6 +100,12 @@ final class PBXProjBuilder {
     }
 
     @discardableResult
+    func addAttribute(name: String, value: String) -> PBXProjBuilder {
+        pbxproj.rootObject?.attributes[name] = value
+        return self
+    }
+
+    @discardableResult
     func make(target targetName: String, dependOn dependencyTargetNames: [String]) -> PBXProjBuilder {
         let target = pbxproj.targets(named: targetName).first as! PBXNativeTarget
         dependencyTargetNames.forEach {

@@ -402,6 +402,23 @@ Output format: (<path>, <name>, <source_tree>)
 ✅ LINKED_DEPENDENCIES > "ProjectFramework" target
 ✅ LINKED_DEPENDENCIES > "ProjectTests" target
 ✅ LINKED_DEPENDENCIES > "ProjectUITests" target
+❌ ATTRIBUTES > Root project
+
+⚠️  Value mismatch (3):
+
+  • LastSwiftUpdateCheck
+    ◦ 1110
+    ◦ 1030
+
+  • LastUpgradeCheck
+    ◦ 1020
+    ◦ 1030
+
+  • ORGANIZATIONNAME
+    ◦ Bloomberg LP
+    ◦ Another Organization
+
+
 
 
 ```

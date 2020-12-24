@@ -35,6 +35,7 @@
 ❌ SOURCE_TREES > Root project
 ❌ DEPENDENCIES > "Project" target
 ❌ LINKED_DEPENDENCIES > "Project" target
+❌ ATTRIBUTES > Root project
 
 
 ```

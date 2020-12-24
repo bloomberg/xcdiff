@@ -26,5 +26,6 @@ inclusion status when tags aren't explicitly specified.
 - SOURCE_TREES                   | Yes
 - DEPENDENCIES                   | Yes
 - LINKED_DEPENDENCIES            | Yes
+- ATTRIBUTES                     | Yes
 
 ```

@@ -111,6 +111,7 @@ final class CommandsRunnerTests: XCTestCase {
         ✅ LINKED_DEPENDENCIES > "ProjectFramework" target
         ✅ LINKED_DEPENDENCIES > "ProjectTests" target
         ✅ LINKED_DEPENDENCIES > "ProjectUITests" target
+        ✅ ATTRIBUTES > Root project
 
 
         """)

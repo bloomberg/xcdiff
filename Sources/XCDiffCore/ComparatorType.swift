@@ -30,6 +30,7 @@ public enum ComparatorType {
     case sourceTrees
     case dependencies
     case linkedDependecies
+    case attributes
     case custom(Comparator)
 
     public var tag: String {
@@ -65,6 +66,8 @@ public enum ComparatorType {
             return DependenciesComparator()
         case .linkedDependecies:
             return LinkedDependenciesComparator()
+        case .attributes:
+            return AttributesComparator()
         case let .custom(comparator):
             return comparator
         }
@@ -87,6 +90,7 @@ public extension Array where Element == ComparatorType {
             .sourceTrees,
             .dependencies,
             .linkedDependecies,
+            .attributes,
         ]
     }
 
@@ -104,6 +108,7 @@ public extension Array where Element == ComparatorType {
             .sourceTrees,
             .dependencies,
             .linkedDependecies,
+            .attributes,
         ]
     }
 }
