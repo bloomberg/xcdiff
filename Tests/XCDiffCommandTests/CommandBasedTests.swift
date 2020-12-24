@@ -32,6 +32,12 @@ final class CommandBasedTests: XCTestCase {
             let subject = CommandRunner(printer: printer)
             let exitCode = subject.run(with: command.command)
 
+            //
+            // Note: In the event this test fails, it means that the produced output from xcdiff
+            // now mismatches the snapshotes previously captured.
+            //
+            // Snapshots can be re-generated via running `make regenerate_command_snapshots`.
+            //
             XCTAssertEqual(printer.output, command.expectedOutput,
                            "'\(command)' didn't produce expected output.")
             XCTAssertEqual(exitCode, command.expectedExitCode,
