@@ -6,6 +6,7 @@ import subprocess
 import sys
 import os
 import pathlib
+import re
 
 with open(pathlib.Path(__file__).parent / "../CommandTests/manual_test_commands.json", "r") as manual_test_commands_file:
     manual_test_commands = json.load(manual_test_commands_file)
@@ -76,14 +77,14 @@ def build_project():
     subprocess.check_call(["swift", "build"])
 
 def run_command(arguments):
-    dirname = os.path.dirname(sys.argv[0])
-    fixtures_path = os.path.join(dirname, "../Fixtures")
-    project_1_path = os.path.join(fixtures_path, "ios_project_1/Project.xcodeproj")
-    project_2_path = os.path.join(fixtures_path, "ios_project_2/Project.xcodeproj")
-    arguments = [project_1_path if element == "{ios_project_1}" else element for element in arguments]
-    arguments = [project_2_path if element == "{ios_project_2}" else element for element in arguments]
+    arguments = [substitute_project_paths(element) for element in arguments]
     print(arguments)
     return subprocess.Popen(arguments, stdout=subprocess.PIPE, stderr=subprocess.PIPE,  shell=False)
+
+def substitute_project_paths(arg):
+    dirname = os.path.dirname(sys.argv[0])
+    fixtures_path = os.path.join(dirname, "../Fixtures")
+    return re.sub("{(.*)}", "{}/\\1/Project.xcodeproj".format(fixtures_path), arg)
 
 def generate_command_tests_files():
     dirname = os.path.dirname(sys.argv[0])

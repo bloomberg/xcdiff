@@ -42,3 +42,22 @@ extension PBXTarget {
             .compactMap { $0 as? PBXCopyFilesBuildPhase }
     }
 }
+
+extension XCRemoteSwiftPackageReference.VersionRequirement: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case let .upToNextMajorVersion(version):
+            return ".upToNextMajorVersion(\(version))"
+        case let .upToNextMinorVersion(version):
+            return ".upToNextMinorVersion(\(version))"
+        case let .range(from: fromVersion, to: toVersion):
+            return ".range(\(fromVersion) ... \(toVersion))"
+        case let .exact(version):
+            return ".exact(\(version))"
+        case let .branch(branch):
+            return ".branch(\(branch))"
+        case let .revision(revision):
+            return ".revision(\(revision))"
+        }
+    }
+}

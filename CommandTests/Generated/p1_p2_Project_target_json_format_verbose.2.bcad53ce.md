@@ -421,6 +421,21 @@
 
     ],
     "tag" : "attributes"
+  },
+  {
+    "context" : [
+
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "swift_packages"
   }
 ]
 

@@ -16,7 +16,7 @@
 
 import Foundation
 
-extension Set where Element == String {
+extension Set where Element: Hashable, Element: Comparable {
     func subtractingAndSorted(_ second: Set<Element>?) -> [Element] {
         return subtracting(second ?? []).sorted()
     }
@@ -26,7 +26,7 @@ extension Set where Element == String {
     }
 }
 
-extension Array where Element == String {
+extension Array where Element: Hashable, Element: Comparable {
     func subtractingAndSorted(_ second: [Element]?) -> [Element] {
         return Set(self).subtractingAndSorted(second?.toSet())
     }

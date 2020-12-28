@@ -391,6 +391,156 @@ final class LinkedDependenciesComparatorTests: XCTestCase {
                                               differentValues: [])])
     }
 
+    func testCompare_whenSamePackageProducts() throws {
+        // Given
+        let first = project(name: "P1")
+            .addTarget(name: "T1") {
+                $0.addLinkedDependencies([
+                    LinkedDependenciesData(
+                        packageProduct: SwiftPackageProductDependencyData(productName: "LibraryA")
+                    ),
+                    LinkedDependenciesData(
+                        packageProduct: SwiftPackageProductDependencyData(productName: "LibraryB")
+                    ),
+                ])
+            }
+            .projectDescriptor()
+
+        let second = project(name: "P2")
+            .addTarget(name: "T1") {
+                $0.addLinkedDependencies([
+                    LinkedDependenciesData(
+                        packageProduct: SwiftPackageProductDependencyData(productName: "LibraryA")
+                    ),
+                    LinkedDependenciesData(
+                        packageProduct: SwiftPackageProductDependencyData(productName: "LibraryB")
+                    ),
+                ])
+            }
+            .projectDescriptor()
+
+        // When
+        let actual = try subject.compare(first,
+                                         second,
+                                         parameters: .all)
+
+        // Then
+        XCTAssertEqual(actual, [
+            CompareResult(
+                tag: "linked_dependencies",
+                context: ["\"T1\" target"],
+                onlyInFirst: [],
+                onlyInSecond: [],
+                differentValues: []
+            ),
+        ])
+    }
+
+    func testCompare_whenDifferentPackageProducts() throws {
+        // Given
+        let first = project(name: "P1")
+            .addTarget(name: "T1") {
+                $0.addLinkedDependencies([
+                    LinkedDependenciesData(
+                        packageProduct: SwiftPackageProductDependencyData(productName: "LibraryA")
+                    ),
+                    LinkedDependenciesData(
+                        packageProduct: SwiftPackageProductDependencyData(productName: "LibraryB")
+                    ),
+                ])
+            }
+            .projectDescriptor()
+
+        let second = project(name: "P2")
+            .addTarget(name: "T1") {
+                $0.addLinkedDependencies([
+                    LinkedDependenciesData(
+                        packageProduct: SwiftPackageProductDependencyData(productName: "LibraryA")
+                    ),
+                    LinkedDependenciesData(
+                        packageProduct: SwiftPackageProductDependencyData(productName: "LibraryC")
+                    ),
+                ])
+            }
+            .projectDescriptor()
+
+        // When
+        let actual = try subject.compare(first,
+                                         second,
+                                         parameters: .all)
+
+        // Then
+        XCTAssertEqual(actual, [
+            CompareResult(
+                tag: "linked_dependencies",
+                context: ["\"T1\" target"],
+                onlyInFirst: ["LibraryB"],
+                onlyInSecond: ["LibraryC"],
+                differentValues: []
+            ),
+        ])
+    }
+
+    func testCompare_whenDifferentPackageProductsAttributes() throws {
+        // Given
+        let first = project(name: "P1")
+            .addTarget(name: "T1") {
+                $0.addLinkedDependencies([
+                    LinkedDependenciesData(
+                        packageProduct: SwiftPackageProductDependencyData(
+                            productName: "LibraryA",
+                            package: RemoteSwiftPackageData(url: "http://testing.com/package.git")
+                        )
+                    ),
+                    LinkedDependenciesData(
+                        packageProduct: SwiftPackageProductDependencyData(
+                            productName: "LibraryB",
+                            package: RemoteSwiftPackageData(url: "http://testing.com/package.git")
+                        )
+                    ),
+                ])
+            }
+            .projectDescriptor()
+
+        let second = project(name: "P2")
+            .addTarget(name: "T1") {
+                $0.addLinkedDependencies([
+                    LinkedDependenciesData(
+                        packageProduct: SwiftPackageProductDependencyData(
+                            productName: "LibraryA",
+                            package: RemoteSwiftPackageData(url: "http://testing.com/package.git")
+                        )
+                    ),
+                    LinkedDependenciesData(
+                        packageProduct: SwiftPackageProductDependencyData(productName: "LibraryB")
+                    ),
+                ])
+            }
+            .projectDescriptor()
+
+        // When
+        let actual = try subject.compare(first,
+                                         second,
+                                         parameters: .all)
+
+        // Then
+        XCTAssertEqual(actual, [
+            CompareResult(
+                tag: "linked_dependencies",
+                context: ["\"T1\" target"],
+                onlyInFirst: [],
+                onlyInSecond: [],
+                differentValues: [
+                    .init(
+                        context: "LibraryB package reference",
+                        first: "package (http://testing.com/package.git) nil",
+                        second: "nil"
+                    ),
+                ]
+            ),
+        ])
+    }
+
     // MARK: - Helpers
 
     private func noDifference(targets: [String] = []) -> [CompareResult] {
