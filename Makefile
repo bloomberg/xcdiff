@@ -44,3 +44,6 @@ lint:
 	swiftformat --version
 	swiftlint --strict --quiet
 	swiftformat . --lint
+
+regenerate_command_snapshots:
+	./Scripts/generate_tests_commands_files.py
