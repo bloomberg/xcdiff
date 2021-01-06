@@ -2,6 +2,10 @@
 
 The list of built-in comparators available in xcdiff.
 
+### `attributes`
+
+Compares project attributes _(e.g. Organization name, last upgrade check, etc...)_.
+
 ### `build_phases`
 
 Compares build phases i.e. dependencies, sources, headers, to ensure all are present in both projects in the same order.

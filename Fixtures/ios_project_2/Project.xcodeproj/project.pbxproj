@@ -480,9 +480,9 @@
 		2E26636C22B7F52500BA59BC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1020;
-				ORGANIZATIONNAME = "Bloomberg LP";
+				LastSwiftUpdateCheck = 1030;
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = "Another Organization";
 				TargetAttributes = {
 					2E26637322B7F52500BA59BC = {
 						CreatedOnToolsVersion = 10.2.1;

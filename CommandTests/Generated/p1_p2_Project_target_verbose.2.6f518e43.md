@@ -200,6 +200,23 @@ Output format: (<path>, <name>, <source_tree>)
     ◦ optional
 
 
+❌ ATTRIBUTES > Root project
+
+⚠️  Value mismatch (3):
+
+  • LastSwiftUpdateCheck
+    ◦ 1110
+    ◦ 1030
+
+  • LastUpgradeCheck
+    ◦ 1020
+    ◦ 1030
+
+  • ORGANIZATIONNAME
+    ◦ Bloomberg LP
+    ◦ Another Organization
+
+
 
 
 ```

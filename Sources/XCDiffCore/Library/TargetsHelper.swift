@@ -147,6 +147,16 @@ final class TargetsHelper {
         }
     }
 
+    func attributes(from pbxproj: PBXProj) throws -> [String: String] {
+        guard let rootProject = try pbxproj.rootProject() else {
+            return [:]
+        }
+
+        return rootProject.attributes.mapValues {
+            "\($0)"
+        }
+    }
+
     // MARK: - Private
 
     private func path(from fileElement: PBXFileElement?, sourceRoot: Path) throws -> String? {

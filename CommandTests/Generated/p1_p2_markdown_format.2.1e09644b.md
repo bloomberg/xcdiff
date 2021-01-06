@@ -201,5 +201,8 @@
 ## ✅ LINKED_DEPENDENCIES > "ProjectUITests" target
 
 
+## ❌ ATTRIBUTES > Root project
+
+
 
 ```

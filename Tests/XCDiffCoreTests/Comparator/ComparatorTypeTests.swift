@@ -35,6 +35,7 @@ final class ComperatorTypeTests: XCTestCase {
             "source_trees",
             "dependencies",
             "linked_dependencies",
+            "attributes",
         ])
     }
 

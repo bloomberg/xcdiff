@@ -392,6 +392,35 @@
       "NewFramework.framework"
     ],
     "tag" : "linked_dependencies"
+  },
+  {
+    "context" : [
+      "Root project"
+    ],
+    "differentValues" : [
+      {
+        "context" : "LastSwiftUpdateCheck",
+        "first" : "1110",
+        "second" : "1030"
+      },
+      {
+        "context" : "LastUpgradeCheck",
+        "first" : "1020",
+        "second" : "1030"
+      },
+      {
+        "context" : "ORGANIZATIONNAME",
+        "first" : "Bloomberg LP",
+        "second" : "Another Organization"
+      }
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "attributes"
   }
 ]
 
