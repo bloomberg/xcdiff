@@ -27,6 +27,8 @@ final class ProjectFixtures {
         case non_existing
         case ios_project_1
         case ios_project_2
+        case ios_project_with_swift_packages_1
+        case ios_project_with_swift_packages_2
         case ios_project_invalid_paths
         // swiftlint:enable identifier_name
     }
@@ -62,7 +64,7 @@ final class ProjectFixtures {
     private func rootPath() -> Path {
         let localFilePathComponents = URL(fileURLWithPath: #file).pathComponents
         guard let testsComponentIndex = localFilePathComponents.firstIndex(of: "XCDiffCommandTests") else {
-            fatalError("Could not dtermine source root path")
+            fatalError("Could not determine source root path")
         }
         let rootPathComponents = localFilePathComponents.prefix(upTo: testsComponentIndex)
         let projectRootPath = Path(String(rootPathComponents.joined(separator: "/").dropFirst())).parent()

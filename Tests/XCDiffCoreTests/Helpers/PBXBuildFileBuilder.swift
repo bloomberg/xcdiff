@@ -22,6 +22,7 @@ final class PBXBuildFileBuilder {
     private var name: String?
     private var platformFilter: String?
     private var settings: [String: Any]?
+    private var packageProduct: SwiftPackageProductDependencyData?
 
     @discardableResult
     func setSourceTree(_ sourceTree: PBXSourceTree) -> PBXBuildFileBuilder {
@@ -38,6 +39,12 @@ final class PBXBuildFileBuilder {
     @discardableResult
     func setName(_ name: String) -> PBXBuildFileBuilder {
         self.name = name
+        return self
+    }
+
+    @discardableResult
+    func setPackageProduct(_ packageProduct: SwiftPackageProductDependencyData) -> PBXBuildFileBuilder {
+        self.packageProduct = packageProduct
         return self
     }
 
@@ -65,7 +72,24 @@ final class PBXBuildFileBuilder {
                                              path: path)
         let buildFile = PBXBuildFile(file: fileReference, settings: settings)
         buildFile.platformFilter = platformFilter
-        let objects: [PBXObject] = [buildFile, fileReference]
-        return (buildFile, objects)
+        var objects: [PBXObject?] = [buildFile, fileReference]
+
+        if let packageProduct = packageProduct {
+            let packageReference = packageProduct.package.map {
+                XCRemoteSwiftPackageReference(
+                    repositoryURL: $0.url,
+                    versionRequirement: $0.version
+                )
+            }
+            let product = XCSwiftPackageProductDependency(
+                productName: packageProduct.productName,
+                package: packageReference
+            )
+            buildFile.product = product
+            objects.append(product)
+            objects.append(packageReference)
+        }
+
+        return (buildFile, objects.compactMap { $0 })
     }
 }

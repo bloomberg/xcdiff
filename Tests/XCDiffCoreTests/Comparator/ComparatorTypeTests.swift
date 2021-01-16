@@ -36,6 +36,7 @@ final class ComperatorTypeTests: XCTestCase {
             "dependencies",
             "linked_dependencies",
             "attributes",
+            "swift_packages",
         ])
     }
 

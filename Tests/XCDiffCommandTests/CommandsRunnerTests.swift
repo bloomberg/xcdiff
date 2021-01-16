@@ -112,6 +112,7 @@ final class CommandsRunnerTests: XCTestCase {
         ✅ LINKED_DEPENDENCIES > "ProjectTests" target
         ✅ LINKED_DEPENDENCIES > "ProjectUITests" target
         ✅ ATTRIBUTES > Root project
+        ✅ SWIFT_PACKAGES
 
 
         """)

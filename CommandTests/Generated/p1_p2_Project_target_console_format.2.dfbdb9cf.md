@@ -29,6 +29,7 @@
 ❌ DEPENDENCIES > "Project" target
 ❌ LINKED_DEPENDENCIES > "Project" target
 ❌ ATTRIBUTES > Root project
+✅ SWIFT_PACKAGES
 
 
 ```

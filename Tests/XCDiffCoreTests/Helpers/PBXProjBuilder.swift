@@ -106,11 +106,30 @@ final class PBXProjBuilder {
     }
 
     @discardableResult
+    func addRemoteSwiftPackage(
+        url: String,
+        version: XCRemoteSwiftPackageReference.VersionRequirement? = nil
+    ) -> PBXProjBuilder {
+        let package = XCRemoteSwiftPackageReference(repositoryURL: url, versionRequirement: version)
+        pbxproj.add(object: package)
+        pbxproj.rootObject?.packages.append(package)
+        return self
+    }
+
+    @discardableResult
     func make(target targetName: String, dependOn dependencyTargetNames: [String]) -> PBXProjBuilder {
         let target = pbxproj.targets(named: targetName).first as! PBXNativeTarget
         dependencyTargetNames.forEach {
             let dependencyTarget = pbxproj.targets(named: $0).first!
             _ = try! target.addDependency(target: dependencyTarget)
+        }
+        return self
+    }
+
+    @discardableResult
+    func make(target targetName: String, dependOn dependencies: [DependencyType]) -> PBXProjBuilder {
+        dependencies.forEach {
+            make(target: targetName, dependOn: $0)
         }
         return self
     }
@@ -171,6 +190,9 @@ final class PBXProjBuilder {
                       dependOn dependency: SwiftPackageProductDependencyData) -> PBXProjBuilder {
         let target = pbxproj.targets(named: targetName).first as! PBXNativeTarget
         let swiftPackageDependency = XCSwiftPackageProductDependency(productName: dependency.productName)
+        if let package = dependency.package {
+            swiftPackageDependency.package = pbxproject.packages.first(where: { $0.repositoryURL == package.url })
+        }
         pbxproj.add(object: swiftPackageDependency)
         let targetDependency = PBXTargetDependency(name: dependency.name,
                                                    product: swiftPackageDependency)
@@ -221,8 +243,14 @@ struct TargetProxyDependencyData {
 }
 
 struct SwiftPackageProductDependencyData {
-    let name: String?
-    let productName: String
+    var name: String?
+    var productName: String
+    var package: RemoteSwiftPackageData?
+}
+
+struct RemoteSwiftPackageData {
+    var url: String
+    var version: XCRemoteSwiftPackageReference.VersionRequirement?
 }
 
 enum ContainerPortal {
