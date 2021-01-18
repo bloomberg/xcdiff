@@ -72,5 +72,8 @@
 ## ❌ ATTRIBUTES > Root project
 
 
+## ✅ SWIFT_PACKAGES
+
+
 
 ```

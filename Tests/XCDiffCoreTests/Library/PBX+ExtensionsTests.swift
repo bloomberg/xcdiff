@@ -33,4 +33,29 @@ final class PBXExtensionsTests: XCTestCase {
         XCTAssertEqual(PBXCopyFilesBuildPhase.SubFolder.plugins.description, "plugins")
         XCTAssertEqual(PBXCopyFilesBuildPhase.SubFolder.other.description, "other")
     }
+
+    func testVersionRequirementStrings() {
+        // Given
+        let subjects: [XCRemoteSwiftPackageReference.VersionRequirement] = [
+            .branch("main"),
+            .exact("1.2.0"),
+            .range(from: "0.1.0", to: "0.2.0"),
+            .revision("abcdef"),
+            .upToNextMajorVersion("1.2.0"),
+            .upToNextMinorVersion("0.2.1"),
+        ]
+
+        // When
+        let results = subjects.map(\.description)
+
+        // Then
+        XCTAssertEqual(results, [
+            ".branch(main)",
+            ".exact(1.2.0)",
+            ".range(0.1.0 ... 0.2.0)",
+            ".revision(abcdef)",
+            ".upToNextMajorVersion(1.2.0)",
+            ".upToNextMinorVersion(0.2.1)",
+        ])
+    }
 }

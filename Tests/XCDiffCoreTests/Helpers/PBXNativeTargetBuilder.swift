@@ -185,6 +185,9 @@ final class PBXNativeTargetBuilder {
                     if let name = linkedDependency.name { buildFileBuilder.setName(name) }
                     if let path = linkedDependency.path { buildFileBuilder.setPath(path) }
                     if let settings = linkedDependency.settings { buildFileBuilder.setSettings(settings) }
+                    if let packageProduct = linkedDependency.packageProduct {
+                        buildFileBuilder.setPackageProduct(packageProduct)
+                    }
                 }
             }
         }
@@ -206,17 +209,10 @@ final class PBXNativeTargetBuilder {
 }
 
 struct LinkedDependenciesData {
-    let name: String?
-    let path: String?
-    let settings: [String: [String]]?
-
-    init(name: String? = nil,
-         path: String? = nil,
-         settings: [String: [String]]? = nil) {
-        self.name = name
-        self.path = path
-        self.settings = settings
-    }
+    var name: String?
+    var path: String?
+    var packageProduct: SwiftPackageProductDependencyData?
+    var settings: [String: [String]]?
 }
 
 struct EmbeddedFrameworksData {

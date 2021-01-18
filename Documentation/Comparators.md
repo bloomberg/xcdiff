@@ -58,6 +58,10 @@ Compares sources including their compiler flag attributes.
 
 Compares the project group structure.
 
+### `swift_packages`
+
+Compares the associated remote Swift Packages.
+
 ### `targets`
 
 Compares target names and types.

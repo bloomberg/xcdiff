@@ -33,6 +33,7 @@ struct HeaderDescriptor: Hashable {
 struct LinkedDependencyDescriptor: Hashable {
     let name: String?
     let path: String?
+    let package: SwiftPackageDescriptor?
     let type: DependencyDescriptorType
 }
 
@@ -141,6 +142,12 @@ final class TargetsHelper {
             if $0.file?.name != nil || $0.file?.path != nil {
                 return LinkedDependencyDescriptor(name: $0.file?.name,
                                                   path: $0.file?.path,
+                                                  package: nil,
+                                                  type: $0.settings == nil ? .required : .optional)
+            } else if let product = $0.product {
+                return LinkedDependencyDescriptor(name: product.productName,
+                                                  path: nil,
+                                                  package: product.package.flatMap(swiftPackageDescriptor),
                                                   type: $0.settings == nil ? .required : .optional)
             }
             return nil
@@ -155,6 +162,22 @@ final class TargetsHelper {
         return rootProject.attributes.mapValues {
             "\($0)"
         }
+    }
+
+    func swiftPackages(in projectDescriptor: ProjectDescriptor) throws -> [SwiftPackageDescriptor] {
+        guard let rootProject = try projectDescriptor.pbxproj.rootProject() else {
+            return []
+        }
+
+        return rootProject.packages.map(swiftPackageDescriptor)
+    }
+
+    private func swiftPackageDescriptor(from package: XCRemoteSwiftPackageReference) -> SwiftPackageDescriptor {
+        SwiftPackageDescriptor(
+            name: package.name ?? "nil",
+            url: package.repositoryURL ?? "nil",
+            version: package.versionRequirement?.description ?? "nil"
+        )
     }
 
     // MARK: - Private

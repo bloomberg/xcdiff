@@ -46,12 +46,13 @@ final class LinkedDependenciesComparator: Comparator {
         let descriptorPairs = commonDependencyDescriptorPairs(first: firstDependencies,
                                                               second: secondDependencies)
 
-        let differences = attributesDifferences(in: descriptorPairs)
+        let attributesDifferences = self.attributesDifferences(in: descriptorPairs)
+        let packagesDifferences = packageDifferences(in: descriptorPairs)
 
         return result(context: ["\"\(commonTarget.first.name)\" target"],
                       first: firstPaths,
                       second: secondPaths,
-                      differentValues: differences)
+                      differentValues: attributesDifferences + packagesDifferences)
     }
 
     private func dependencyKey(dependency: LinkedDependencyDescriptor) -> String? {
@@ -89,6 +90,20 @@ final class LinkedDependenciesComparator: Comparator {
                     return .init(context: "\(key) attributes",
                                  first: first.type.rawValue,
                                  second: second.type.rawValue)
+                }
+                return nil
+            }
+    }
+
+    private func packageDifferences(in dependencyDescriptorPairs: [DependencyDescriptorPair])
+        -> [CompareResult.DifferentValues] {
+        return dependencyDescriptorPairs
+            .filter { $0.package != $1.package }
+            .compactMap { first, second -> CompareResult.DifferentValues? in
+                if let key = dependencyKey(dependency: first) {
+                    return .init(context: "\(key) package reference",
+                                 first: first.package?.difference(from: second.package),
+                                 second: second.package?.difference(from: first.package))
                 }
                 return nil
             }

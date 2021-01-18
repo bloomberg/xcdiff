@@ -27,5 +27,6 @@ inclusion status when tags aren't explicitly specified.
 - DEPENDENCIES                   | Yes
 - LINKED_DEPENDENCIES            | Yes
 - ATTRIBUTES                     | Yes
+- SWIFT_PACKAGES                 | Yes
 
 ```
