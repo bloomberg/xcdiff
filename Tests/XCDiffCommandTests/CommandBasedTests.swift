@@ -116,35 +116,56 @@ final class CommandBasedTests: XCTestCase {
 
 private extension Scanner {
     func scanStringOrFail(_ string: String, into result: AutoreleasingUnsafeMutablePointer<NSString?>?) {
-        guard scanString(string, into: result) else {
-            fatalError("Missing token: \(string)")
-        }
-    }
-
-    func scanCharactersOrFail(from characterSet: CharacterSet,
-                              into result: AutoreleasingUnsafeMutablePointer<NSString?>?) {
-        guard scanUpToCharacters(from: characterSet, into: result) else {
-            fatalError("Missing token from character set: \(characterSet)")
+        if #available(OSX 10.15, *) {
+            guard let value = scanString(string) else {
+                fatalError("Missing token: \(string)")
+            }
+            result?.pointee = value as NSString
+        } else {
+            guard scanString(string, into: result) else {
+                fatalError("Missing token: \(string)")
+            }
         }
     }
 
     func scanUpToCharactersOrFail(from characterSet: CharacterSet,
                                   into result: AutoreleasingUnsafeMutablePointer<NSString?>?) {
-        guard scanUpToCharacters(from: characterSet, into: result) else {
-            fatalError("Missing token from character set: \(characterSet)")
+        if #available(OSX 10.15, *) {
+            guard let value = scanUpToCharacters(from: characterSet) else {
+                fatalError("Missing token from character set: \(characterSet)")
+            }
+            result?.pointee = value as NSString
+        } else {
+            guard scanUpToCharacters(from: characterSet, into: result) else {
+                fatalError("Missing token from character set: \(characterSet)")
+            }
         }
     }
 
     func scanUpToOrFail(_ string: String,
                         into result: AutoreleasingUnsafeMutablePointer<NSString?>?) {
-        guard scanUpTo(string, into: result) else {
-            fatalError("Missing token: \(string)")
+        if #available(OSX 10.15, *) {
+            guard let value = scanUpToString(string) else {
+                fatalError("Missing token: \(string)")
+            }
+            result?.pointee = value as NSString
+        } else {
+            guard scanUpTo(string, into: result) else {
+                fatalError("Missing token: \(string)")
+            }
         }
     }
 
     func scanInt32OrFail(_ result: UnsafeMutablePointer<Int32>?) {
-        guard scanInt32(result) else {
-            fatalError("Missing int32")
+        if #available(OSX 10.15, *) {
+            guard let value = scanInt32() else {
+                fatalError("Missing Int32")
+            }
+            result?.pointee = value
+        } else {
+            guard scanInt32(result) else {
+                fatalError("Missing Int32")
+            }
         }
     }
 
