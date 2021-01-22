@@ -9,5 +9,5 @@
 7. Populate the description with the recent changes since the last release. For convenience the following command can be used to generate a changelog summary:
 
 ```bash
-git log master...$(git describe --tags `git rev-list --tags --max-count=1`) --pretty=format:'- %s'
+git log main...$(git describe --tags `git rev-list --tags --max-count=1`) --pretty=format:'- %s'
 ```
