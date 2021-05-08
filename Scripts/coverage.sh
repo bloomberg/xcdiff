@@ -13,4 +13,4 @@ mkdir -p .coverage
 xcrun llvm-cov export -format="lcov" .build/debug/xcdiff -instr-profile .build/debug/codecov/default.profdata > ./.coverage/coverage.lcov
 
 # upload coverage data
-bash <(curl -s https://codecov.io/bash) -D .coverage
+bash Scripts/codecov.sh
