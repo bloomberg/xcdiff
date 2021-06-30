@@ -260,6 +260,17 @@ Output format: (<path>, <name>, <source_tree>)
 
 
 
+## ❌ ATTRIBUTES > "Project" target
+
+
+### ⚠️  Value mismatch (1):
+
+  - `LastSwiftMigration`
+    - `1140`
+    - `1020`
+
+
+
 ## ✅ SWIFT_PACKAGES
 
 

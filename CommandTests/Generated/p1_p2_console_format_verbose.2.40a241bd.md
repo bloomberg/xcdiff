@@ -419,6 +419,25 @@ Output format: (<path>, <name>, <source_tree>)
     ◦ Another Organization
 
 
+❌ ATTRIBUTES > "MismatchingLibrary" target
+
+⚠️  Only in second (1):
+
+  • LastSwiftMigration = 1110
+
+
+❌ ATTRIBUTES > "Project" target
+
+⚠️  Value mismatch (1):
+
+  • LastSwiftMigration
+    ◦ 1140
+    ◦ 1020
+
+
+✅ ATTRIBUTES > "ProjectFramework" target
+✅ ATTRIBUTES > "ProjectTests" target
+✅ ATTRIBUTES > "ProjectUITests" target
 ✅ SWIFT_PACKAGES
 
 

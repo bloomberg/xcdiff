@@ -164,6 +164,17 @@ final class TargetsHelper {
         }
     }
 
+    func targetAttributes(pbxproj: PBXProj, target: PBXTarget) throws -> [String: String] {
+        guard let rootProject = try pbxproj.rootProject(),
+            let attributes = rootProject.targetAttributes[target] else {
+            return [:]
+        }
+
+        return attributes.mapValues {
+            "\($0)"
+        }
+    }
+
     func swiftPackages(in projectDescriptor: ProjectDescriptor) throws -> [SwiftPackageDescriptor] {
         guard let rootProject = try projectDescriptor.pbxproj.rootProject() else {
             return []

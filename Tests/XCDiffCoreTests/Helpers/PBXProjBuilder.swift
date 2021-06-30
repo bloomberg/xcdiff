@@ -60,6 +60,11 @@ final class PBXProjBuilder {
         nativeTargetPrototype.fileElements.forEach { $0.parent = group }
         group.parent = pbxproject.mainGroup
         pbxproject.mainGroup.children.append(group)
+
+        if !nativeTargetPrototype.attributes.isEmpty {
+            pbxproject.targetAttributes[nativeTargetPrototype.pbxtarget] = nativeTargetPrototype.attributes
+        }
+
         return self
     }
 

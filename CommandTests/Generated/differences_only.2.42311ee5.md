@@ -36,6 +36,8 @@
 ❌ DEPENDENCIES > "Project" target
 ❌ LINKED_DEPENDENCIES > "Project" target
 ❌ ATTRIBUTES > Root project
+❌ ATTRIBUTES > "MismatchingLibrary" target
+❌ ATTRIBUTES > "Project" target
 
 
 ```

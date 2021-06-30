@@ -424,6 +424,25 @@
   },
   {
     "context" : [
+      "\"Project\" target"
+    ],
+    "differentValues" : [
+      {
+        "context" : "LastSwiftMigration",
+        "first" : "1140",
+        "second" : "1020"
+      }
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "attributes"
+  },
+  {
+    "context" : [
 
     ],
     "differentValues" : [

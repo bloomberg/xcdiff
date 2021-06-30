@@ -25,6 +25,8 @@ final class AttributesComparatorTests: XCTestCase {
         subject = AttributesComparator()
     }
 
+    // MARK: - Project Attributes
+
     func testCompare_whenNoAttributes() throws {
         // Given
         let first = project()
@@ -135,6 +137,161 @@ final class AttributesComparatorTests: XCTestCase {
                 differentValues: [
                     .init(context: "LastSwiftUpdateCheck", first: "1030", second: "1220"),
                     .init(context: "LastUpgradeCheck", first: "1030", second: "1220"),
+                ]
+            ),
+        ])
+    }
+
+    // MARK: - Target Attributes
+
+    func testCompare_targetAttributes_whenNoAttributes() throws {
+        // Given
+        let first = project()
+            .addTarget(name: "TargetA", productType: .application)
+            .projectDescriptor()
+        let second = project()
+            .addTarget(name: "TargetA", productType: .application)
+            .projectDescriptor()
+
+        // When
+        let result = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(result, [
+            .init(
+                tag: "attributes",
+                context: ["Root project"]
+            ),
+            .init(
+                tag: "attributes",
+                context: ["\"TargetA\" target"]
+            ),
+        ])
+    }
+
+    func testCompare_targetAttributes_whenSameAttributes() throws {
+        // Given
+        let first = project()
+            .addTarget(name: "TargetA", productType: .application) { builder in
+                builder.addAttribute(name: "LastSwiftMigration", value: "1250")
+                builder.addAttribute(name: "CreatedOnToolsVersion", value: "12.5")
+            }
+            .projectDescriptor()
+        let second = project()
+            .addTarget(name: "TargetA", productType: .application) { builder in
+                builder.addAttribute(name: "LastSwiftMigration", value: "1250")
+                builder.addAttribute(name: "CreatedOnToolsVersion", value: "12.5")
+            }
+            .projectDescriptor()
+
+        // When
+        let result = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(result, [
+            .init(
+                tag: "attributes",
+                context: ["Root project"]
+            ),
+            .init(
+                tag: "attributes",
+                context: ["\"TargetA\" target"]
+            ),
+        ])
+    }
+
+    func testCompare_targetAttributes_whenAttributeOnlyInFirst() throws {
+        // Given
+        let first = project()
+            .addTarget(name: "TargetA", productType: .application) { builder in
+                builder.addAttribute(name: "LastSwiftMigration", value: "1250")
+                builder.addAttribute(name: "CreatedOnToolsVersion", value: "12.5")
+            }
+            .projectDescriptor()
+        let second = project()
+            .addTarget(name: "TargetA", productType: .application) { builder in
+                builder.addAttribute(name: "CreatedOnToolsVersion", value: "12.5")
+            }
+            .projectDescriptor()
+
+        // When
+        let result = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(result, [
+            .init(
+                tag: "attributes",
+                context: ["Root project"]
+            ),
+            .init(
+                tag: "attributes",
+                context: ["\"TargetA\" target"],
+                onlyInFirst: ["LastSwiftMigration = 1250"]
+            ),
+        ])
+    }
+
+    func testCompare_targetAttributes_whenAttributeOnlyInSecond() throws {
+        // Given
+        let first = project()
+            .addTarget(name: "TargetA", productType: .application) { builder in
+                builder.addAttribute(name: "CreatedOnToolsVersion", value: "12.5")
+            }
+            .projectDescriptor()
+        let second = project()
+            .addTarget(name: "TargetA", productType: .application) { builder in
+                builder.addAttribute(name: "LastSwiftMigration", value: "1250")
+                builder.addAttribute(name: "CreatedOnToolsVersion", value: "12.5")
+            }
+            .projectDescriptor()
+
+        // When
+        let result = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(result, [
+            .init(
+                tag: "attributes",
+                context: ["Root project"]
+            ),
+            .init(
+                tag: "attributes",
+                context: ["\"TargetA\" target"],
+                onlyInSecond: ["LastSwiftMigration = 1250"]
+            ),
+        ])
+    }
+
+    func testCompare_targetAttributes_whenDifferentAttributeValues() throws {
+        // Given
+        let first = project()
+            .addTarget(name: "TargetA", productType: .application) { builder in
+                builder.addAttribute(name: "LastSwiftMigration", value: "1300")
+                builder.addAttribute(name: "CreatedOnToolsVersion", value: "12.5")
+            }
+            .projectDescriptor()
+        let second = project()
+            .addTarget(name: "TargetA", productType: .application) { builder in
+                builder.addAttribute(name: "LastSwiftMigration", value: "1250")
+                builder.addAttribute(name: "CreatedOnToolsVersion", value: "12.0")
+            }
+            .projectDescriptor()
+
+        // When
+        let result = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(result, [
+            .init(
+                tag: "attributes",
+                context: ["Root project"]
+            ),
+            .init(
+                tag: "attributes",
+                context: ["\"TargetA\" target"],
+                differentValues: [
+                    .init(context: "CreatedOnToolsVersion", first: "12.5", second: "12.0"),
+                    .init(context: "LastSwiftMigration", first: "1300", second: "1250"),
                 ]
             ),
         ])

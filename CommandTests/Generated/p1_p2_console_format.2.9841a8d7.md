@@ -73,6 +73,11 @@
 ✅ LINKED_DEPENDENCIES > "ProjectTests" target
 ✅ LINKED_DEPENDENCIES > "ProjectUITests" target
 ❌ ATTRIBUTES > Root project
+❌ ATTRIBUTES > "MismatchingLibrary" target
+❌ ATTRIBUTES > "Project" target
+✅ ATTRIBUTES > "ProjectFramework" target
+✅ ATTRIBUTES > "ProjectTests" target
+✅ ATTRIBUTES > "ProjectUITests" target
 ✅ SWIFT_PACKAGES
 
 

@@ -15,6 +15,7 @@
 //
 
 import Foundation
+import XcodeProj
 
 final class AttributesComparator: Comparator {
     let tag = "attributes"
@@ -23,15 +24,52 @@ final class AttributesComparator: Comparator {
 
     func compare(_ first: ProjectDescriptor,
                  _ second: ProjectDescriptor,
-                 parameters _: ComparatorParameters) throws -> [CompareResult] {
-        return try compareProjectAttributes(first: first, second: second)
+                 parameters: ComparatorParameters) throws -> [CompareResult] {
+        let projectAttributes = try compareProjectAttributes(first: first, second: second)
+        let targetAttributes = try compareTargetAttributes(
+            firstProject: first,
+            secondProject: second,
+            parameters: parameters
+        )
+        return [projectAttributes] + targetAttributes
     }
 
+    // MARK: - Private
+
     private func compareProjectAttributes(first: ProjectDescriptor,
-                                          second: ProjectDescriptor) throws -> [CompareResult] {
+                                          second: ProjectDescriptor) throws -> CompareResult {
         let first = try targetsHelper.attributes(from: first.pbxproj)
         let second = try targetsHelper.attributes(from: second.pbxproj)
+        return compareValues(
+            context: ["Root project"],
+            first: first,
+            second: second
+        )
+    }
 
+    private func compareTargetAttributes(
+        firstProject: ProjectDescriptor,
+        secondProject: ProjectDescriptor,
+        parameters: ComparatorParameters
+    ) throws -> [CompareResult] {
+        try targetsHelper
+            .commonTargets(firstProject, secondProject, parameters: parameters)
+            .map { firstTarget, secondTarget in
+                let first = try targetsHelper.targetAttributes(pbxproj: firstProject.pbxproj, target: firstTarget)
+                let second = try targetsHelper.targetAttributes(pbxproj: secondProject.pbxproj, target: secondTarget)
+                return compareValues(
+                    context: ["\"\(firstTarget.name)\" target"],
+                    first: first,
+                    second: second
+                )
+            }
+    }
+
+    private func compareValues(
+        context: [String],
+        first: [String: String],
+        second: [String: String]
+    ) -> CompareResult {
         let firstKeys = Array(first.keys)
         let secondKeys = Array(second.keys)
         let commonKeys = firstKeys.commonSorted(secondKeys)
@@ -56,16 +94,14 @@ final class AttributesComparator: Comparator {
             return nil
         }
 
-        return [
-            CompareResult(tag: tag,
-                          context: ["Root project"],
-                          onlyInFirst: onlyInFirst,
-                          onlyInSecond: onlyInSecond,
-                          differentValues: valueDifferences),
-        ]
+        return CompareResult(
+            tag: tag,
+            context: context,
+            onlyInFirst: onlyInFirst,
+            onlyInSecond: onlyInSecond,
+            differentValues: valueDifferences
+        )
     }
-
-    // MARK: - Private
 
     private func keyAndValue(_ key: String, attributes: [String: String]) -> String {
         return "\(key) = \(attributes[key] ?? "nil")"

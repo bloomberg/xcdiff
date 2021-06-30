@@ -46,6 +46,7 @@
 
 
 ✅ ATTRIBUTES > Root project
+✅ ATTRIBUTES > "App" target
 ❌ SWIFT_PACKAGES
 
 ⚠️  Only in second (1):
