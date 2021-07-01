@@ -296,4 +296,39 @@ final class AttributesComparatorTests: XCTestCase {
             ),
         ])
     }
+
+    func testCompare_targetAttributes_whenTargetReferencesSameTargetWithDifferentIds() throws {
+        // Given
+        let first = project()
+            .addTarget(name: "TargetA", productType: .application)
+            .addTarget(name: "TargetB", productType: .application) { builder in
+                builder.addAttribute(name: "TestTargetID", referenceTarget: "TargetA")
+            }
+            .projectDescriptor()
+        let second = project()
+            .addTarget(name: "TargetA", productType: .application)
+            .addTarget(name: "TargetB", productType: .application) { builder in
+                builder.addAttribute(name: "TestTargetID", referenceTarget: "TargetA")
+            }
+            .projectDescriptor()
+
+        // When
+        let result = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(result, [
+            .init(
+                tag: "attributes",
+                context: ["Root project"]
+            ),
+            .init(
+                tag: "attributes",
+                context: ["\"TargetA\" target"]
+            ),
+            .init(
+                tag: "attributes",
+                context: ["\"TargetB\" target"]
+            ),
+        ])
+    }
 }

@@ -410,7 +410,6 @@
 					};
 					2E26639222B7F52600BA59BC = {
 						CreatedOnToolsVersion = 10.2.1;
-						TestTargetID = 2E26637322B7F52500BA59BC;
 					};
 					2EB291DB230B29B300C9EB4A = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -773,9 +772,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bloomberg.xcdiff.ProjectUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Project;
 			};
 			name = Debug;
 		};
@@ -792,9 +791,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bloomberg.xcdiff.ProjectUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Project;
 			};
 			name = Release;
 		};

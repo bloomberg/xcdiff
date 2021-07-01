@@ -439,13 +439,35 @@
 ## ✅ SETTINGS > "ProjectUITests" target > "Debug" configuration > Base configuration
 
 
-## ✅ SETTINGS > "ProjectUITests" target > "Debug" configuration > Values
+## ❌ SETTINGS > "ProjectUITests" target > "Debug" configuration > Values
+
+
+### ⚠️  Only in first (1):
+
+  - `PROVISIONING_PROFILE = `
+
+
+### ⚠️  Only in second (1):
+
+  - `TEST_TARGET_NAME = Project`
+
 
 
 ## ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Base configuration
 
 
-## ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Values
+## ❌ SETTINGS > "ProjectUITests" target > "Release" configuration > Values
+
+
+### ⚠️  Only in first (1):
+
+  - `PROVISIONING_PROFILE = `
+
+
+### ⚠️  Only in second (1):
+
+  - `TEST_TARGET_NAME = Project`
+
 
 
 ## ❌ SOURCE_TREES > Root project
@@ -576,7 +598,13 @@ Output format: (<path>, <name>, <source_tree>)
 ## ✅ ATTRIBUTES > "ProjectTests" target
 
 
-## ✅ ATTRIBUTES > "ProjectUITests" target
+## ❌ ATTRIBUTES > "ProjectUITests" target
+
+
+### ⚠️  Only in second (1):
+
+  - `TestTargetID = Project`
+
 
 
 ## ✅ SWIFT_PACKAGES

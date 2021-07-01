@@ -61,8 +61,18 @@ final class PBXProjBuilder {
         group.parent = pbxproject.mainGroup
         pbxproject.mainGroup.children.append(group)
 
-        if !nativeTargetPrototype.attributes.isEmpty {
-            pbxproject.targetAttributes[nativeTargetPrototype.pbxtarget] = nativeTargetPrototype.attributes
+        let stringAttributes: [String: Any] = nativeTargetPrototype.attributes
+        let targetReferenceAttributes: [String: Any] = nativeTargetPrototype
+            .targetReferenceAttributes
+            .compactMapValues { targetName in
+                if let referencedTarget = pbxproject.targets.first(where: { $0.name == targetName }) {
+                    return referencedTarget
+                }
+                return nil
+            }
+        let allAttributes = stringAttributes.merging(targetReferenceAttributes, uniquingKeysWith: { $1 })
+        if !allAttributes.isEmpty {
+            pbxproject.targetAttributes[nativeTargetPrototype.pbxtarget] = allAttributes
         }
 
         return self

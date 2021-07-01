@@ -63,5 +63,10 @@
         "alias": "swift_packages_verbose",
         "command": ["-p1", "{ios_project_with_swift_packages_1}", "-p2", "{ios_project_with_swift_packages_2}", "-v"],
         "comment": "Swift Package differences are flagged"
+    },
+    {
+        "alias": "test_target_attributes",
+        "command": ["-p1", "{ios_project_with_ui_tests_1}", "-p2", "{ios_project_with_ui_tests_2}", "-g", "attributes", "-v"],
+        "comment": "Target attributes that reference targets (e.g. TestTargetID) are resolved correctly"
     }
 ]
