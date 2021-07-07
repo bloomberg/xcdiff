@@ -32,10 +32,15 @@
 ❌ SETTINGS > "Project" target > "Release" configuration > Values
 ❌ SETTINGS > "ProjectFramework" target > "Debug" configuration > Values
 ❌ SETTINGS > "ProjectFramework" target > "Release" configuration > Values
+❌ SETTINGS > "ProjectUITests" target > "Debug" configuration > Values
+❌ SETTINGS > "ProjectUITests" target > "Release" configuration > Values
 ❌ SOURCE_TREES > Root project
 ❌ DEPENDENCIES > "Project" target
 ❌ LINKED_DEPENDENCIES > "Project" target
 ❌ ATTRIBUTES > Root project
+❌ ATTRIBUTES > "MismatchingLibrary" target
+❌ ATTRIBUTES > "Project" target
+❌ ATTRIBUTES > "ProjectUITests" target
 
 
 ```

@@ -164,6 +164,36 @@ final class TargetsHelper {
         }
     }
 
+    func targetAttributes(pbxproj: PBXProj, target: PBXTarget) throws -> [String: String] {
+        guard let rootProject = try pbxproj.rootProject(),
+            let attributes = rootProject.targetAttributes[target] else {
+            return [:]
+        }
+
+        let targetsLookup: [String: PBXTarget] = Dictionary(
+            rootProject.targets.map {
+                ($0.uuid, $0)
+            },
+            uniquingKeysWith: { $1 }
+        )
+
+        return attributes.mapValues { value in
+            switch value {
+            case let pbxTarget as PBXTarget:
+                return pbxTarget.name
+            default:
+                let stringValue = "\(value)"
+
+                // Some attributes like `TestTargetID` store references to other targets
+                // as such those need to be resolved to allow semantic comparisons
+                if let target = targetsLookup[stringValue] {
+                    return target.name
+                }
+                return stringValue
+            }
+        }
+    }
+
     func swiftPackages(in projectDescriptor: ProjectDescriptor) throws -> [SwiftPackageDescriptor] {
         guard let rootProject = try projectDescriptor.pbxproj.rootProject() else {
             return []

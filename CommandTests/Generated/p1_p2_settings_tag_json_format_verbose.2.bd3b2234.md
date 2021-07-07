@@ -431,10 +431,10 @@
 
     ],
     "onlyInFirst" : [
-
+      "PROVISIONING_PROFILE = "
     ],
     "onlyInSecond" : [
-
+      "TEST_TARGET_NAME = Project"
     ],
     "tag" : "settings"
   },
@@ -465,10 +465,10 @@
 
     ],
     "onlyInFirst" : [
-
+      "PROVISIONING_PROFILE = "
     ],
     "onlyInSecond" : [
-
+      "TEST_TARGET_NAME = Project"
     ],
     "tag" : "settings"
   }

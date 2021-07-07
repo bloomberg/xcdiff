@@ -908,10 +908,10 @@
 
     ],
     "onlyInFirst" : [
-
+      "PROVISIONING_PROFILE = "
     ],
     "onlyInSecond" : [
-
+      "TEST_TARGET_NAME = Project"
     ],
     "tag" : "settings"
   },
@@ -942,10 +942,10 @@
 
     ],
     "onlyInFirst" : [
-
+      "PROVISIONING_PROFILE = "
     ],
     "onlyInSecond" : [
-
+      "TEST_TARGET_NAME = Project"
     ],
     "tag" : "settings"
   },
@@ -1164,6 +1164,85 @@
     ],
     "onlyInSecond" : [
 
+    ],
+    "tag" : "attributes"
+  },
+  {
+    "context" : [
+      "\"MismatchingLibrary\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "LastSwiftMigration = 1110"
+    ],
+    "tag" : "attributes"
+  },
+  {
+    "context" : [
+      "\"Project\" target"
+    ],
+    "differentValues" : [
+      {
+        "context" : "LastSwiftMigration",
+        "first" : "1140",
+        "second" : "1020"
+      }
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "attributes"
+  },
+  {
+    "context" : [
+      "\"ProjectFramework\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "attributes"
+  },
+  {
+    "context" : [
+      "\"ProjectTests\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "attributes"
+  },
+  {
+    "context" : [
+      "\"ProjectUITests\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "TestTargetID = Project"
     ],
     "tag" : "attributes"
   },

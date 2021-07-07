@@ -159,13 +159,13 @@
 ## ✅ SETTINGS > "ProjectUITests" target > "Debug" configuration > Base configuration
 
 
-## ✅ SETTINGS > "ProjectUITests" target > "Debug" configuration > Values
+## ❌ SETTINGS > "ProjectUITests" target > "Debug" configuration > Values
 
 
 ## ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Base configuration
 
 
-## ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Values
+## ❌ SETTINGS > "ProjectUITests" target > "Release" configuration > Values
 
 
 ## ❌ SOURCE_TREES > Root project
@@ -202,6 +202,21 @@
 
 
 ## ❌ ATTRIBUTES > Root project
+
+
+## ❌ ATTRIBUTES > "MismatchingLibrary" target
+
+
+## ❌ ATTRIBUTES > "Project" target
+
+
+## ✅ ATTRIBUTES > "ProjectFramework" target
+
+
+## ✅ ATTRIBUTES > "ProjectTests" target
+
+
+## ❌ ATTRIBUTES > "ProjectUITests" target
 
 
 ## ✅ SWIFT_PACKAGES

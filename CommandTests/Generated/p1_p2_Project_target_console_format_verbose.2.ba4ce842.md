@@ -217,6 +217,15 @@ Output format: (<path>, <name>, <source_tree>)
     ◦ Another Organization
 
 
+❌ ATTRIBUTES > "Project" target
+
+⚠️  Value mismatch (1):
+
+  • LastSwiftMigration
+    ◦ 1140
+    ◦ 1020
+
+
 ✅ SWIFT_PACKAGES
 
 

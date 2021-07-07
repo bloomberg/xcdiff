@@ -21,6 +21,8 @@ struct PBXNativeTargetPrototype {
     let pbxtarget: PBXNativeTarget
     let objects: [PBXObject]
     let fileElements: [PBXFileElement] // need to be added to the main group
+    var attributes: [String: String]
+    var targetReferenceAttributes: [String: String]
 }
 
 enum DstSubfolderSpec {
@@ -52,6 +54,8 @@ final class PBXNativeTargetBuilder {
     private var objects: [PBXObject] = []
     private var fileElements: [PBXFileElement] = []
     private var dependencies: [PBXTargetDependency] = []
+    private var attributes: [String: String] = [:]
+    private var targetReferenceAttributes: [String: String] = [:]
 
     init(name: String, productType: PBXProductType?) {
         pbxtarget = PBXNativeTarget(name: name, productType: productType)
@@ -59,9 +63,13 @@ final class PBXNativeTargetBuilder {
     }
 
     func build() -> PBXNativeTargetPrototype {
-        return PBXNativeTargetPrototype(pbxtarget: pbxtarget,
-                                        objects: objects,
-                                        fileElements: fileElements)
+        return PBXNativeTargetPrototype(
+            pbxtarget: pbxtarget,
+            objects: objects,
+            fileElements: fileElements,
+            attributes: attributes,
+            targetReferenceAttributes: targetReferenceAttributes
+        )
     }
 
     @discardableResult
@@ -204,6 +212,18 @@ final class PBXNativeTargetBuilder {
                 }
             }
         }
+        return self
+    }
+
+    @discardableResult
+    func addAttribute(name: String, value: String) -> PBXNativeTargetBuilder {
+        attributes[name] = value
+        return self
+    }
+
+    @discardableResult
+    func addAttribute(name: String, referenceTarget: String) -> PBXNativeTargetBuilder {
+        targetReferenceAttributes[name] = referenceTarget
         return self
     }
 }

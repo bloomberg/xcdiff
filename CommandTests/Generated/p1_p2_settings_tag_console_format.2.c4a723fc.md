@@ -29,9 +29,9 @@
 ✅ SETTINGS > "ProjectTests" target > "Release" configuration > Base configuration
 ✅ SETTINGS > "ProjectTests" target > "Release" configuration > Values
 ✅ SETTINGS > "ProjectUITests" target > "Debug" configuration > Base configuration
-✅ SETTINGS > "ProjectUITests" target > "Debug" configuration > Values
+❌ SETTINGS > "ProjectUITests" target > "Debug" configuration > Values
 ✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Base configuration
-✅ SETTINGS > "ProjectUITests" target > "Release" configuration > Values
+❌ SETTINGS > "ProjectUITests" target > "Release" configuration > Values
 
 
 ```
