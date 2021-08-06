@@ -12,8 +12,8 @@ function main {
     # go to formulas
     pushd "Scripts/Formulas"
 
-    # update homebrew
-    brew update
+    # disable homebrew auto update
+    export HOMEBREW_NO_AUTO_UPDATE=1
 
     # install (or reinstall) swiftlint
     install_formula swiftlint
