@@ -135,7 +135,7 @@ final class TargetsHelper {
 
     func linkedDependencies(from target: PBXTarget) throws -> [LinkedDependencyDescriptor] {
         guard let linkedDependencies = target.buildPhases.compactMap({ $0 as? PBXFrameworksBuildPhase }).first,
-            let dependencyFiles = linkedDependencies.files else {
+              let dependencyFiles = linkedDependencies.files else {
             return []
         }
         return dependencyFiles.compactMap {
@@ -166,7 +166,7 @@ final class TargetsHelper {
 
     func targetAttributes(pbxproj: PBXProj, target: PBXTarget) throws -> [String: String] {
         guard let rootProject = try pbxproj.rootProject(),
-            let attributes = rootProject.targetAttributes[target] else {
+              let attributes = rootProject.targetAttributes[target] else {
             return [:]
         }
 

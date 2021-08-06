@@ -73,7 +73,7 @@ final class LinkedDependenciesComparator: Comparator {
             .map { (firstDependencyDescriptorMap[$0]!, secondDependencyDescriptorMap[$0]!) }
             .sorted { left, right in
                 if let keyLeft = left.0.name ?? left.0.path,
-                    let keyRight = right.0.name ?? right.0.path {
+                   let keyRight = right.0.name ?? right.0.path {
                     return keyLeft < keyRight
                 }
                 return false
@@ -115,6 +115,6 @@ final class LinkedDependenciesComparator: Comparator {
             if let key = dependencyKey(dependency: $0) { return (key, $0) }
             return nil
         },
-                          uniquingKeysWith: { first, _ in first })
+        uniquingKeysWith: { first, _ in first })
     }
 }
