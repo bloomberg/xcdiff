@@ -46,4 +46,8 @@ lint:
 	swiftformat . --lint
 
 regenerate_command_snapshots:
-	./Scripts/generate_tests_commands_files.py
+	./Scripts/generate_tests_commands_files.p
+
+install_tools:
+	./Scripts/brew.sh
+

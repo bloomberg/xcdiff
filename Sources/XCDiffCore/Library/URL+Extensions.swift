@@ -29,8 +29,8 @@ extension URL {
 
         var index = 0
         while index < destinationComp.count,
-            index < baseComp.count,
-            destinationComp[index] == baseComp[index] {
+              index < baseComp.count,
+              destinationComp[index] == baseComp[index] {
             index += 1
         }
 

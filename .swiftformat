@@ -1,2 +1,5 @@
 --exclude Fixtures
 --swiftversion 5
+
+--disable enumNamespaces
+--disable wrapMultilineStatementBraces

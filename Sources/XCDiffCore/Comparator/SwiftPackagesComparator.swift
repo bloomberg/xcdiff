@@ -40,7 +40,7 @@ final class SwiftPackagesComparator: Comparator {
 
         let differencesValues: [CompareResult.DifferentValues] = differences.compactMap {
             guard let first = firstDictionary[$0.identifier],
-                let second = secondDictionary[$0.identifier] else {
+                  let second = secondDictionary[$0.identifier] else {
                 return nil
             }
 

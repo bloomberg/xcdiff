@@ -106,7 +106,7 @@ final class SettingsComparator: Comparator {
         let firstConfigurationOptional = first?.configuration(name: configurationName)
         let secondConfigurationOptional = second?.configuration(name: configurationName)
         guard let firstConfiguration = firstConfigurationOptional,
-            let secondConfiguration = secondConfigurationOptional else {
+              let secondConfiguration = secondConfigurationOptional else {
             if firstConfigurationOptional == nil, secondConfigurationOptional == nil {
                 return [CompareResult(tag: tag, context: context)]
             }
