@@ -76,6 +76,10 @@ def is_not_blank(string):
 def build_project():
     subprocess.check_call(["swift", "build"])
 
+def xcdiff_binary_path():
+    bin_path = subprocess.check_output(["swift", "build", "--show-bin-path"]).strip().decode()
+    return os.path.join(bin_path, "xcdiff")
+
 def run_command(arguments):
     arguments = [substitute_project_paths(element) for element in arguments]
     print(arguments)
@@ -90,7 +94,7 @@ def generate_command_tests_files():
     dirname = os.path.dirname(sys.argv[0])
     command_tests_path = os.path.join(dirname, "../CommandTests/Generated")
     commands = generate_commands() + COMMANDS
-    command_run = ["swift", "run", "xcdiff"]
+    command_run = [xcdiff_binary_path()]
     remove_all_command_tests_files(command_tests_path)
 
     for command in commands:
