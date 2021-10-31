@@ -23,9 +23,9 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-tools-support-core.git", .upToNextMajor(from: "0.1.0")),
-        .package(url: "https://github.com/kylef/PathKit", .upToNextMinor(from: "1.0.0")),
-        .package(url: "https://github.com/tuist/xcodeproj.git", .upToNextMajor(from: "8.0.0")),
+        .package(url: "https://github.com/apple/swift-tools-support-core.git", .upToNextMajor(from: "0.2.4")),
+        .package(url: "https://github.com/kylef/PathKit", .upToNextMinor(from: "1.0.1")),
+        .package(url: "https://github.com/tuist/xcodeproj.git", .upToNextMajor(from: "8.5.0")),
     ],
     targets: [
         .target(
