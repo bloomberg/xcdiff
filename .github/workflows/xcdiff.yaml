@@ -9,6 +9,11 @@ on:
 env:
   DEVELOPER_DIR: "/Applications/Xcode_12.5.1.app/Contents/Developer"
 
+# Limit GITHUB_TOKEN permissions to read-only for repo contents
+# https://docs.github.com/en/actions/security-guides/automatic-token-authentication
+permissions:
+  contents: read
+
 jobs:
   lint:
     name: Lint
@@ -25,7 +30,13 @@ jobs:
     runs-on: macOS-11
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/cache@v2
+      with:
+        path: .build
+        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-spm-
     - name: build
-      run: make clean build
+      run: make build
     - name: test
       run: make test_ci
