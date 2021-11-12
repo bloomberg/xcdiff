@@ -2,8 +2,8 @@
    <img src="Documentation/Resources/xcdiff.png" alt="xcdiff logo" />
 </p>
 
-[![Build Status](https://travis-ci.com/bloomberg/xcdiff.svg?branch=master)](https://travis-ci.com/bloomberg/xcdiff)
-[![Coverage Status](https://codecov.io/gh/bloomberg/xcdiff/branch/master/graph/badge.svg)](https://codecov.io/gh/bloomberg/xcdiff)
+[![Build Status](https://github.com/bloomberg/xcdiff/actions/workflows/xcdiff.yaml/badge.svg)](https://github.com/bloomberg/xcdiff/actions/workflows/xcdiff.yaml)
+[![Coverage Status](https://codecov.io/gh/bloomberg/xcdiff/branch/main/graph/badge.svg)](https://codecov.io/gh/bloomberg/xcdiff)
 
 *xcdiff* is an extensible tool that **finds differences between two .xcodeproj project files**. It can be thought of as git diff for .xcodeproj files, which can be used directly from the command line as well as a library supporting your own set of tools.
 

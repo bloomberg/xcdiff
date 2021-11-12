@@ -1,7 +1,0 @@
-language: swift
-os: osx
-osx_image: xcode12.5
-script:
-  - ./Scripts/brew.sh && make lint
-  - make clean build
-  - make clean test_ci
