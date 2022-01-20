@@ -40,3 +40,6 @@ jobs:
       run: make build
     - name: test
       run: make test_ci
+    - uses: codecov/codecov-action@v2
+      with:
+        directory: .coverage
