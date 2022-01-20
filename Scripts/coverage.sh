@@ -12,5 +12,4 @@ mkdir -p .coverage
 # export the coverage output to lcov format
 xcrun llvm-cov export -format="lcov" .build/debug/xcdiff -instr-profile .build/debug/codecov/default.profdata > ./.coverage/coverage.lcov
 
-# upload coverage data
-bash Scripts/codecov.sh
+echo "Coverage reports saved to the .coverage directory"
