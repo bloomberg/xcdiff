@@ -154,11 +154,11 @@ final class HTMLRenderer: Renderer {
     }
 
     func text(_ text: String) {
-        tag("p", nil, escape(text))
+        tag("p", nil, text.htmlEscaped())
     }
 
     func pre(_ text: String) {
-        self.text(escape(text))
+        self.text(text.htmlEscaped())
     }
 
     func list(_ content: () -> Void) {
@@ -167,7 +167,7 @@ final class HTMLRenderer: Renderer {
 
     func item(_ text: String) {
         item {
-            output.write(escape(text))
+            output.write(text.htmlEscaped())
         }
     }
 
@@ -201,16 +201,6 @@ final class HTMLRenderer: Renderer {
         output.write("""
         </\(name)>
         """)
-    }
-
-    // rather poor solution, we might need to find something more flexible and performant
-    private func escape(_ text: String) -> String {
-        return text
-            .replacingOccurrences(of: "&", with: "&amp;")
-            .replacingOccurrences(of: "<", with: "&#x3C;")
-            .replacingOccurrences(of: ">", with: "&#x3E;")
-            .replacingOccurrences(of: "\"", with: "&quot;")
-            .replacingOccurrences(of: "'", with: "&#39;")
     }
 
     private enum CSSClass: String {

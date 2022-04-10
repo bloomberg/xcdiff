@@ -60,6 +60,16 @@
         "comment": "Multiple differences, valid HTML format expected"
     },
     {
+        "alias": "html_side_by_side_format",
+        "command": ["-p1", "{ios_project_1}", "-p2", "{ios_project_2}", "-f", "htmlSideBySide"],
+        "comment": "Multiple differences, valid HTML format expected"
+    },
+    {
+        "alias": "html_side_by_side_format_verbose",
+        "command": ["-p1", "{ios_project_1}", "-p2", "{ios_project_2}", "-f", "htmlSideBySide", "-v"],
+        "comment": "Multiple differences, valid HTML format expected"
+    },
+    {
         "alias": "swift_packages_verbose",
         "command": ["-p1", "{ios_project_with_swift_packages_1}", "-p2", "{ios_project_with_swift_packages_2}", "-v"],
         "comment": "Swift Package differences are flagged"

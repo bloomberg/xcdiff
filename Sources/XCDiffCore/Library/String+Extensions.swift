@@ -19,7 +19,7 @@ import Foundation
 extension String {
     func split(around delimiter: String) -> (String, String?) {
         var start = startIndex
-        while let index = self.index(start, offsetBy: delimiter.count, limitedBy: endIndex) {
+        while let index = index(start, offsetBy: delimiter.count, limitedBy: endIndex) {
             if self[start ..< index] == delimiter {
                 let leading = self[startIndex ..< start]
                 guard index != endIndex else {
