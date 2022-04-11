@@ -107,16 +107,24 @@
             width: 50%;
         }
 
-        .onlyFirstContent {
+        .onlyFirstContent td:nth-child(1) {
             background-color: #ffdfe6;
         }
 
-        .onlySecondContent {
+        .onlyFirstContent td:nth-child(2) {
+            background-color: #efefef;
+        }
+
+        .onlySecondContent td:nth-child(1) {
+            background-color: #efefef;
+        }
+
+        .onlySecondContent td:nth-child(2) {
             background-color: #e3f8d7;
         }
 
         .differentContentKey {
-            background-color: #f9f5cb;
+            background-color: #f4efbc;
             color: #56494E;
             font-weight: bold;
         }
@@ -126,12 +134,16 @@
         }
 
         .differentContent td {
-            padding: 2pt 18pt;
+            padding: 2pt 15pt;
         }
 
         .rowHeading {
             text-align: center;
             font-weight: bold;
+        }
+
+        .rowSpacer {
+            height: 10pt;
         }
 
         table {
@@ -394,9 +406,9 @@
             NewFramework.framework
         </td>
     </tr>
-    <tr class="rowHeading">
+    <tr class="rowSpacer">
         <td colspan="2">
-            Value Mismatch
+            
         </td>
     </tr>
     <tr class="differentContentKey">
@@ -442,9 +454,9 @@
             NewFramework
         </td>
     </tr>
-    <tr class="rowHeading">
+    <tr class="rowSpacer">
         <td colspan="2">
-            Value Mismatch
+            
         </td>
     </tr>
     <tr class="differentContentKey">
@@ -526,9 +538,9 @@
             ProjectFramework/Header4.h
         </td>
     </tr>
-    <tr class="rowHeading">
+    <tr class="rowSpacer">
         <td colspan="2">
-            Value Mismatch
+            
         </td>
     </tr>
     <tr class="differentContentKey">
@@ -587,9 +599,9 @@
             
         </td>
     </tr>
-    <tr class="rowHeading">
+    <tr class="rowSpacer">
         <td colspan="2">
-            Value Mismatch
+            
         </td>
     </tr>
     <tr class="differentContentKey">
@@ -769,12 +781,7 @@
         </tr>
     </thead>
     <tbody>
-            <tr class="rowHeading">
-        <td colspan="2">
-            Value Mismatch
-        </td>
-    </tr>
-    <tr class="differentContentKey">
+            <tr class="differentContentKey">
         <td colspan="2">
             Path to .xcconfig
         </td>
@@ -960,9 +967,9 @@
             VERSION_INFO_PREFIX = 
         </td>
     </tr>
-    <tr class="rowHeading">
+    <tr class="rowSpacer">
         <td colspan="2">
-            Value Mismatch
+            
         </td>
     </tr>
     <tr class="differentContentKey">
@@ -1098,9 +1105,9 @@
             VERSION_INFO_PREFIX = 
         </td>
     </tr>
-    <tr class="rowHeading">
+    <tr class="rowSpacer">
         <td colspan="2">
-            Value Mismatch
+            
         </td>
     </tr>
     <tr class="differentContentKey">
@@ -1129,12 +1136,7 @@
         </tr>
     </thead>
     <tbody>
-            <tr class="rowHeading">
-        <td colspan="2">
-            Value Mismatch
-        </td>
-    </tr>
-    <tr class="differentContentKey">
+            <tr class="differentContentKey">
         <td colspan="2">
             Path to .xcconfig
         </td>
@@ -1168,9 +1170,9 @@
             ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
         </td>
     </tr>
-    <tr class="rowHeading">
+    <tr class="rowSpacer">
         <td colspan="2">
-            Value Mismatch
+            
         </td>
     </tr>
     <tr class="differentContentKey">
@@ -1210,9 +1212,9 @@
             ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
         </td>
     </tr>
-    <tr class="rowHeading">
+    <tr class="rowSpacer">
         <td colspan="2">
-            Value Mismatch
+            
         </td>
     </tr>
     <tr class="differentContentKey">
@@ -1244,12 +1246,7 @@
         </tr>
     </thead>
     <tbody>
-            <tr class="rowHeading">
-        <td colspan="2">
-            Value Mismatch
-        </td>
-    </tr>
-    <tr class="differentContentKey">
+            <tr class="differentContentKey">
         <td colspan="2">
             PRODUCT_BUNDLE_IDENTIFIER
         </td>
@@ -1278,12 +1275,7 @@
         </tr>
     </thead>
     <tbody>
-            <tr class="rowHeading">
-        <td colspan="2">
-            Value Mismatch
-        </td>
-    </tr>
-    <tr class="differentContentKey">
+            <tr class="differentContentKey">
         <td colspan="2">
             PRODUCT_BUNDLE_IDENTIFIER
         </td>
@@ -1613,9 +1605,9 @@
             NewFramework.framework
         </td>
     </tr>
-    <tr class="rowHeading">
+    <tr class="rowSpacer">
         <td colspan="2">
-            Value Mismatch
+            
         </td>
     </tr>
     <tr class="differentContentKey">
@@ -1653,12 +1645,7 @@
         </tr>
     </thead>
     <tbody>
-            <tr class="rowHeading">
-        <td colspan="2">
-            Value Mismatch
-        </td>
-    </tr>
-    <tr class="differentContentKey">
+            <tr class="differentContentKey">
         <td colspan="2">
             LastSwiftUpdateCheck
         </td>
@@ -1731,12 +1718,7 @@
         </tr>
     </thead>
     <tbody>
-            <tr class="rowHeading">
-        <td colspan="2">
-            Value Mismatch
-        </td>
-    </tr>
-    <tr class="differentContentKey">
+            <tr class="differentContentKey">
         <td colspan="2">
             LastSwiftMigration
         </td>

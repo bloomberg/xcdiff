@@ -107,16 +107,24 @@
             width: 50%;
         }
 
-        .onlyFirstContent {
+        .onlyFirstContent td:nth-child(1) {
             background-color: #ffdfe6;
         }
 
-        .onlySecondContent {
+        .onlyFirstContent td:nth-child(2) {
+            background-color: #efefef;
+        }
+
+        .onlySecondContent td:nth-child(1) {
+            background-color: #efefef;
+        }
+
+        .onlySecondContent td:nth-child(2) {
             background-color: #e3f8d7;
         }
 
         .differentContentKey {
-            background-color: #f9f5cb;
+            background-color: #f4efbc;
             color: #56494E;
             font-weight: bold;
         }
@@ -126,12 +134,16 @@
         }
 
         .differentContent td {
-            padding: 2pt 18pt;
+            padding: 2pt 15pt;
         }
 
         .rowHeading {
             text-align: center;
             font-weight: bold;
+        }
+
+        .rowSpacer {
+            height: 10pt;
         }
 
         table {

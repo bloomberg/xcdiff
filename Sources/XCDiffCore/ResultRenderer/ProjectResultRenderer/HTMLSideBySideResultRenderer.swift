@@ -18,21 +18,6 @@ import Foundation
 
 // swiftlint:disable:next type_body_length
 final class HTMLSideBySideResultRenderer: ProjectCompareResultRenderer {
-    private enum SectionType {
-        case success
-        case warning
-    }
-
-    private enum CSSClass: String {
-        case success
-        case warning
-        case rowHeading
-        case onlyFirstContent
-        case onlySecondContent
-        case differentContentKey
-        case differentContent
-    }
-
     private let output: AnyOutput<String>
     private let verbose: Bool
 
@@ -83,6 +68,7 @@ final class HTMLSideBySideResultRenderer: ProjectCompareResultRenderer {
                     second: nil
                 )
             }
+
             for onlyInSecond in result.onlyInSecond {
                 makeTableRow(
                     cssClass: .onlySecondContent,
@@ -91,12 +77,14 @@ final class HTMLSideBySideResultRenderer: ProjectCompareResultRenderer {
                 )
             }
 
-            if !result.differentValues.isEmpty {
+            // row spacer only to divide the sections if necessary
+            if !result.differentValues.isEmpty, !result.onlyInFirst.isEmpty || !result.onlyInSecond.isEmpty {
                 makeMergedColumnRow(
-                    cssClass: .rowHeading,
-                    text: "Value Mismatch"
+                    cssClass: .rowSpacer,
+                    text: ""
                 )
             }
+
             for differentValue in result.differentValues {
                 makeMergedColumnRow(
                     cssClass: .differentContentKey,
@@ -285,16 +273,24 @@ final class HTMLSideBySideResultRenderer: ProjectCompareResultRenderer {
                     width: 50%;
                 }
 
-                .onlyFirstContent {
+                .onlyFirstContent td:nth-child(1) {
                     background-color: #ffdfe6;
                 }
 
-                .onlySecondContent {
+                .onlyFirstContent td:nth-child(2) {
+                    background-color: #efefef;
+                }
+
+                .onlySecondContent td:nth-child(1) {
+                    background-color: #efefef;
+                }
+
+                .onlySecondContent td:nth-child(2) {
                     background-color: #e3f8d7;
                 }
 
                 .differentContentKey {
-                    background-color: #f9f5cb;
+                    background-color: #f4efbc;
                     color: #56494E;
                     font-weight: bold;
                 }
@@ -304,12 +300,16 @@ final class HTMLSideBySideResultRenderer: ProjectCompareResultRenderer {
                 }
 
                 .differentContent td {
-                    padding: 2pt 18pt;
+                    padding: 2pt 15pt;
                 }
 
                 .rowHeading {
                     text-align: center;
                     font-weight: bold;
+                }
+
+                .rowSpacer {
+                    height: 10pt;
                 }
 
                 table {
@@ -338,6 +338,24 @@ final class HTMLSideBySideResultRenderer: ProjectCompareResultRenderer {
         </body>
         </html>
         """
+    }
+}
+
+private extension HTMLSideBySideResultRenderer {
+    private enum SectionType {
+        case success
+        case warning
+    }
+
+    private enum CSSClass: String {
+        case success
+        case warning
+        case rowHeading
+        case onlyFirstContent
+        case onlySecondContent
+        case differentContentKey
+        case differentContent
+        case rowSpacer
     }
 }
 
