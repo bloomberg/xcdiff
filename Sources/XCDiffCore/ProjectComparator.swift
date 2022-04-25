@@ -23,6 +23,7 @@ public enum Format: String, RawRepresentable, CaseIterable {
     case markdown
     case json
     case html
+    case htmlSideBySide
 }
 
 public struct Mode {

@@ -48,6 +48,8 @@ final class UniversalResultRenderer: ResultRenderer {
             return createJSONRenderer(outputBuffer: outputBuffer)
         case .html:
             return createHTMLRenderer(outputBuffer: outputBuffer)
+        case .htmlSideBySide:
+            return createHTMLSideBySideRenderer(outputBuffer: outputBuffer)
         }
     }
 
@@ -69,5 +71,9 @@ final class UniversalResultRenderer: ResultRenderer {
     private func createHTMLRenderer(outputBuffer: AnyOutput<String>) -> ProjectCompareResultRenderer {
         return TextProjectCompareResultRenderer(renderer: HTMLRenderer(output: outputBuffer),
                                                 verbose: verbose)
+    }
+
+    private func createHTMLSideBySideRenderer(outputBuffer: AnyOutput<String>) -> ProjectCompareResultRenderer {
+        return HTMLSideBySideResultRenderer(output: outputBuffer, verbose: verbose)
     }
 }

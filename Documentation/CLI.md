@@ -49,11 +49,12 @@ For more information on what each of the comparators does, see [Comparators](Com
 
 Since there is a lot of information stored in a `.xcodeproj` file comparisons can get verbose. We provide output format options to make reading the output easier.
 
-There are three output formats:
-- `console` (default, if `-f` is not specified)
+There are a few different output formats:
+- `console` _(default, if `-f` is not specified)_
 - `json`
 - `markdown`
 - `html`
+- `htmlSideBySide` _(diff style format)_
 
 ```sh
 xcdiff -f markdown # alternatively json or console
