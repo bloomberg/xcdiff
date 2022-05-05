@@ -14,7 +14,7 @@
 // limitations under the License.
 //
 
-// swiftlint:disable type_body_length
+import ArgumentParser
 import Foundation
 import PathKit
 import TSCBasic
@@ -22,102 +22,41 @@ import TSCUtility
 import XCDiffCore
 
 public final class CommandRunner {
+    private let commandType: XCDiffParsableCommand.Type
     private let printer: Printer
     private let fileSystem: FileSystem
-    private let parser: ArgumentParser
-    private let versionOption: OptionArgument<Bool>
-    private let path1Option: OptionArgument<String>
-    private let path2Option: OptionArgument<String>
-    private let formatOption: OptionArgument<String>
-    private let targetOption: OptionArgument<String>
-    private let tagOption: OptionArgument<String>
-    private let configurationOption: OptionArgument<String>
-    private let verboseOption: OptionArgument<Bool>
-    private let differencesOnlyOption: OptionArgument<Bool>
-    private let listOption: OptionArgument<Bool>
-    private let command: String
     private let allComparators: [ComparatorType] = .allAvailableComparators
     private let defaultComparators: [ComparatorType] = .defaultComparators
 
     // MARK: - Public
 
-    // swiftlint:disable:next function_body_length
-    public init(command: String = "xcdiff",
+    public init(commandType: XCDiffParsableCommand.Type? = nil,
                 printer: Printer? = nil,
-                fileSystem: FileSystem? = nil,
-                externalParser: ArgumentParser? = nil) {
-        self.command = command
+                fileSystem: FileSystem? = nil) {
+        self.commandType = commandType ?? XCDiffMainCommand.self
         self.printer = printer ?? DefaultPrinter()
         self.fileSystem = fileSystem ?? DefaultFileSystem()
-
-        if let externalParser = externalParser {
-            parser = externalParser.add(subparser: command,
-                                        overview: CommandRunner.overview)
-        } else {
-            parser = ArgumentParser(commandName: command,
-                                    usage: "[options]",
-                                    overview: CommandRunner.overview)
-        }
-
-        versionOption = parser.add(option: "--version",
-                                   kind: Bool.self,
-                                   usage: "Show \(command) version")
-        path1Option = parser.add(option: "--path1",
-                                 shortName: "-p1",
-                                 kind: String.self,
-                                 usage: "Absolute or relative path to the first Xcode project (.xcodeproj file)",
-                                 completion: nil)
-        path2Option = parser.add(option: "--path2",
-                                 shortName: "-p2",
-                                 kind: String.self,
-                                 usage: "Absolute or relative path to the second Xcode project (.xcodeproj file)",
-                                 completion: nil)
-        formatOption = parser.add(option: "--format",
-                                  shortName: "-f",
-                                  kind: String.self,
-                                  usage: "Output format \(CommandRunner.formatCases)")
-        targetOption = parser.add(option: "--target",
-                                  shortName: "-t",
-                                  kind: String.self,
-                                  usage: "Target name")
-        tagOption = parser.add(option: "--tag",
-                               shortName: "-g",
-                               kind: String.self,
-                               usage: "Tag name")
-        configurationOption = parser.add(option: "--configuration",
-                                         shortName: "-c",
-                                         kind: String.self,
-                                         usage: "Configuration name")
-        verboseOption = parser.add(option: "--verbose",
-                                   shortName: "-v",
-                                   kind: Bool.self,
-                                   usage: "Verbose mode")
-        differencesOnlyOption = parser.add(option: "--differences-only",
-                                           shortName: "-d",
-                                           kind: Bool.self,
-                                           usage: "Differences only in the output")
-        listOption = parser.add(option: "--list",
-                                shortName: "-l",
-                                kind: Bool.self,
-                                usage: "List all available comparators (tags)")
     }
 
-    public func run(with arguments: ArgumentParser.Result) -> Int32 {
-        // Collect required command line arguments
-        let version = getVersion(from: arguments)
-        let list = getList(from: arguments)
-
-        // Check if version requested
-        if version {
-            return runPrintVersion()
+    public func run(with arguments: [String]) -> Int32 {
+        do {
+            var command = try commandType.parseAsRoot(arguments)
+            if let xcdiffCommand = command as? XCDiffParsableCommand {
+                return run(with: xcdiffCommand.arguments)
+            } else {
+                try command.run()
+                return complete(commandType: commandType)
+            }
+        } catch {
+            return complete(commandType: commandType, withError: error)
         }
+    }
 
-        // Check if list requested
-        if list {
+    public func run(with arguments: XCDiffArguments) -> Int32 {
+        if arguments.list {
             return runPrintAvailableOperators()
         }
 
-        // Run compare
         do {
             return try runPrintCompare(with: arguments)
         } catch {
@@ -125,21 +64,19 @@ public final class CommandRunner {
         }
     }
 
-    public func run(with rawArguments: [String]) -> Int32 {
-        do {
-            let arguments = try parseArguments(rawArguments)
-            return run(with: arguments)
-        } catch {
-            return handleError(error)
+    private func complete(commandType: ParsableCommand.Type, withError error: Error? = nil) -> Int32 {
+        guard let error = error else {
+            return ExitCode.success.rawValue
         }
+
+        let exitCode = commandType.exitCode(for: error)
+        let fullMessage = commandType.fullMessage(for: error)
+        printer.text(fullMessage)
+
+        return exitCode.isSuccess ? ExitCode.success.rawValue : ExitCode.failure.rawValue
     }
 
     // MARK: - Private
-
-    private func runPrintVersion() -> Int32 {
-        printer.text(Constants.version.description)
-        return 0
-    }
 
     private func runPrintAvailableOperators() -> Int32 {
         let defaultComparatorsTags = Set([ComparatorType].defaultComparators.map { $0.tag })
@@ -176,22 +113,24 @@ public final class CommandRunner {
         return 0
     }
 
-    private func runPrintCompare(with arguments: ArgumentParser.Result) throws -> Int32 {
+    private func runPrintCompare(with arguments: XCDiffArguments) throws -> Int32 {
         // Collect required command line arguments
-        let format = try getFormat(from: arguments)
-        let targets = getTargets(from: arguments)
-        let tags = getTags(from: arguments)
-        let configurations = getConfigurations(from: arguments)
-        let verbose = getVerbose(from: arguments)
-        let differencesOnly = getDifferencesOnly(from: arguments)
-        let parameters = ComparatorParameters(targets: targets,
-                                              configurations: configurations)
+        let targets = targets(from: arguments.target)
+        let tags = tags(from: arguments.tag)
+        let configurations = configurations(from: arguments.configuration)
+        let parameters = ComparatorParameters(targets: targets, configurations: configurations)
 
         // Set up project comparator
-        let (path1, path2) = try getPaths(from: arguments)
-        let mode = Mode(format: format, verbose: verbose, differencesOnly: differencesOnly)
-        let projectComparator = ProjectComparatorFactory.create(comparators: try allComparators.filter(by: tags),
-                                                                mode: mode)
+        let (path1, path2) = try getPaths(arguments.path1, arguments.path2)
+        let mode = Mode(
+            format: arguments.format,
+            verbose: arguments.verbose,
+            differencesOnly: arguments.differencesOnly
+        )
+        let projectComparator = ProjectComparatorFactory.create(
+            comparators: try allComparators.filter(by: tags),
+            mode: mode
+        )
 
         // Run compare
         let result = try projectComparator.compare(path1, path2, parameters: parameters)
@@ -201,15 +140,7 @@ public final class CommandRunner {
         return result.success ? 0 : 2
     }
 
-    private func parseArguments(_ arguments: [String]) throws -> ArgumentParser.Result {
-        return try parser.parse(arguments)
-    }
-
-    private func getPaths(from arguments: ArgumentParser.Result) throws -> (Path, Path) {
-        let path1Arg = arguments.get(path1Option)
-        let path2Arg = arguments.get(path2Option)
-
-        // check if both paths are defined
+    private func getPaths(_ path1Arg: String?, _ path2Arg: String?) throws -> (Path, Path) {
         if let path1Arg = path1Arg, let path2Arg = path2Arg {
             let path1 = Path(path1Arg)
             let path2 = Path(path2Arg)
@@ -239,81 +170,21 @@ public final class CommandRunner {
         """)
     }
 
-    private func getFormat(from arguments: ArgumentParser.Result) throws -> XCDiffCore.Format {
-        guard let formatString = arguments.get(formatOption) else {
-            return .console
-        }
-
-        guard let format = Format(rawValue: formatString) else {
-            throw CommandError.generic("Unrecognized format, use `-f \(CommandRunner.formatCases)`")
-        }
-
-        return format
+    private func targets(from arg: String?) -> ComparatorParameters.Option<String> {
+        arg.map { option(from: $0) } ?? .all
     }
 
-    private func getTargets(from arguments: ArgumentParser.Result) -> ComparatorParameters.Option<String> {
-        guard let targets = arguments.get(targetOption) else {
-            return .all
-        }
-        return option(from: targets)
+    private func tags(from arg: String?) -> ComparatorParameters.Option<String> {
+        arg.map { option(from: $0) } ?? .some(defaultComparators.map { $0.tag })
     }
 
-    private func getTags(from arguments: ArgumentParser.Result) -> ComparatorParameters.Option<String> {
-        guard let tags = arguments.get(tagOption) else {
-            return .some(defaultComparators.map { $0.tag })
-        }
-        return option(from: tags)
-    }
-
-    private func getConfigurations(from arguments: ArgumentParser.Result) -> ComparatorParameters.Option<String> {
-        guard let configurations = arguments.get(configurationOption) else {
-            return .all
-        }
-        return option(from: configurations)
-    }
-
-    private func getVerbose(from arguments: ArgumentParser.Result) -> Bool {
-        guard let verbose = arguments.get(verboseOption) else {
-            return false
-        }
-        return verbose
-    }
-
-    private func getDifferencesOnly(from arguments: ArgumentParser.Result) -> Bool {
-        guard let differencesOnly = arguments.get(differencesOnlyOption) else {
-            return false
-        }
-        return differencesOnly
-    }
-
-    private func getList(from arguments: ArgumentParser.Result) -> Bool {
-        guard let list = arguments.get(listOption) else {
-            return false
-        }
-        return list
-    }
-
-    private func getVersion(from arguments: ArgumentParser.Result) -> Bool {
-        return arguments.get(versionOption) ?? false
-    }
-
-    private func printUsage() {
-        parser.printUsage(on: stdoutStream)
+    private func configurations(from arg: String?) -> ComparatorParameters.Option<String> {
+        arg.map { option(from: $0) } ?? .all
     }
 
     private func handleError(_ error: Error) -> Int32 {
-        let parsedError = parseError(error)
-        printer.error(parsedError.message)
-        return parsedError.code
-    }
-
-    private func parseError(_ error: Error) -> (code: Int32, message: String) {
-        switch error {
-        case let error as ArgumentParserError:
-            return (1, error.description)
-        default:
-            return (1, error.localizedDescription)
-        }
+        printer.error(error.localizedDescription)
+        return 1
     }
 
     private func option(from string: String) -> ComparatorParameters.Option<String> {
@@ -326,7 +197,7 @@ public final class CommandRunner {
         return .only(string)
     }
 
-    private static var formatCases: String {
+    static var formatCases: String {
         let values = XCDiffCore.Format.allCases
             .map { $0.rawValue }
             .sorted()
@@ -334,7 +205,7 @@ public final class CommandRunner {
         return "(\(values))"
     }
 
-    private static var overview: String {
+    static var overview: String {
         return """
         Compare Xcode project (.xcodeproj) files.
         """
@@ -391,4 +262,66 @@ enum CommandError: LocalizedError {
     }
 }
 
-// swiftlint:enable type_body_length
+public struct XCDiffArguments: ParsableArguments {
+    @Flag(name: .shortAndLong, help: "List all available comparators (tags)")
+    var list = false
+
+    @Flag(name: .shortAndLong, help: "Verbose mode")
+    var verbose = false
+
+    @Flag(name: .shortAndLong, help: "Differences only in the output")
+    var differencesOnly = false
+
+    @Option(
+        name: [.long, .customLong("p1", withSingleDash: true)],
+        help: "Absolute or relative path to the first Xcode project (.xcodeproj file)"
+    )
+    var path1: String?
+
+    @Option(
+        name: [.long, .customLong("p2", withSingleDash: true)],
+        help: "Absolute or relative path to the second Xcode project (.xcodeproj file)"
+    )
+    var path2: String?
+
+    @Option(name: .shortAndLong, help: "Output format \(CommandRunner.formatCases)")
+    var format: XCDiffCore.Format = .console
+
+    @Option(name: .shortAndLong, help: "Target name")
+    var target: String?
+
+    @Option(name: [.long, .customShort("g")], help: "Tag name")
+    var tag: String?
+
+    @Option(name: .shortAndLong, help: .init("Configuration name", valueName: "c"))
+    var configuration: String?
+
+    public init() {}
+}
+
+extension XCDiffCore.Format: ExpressibleByArgument {}
+
+public protocol XCDiffParsableCommand: ParsableCommand {
+    static var commandName: String { get }
+    var arguments: XCDiffArguments { get }
+}
+
+public extension XCDiffParsableCommand {
+    static var configuration: CommandConfiguration {
+        .init(
+            commandName: commandName,
+            abstract: CommandRunner.overview,
+            usage: "[options]",
+            version: Constants.version.description
+        )
+    }
+}
+
+struct XCDiffMainCommand: XCDiffParsableCommand {
+    static var commandName: String {
+        "xcdiff"
+    }
+
+    @OptionGroup
+    var arguments: XCDiffArguments
+}

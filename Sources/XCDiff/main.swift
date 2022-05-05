@@ -18,7 +18,7 @@ import Foundation
 import XCDiffCommand
 
 func main() -> Int32 {
-    let arguments = Array(ProcessInfo.processInfo.arguments.dropFirst())
+    let arguments = Array(CommandLine.arguments.dropFirst())
     let commandRunner = CommandRunner()
     let code = commandRunner.run(with: arguments)
     return code
