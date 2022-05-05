@@ -8,6 +8,8 @@
 
 # Expected output
 ```
-ERROR: unknown option -unknown; use --help to list available options
+Error: Unknown option '-unknown'
+Usage: [options]
+  See 'xcdiff --help' for more information.
 
 ```
