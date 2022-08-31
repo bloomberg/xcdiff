@@ -29,6 +29,7 @@ final class ComperatorTypeTests: XCTestCase {
             "headers",
             "sources",
             "resources",
+            "run_scripts",
             "configurations",
             "settings",
             "resolved_settings",

@@ -20,6 +20,7 @@ inclusion status when tags aren't explicitly specified.
 - HEADERS                        | Yes
 - SOURCES                        | Yes
 - RESOURCES                      | Yes
+- RUN_SCRIPTS                    | Yes
 - CONFIGURATIONS                 | Yes
 - SETTINGS                       | Yes
 - RESOLVED_SETTINGS              | No

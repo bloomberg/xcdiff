@@ -46,6 +46,10 @@ As the comparator uses `xcodebuild -showBuildSettings` under the hood, it can be
 
 Compares resources i.e. files copied to the resources directory.
 
+### `run_scripts`
+
+Compares Run Script build phases including the name, properties, and input and output file lists.
+
 ### `settings`
 
 Compares raw project and target level build settings values.

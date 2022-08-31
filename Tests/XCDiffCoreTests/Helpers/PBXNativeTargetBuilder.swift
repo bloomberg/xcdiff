@@ -40,11 +40,40 @@ struct CopyFilesBuildPhase {
     var dstPath: String?
 }
 
+struct RunScriptBuildPhase {
+    var name: String?
+    var inputPaths: [String]
+    var outputPaths: [String]
+    var shellPath: String
+    var shellScript: String?
+    var showEnvVarsInLog: Bool
+    var alwaysOutOfDate: Bool
+    var dependencyFile: String?
+
+    init(name: String? = nil,
+         inputPaths: [String] = [],
+         outputPaths: [String] = [],
+         shellPath: String = "/bin/sh",
+         shellScript: String? = nil,
+         showEnvVarsInLog: Bool = false,
+         alwaysOutOfDate: Bool = false,
+         dependencyFile: String? = nil) {
+        self.name = name
+        self.inputPaths = inputPaths
+        self.outputPaths = outputPaths
+        self.shellPath = shellPath
+        self.shellScript = shellScript
+        self.showEnvVarsInLog = showEnvVarsInLog
+        self.alwaysOutOfDate = alwaysOutOfDate
+        self.dependencyFile = dependencyFile
+    }
+}
+
 enum BuildPhase {
     case sources
     case frameworks
     case resources
-    case shellScripts
+    case shellScripts(RunScriptBuildPhase = RunScriptBuildPhase())
     case copyFiles(CopyFilesBuildPhase)
     case headers
 }

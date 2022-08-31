@@ -371,6 +371,8 @@
 				2E26637122B7F52500BA59BC /* Frameworks */,
 				2E26637222B7F52500BA59BC /* Resources */,
 				2EFBAADB22B9A34600AA5E95 /* Embed Frameworks */,
+				BF3DE30228BFE0930011B308 /* ShellScript */,
+				BF065C3328C2778C00FEC27F /* Second script */,
 			);
 			buildRules = (
 			);
@@ -584,6 +586,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BF065C3328C2778C00FEC27F /* Second script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Second script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"second script\"\n";
+		};
+		BF3DE30228BFE0930011B308 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Hello, world?\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2E26637022B7F52500BA59BC /* Sources */ = {
