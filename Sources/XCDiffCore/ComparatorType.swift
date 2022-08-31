@@ -24,6 +24,7 @@ public enum ComparatorType {
     case headers
     case sources
     case resources
+    case runScripts
     case configurations
     case settings
     case resolvedSettings
@@ -55,6 +56,8 @@ public enum ComparatorType {
             return SourcesComparator()
         case .resources:
             return ResourcesComparator()
+        case .runScripts:
+            return RunScriptComparator()
         case .configurations:
             return ConfigurationsComparator()
         case .settings:
@@ -87,6 +90,7 @@ public extension Array where Element == ComparatorType {
             .headers,
             .sources,
             .resources,
+            .runScripts,
             .configurations,
             .settings,
             .resolvedSettings,
@@ -107,6 +111,7 @@ public extension Array where Element == ComparatorType {
             .headers,
             .sources,
             .resources,
+            .runScripts,
             .configurations,
             .settings,
             .sourceTrees,

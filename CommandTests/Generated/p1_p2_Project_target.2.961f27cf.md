@@ -16,6 +16,8 @@
 ✅ HEADERS > "Project" target
 ❌ SOURCES > "Project" target
 ❌ RESOURCES > "Project" target
+❌ RUN_SCRIPTS > "Project" target > "Second script" build phase
+❌ RUN_SCRIPTS > "Project" target > "ShellScript" build phase
 ❌ CONFIGURATIONS > Root project
 ❌ SETTINGS > Root project > "Debug" configuration > Base configuration
 ❌ SETTINGS > Root project > "Debug" configuration > Values

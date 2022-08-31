@@ -21,6 +21,8 @@
 ❌ RESOURCES > "Project" target
 ❌ RESOURCES > "ProjectTests" target
 ❌ RESOURCES > "ProjectUITests" target
+❌ RUN_SCRIPTS > "Project" target > "Second script" build phase
+❌ RUN_SCRIPTS > "Project" target > "ShellScript" build phase
 ❌ CONFIGURATIONS > Root project
 ❌ SETTINGS > Root project > "Debug" configuration > Base configuration
 ❌ SETTINGS > Root project > "Debug" configuration > Values

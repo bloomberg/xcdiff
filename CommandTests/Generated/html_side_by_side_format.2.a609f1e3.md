@@ -247,6 +247,24 @@
 <section class="warning">
     <h2>❌ RESOURCES &#x3E; &quot;ProjectUITests&quot; target</h2>
 </section>
+<section class="success">
+    <h2>✅ RUN_SCRIPTS &#x3E; &quot;MismatchingLibrary&quot; target</h2>
+</section>
+<section class="warning">
+    <h2>❌ RUN_SCRIPTS &#x3E; &quot;Project&quot; target &#x3E; &quot;Second script&quot; build phase</h2>
+</section>
+<section class="warning">
+    <h2>❌ RUN_SCRIPTS &#x3E; &quot;Project&quot; target &#x3E; &quot;ShellScript&quot; build phase</h2>
+</section>
+<section class="success">
+    <h2>✅ RUN_SCRIPTS &#x3E; &quot;ProjectFramework&quot; target</h2>
+</section>
+<section class="success">
+    <h2>✅ RUN_SCRIPTS &#x3E; &quot;ProjectTests&quot; target</h2>
+</section>
+<section class="success">
+    <h2>✅ RUN_SCRIPTS &#x3E; &quot;ProjectUITests&quot; target</h2>
+</section>
 <section class="warning">
     <h2>❌ CONFIGURATIONS &#x3E; Root project</h2>
 </section>

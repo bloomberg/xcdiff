@@ -159,6 +159,51 @@
   },
   {
     "context" : [
+      "\"Project\" target",
+      "\"Second script\" build phase"
+    ],
+    "differentValues" : [
+      {
+        "context" : "shellScript",
+        "first" : "echo \"First Hello, world!\"\n",
+        "second" : "echo \"second script\"\n"
+      }
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "run_scripts"
+  },
+  {
+    "context" : [
+      "\"Project\" target",
+      "\"ShellScript\" build phase"
+    ],
+    "differentValues" : [
+      {
+        "context" : "shellScript",
+        "first" : "echo \"Hello, World!\"\n",
+        "second" : "echo \"Hello, world?\"\n"
+      },
+      {
+        "context" : "showEnvVarsInLog",
+        "first" : "true",
+        "second" : "false"
+      }
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "run_scripts"
+  },
+  {
+    "context" : [
       "Root project"
     ],
     "differentValues" : [

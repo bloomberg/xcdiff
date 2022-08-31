@@ -5,6 +5,7 @@
         "targets",
         "headers",
         "resources",
+        "run_scripts",
         "configurations",
         "settings",
         "sources",

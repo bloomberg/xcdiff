@@ -16,6 +16,7 @@
 ✅ HEADERS > "App" target
 ✅ SOURCES > "App" target
 ✅ RESOURCES > "App" target
+✅ RUN_SCRIPTS > "App" target
 ✅ CONFIGURATIONS > Root project
 ✅ SETTINGS > Root project > "Debug" configuration > Base configuration
 ✅ SETTINGS > Root project > "Debug" configuration > Values

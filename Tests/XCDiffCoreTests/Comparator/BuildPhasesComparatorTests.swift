@@ -115,15 +115,15 @@ final class BuildPhasesComparatorTests: XCTestCase {
         let first = project()
             .addTarget(name: "Target1", productType: .application) { target in
                 target.addBuildPhase(.copyFiles(.plugins)) { _ in }
-                target.addBuildPhase(.shellScripts) { $0.setName("Shell 1") }
-                target.addBuildPhase(.shellScripts) { $0.setName("Shell 2") }
-                target.addBuildPhase(.shellScripts) { $0.setName("Shell 3") }
+                target.addBuildPhase(.shellScripts(RunScriptBuildPhase(name: "Shell 1"))) { _ in }
+                target.addBuildPhase(.shellScripts(RunScriptBuildPhase(name: "Shell 2"))) { _ in }
+                target.addBuildPhase(.shellScripts(RunScriptBuildPhase(name: "Shell 3"))) { _ in }
             }
             .projectDescriptor()
         let second = project()
             .addTarget(name: "Target1", productType: .application) { target in
                 target.addBuildPhase(.copyFiles(.plugins)) { _ in }
-                target.addBuildPhase(.shellScripts) { $0.setName("Shell 1") }
+                target.addBuildPhase(.shellScripts(RunScriptBuildPhase(name: "Shell 1"))) { _ in }
             }
             .projectDescriptor()
 
@@ -143,15 +143,15 @@ final class BuildPhasesComparatorTests: XCTestCase {
         let first = project()
             .addTarget(name: "Target1", productType: .application) { target in
                 target.addBuildPhase(.copyFiles(.plugins)) { _ in }
-                target.addBuildPhase(.shellScripts) { $0.setName("Shell 2") }
-                target.addBuildPhase(.shellScripts) { $0.setName("Shell 3") }
-                target.addBuildPhase(.shellScripts) { $0.setName("Shell 1") }
+                target.addBuildPhase(.shellScripts(RunScriptBuildPhase(name: "Shell 2"))) { _ in }
+                target.addBuildPhase(.shellScripts(RunScriptBuildPhase(name: "Shell 3"))) { _ in }
+                target.addBuildPhase(.shellScripts(RunScriptBuildPhase(name: "Shell 1"))) { _ in }
             }
             .projectDescriptor()
         let second = project()
             .addTarget(name: "Target1", productType: .application) { target in
                 target.addBuildPhase(.copyFiles(.plugins)) { _ in }
-                target.addBuildPhase(.shellScripts) { $0.setName("Shell 1") }
+                target.addBuildPhase(.shellScripts(RunScriptBuildPhase(name: "Shell 1"))) { _ in }
             }
             .projectDescriptor()
 
@@ -171,13 +171,13 @@ final class BuildPhasesComparatorTests: XCTestCase {
         let first = project()
             .addTarget(name: "Target1", productType: .application) { target in
                 target.addBuildPhase(.copyFiles(.plugins)) { _ in }
-                target.addBuildPhase(.shellScripts) { $0.setName("Shell A") }
+                target.addBuildPhase(.shellScripts(RunScriptBuildPhase(name: "Shell A"))) { _ in }
             }
             .projectDescriptor()
         let second = project()
             .addTarget(name: "Target1", productType: .application) { target in
                 target.addBuildPhase(.copyFiles(.plugins)) { _ in }
-                target.addBuildPhase(.shellScripts) { $0.setName("Shell B") }
+                target.addBuildPhase(.shellScripts(RunScriptBuildPhase(name: "Shell B"))) { _ in }
             }
             .projectDescriptor()
 

@@ -76,8 +76,15 @@ final class PBXBuildPhaseBuilder {
             buildPhase = PBXHeadersBuildPhase(files: buildFiles)
         case .frameworks:
             buildPhase = PBXFrameworksBuildPhase(files: buildFiles)
-        case .shellScripts:
-            buildPhase = PBXShellScriptBuildPhase(files: buildFiles, name: name)
+        case let .shellScripts(runScriptBuildPhase):
+            buildPhase = PBXShellScriptBuildPhase(name: runScriptBuildPhase.name,
+                                                  inputPaths: runScriptBuildPhase.inputPaths,
+                                                  outputPaths: runScriptBuildPhase.outputPaths,
+                                                  shellPath: runScriptBuildPhase.shellPath,
+                                                  shellScript: runScriptBuildPhase.shellScript,
+                                                  showEnvVarsInLog: runScriptBuildPhase.showEnvVarsInLog,
+                                                  alwaysOutOfDate: runScriptBuildPhase.alwaysOutOfDate,
+                                                  dependencyFile: runScriptBuildPhase.dependencyFile)
         case let .copyFiles(copyBuildPhase):
             buildPhase = PBXCopyFilesBuildPhase(dstPath: copyBuildPhase.dstPath,
                                                 dstSubfolderSpec: .from(copyBuildPhase.dstSubfolderSpec),
