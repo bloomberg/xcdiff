@@ -23,10 +23,10 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-tools-support-core.git", .upToNextMajor(from: "0.2.4")),
-        .package(url: "https://github.com/kylef/PathKit", .upToNextMinor(from: "1.0.1")),
-        .package(url: "https://github.com/tuist/xcodeproj.git", .upToNextMajor(from: "8.5.0")),
-        .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMajor(from: "1.1.2")),
+        .package(url: "https://github.com/apple/swift-tools-support-core.git", from: "0.3.0"),
+        .package(url: "https://github.com/kylef/PathKit", from: "1.0.0"),
+        .package(url: "https://github.com/tuist/xcodeproj.git", from: "8.0.0"),
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.0")
     ],
     targets: [
         .executableTarget(
