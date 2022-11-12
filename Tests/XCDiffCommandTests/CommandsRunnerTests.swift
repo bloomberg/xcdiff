@@ -132,7 +132,7 @@ final class CommandsRunnerTests: XCTestCase {
 
     func testRun_whenSameProjectsWithQuietOption() {
         // Given
-        let command: [String] = ["-d"]
+        let command = ["-d"]
         fileSystem.listCurrentDirectoryReturn = [
             fixtures.project.ios_project_1().string,
             fixtures.project.ios_project_1().string,
