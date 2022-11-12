@@ -5,7 +5,7 @@ function install_formula {
     if [[ $? == 0 ]] ; then
         brew list "$1" && brew uninstall "$1"
     fi
-    brew install "$1.rb"
+    brew install --formula "$1.rb"
 }
 
 function main {
