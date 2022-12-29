@@ -476,6 +476,11 @@
         "context" : "LastSwiftMigration",
         "first" : "1140",
         "second" : "1020"
+      },
+      {
+        "context" : "SystemCapabilities",
+        "first" : "[\"com.apple.ApplicationGroups.iOS\": [\"enabled\": \"1\"], \"com.apple.BackgroundModes\": [\"enabled\": \"1\"], \"com.apple.DataProtection\": [\"enabled\": \"1\"], \"com.apple.Keychain\": [\"enabled\": \"1\"], \"com.apple.Push\": [\"enabled\": \"1\"], \"com.apple.SafariKeychain\": [\"enabled\": \"1\"], \"com.apple.Siri\": [\"enabled\": \"1\"]]",
+        "second" : "[\"com.apple.ApplicationGroups.iOS\": [\"enabled\": \"1\"], \"com.apple.Keychain\": [\"enabled\": \"1\"], \"com.apple.Push\": [\"enabled\": \"0\"], \"com.apple.SafariKeychain\": [\"enabled\": \"1\"], \"com.apple.Siri\": [\"enabled\": \"1\"]]"
       }
     ],
     "onlyInFirst" : [

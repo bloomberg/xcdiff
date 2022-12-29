@@ -21,7 +21,7 @@ struct PBXNativeTargetPrototype {
     let pbxtarget: PBXNativeTarget
     let objects: [PBXObject]
     let fileElements: [PBXFileElement] // need to be added to the main group
-    var attributes: [String: String]
+    var attributes: [String: Any]
     var targetReferenceAttributes: [String: String]
 }
 
@@ -83,7 +83,7 @@ final class PBXNativeTargetBuilder {
     private var objects: [PBXObject] = []
     private var fileElements: [PBXFileElement] = []
     private var dependencies: [PBXTargetDependency] = []
-    private var attributes: [String: String] = [:]
+    private var attributes: [String: Any] = [:]
     private var targetReferenceAttributes: [String: String] = [:]
 
     init(name: String, productType: PBXProductType?) {
@@ -245,7 +245,7 @@ final class PBXNativeTargetBuilder {
     }
 
     @discardableResult
-    func addAttribute(name: String, value: String) -> PBXNativeTargetBuilder {
+    func addAttribute(name: String, value: Any) -> PBXNativeTargetBuilder {
         attributes[name] = value
         return self
     }

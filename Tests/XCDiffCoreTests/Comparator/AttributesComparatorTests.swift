@@ -14,10 +14,13 @@
 // limitations under the License.
 //
 
+// swiftlint:disable file_length
+
 import Foundation
 @testable import XCDiffCore
 import XCTest
 
+// swiftlint:disable:next type_body_length
 final class AttributesComparatorTests: XCTestCase {
     private var subject: AttributesComparator!
 
@@ -65,6 +68,83 @@ final class AttributesComparatorTests: XCTestCase {
             .init(
                 tag: "attributes",
                 context: ["Root project"]
+            ),
+        ])
+    }
+
+    func testCompare_whenDictionaryAttributes() throws {
+        // Given
+        let dictionary1 = [
+            "test.attribute1": ["enabled": "1"],
+            "test.attribute2": ["enabled": "1"],
+            "test.attribute3": ["enabled": "1"],
+        ]
+        let dictionary2 = [
+            "test.attribute3": ["enabled": "1"],
+            "test.attribute2": ["enabled": "1"],
+            "test.attribute1": ["enabled": "1"],
+        ]
+        let first = project()
+            .addAttribute(name: "LastSwiftUpdateCheck", value: "1110")
+            .addAttribute(name: "ComplexAttributes", value: dictionary1)
+            .projectDescriptor()
+        let second = project()
+            .addAttribute(name: "LastSwiftUpdateCheck", value: "1110")
+            .addAttribute(name: "ComplexAttributes", value: dictionary2)
+            .projectDescriptor()
+
+        // When
+        let result = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(result, [
+            .init(
+                tag: "attributes",
+                context: ["Root project"]
+            ),
+        ])
+    }
+
+    func testCompare_whenDifferentDictionaryAttributes() throws {
+        // Given
+        let dictionary1 = [
+            "test.attribute1": ["enabled": "1"],
+            "test.attribute2": ["enabled": "1"],
+            "test.attribute3": ["enabled": "0"],
+        ]
+        let dictionary2 = [
+            "test.attribute3": ["enabled": "1"],
+            "test.attribute2": ["enabled": "0"],
+            "test.attribute1": ["enabled": "1"],
+        ]
+        let first = project()
+            .addAttribute(name: "LastSwiftUpdateCheck", value: "1110")
+            .addAttribute(name: "ComplexAttributes", value: dictionary1)
+            .projectDescriptor()
+        let second = project()
+            .addAttribute(name: "LastSwiftUpdateCheck", value: "1110")
+            .addAttribute(name: "ComplexAttributes", value: dictionary2)
+            .projectDescriptor()
+
+        // When
+        let result = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(result, [
+            .init(
+                tag: "attributes",
+                context: ["Root project"],
+                differentValues: [
+                    .init(
+                        context: "ComplexAttributes",
+                        first: "[\"test.attribute1\": [\"enabled\": \"1\"], " +
+                            "\"test.attribute2\": [\"enabled\": \"1\"], " +
+                            "\"test.attribute3\": [\"enabled\": \"0\"]]",
+                        second: "[\"test.attribute1\": [\"enabled\": \"1\"], " +
+                            "\"test.attribute2\": [\"enabled\": \"0\"], " +
+                            "\"test.attribute3\": [\"enabled\": \"1\"]]"
+                    ),
+                ]
             ),
         ])
     }
@@ -196,6 +276,99 @@ final class AttributesComparatorTests: XCTestCase {
             .init(
                 tag: "attributes",
                 context: ["\"TargetA\" target"]
+            ),
+        ])
+    }
+
+    func testCompare_targetAttributes_whenDictionaryAttributes() throws {
+        // Given
+        let dictionary1 = [
+            "test.attribute1": ["enabled": "1"],
+            "test.attribute2": ["enabled": "1"],
+            "test.attribute3": ["enabled": "1"],
+        ]
+        let dictionary2 = [
+            "test.attribute3": ["enabled": "1"],
+            "test.attribute2": ["enabled": "1"],
+            "test.attribute1": ["enabled": "1"],
+        ]
+        let first = project()
+            .addTarget(name: "TargetA", productType: .application) { builder in
+                builder.addAttribute(name: "LastSwiftMigration", value: "1250")
+                builder.addAttribute(name: "ComplexAttributes", value: dictionary1)
+            }
+            .projectDescriptor()
+        let second = project()
+            .addTarget(name: "TargetA", productType: .application) { builder in
+                builder.addAttribute(name: "LastSwiftMigration", value: "1250")
+                builder.addAttribute(name: "ComplexAttributes", value: dictionary2)
+            }
+            .projectDescriptor()
+
+        // When
+        let result = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(result, [
+            .init(
+                tag: "attributes",
+                context: ["Root project"]
+            ),
+            .init(
+                tag: "attributes",
+                context: ["\"TargetA\" target"]
+            ),
+        ])
+    }
+
+    func testCompare_targetAttributes_whenDifferentDictionaryAttributes() throws {
+        // Given
+        let dictionary1 = [
+            "test.attribute1": ["enabled": "1"],
+            "test.attribute2": ["enabled": "1"],
+            "test.attribute3": ["enabled": "0"],
+        ]
+        let dictionary2 = [
+            "test.attribute3": ["enabled": "1"],
+            "test.attribute2": ["enabled": "0"],
+            "test.attribute1": ["enabled": "1"],
+        ]
+        let first = project()
+            .addTarget(name: "TargetA", productType: .application) { builder in
+                builder.addAttribute(name: "LastSwiftMigration", value: "1250")
+                builder.addAttribute(name: "ComplexAttributes", value: dictionary1)
+            }
+            .projectDescriptor()
+        let second = project()
+            .addTarget(name: "TargetA", productType: .application) { builder in
+                builder.addAttribute(name: "LastSwiftMigration", value: "1250")
+                builder.addAttribute(name: "ComplexAttributes", value: dictionary2)
+            }
+            .projectDescriptor()
+
+        // When
+        let result = try subject.compare(first, second, parameters: .all)
+
+        // Then
+        XCTAssertEqual(result, [
+            .init(
+                tag: "attributes",
+                context: ["Root project"]
+            ),
+            .init(
+                tag: "attributes",
+                context: ["\"TargetA\" target"],
+                differentValues: [
+                    .init(
+                        context: "ComplexAttributes",
+                        first: "[\"test.attribute1\": [\"enabled\": \"1\"], " +
+                            "\"test.attribute2\": [\"enabled\": \"1\"], " +
+                            "\"test.attribute3\": [\"enabled\": \"0\"]]",
+                        second: "[\"test.attribute1\": [\"enabled\": \"1\"], " +
+                            "\"test.attribute2\": [\"enabled\": \"0\"], " +
+                            "\"test.attribute3\": [\"enabled\": \"1\"]]"
+                    ),
+                ]
             ),
         ])
     }
