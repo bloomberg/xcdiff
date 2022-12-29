@@ -1812,6 +1812,19 @@
             1020
         </td>
     </tr>
+    <tr class="differentContentKey">
+        <td colspan="2">
+            SystemCapabilities
+        </td>
+    </tr>
+    <tr class="differentContent">
+        <td>
+            [&quot;com.apple.ApplicationGroups.iOS&quot;: [&quot;enabled&quot;: &quot;1&quot;], &quot;com.apple.BackgroundModes&quot;: [&quot;enabled&quot;: &quot;1&quot;], &quot;com.apple.DataProtection&quot;: [&quot;enabled&quot;: &quot;1&quot;], &quot;com.apple.Keychain&quot;: [&quot;enabled&quot;: &quot;1&quot;], &quot;com.apple.Push&quot;: [&quot;enabled&quot;: &quot;1&quot;], &quot;com.apple.SafariKeychain&quot;: [&quot;enabled&quot;: &quot;1&quot;], &quot;com.apple.Siri&quot;: [&quot;enabled&quot;: &quot;1&quot;]]
+        </td>
+        <td>
+            [&quot;com.apple.ApplicationGroups.iOS&quot;: [&quot;enabled&quot;: &quot;1&quot;], &quot;com.apple.Keychain&quot;: [&quot;enabled&quot;: &quot;1&quot;], &quot;com.apple.Push&quot;: [&quot;enabled&quot;: &quot;0&quot;], &quot;com.apple.SafariKeychain&quot;: [&quot;enabled&quot;: &quot;1&quot;], &quot;com.apple.Siri&quot;: [&quot;enabled&quot;: &quot;1&quot;]]
+        </td>
+    </tr>
     </tbody>
 </table>
 </section>

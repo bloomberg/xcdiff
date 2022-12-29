@@ -67,8 +67,8 @@ final class AttributesComparator: Comparator {
 
     private func compareValues(
         context: [String],
-        first: [String: String],
-        second: [String: String]
+        first: [String: AttributeValue],
+        second: [String: AttributeValue]
     ) -> CompareResult {
         let firstKeys = Array(first.keys)
         let secondKeys = Array(second.keys)
@@ -87,8 +87,8 @@ final class AttributesComparator: Comparator {
             let secondAttribute = second[name]
             guard firstAttribute == secondAttribute else {
                 return .init(context: name,
-                             first: firstAttribute,
-                             second: secondAttribute)
+                             first: firstAttribute?.description,
+                             second: secondAttribute?.description)
             }
 
             return nil
@@ -103,7 +103,7 @@ final class AttributesComparator: Comparator {
         )
     }
 
-    private func keyAndValue(_ key: String, attributes: [String: String]) -> String {
-        return "\(key) = \(attributes[key] ?? "nil")"
+    private func keyAndValue(_ key: String, attributes: [String: AttributeValue]) -> String {
+        return "\(key) = \(attributes[key]?.description ?? "nil")"
     }
 }

@@ -626,11 +626,15 @@ Output format: (<path>, <name>, <source_tree>)
 ## ❌ ATTRIBUTES > "Project" target
 
 
-### ⚠️  Value mismatch (1):
+### ⚠️  Value mismatch (2):
 
   - `LastSwiftMigration`
     - `1140`
     - `1020`
+
+  - `SystemCapabilities`
+    - `["com.apple.ApplicationGroups.iOS": ["enabled": "1"], "com.apple.BackgroundModes": ["enabled": "1"], "com.apple.DataProtection": ["enabled": "1"], "com.apple.Keychain": ["enabled": "1"], "com.apple.Push": ["enabled": "1"], "com.apple.SafariKeychain": ["enabled": "1"], "com.apple.Siri": ["enabled": "1"]]`
+    - `["com.apple.ApplicationGroups.iOS": ["enabled": "1"], "com.apple.Keychain": ["enabled": "1"], "com.apple.Push": ["enabled": "0"], "com.apple.SafariKeychain": ["enabled": "1"], "com.apple.Siri": ["enabled": "1"]]`
 
 
 

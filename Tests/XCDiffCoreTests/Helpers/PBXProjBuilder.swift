@@ -115,7 +115,7 @@ final class PBXProjBuilder {
     }
 
     @discardableResult
-    func addAttribute(name: String, value: String) -> PBXProjBuilder {
+    func addAttribute(name: String, value: Any) -> PBXProjBuilder {
         pbxproj.rootObject?.attributes[name] = value
         return self
     }
