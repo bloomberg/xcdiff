@@ -25,7 +25,7 @@ class SettingValueComparator: ValueComparator {
     // MARK: - Lifecycle
 
     init(firstProjectName: String?, secondProjectName: String?) {
-        guard let firstProjectName = firstProjectName, let secondProjectName = secondProjectName else {
+        guard let firstProjectName, let secondProjectName else {
             projectNameDifference = nil
             return
         }
@@ -51,7 +51,7 @@ class SettingValueComparator: ValueComparator {
         guard lha != rha else {
             return true
         }
-        guard let projectNameDifference = projectNameDifference else {
+        guard let projectNameDifference else {
             return lha == rha
         }
         let settingValuesDifference = stringDiff.diff(lha, rha)

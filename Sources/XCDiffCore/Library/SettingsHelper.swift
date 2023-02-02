@@ -62,7 +62,7 @@ class SettingsHelper {
 
     private func stringFromBuildSetting(_ buildSetting: Any?) throws -> String {
         // try to unwrap
-        guard let buildSetting = buildSetting else {
+        guard let buildSetting else {
             return "nil"
         }
 

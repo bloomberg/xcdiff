@@ -61,12 +61,12 @@ final class CopyFilesComparator: Comparator {
     private func compare(_ first: CopyFilesBuildPhaseDescriptor?,
                          _ second: CopyFilesBuildPhaseDescriptor?,
                          context: [String]) throws -> CompareResult {
-        guard let first = first else {
+        guard let first else {
             return result(context: context,
                           description: "The build phase does not exist in the first project",
                           onlyInSecond: ["Duplicated build phase name"])
         }
-        guard let second = second else {
+        guard let second else {
             return result(context: context,
                           description: "The build phase does not exist in the second project",
                           onlyInFirst: ["Duplicated build phase name"])
