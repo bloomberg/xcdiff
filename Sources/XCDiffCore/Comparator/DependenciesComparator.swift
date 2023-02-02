@@ -86,7 +86,7 @@ private struct DependencyDescriptor {
         }
 
         private func string(from proxyType: PBXContainerItemProxy.ProxyType?) -> String? {
-            guard let proxyType = proxyType else {
+            guard let proxyType else {
                 return nil
             }
             switch proxyType {
@@ -123,15 +123,15 @@ private struct DependencyDescriptor {
 
         // name
         if case let .target(target) = context {
-            if let name = name, name != target {
+            if let name, name != target {
                 result.append("name=\(name)")
             }
-        } else if let name = name {
+        } else if let name {
             result.append("name=\(name)")
         }
 
         // product name
-        if let productName = productName {
+        if let productName {
             result.append("product_name=\(productName.description)")
         }
 

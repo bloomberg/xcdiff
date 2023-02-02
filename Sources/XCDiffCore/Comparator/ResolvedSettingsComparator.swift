@@ -87,11 +87,11 @@ final class ResolvedSettingsComparator: Comparator {
             path,
         ]
 
-        if let target = target {
+        if let target {
             arguments.append(contentsOf: ["-target", target])
         }
 
-        if let config = config {
+        if let config {
             arguments.append(contentsOf: ["-config", config])
         }
 

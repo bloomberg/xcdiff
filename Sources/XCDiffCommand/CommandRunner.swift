@@ -65,7 +65,7 @@ public final class CommandRunner {
     }
 
     private func complete(commandType: ParsableCommand.Type, withError error: Error? = nil) -> Int32 {
-        guard let error = error else {
+        guard let error else {
             return ExitCode.success.rawValue
         }
 
@@ -141,7 +141,7 @@ public final class CommandRunner {
     }
 
     private func getPaths(_ path1Arg: String?, _ path2Arg: String?) throws -> (Path, Path) {
-        if let path1Arg = path1Arg, let path2Arg = path2Arg {
+        if let path1Arg, let path2Arg {
             let path1 = Path(path1Arg)
             let path2 = Path(path2Arg)
             guard path1.exists else {

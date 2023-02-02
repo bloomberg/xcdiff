@@ -189,7 +189,7 @@ final class HTMLRenderer: Renderer {
 
     private func tag(_ name: String, _ cssClass: CSSClass? = nil, _ content: () -> Void) {
         let cssClassString: String
-        if let cssClass = cssClass {
+        if let cssClass {
             cssClassString = " class=\"\(cssClass.rawValue)\""
         } else {
             cssClassString = ""

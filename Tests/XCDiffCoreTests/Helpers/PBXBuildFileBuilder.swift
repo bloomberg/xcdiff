@@ -74,7 +74,7 @@ final class PBXBuildFileBuilder {
         buildFile.platformFilter = platformFilter
         var objects: [PBXObject?] = [buildFile, fileReference]
 
-        if let packageProduct = packageProduct {
+        if let packageProduct {
             let packageReference = packageProduct.package.map {
                 XCRemoteSwiftPackageReference(
                     repositoryURL: $0.url,
