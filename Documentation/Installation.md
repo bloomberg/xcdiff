@@ -23,7 +23,11 @@ export PATH="$PATH:$(swift build -c release --show-bin-path)"
 
 ### Homebrew
 
-*TODO*
+To install xcdiff using [Homebrew](https://brew.sh):
+
+```sh
+brew install xcdiff
+```
 
 ### Mint
 
