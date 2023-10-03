@@ -33,6 +33,9 @@ update_version:
 update_hash:
 	sed -i '' 's/#GIT_SHORT_HASH#/$(GIT_SHORT_HASH)/' Sources/XCDiffCommand/Constants.swift
 
+update_homebrew:
+	brew bump-formula-pr xcdiff --version="${VERSION}"
+
 format:
 	swiftformat .
 
