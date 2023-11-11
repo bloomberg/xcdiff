@@ -28,35 +28,21 @@ final class SwiftPackagesComparator: Comparator {
         let firstPackages = try targetsHelper.swiftPackages(in: first)
         let secondPackages = try targetsHelper.swiftPackages(in: second)
 
-        let firstDictionary = Dictionary(firstPackages.map { ($0.identifier, $0) }, uniquingKeysWith: { $1 })
-        let secondDictionary = Dictionary(secondPackages.map { ($0.identifier, $0) }, uniquingKeysWith: { $1 })
-
-        let onlyInFirst = firstPackages.filter { secondDictionary[$0.identifier] == nil }
-        let onlyInSecond = secondPackages.filter { firstDictionary[$0.identifier] == nil }
-        let common = firstPackages.filter { secondDictionary[$0.identifier] != nil }
-        let differences = common.filter {
-            firstDictionary[$0.identifier] != secondDictionary[$0.identifier]
-        }
-
-        let differencesValues: [CompareResult.DifferentValues] = differences.compactMap {
-            guard let first = firstDictionary[$0.identifier],
-                  let second = secondDictionary[$0.identifier] else {
-                return nil
-            }
-
-            return CompareResult.DifferentValues(
-                context: "\($0.name) (\($0.url))",
-                first: first.difference(from: second),
-                second: second.difference(from: first)
-            )
-        }
-
         return [
-            CompareResult(
-                tag: tag,
-                onlyInFirst: onlyInFirst.map(\.description),
-                onlyInSecond: onlyInSecond.map(\.description),
-                differentValues: differencesValues
+            result(
+                first: firstPackages,
+                second: secondPackages,
+                diffCommonValues: { commonPairs in
+                    commonPairs.filter {
+                        $0 != $1
+                    }.map { first, second in
+                        CompareResult.DifferentValues(
+                            context: "\(first.name) (\(first.url))",
+                            first: first.difference(from: second),
+                            second: second.difference(from: first)
+                        )
+                    }
+                }
             ),
         ]
     }

@@ -16,6 +16,15 @@
 
 import Foundation
 
+protocol DiffComparable: Hashable {
+    var diffKey: String { get }
+    var diffDescription: String { get }
+}
+
+extension DiffComparable {
+    var diffDescription: String { diffKey }
+}
+
 extension Comparator {
     func result(context: [String] = [],
                 description: String? = nil,
@@ -77,5 +86,51 @@ extension Comparator {
                        first: first,
                        second: second,
                        differentValues: differentValues)]
+    }
+
+    typealias DiffCommonValues<T: DiffComparable> = (
+        [(first: T, second: T)]
+    ) -> [CompareResult.DifferentValues]
+
+    func result<T: DiffComparable>(
+        context: [String] = [],
+        description: String? = nil,
+        first: [T] = [],
+        second: [T] = [],
+        diffCommonValues: DiffCommonValues<T> = { _ in [] }
+    ) -> CompareResult {
+        let firstKeys = Set(first.map(\.diffKey))
+        let secondKeys = Set(second.map(\.diffKey))
+
+        let firstMap = Dictionary(
+            first.map { ($0.diffKey, $0) },
+            uniquingKeysWith: { $1 }
+        )
+
+        let secondMap = Dictionary(
+            second.map { ($0.diffKey, $0) },
+            uniquingKeysWith: { $1 }
+        )
+
+        let common = firstKeys
+            .intersection(secondKeys)
+            .sorted()
+            .map { key in
+                let commonFirst = firstMap[key]!
+                let commonSecond = secondMap[key]!
+                return (first: commonFirst, second: commonSecond)
+            }
+
+        return result(
+            context: context,
+            description: description,
+            onlyInFirst: firstKeys.subtractingAndSorted(secondKeys).compactMap {
+                firstMap[$0]?.diffDescription
+            },
+            onlyInSecond: secondKeys.subtractingAndSorted(firstKeys).compactMap {
+                secondMap[$0]?.diffDescription
+            },
+            differentValues: diffCommonValues(common)
+        )
     }
 }
