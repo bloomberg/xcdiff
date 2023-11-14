@@ -20,17 +20,33 @@ import XcodeProj
 
 typealias TargetPair = (first: PBXTarget, second: PBXTarget)
 
-struct SourceDescriptor: Hashable {
+struct SourceDescriptor: Hashable, DiffComparable {
+    var diffKey: String {
+        path
+    }
+
     let path: String
     let flags: String?
 }
 
-struct HeaderDescriptor: Hashable {
+struct HeaderDescriptor: Hashable, DiffComparable {
+    var diffKey: String {
+        path
+    }
+
     let path: String
     let attributes: String?
 }
 
-struct LinkedDependencyDescriptor: Hashable {
+struct LinkedDependencyDescriptor: Hashable, DiffComparable {
+    var diffKey: String {
+        key ?? ""
+    }
+
+    var key: String? {
+        name ?? path
+    }
+
     let name: String?
     let path: String?
     let package: SwiftPackageDescriptor?

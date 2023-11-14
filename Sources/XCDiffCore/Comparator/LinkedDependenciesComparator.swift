@@ -37,48 +37,22 @@ final class LinkedDependenciesComparator: Comparator {
     }
 
     private func createLinkedDependenciesResults(commonTarget: TargetPair) throws -> CompareResult {
-        let firstDependencies = try targetsHelper.linkedDependencies(from: commonTarget.first)
-        let secondDependencies = try targetsHelper.linkedDependencies(from: commonTarget.second)
+        let firstDependencies = try targetsHelper
+            .linkedDependencies(from: commonTarget.first)
+            .filter { $0.key != nil }
+        let secondDependencies = try targetsHelper
+            .linkedDependencies(from: commonTarget.second)
+            .filter { $0.key != nil }
 
-        let firstPaths = Set(firstDependencies.compactMap { dependencyKey(dependency: $0) })
-        let secondPaths = Set(secondDependencies.compactMap { dependencyKey(dependency: $0) })
-
-        let descriptorPairs = commonDependencyDescriptorPairs(first: firstDependencies,
-                                                              second: secondDependencies)
-
-        let attributesDifferences = self.attributesDifferences(in: descriptorPairs)
-        let packagesDifferences = packageDifferences(in: descriptorPairs)
-
-        return result(context: ["\"\(commonTarget.first.name)\" target"],
-                      first: firstPaths,
-                      second: secondPaths,
-                      differentValues: attributesDifferences + packagesDifferences)
-    }
-
-    private func dependencyKey(dependency: LinkedDependencyDescriptor) -> String? {
-        if let key = dependency.name ?? dependency.path { return key }
-        return nil
-    }
-
-    private func commonDependencyDescriptorPairs(first: [LinkedDependencyDescriptor],
-                                                 second: [LinkedDependencyDescriptor]) -> [DependencyDescriptorPair] {
-        let firstDependencyDescriptorMap = dependencyPathMap(from: first)
-        let secondDependencyDescriptorMap = dependencyPathMap(from: second)
-
-        let firstPaths = Set(firstDependencyDescriptorMap.keys)
-        let secondPaths = Set(secondDependencyDescriptorMap.keys)
-
-        let commonSources = firstPaths
-            .intersection(secondPaths)
-            .map { (firstDependencyDescriptorMap[$0]!, secondDependencyDescriptorMap[$0]!) }
-            .sorted { left, right in
-                if let keyLeft = left.0.name ?? left.0.path,
-                   let keyRight = right.0.name ?? right.0.path {
-                    return keyLeft < keyRight
-                }
-                return false
+        return result(
+            context: ["\"\(commonTarget.first.name)\" target"],
+            first: firstDependencies,
+            second: secondDependencies,
+            diffCommonValues: { commonPairs in
+                attributesDifferences(in: commonPairs)
+                    + packageDifferences(in: commonPairs)
             }
-        return commonSources
+        )
     }
 
     private func attributesDifferences(in dependencyDescriptorPairs: [DependencyDescriptorPair])
@@ -86,7 +60,7 @@ final class LinkedDependenciesComparator: Comparator {
         return dependencyDescriptorPairs
             .filter { $0.type != $1.type }
             .compactMap { first, second -> CompareResult.DifferentValues? in
-                if let key = dependencyKey(dependency: first) {
+                if let key = first.key {
                     return .init(context: "\(key) attributes",
                                  first: first.type.rawValue,
                                  second: second.type.rawValue)
@@ -100,21 +74,12 @@ final class LinkedDependenciesComparator: Comparator {
         return dependencyDescriptorPairs
             .filter { $0.package != $1.package }
             .compactMap { first, second -> CompareResult.DifferentValues? in
-                if let key = dependencyKey(dependency: first) {
+                if let key = first.key {
                     return .init(context: "\(key) package reference",
                                  first: first.package?.difference(from: second.package),
                                  second: second.package?.difference(from: first.package))
                 }
                 return nil
             }
-    }
-
-    private func dependencyPathMap(from dependencyDescriptors: [LinkedDependencyDescriptor])
-        -> [String: LinkedDependencyDescriptor] {
-        return Dictionary(dependencyDescriptors.compactMap {
-            if let key = dependencyKey(dependency: $0) { return (key, $0) }
-            return nil
-        },
-        uniquingKeysWith: { first, _ in first })
     }
 }

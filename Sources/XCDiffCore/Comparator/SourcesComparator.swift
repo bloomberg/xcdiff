@@ -22,58 +22,42 @@ final class SourcesComparator: Comparator {
     let tag = "sources"
     private let targetsHelper = TargetsHelper()
 
-    func compare(_ first: ProjectDescriptor,
-                 _ second: ProjectDescriptor,
-                 parameters: ComparatorParameters) throws -> [CompareResult] {
+    func compare(
+        _ first: ProjectDescriptor,
+        _ second: ProjectDescriptor,
+        parameters: ComparatorParameters
+    ) throws -> [CompareResult] {
         let commonTargets = try targetsHelper.commonTargets(first, second, parameters: parameters)
         return try commonTargets
             .map { firstTarget, secondTarget -> CompareResult in
                 let firstSources = try targetsHelper.sources(from: firstTarget, sourceRoot: first.sourceRoot)
                 let secondSources = try targetsHelper.sources(from: secondTarget, sourceRoot: second.sourceRoot)
 
-                let firstPaths = Set(firstSources.map { $0.path })
-                let secondPaths = Set(secondSources.map { $0.path })
-
-                let commonSources = commonSourcesPair(first: firstSources, second: secondSources)
-                let difference = compilerFlagDifferences(in: commonSources)
-
-                return result(context: ["\"\(firstTarget.name)\" target"],
-                              first: firstPaths,
-                              second: secondPaths,
-                              differentValues: difference)
+                return result(
+                    context: ["\"\(firstTarget.name)\" target"],
+                    first: firstSources,
+                    second: secondSources,
+                    diffCommonValues: { commonPairs in
+                        compilerFlagDifferences(in: commonPairs)
+                    }
+                )
             }
-    }
-
-    /// Returns common sources as a source pair
-    private func commonSourcesPair(first: [SourceDescriptor], second: [SourceDescriptor]) -> [SourcePair] {
-        let firstSourcesMapping = sourcePathMapping(from: first)
-        let secondSourcesMapping = sourcePathMapping(from: second)
-
-        let firstPaths = Set(firstSourcesMapping.keys)
-        let secondPaths = Set(secondSourcesMapping.keys)
-
-        let commonSources: [SourcePair] = firstPaths.intersection(secondPaths).map {
-            (firstSourcesMapping[$0]!, secondSourcesMapping[$0]!)
-        }
-
-        return commonSources
     }
 
     /// Returns compiler flag differences between source pairs
-    private func compilerFlagDifferences(in sourcePairs: [SourcePair]) -> [CompareResult.DifferentValues] {
+    private func compilerFlagDifferences(
+        in sourcePairs: [SourcePair]
+    ) -> [CompareResult.DifferentValues] {
         return sourcePairs.compactMap { sourcePair in
             let (first, second) = sourcePair
             if first.flags != second.flags {
-                return CompareResult.DifferentValues(context: "\(first.path) compiler flags",
-                                                     first: first.flags,
-                                                     second: second.flags)
+                return CompareResult.DifferentValues(
+                    context: "\(first.path) compiler flags",
+                    first: first.flags,
+                    second: second.flags
+                )
             }
             return nil
         }
-    }
-
-    /// Returns a dictionary that maps sources by their path `[path: SourceDescriptor]`
-    private func sourcePathMapping(from sources: [SourceDescriptor]) -> [String: SourceDescriptor] {
-        return Dictionary(sources.map { ($0.path, $0) }, uniquingKeysWith: { first, _ in first })
     }
 }

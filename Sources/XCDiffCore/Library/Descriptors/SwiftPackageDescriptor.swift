@@ -54,3 +54,13 @@ struct SwiftPackageDescriptor: Hashable, CustomStringConvertible, Comparable {
         return lhs.description < rhs.description
     }
 }
+
+extension SwiftPackageDescriptor: DiffComparable {
+    var diffKey: String {
+        identifier
+    }
+
+    var diffDescription: String {
+        description
+    }
+}
