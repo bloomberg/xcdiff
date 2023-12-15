@@ -397,13 +397,22 @@ final class CopyFilesComparatorTests: XCTestCase {
 
         // Then
         XCTAssertEqual(actual, [
-            .init(tag: "copy_files",
-                  context: ["\"Target1\" target", "CopyFiles"],
-                  differentValues: [
-                      .init(context: "a.txt",
-                            first: "platformFilter = ios, attributes = [\"A1\", \"B1\"]",
-                            second: "platformFilter = macos, attributes = [\"A2\", \"B2\"]"),
-                  ]),
+            .init(
+                tag: "copy_files",
+                context: ["\"Target1\" target", "CopyFiles"],
+                differentValues: [
+                    .init(
+                        context: "a.txt attributes",
+                        first: "[\"A1\", \"B1\"]",
+                        second: "[\"A2\", \"B2\"]"
+                    ),
+                    .init(
+                        context: "a.txt platformFilters",
+                        first: "[\"ios\"]",
+                        second: "[\"macos\"]"
+                    ),
+                ]
+            ),
         ])
     }
 

@@ -23,9 +23,11 @@ public struct CompareResult: GenericCompareResult, Equatable {
         public let first: String
         public let second: String
 
-        public init(context: String,
-                    first: String? = nil,
-                    second: String? = nil) {
+        public init(
+            context: String,
+            first: String? = nil,
+            second: String? = nil
+        ) {
             self.context = context
             self.first = first ?? "nil"
             self.second = second ?? "nil"

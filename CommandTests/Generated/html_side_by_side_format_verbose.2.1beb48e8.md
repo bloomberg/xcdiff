@@ -413,15 +413,15 @@
     </tr>
     <tr class="differentContentKey">
         <td colspan="2">
-            ProjectFramework.framework
+            ProjectFramework.framework attributes
         </td>
     </tr>
     <tr class="differentContent">
         <td>
-            attributes = [&quot;CodeSignOnCopy&quot;, &quot;RemoveHeadersOnCopy&quot;]
+            [&quot;CodeSignOnCopy&quot;, &quot;RemoveHeadersOnCopy&quot;]
         </td>
         <td>
-            attributes = []
+            []
         </td>
     </tr>
     </tbody>

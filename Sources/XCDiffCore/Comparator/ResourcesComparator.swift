@@ -19,19 +19,24 @@ import Foundation
 final class ResourcesComparator: Comparator {
     let tag = "resources"
     private let targetsHelper = TargetsHelper()
+    private let buildFileComparatorHelper = BuildFileComparatorHelper()
 
     func compare(_ first: ProjectDescriptor,
                  _ second: ProjectDescriptor,
                  parameters: ComparatorParameters) throws -> [CompareResult] {
         let commonTargets = try targetsHelper.commonTargets(first, second, parameters: parameters)
         let compareResults = try commonTargets.map { firstTarget, secondTarget -> CompareResult in
-            let firstPaths = Set(try targetsHelper.resources(from: firstTarget, sourceRoot: first.sourceRoot))
-            let secondPaths = Set(try targetsHelper.resources(from: secondTarget, sourceRoot: second.sourceRoot))
+            let firstResources = try targetsHelper.resources(from: firstTarget, sourceRoot: first.sourceRoot)
+            let secondResources = try targetsHelper.resources(from: secondTarget, sourceRoot: second.sourceRoot)
 
-            return result(context: ["\"\(firstTarget.name)\" target"],
-                          first: firstPaths,
-                          second: secondPaths,
-                          differentValues: [])
+            return result(
+                context: ["\"\(firstTarget.name)\" target"],
+                first: firstResources,
+                second: secondResources,
+                diffCommonValues: { [buildFileComparatorHelper] common in
+                    buildFileComparatorHelper.diff(common)
+                }
+            )
         }
 
         return compareResults

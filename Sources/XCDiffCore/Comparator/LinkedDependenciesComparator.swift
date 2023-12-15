@@ -17,11 +17,12 @@
 import Foundation
 
 final class LinkedDependenciesComparator: Comparator {
-    private typealias DependencyDescriptorPair = (first: LinkedDependencyDescriptor,
-                                                  second: LinkedDependencyDescriptor)
-    private typealias EmbeddedFrameworksDescriptorPair = (first: EmbeddedFrameworksDescriptor,
-                                                          second: EmbeddedFrameworksDescriptor)
+    private typealias DependencyDescriptorPair = (
+        first: LinkedDependencyDescriptor,
+        second: LinkedDependencyDescriptor
+    )
     private let targetsHelper = TargetsHelper()
+    private let buildFileComparatorHelper = BuildFileComparatorHelper()
 
     let tag = "linked_dependencies"
 
@@ -51,6 +52,10 @@ final class LinkedDependenciesComparator: Comparator {
             diffCommonValues: { commonPairs in
                 attributesDifferences(in: commonPairs)
                     + packageDifferences(in: commonPairs)
+                    + buildFileComparatorHelper
+                    .diff(
+                        commonPairs.compactMap(buildFileDescriptorPair)
+                    )
             }
         )
     }
@@ -81,5 +86,32 @@ final class LinkedDependenciesComparator: Comparator {
                 }
                 return nil
             }
+    }
+
+    private func buildFileDescriptorPair(
+        from pair: DependencyDescriptorPair
+    ) -> BuildFileComparatorHelper.BuildFileDescriptorPair? {
+        guard let first = buildFileDescriptor(from: pair.first),
+              let second = buildFileDescriptor(from: pair.second) else {
+            return nil
+        }
+        return BuildFileComparatorHelper.BuildFileDescriptorPair(
+            first: first,
+            second: second
+        )
+    }
+
+    private func buildFileDescriptor(
+        from descriptor: LinkedDependencyDescriptor
+    ) -> BuildFileDescriptor? {
+        guard let key = descriptor.key else {
+            return nil
+        }
+
+        return BuildFileDescriptor(
+            name: key,
+            platformFilters: descriptor.platformFilters,
+            attributes: []
+        )
     }
 }

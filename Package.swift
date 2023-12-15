@@ -25,7 +25,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/apple/swift-tools-support-core.git", from: "0.3.0"),
         .package(url: "https://github.com/kylef/PathKit", from: "1.0.0"),
-        .package(url: "https://github.com/tuist/xcodeproj.git", from: "8.0.0"),
+        .package(url: "https://github.com/tuist/xcodeproj.git", from: "8.15.0"),
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.0"),
     ],
     targets: [

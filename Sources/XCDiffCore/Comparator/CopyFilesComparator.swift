@@ -22,6 +22,7 @@ final class CopyFilesComparator: Comparator {
     let tag = "copy_files"
     private let targetsHelper = TargetsHelper()
     private let pathHelper = PathHelper()
+    private let buildFileComparatorHelper = BuildFileComparatorHelper()
 
     func compare(_ first: ProjectDescriptor, _ second: ProjectDescriptor,
                  parameters: ComparatorParameters) throws -> [CompareResult] {
@@ -71,8 +72,8 @@ final class CopyFilesComparator: Comparator {
                           description: "The build phase does not exist in the second project",
                           onlyInFirst: ["Duplicated build phase name"])
         }
-        let firstFiles = Dictionary(grouping: first.files, by: { $0.path })
-        let secondFiles = Dictionary(grouping: second.files, by: { $0.path })
+        let firstFiles = Dictionary(grouping: first.files, by: { $0.name })
+        let secondFiles = Dictionary(grouping: second.files, by: { $0.name })
         let firstKeys = firstFiles.keys.map { String($0) }.toSet()
         let secondKeys = secondFiles.keys.map { String($0) }.toSet()
         let onlyInFirst = firstKeys.subtractingAndSorted(secondKeys)
@@ -85,12 +86,14 @@ final class CopyFilesComparator: Comparator {
                       differentValues: properties + files)
     }
 
-    private func compareFiles(_ first: CopyFilesBuildPhaseDescriptor,
-                              _ second: CopyFilesBuildPhaseDescriptor) throws -> [CompareResult.DifferentValues] {
-        let firstFiles = Dictionary(grouping: first.files, by: { $0.path })
-        let secondFiles = Dictionary(grouping: second.files, by: { $0.path })
+    private func compareFiles(
+        _ first: CopyFilesBuildPhaseDescriptor,
+        _ second: CopyFilesBuildPhaseDescriptor
+    ) throws -> [CompareResult.DifferentValues] {
+        let firstFiles = Dictionary(grouping: first.files, by: { $0.name })
+        let secondFiles = Dictionary(grouping: second.files, by: { $0.name })
         let commonPaths = Set(firstFiles.keys).intersection(secondFiles.keys).map { String($0) }
-        return try commonPaths.flatMap { path -> [CompareResult.DifferentValues] in
+        let buildFilePairs = try commonPaths.map { path in
             let firstArray = firstFiles[path]!
             let secondArray = secondFiles[path]!
             guard firstArray.count == 1 else {
@@ -103,15 +106,12 @@ final class CopyFilesComparator: Comparator {
                     "\(second.name) Build Phase in second contains \(secondArray.count) references " +
                         "to the same file (path = \(path))")
             }
-            let firstPath = firstArray[0]
-            let secondPath = secondArray[0]
-            if firstPath != secondPath {
-                return [.init(context: path,
-                              first: firstPath.properties(compareTo: secondPath),
-                              second: secondPath.properties(compareTo: firstPath))]
-            }
-            return []
+            let firstFile = firstArray[0]
+            let secondFile = secondArray[0]
+            return (first: firstFile, second: secondFile)
         }
+
+        return buildFileComparatorHelper.diff(buildFilePairs)
     }
 
     private func descriptors(from target: PBXTarget, sourceRoot: Path) throws -> [CopyFilesBuildPhaseDescriptor] {
@@ -129,14 +129,25 @@ final class CopyFilesComparator: Comparator {
         }
     }
 
-    private func descriptors(from files: [PBXBuildFile], sourceRoot: Path) throws -> [FileDescriptor] {
+    private func descriptors(
+        from files: [PBXBuildFile],
+        sourceRoot: Path
+    ) throws -> [BuildFileDescriptor] {
         return try files
-            .compactMap {
-                guard let path = try pathHelper.fullPath(from: $0.file, sourceRoot: sourceRoot) ?? $0.file?.path else {
+            .compactMap { buildFile -> BuildFileDescriptor? in
+                guard let path = try pathHelper.fullPath(
+                    from: buildFile.file,
+                    sourceRoot: sourceRoot
+                ) ?? buildFile.file?.path else {
                     return nil
                 }
-                let attributes = $0.settings?["ATTRIBUTES"] as? [String] ?? []
-                return FileDescriptor(path: path, platformFilter: $0.platformFilter, attributes: attributes)
+                let attributes = buildFile.settings?["ATTRIBUTES"] as? [String] ?? []
+
+                return BuildFileDescriptor(
+                    name: path,
+                    platformFilters: buildFile.combinedPlatformFilters(),
+                    attributes: attributes
+                )
             }
     }
 }
@@ -148,7 +159,7 @@ private struct CopyFilesBuildPhaseDescriptor: Equatable {
     let runOnlyForDeploymentPostprocessing: Bool
     let dstPath: String?
     let dstSubfolderSpec: PBXCopyFilesBuildPhase.SubFolder?
-    let files: [FileDescriptor]
+    let files: [BuildFileDescriptor]
 
     func differentValues(second: CopyFilesBuildPhaseDescriptor) -> [CompareResult.DifferentValues] {
         var result = [CompareResult.DifferentValues]()
@@ -178,22 +189,5 @@ private struct CopyFilesBuildPhaseDescriptor: Equatable {
                                 second: "\(describe(second.dstSubfolderSpec))"))
         }
         return result
-    }
-}
-
-private struct FileDescriptor: Equatable {
-    let path: String
-    let platformFilter: String?
-    let attributes: [String]
-
-    func properties(compareTo second: FileDescriptor) -> String {
-        var result = [String]()
-        if platformFilter != second.platformFilter {
-            result.append("platformFilter = \(describe(platformFilter))")
-        }
-        if attributes != second.attributes {
-            result.append("attributes = \(attributes.toSet().subtractingAndSorted(second.attributes.toSet()))")
-        }
-        return result.joined(separator: ", ")
     }
 }

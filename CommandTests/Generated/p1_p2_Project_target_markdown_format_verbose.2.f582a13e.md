@@ -54,9 +54,9 @@
 
 ### ⚠️  Value mismatch (1):
 
-  - `ProjectFramework.framework`
-    - `attributes = ["CodeSignOnCopy", "RemoveHeadersOnCopy"]`
-    - `attributes = []`
+  - `ProjectFramework.framework attributes`
+    - `["CodeSignOnCopy", "RemoveHeadersOnCopy"]`
+    - `[]`
 
 
 
