@@ -63,9 +63,9 @@
     ],
     "differentValues" : [
       {
-        "context" : "ProjectFramework.framework",
-        "first" : "attributes = [\"CodeSignOnCopy\", \"RemoveHeadersOnCopy\"]",
-        "second" : "attributes = []"
+        "context" : "ProjectFramework.framework attributes",
+        "first" : "[\"CodeSignOnCopy\", \"RemoveHeadersOnCopy\"]",
+        "second" : "[]"
       }
     ],
     "onlyInFirst" : [

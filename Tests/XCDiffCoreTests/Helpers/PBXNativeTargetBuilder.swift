@@ -225,6 +225,12 @@ final class PBXNativeTargetBuilder {
                     if let packageProduct = linkedDependency.packageProduct {
                         buildFileBuilder.setPackageProduct(packageProduct)
                     }
+                    if let platformFilter = linkedDependency.platformFilter {
+                        buildFileBuilder.setPlatformFilter(platformFilter)
+                    }
+                    if let platformFilters = linkedDependency.platformFilters {
+                        buildFileBuilder.setPlatformFilters(platformFilters)
+                    }
                 }
             }
         }
@@ -262,11 +268,15 @@ struct LinkedDependenciesData {
     var path: String?
     var packageProduct: SwiftPackageProductDependencyData?
     var settings: [String: [String]]?
+    var platformFilter: String?
+    var platformFilters: [String]?
 }
 
 struct EmbeddedFrameworksData {
     let path: String
     let settings: [String: [String]]?
+    var platformFilter: String?
+    var platformFilters: [String]?
 }
 
 enum SourceTree {

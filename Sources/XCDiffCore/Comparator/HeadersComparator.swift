@@ -21,6 +21,7 @@ final class HeadersComparator: Comparator {
 
     let tag = "headers"
     private let targetsHelper = TargetsHelper()
+    private let buildFileComparatorHelper = BuildFileComparatorHelper()
 
     func compare(_ first: ProjectDescriptor,
                  _ second: ProjectDescriptor,
@@ -35,7 +36,12 @@ final class HeadersComparator: Comparator {
                 first: firstHeaders,
                 second: secondHeaders,
                 diffCommonValues: { commonPairs in
-                    attributesDifferences(in: commonPairs)
+                    let differentValues = self.attributesDifferences(in: commonPairs)
+                    let buildFileDifferences = self.buildFileComparatorHelper.diff(
+                        commonPairs.map(self.buildFileDescriptorPair)
+                    )
+
+                    return differentValues + buildFileDifferences
                 }
             )
         }
@@ -56,5 +62,24 @@ final class HeadersComparator: Comparator {
                     second: second.attributes ?? "nil (Project)"
                 )
             }
+    }
+
+    private func buildFileDescriptorPair(
+        from headerDescriptorPair: HeaderDescriptorPair
+    ) -> BuildFileComparatorHelper.BuildFileDescriptorPair {
+        (
+            first: buildFileDescriptor(from: headerDescriptorPair.first),
+            second: buildFileDescriptor(from: headerDescriptorPair.second)
+        )
+    }
+
+    private func buildFileDescriptor(
+        from descriptor: HeaderDescriptor
+    ) -> BuildFileDescriptor {
+        return BuildFileDescriptor(
+            name: descriptor.path,
+            platformFilters: descriptor.platformFilters,
+            attributes: []
+        )
     }
 }

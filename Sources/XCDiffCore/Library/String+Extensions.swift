@@ -35,6 +35,9 @@ extension String {
     }
 }
 
-func describe<T: CustomStringConvertible>(_ value: T?) -> String {
-    return value?.description ?? "nil"
+func describe<T: CustomStringConvertible>(
+    _ value: T?,
+    default: String = "nil"
+) -> String {
+    return value?.description ?? `default`
 }

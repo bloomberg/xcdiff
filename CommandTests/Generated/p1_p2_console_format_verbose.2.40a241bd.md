@@ -65,9 +65,9 @@
 
 ⚠️  Value mismatch (1):
 
-  • ProjectFramework.framework
-    ◦ attributes = ["CodeSignOnCopy", "RemoveHeadersOnCopy"]
-    ◦ attributes = []
+  • ProjectFramework.framework attributes
+    ◦ ["CodeSignOnCopy", "RemoveHeadersOnCopy"]
+    ◦ []
 
 
 ✅ COPY_FILES > "ProjectFramework" target
