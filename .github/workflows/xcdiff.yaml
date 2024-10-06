@@ -19,7 +19,7 @@ jobs:
     name: Lint
     runs-on: macOS-14
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Install dependencies
       run: ./Scripts/brew.sh
     - name: lint
@@ -29,8 +29,8 @@ jobs:
     name: Build & Test
     runs-on: macOS-14
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/cache@v2
+    - uses: actions/checkout@v4
+    - uses: actions/cache@v4
       with:
         path: .build
         key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
@@ -40,6 +40,6 @@ jobs:
       run: make build
     - name: test
       run: make test_ci
-    - uses: codecov/codecov-action@v2
+    - uses: codecov/codecov-action@v4
       with:
         directory: .coverage
