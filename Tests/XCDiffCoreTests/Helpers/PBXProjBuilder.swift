@@ -127,7 +127,7 @@ final class PBXProjBuilder {
     ) -> PBXProjBuilder {
         let package = XCRemoteSwiftPackageReference(repositoryURL: url, versionRequirement: version)
         pbxproj.add(object: package)
-        pbxproj.rootObject?.packages.append(package)
+        pbxproj.rootObject?.remotePackages.append(package)
         return self
     }
 
@@ -224,6 +224,8 @@ final class PBXProjBuilder {
         let project = PBXProject(name: name,
                                  buildConfigurationList: configurationList,
                                  compatibilityVersion: Xcode.Default.compatibilityVersion,
+                                 preferredProjectObjectVersion: nil,
+                                 minimizedProjectReferenceProxies: nil,
                                  mainGroup: mainGroup,
                                  projectDirPath: projectDirPath)
         let objects = configurationListObjects + [mainGroup, project]
