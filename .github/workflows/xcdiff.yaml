@@ -5,6 +5,9 @@ on:
   pull_request:
     branches:
       - main
+  schedule:
+    # 20:00 UTC 
+    - cron: "0 20 * * *"
 
 env:
   DEVELOPER_DIR: "/Applications/Xcode_16.2.app/Contents/Developer"
