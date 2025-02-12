@@ -33,6 +33,7 @@ public enum ComparatorType {
     case linkedDependecies
     case attributes
     case swiftPackages
+    case fileSystemSynchronizedGroups
     case custom(Comparator)
 
     public var tag: String {
@@ -74,6 +75,8 @@ public enum ComparatorType {
             return AttributesComparator()
         case .swiftPackages:
             return SwiftPackagesComparator()
+        case .fileSystemSynchronizedGroups:
+            return FileSytemSynchronizedGroupsComparator()
         case let .custom(comparator):
             return comparator
         }
@@ -99,6 +102,7 @@ public extension Array where Element == ComparatorType {
             .linkedDependecies,
             .attributes,
             .swiftPackages,
+            .fileSystemSynchronizedGroups,
         ]
     }
 
@@ -119,6 +123,7 @@ public extension Array where Element == ComparatorType {
             .linkedDependecies,
             .attributes,
             .swiftPackages,
+            .fileSystemSynchronizedGroups,
         ]
     }
 }

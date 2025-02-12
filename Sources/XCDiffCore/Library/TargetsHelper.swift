@@ -40,6 +40,19 @@ struct HeaderDescriptor: Hashable, DiffComparable {
     let platformFilters: [String]?
 }
 
+struct FileSystemSynchronizedGroupDescriptor: Hashable, DiffComparable {
+    var diffKey: String {
+        key ?? ""
+    }
+
+    var key: String? {
+        name ?? path
+    }
+
+    let name: String?
+    let path: String?
+}
+
 struct LinkedDependencyDescriptor: Hashable, DiffComparable {
     var diffKey: String {
         key ?? ""
@@ -176,6 +189,22 @@ final class TargetsHelper {
                 name: path,
                 platformFilters: $0.combinedPlatformFilters(),
                 attributes: []
+            )
+        }
+    }
+
+    func fileSystemSynchronizedGroups(
+        from target: PBXTarget,
+        sourceRoot: Path
+    ) throws -> [FileSystemSynchronizedGroupDescriptor] {
+        guard let fileSystemSynchronizedGroups = target.fileSystemSynchronizedGroups else {
+            return []
+        }
+
+        return try fileSystemSynchronizedGroups.map { rootGroup in
+            FileSystemSynchronizedGroupDescriptor(
+                name: rootGroup.name,
+                path: try path(from: rootGroup, sourceRoot: sourceRoot) ?? rootGroup.path
             )
         }
     }

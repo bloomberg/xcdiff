@@ -33,6 +33,7 @@
 ❌ ATTRIBUTES > Root project
 ❌ ATTRIBUTES > "Project" target
 ✅ SWIFT_PACKAGES
+✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "Project" target
 
 
 ```

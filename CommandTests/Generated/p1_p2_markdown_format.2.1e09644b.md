@@ -240,5 +240,20 @@
 ## ✅ SWIFT_PACKAGES
 
 
+## ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "MismatchingLibrary" target
+
+
+## ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "Project" target
+
+
+## ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "ProjectFramework" target
+
+
+## ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "ProjectTests" target
+
+
+## ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "ProjectUITests" target
+
+
 
 ```
