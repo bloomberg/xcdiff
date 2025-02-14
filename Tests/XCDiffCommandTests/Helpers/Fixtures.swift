@@ -32,6 +32,8 @@ final class ProjectFixtures {
         case ios_project_with_ui_tests_1
         case ios_project_with_ui_tests_2
         case ios_project_invalid_paths
+        case xcode16_syncgroups_1
+        case xcode16_syncgroups_2
         // swiftlint:enable identifier_name
     }
 

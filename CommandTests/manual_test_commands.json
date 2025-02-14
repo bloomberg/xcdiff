@@ -78,5 +78,10 @@
         "alias": "test_target_attributes",
         "command": ["-p1", "{ios_project_with_ui_tests_1}", "-p2", "{ios_project_with_ui_tests_2}", "-g", "attributes", "-v"],
         "comment": "Target attributes that reference targets (e.g. TestTargetID) are resolved correctly"
+    },
+    {
+        "alias": "test_filesystem_synchronized_groups",
+        "command": ["-p1", "{xcode16_syncgroups_1}", "-p2", "{xcode16_syncgroups_2}", "-g", "filesystem_synchronized_groups", "-v"],
+        "comment": "Filesystem synchronized root groups are part of the diff."
     }
 ]

@@ -505,6 +505,21 @@
 
     ],
     "tag" : "swift_packages"
+  },
+  {
+    "context" : [
+      "\"Project\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "filesystem_synchronized_groups"
   }
 ]
 

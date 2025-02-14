@@ -84,5 +84,8 @@
 ## ✅ SWIFT_PACKAGES
 
 
+## ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "Project" target
+
+
 
 ```

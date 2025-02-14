@@ -1370,6 +1370,81 @@
 
     ],
     "tag" : "swift_packages"
+  },
+  {
+    "context" : [
+      "\"MismatchingLibrary\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "filesystem_synchronized_groups"
+  },
+  {
+    "context" : [
+      "\"Project\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "filesystem_synchronized_groups"
+  },
+  {
+    "context" : [
+      "\"ProjectFramework\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "filesystem_synchronized_groups"
+  },
+  {
+    "context" : [
+      "\"ProjectTests\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "filesystem_synchronized_groups"
+  },
+  {
+    "context" : [
+      "\"ProjectUITests\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "filesystem_synchronized_groups"
   }
 ]
 

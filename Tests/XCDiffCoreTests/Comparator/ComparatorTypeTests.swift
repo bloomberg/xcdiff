@@ -38,6 +38,7 @@ final class ComperatorTypeTests: XCTestCase {
             "linked_dependencies",
             "attributes",
             "swift_packages",
+            "filesystem_synchronized_groups",
         ])
     }
 

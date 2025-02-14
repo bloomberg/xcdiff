@@ -28,6 +28,10 @@ Compares all file references in the Xcode project.
 
 As the comparator is very sensitive, it's likely that differences from other comparators will be flagged here too.
 
+### `filesystem_synchronized_groups`
+
+Compares the Xcode 16+ buildable folder references within targets. A single reference to each buildable folder is present in the project file as opposed to a reference for all the individual sources within them.
+
 ### `headers`
 
 Compares headers including their visibility attributes i.e. Public, Project, and Private.

@@ -215,6 +215,18 @@ final class PBXNativeTargetBuilder {
     }
 
     @discardableResult
+    func addFileSystemSynchronizedRootGroups(_ groups: [String]) -> PBXNativeTargetBuilder {
+        var targetSyncGroups = pbxtarget.fileSystemSynchronizedGroups ?? []
+        let newSyncGroups = groups.map { group in
+            PBXFileSystemSynchronizedRootGroup(path: group)
+        }
+        targetSyncGroups.append(contentsOf: newSyncGroups)
+        pbxtarget.fileSystemSynchronizedGroups = targetSyncGroups
+        objects.append(contentsOf: newSyncGroups)
+        return self
+    }
+
+    @discardableResult
     func addLinkedDependencies(_ linkedDependencies: [LinkedDependenciesData]) -> PBXNativeTargetBuilder {
         addBuildPhase(.frameworks) { buildPhaseBuilder in
             linkedDependencies.forEach { linkedDependency in
