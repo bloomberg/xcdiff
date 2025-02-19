@@ -318,30 +318,11 @@ final class TargetsHelper {
 
 private extension PBXBuildFile {
     func compilerFlags() -> String? {
-        guard let flags = settings?["COMPILER_FLAGS"] else {
-            return nil
-        }
-        if let flagsString = flags as? String {
-            return flagsString
-        }
-        if let flagsArray = flags as? [String] {
-            return flagsArray.joined(separator: ", ")
-        }
-
-        return nil
+        settings?["COMPILER_FLAGS"]?.stringValue
     }
 
     func attributes() -> String? {
-        guard let anyAttributes = settings?["ATTRIBUTES"] else {
-            return nil
-        }
-        if let attributes = anyAttributes as? [String] {
-            return attributes.joined(separator: ", ")
-        }
-        if let attributes = anyAttributes as? String {
-            return attributes
-        }
-        return String(describing: anyAttributes)
+        settings?["ATTRIBUTES"]?.stringValue
     }
 }
 

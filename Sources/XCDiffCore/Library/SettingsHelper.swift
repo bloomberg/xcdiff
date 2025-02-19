@@ -29,16 +29,16 @@ class SettingsHelper {
         let onlyInSecond = secondKeys.subtractingAndSorted(firstKeys).map { keyAndValue($0, buildSettings: second) }
 
         // we attempt to ignore differences that are a result of different project names
-        let firstProjectName = first["PROJECT_NAME"] as? String
-        let secondProjectName = second["PROJECT_NAME"] as? String
+        let firstProjectName = first["PROJECT_NAME"]?.stringValue
+        let secondProjectName = second["PROJECT_NAME"]?.stringValue
         let settingValueComparator = SettingValueComparator(firstProjectName: firstProjectName,
                                                             secondProjectName: secondProjectName)
 
-        let valueDifferences: [CompareResult.DifferentValues] = try commonKeys.compactMap { settingName in
+        let valueDifferences: [CompareResult.DifferentValues] = commonKeys.compactMap { settingName in
             let firstSetting = first[settingName]
             let secondSettings = second[settingName]
-            let firstString = try stringFromBuildSetting(firstSetting)
-            let secondString = try stringFromBuildSetting(secondSettings)
+            let firstString = stringFromBuildSetting(firstSetting)
+            let secondString = stringFromBuildSetting(secondSettings)
             guard settingValueComparator.compare(firstString, secondString) == .orderedSame else {
                 return .init(context: settingName,
                              first: firstString,
@@ -57,25 +57,21 @@ class SettingsHelper {
     // MARK: - Private
 
     private func keyAndValue(_ key: String, buildSettings: BuildSettings) -> String {
-        return "\(key) = \(buildSettings[key] ?? "nil")"
+        return "\(key) = \(buildSettings[key]?.settingDiffValue ?? "nil")"
     }
 
-    private func stringFromBuildSetting(_ buildSetting: Any?) throws -> String {
-        // try to unwrap
-        guard let buildSetting else {
-            return "nil"
-        }
+    private func stringFromBuildSetting(_ buildSetting: BuildSetting?) -> String {
+        buildSetting?.stringValue ?? "nil"
+    }
+}
 
-        // try to cast to string
-        if let buildSettingString = buildSetting as? String {
-            return buildSettingString
+extension BuildSetting {
+    var settingDiffValue: String {
+        switch self {
+        case let .string(value):
+            value
+        case let .array(value):
+            "\(value)"
         }
-
-        // try to case to array
-        if let buildSettingArray = buildSetting as? NSArray {
-            return buildSettingArray.compactMap { $0 as? String }.joined(separator: " ")
-        }
-
-        throw ComparatorError.generic("Cannot convert build setting to string")
     }
 }
