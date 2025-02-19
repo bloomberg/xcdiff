@@ -61,3 +61,34 @@ extension XCRemoteSwiftPackageReference.VersionRequirement: CustomStringConverti
         }
     }
 }
+
+extension BuildSetting {
+    var stringValue: String {
+        switch self {
+        case let .string(value):
+            value
+        case let .array(value):
+            value.joined(separator: ", ")
+        }
+    }
+}
+
+extension BuildFileSetting {
+    var stringValue: String {
+        switch self {
+        case let .string(value):
+            value
+        case let .array(value):
+            value.joined(separator: ", ")
+        }
+    }
+
+    var arrayValue: [String] {
+        switch self {
+        case let .string(value):
+            [value]
+        case let .array(value):
+            value
+        }
+    }
+}

@@ -141,7 +141,7 @@ final class CopyFilesComparator: Comparator {
                 ) ?? buildFile.file?.path else {
                     return nil
                 }
-                let attributes = buildFile.settings?["ATTRIBUTES"] as? [String] ?? []
+                let attributes = buildFile.settings?["ATTRIBUTES"]?.arrayValue ?? []
 
                 return BuildFileDescriptor(
                     name: path,

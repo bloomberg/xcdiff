@@ -22,7 +22,7 @@ final class PBXBuildFileBuilder {
     private var name: String?
     private var platformFilter: String?
     private var platformFilters: [String]?
-    private var settings: [String: Any]?
+    private var settings: [String: BuildFileSetting]?
     private var packageProduct: SwiftPackageProductDependencyData?
 
     @discardableResult
@@ -51,13 +51,13 @@ final class PBXBuildFileBuilder {
 
     @discardableResult
     func setSettings(_ settings: [String: [String]]) -> PBXBuildFileBuilder {
-        self.settings = settings
+        self.settings = settings.mapValues { .array($0) }
         return self
     }
 
     @discardableResult
     func setSettings(_ settings: [String: String]) -> PBXBuildFileBuilder {
-        self.settings = settings
+        self.settings = settings.mapValues { .string($0) }
         return self
     }
 

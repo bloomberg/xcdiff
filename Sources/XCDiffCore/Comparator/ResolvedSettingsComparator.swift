@@ -67,7 +67,7 @@ final class ResolvedSettingsComparator: Comparator {
                                                         secondBuildSettings)
     }
 
-    private func buildSettings(path: String, target: String, configuration: String) throws -> [String: String] {
+    private func buildSettings(path: String, target: String, configuration: String) throws -> [String: BuildSetting] {
         let command = extractBuildSettingsCommand(path: path, target: target, config: configuration)
         let output = try system.execute(arguments: command)
         do {
@@ -100,18 +100,30 @@ final class ResolvedSettingsComparator: Comparator {
         return arguments
     }
 
-    private func parseRawJsonBuildSettings(output: String) throws -> [String: String] {
+    private func parseRawJsonBuildSettings(output: String) throws -> [String: BuildSetting] {
         let data = output.data(using: .utf8)!
         let result = try jsonDecoder.decode([RawShowBuildSettingsItem].self, from: data)
         var buildSettings = result[0].buildSettings
         let replacementKeys: [String] = ["PROJECT_TEMP_DIR", "PROJECT_TEMP_ROOT", "BUILD_DIR", "PROJECT_FILE_PATH"]
-        let replacementValues = replacementKeys.compactMap { (key: String) -> (key: String, value: String)? in
+        let replacementValues = replacementKeys.compactMap { (key: String) -> (key: String, value: BuildSetting)? in
             buildSettings[key].map { (key: key, value: $0) }
         }
         replacementValues.forEach { replacement in
             buildSettings.forEach { setting in
-                buildSettings[setting.key] =
-                    setting.value.replacingOccurrences(of: replacement.value, with: "$(\(replacement.key))")
+                switch setting.value {
+                case let .string(stringValue):
+                    buildSettings[setting.key] =
+                        .string(
+                            stringValue.replacingOccurrences(of: "\(replacement.value)", with: "$(\(replacement.key))")
+                        )
+                case let .array(arrayValue):
+                    buildSettings[setting.key] =
+                        .array(
+                            arrayValue.map {
+                                $0.replacingOccurrences(of: "\(replacement.value)", with: "$(\(replacement.key))")
+                            }
+                        )
+                }
             }
         }
         return buildSettings
@@ -119,5 +131,5 @@ final class ResolvedSettingsComparator: Comparator {
 }
 
 private struct RawShowBuildSettingsItem: Decodable {
-    let buildSettings: [String: String]
+    let buildSettings: [String: BuildSetting]
 }
