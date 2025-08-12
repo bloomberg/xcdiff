@@ -33,6 +33,7 @@ public enum ComparatorType {
     case linkedDependecies
     case attributes
     case swiftPackages
+    case plists
     case fileSystemSynchronizedGroups
     case custom(Comparator)
 
@@ -75,6 +76,8 @@ public enum ComparatorType {
             return AttributesComparator()
         case .swiftPackages:
             return SwiftPackagesComparator()
+        case .plists:
+            return PlistComparator()
         case .fileSystemSynchronizedGroups:
             return FileSytemSynchronizedGroupsComparator()
         case let .custom(comparator):
@@ -102,6 +105,7 @@ public extension Array where Element == ComparatorType {
             .linkedDependecies,
             .attributes,
             .swiftPackages,
+            .plists,
             .fileSystemSynchronizedGroups,
         ]
     }
@@ -123,6 +127,7 @@ public extension Array where Element == ComparatorType {
             .linkedDependecies,
             .attributes,
             .swiftPackages,
+            .plists,
             .fileSystemSynchronizedGroups,
         ]
     }

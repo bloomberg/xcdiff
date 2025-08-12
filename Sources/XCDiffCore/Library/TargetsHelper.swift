@@ -106,7 +106,11 @@ enum AttributeValue: Equatable, CustomStringConvertible {
 }
 
 final class TargetsHelper {
-    private let pathHelper = PathHelper()
+    private let pathHelper: PathHelper
+    
+    init(pathHelper: PathHelper = PathHelper()) {
+        self.pathHelper = pathHelper
+    }
 
     func targets(from projectDescription: ProjectDescriptor) -> Set<String> {
         return native(from: projectDescription).union(aggregate(from: projectDescription))
@@ -295,6 +299,15 @@ final class TargetsHelper {
             url: package.repositoryURL ?? "nil",
             version: package.versionRequirement?.description ?? "nil"
         )
+    }
+    
+    func infoPlist(target: PBXTarget, sourceRoot: Path) throws -> PlistDescriptor {
+        let buildConfig = target.buildConfigurationList?.buildConfigurations.first
+        let plistPathString = buildConfig?.buildSettings[PlistDescriptor.infoPlistKey] as? String ?? ""
+        let plistPath = sourceRoot + Path(plistPathString)
+        let plist = try pathHelper.readPlistFile(from: plistPath)
+        
+        return .init(target: target.name, plist: plist, path: plistPath)
     }
 
     // MARK: - Private
