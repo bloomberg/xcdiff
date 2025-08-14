@@ -308,6 +308,9 @@ Output format: (<path>, <name>, <source_tree>)
 ## ✅ SWIFT_PACKAGES
 
 
+## ✅ PLISTS > Info.plist > Info.plist
+
+
 ## ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "Project" target
 
 

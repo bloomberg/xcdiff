@@ -10,7 +10,8 @@
         "settings",
         "sources",
         "source_trees",
-        "linked_dependencies"
+        "linked_dependencies",
+        "plists"
     ],
     "targets": [
         "",

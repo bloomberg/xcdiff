@@ -656,6 +656,21 @@ Output format: (<path>, <name>, <source_tree>)
 ## ✅ SWIFT_PACKAGES
 
 
+## ✅ PLISTS > MismatchingLibrary-Info.plist
+
+
+## ✅ PLISTS > Info.plist > Info.plist
+
+
+## ✅ PLISTS > Info.plist > Info.plist
+
+
+## ✅ PLISTS > Info.plist > Info.plist
+
+
+## ✅ PLISTS > Info.plist > Info.plist
+
+
 ## ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "MismatchingLibrary" target
 
 

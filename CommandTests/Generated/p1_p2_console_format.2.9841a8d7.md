@@ -85,6 +85,11 @@
 ✅ ATTRIBUTES > "ProjectTests" target
 ❌ ATTRIBUTES > "ProjectUITests" target
 ✅ SWIFT_PACKAGES
+✅ PLISTS > MismatchingLibrary-Info.plist
+✅ PLISTS > Info.plist > Info.plist
+✅ PLISTS > Info.plist > Info.plist
+✅ PLISTS > Info.plist > Info.plist
+✅ PLISTS > Info.plist > Info.plist
 ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "MismatchingLibrary" target
 ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "Project" target
 ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "ProjectFramework" target

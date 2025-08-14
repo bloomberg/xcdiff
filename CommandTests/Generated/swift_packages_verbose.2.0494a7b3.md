@@ -62,6 +62,7 @@
     ◦ version = .upToNextMinorVersion(0.9.0)
 
 
+✅ PLISTS > Info.plist > Info.plist
 ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "App" target
 
 

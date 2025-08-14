@@ -1373,6 +1373,85 @@
   },
   {
     "context" : [
+      "MismatchingLibrary-Info.plist"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "plists"
+  },
+  {
+    "context" : [
+      "Info.plist",
+      "Info.plist"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "plists"
+  },
+  {
+    "context" : [
+      "Info.plist",
+      "Info.plist"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "plists"
+  },
+  {
+    "context" : [
+      "Info.plist",
+      "Info.plist"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "plists"
+  },
+  {
+    "context" : [
+      "Info.plist",
+      "Info.plist"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "plists"
+  },
+  {
+    "context" : [
       "\"MismatchingLibrary\" target"
     ],
     "differentValues" : [

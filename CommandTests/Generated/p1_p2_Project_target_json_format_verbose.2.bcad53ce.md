@@ -508,6 +508,22 @@
   },
   {
     "context" : [
+      "Info.plist",
+      "Info.plist"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+
+    ],
+    "tag" : "plists"
+  },
+  {
+    "context" : [
       "\"Project\" target"
     ],
     "differentValues" : [
