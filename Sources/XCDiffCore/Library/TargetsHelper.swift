@@ -18,6 +18,8 @@ import Foundation
 import PathKit
 import XcodeProj
 
+// swiftlint:disable file_length
+
 typealias TargetPair = (first: PBXTarget, second: PBXTarget)
 
 struct SourceDescriptor: Hashable, DiffComparable {
@@ -107,9 +109,15 @@ enum AttributeValue: Equatable, CustomStringConvertible {
 
 final class TargetsHelper {
     private let pathHelper: PathHelper
+    private let targetPlistHelper: TargetsPlistHelperProtocol
 
-    init(pathHelper: PathHelper = PathHelper()) {
+    convenience init() {
+        self.init(pathHelper: PathHelper(), targetPlistHelper: TargetsPlistHelper())
+    }
+
+    init(pathHelper: PathHelper, targetPlistHelper: TargetsPlistHelperProtocol) {
         self.pathHelper = pathHelper
+        self.targetPlistHelper = targetPlistHelper
     }
 
     func targets(from projectDescription: ProjectDescriptor) -> Set<String> {
@@ -301,35 +309,11 @@ final class TargetsHelper {
         )
     }
 
-    func infoPlist(target: PBXTarget, sourceRoot: Path) throws -> PlistDescriptor {
-        let buildConfig = target.buildConfigurationList?.buildConfigurations.first
-        let plistPathString = buildConfig?.buildSettings[PlistDescriptor.infoPlistKey] as? String ?? ""
-        let plistPath = sourceRoot + Path(plistPathString)
-        let plist = try pathHelper.readPlistFile(from: plistPath)
+    func plists(from target: PBXTarget, sourceRoot: Path) -> [PlistDescriptor] {
+        let infoPlist = try? targetPlistHelper.infoPlist(target: target, sourceRoot: sourceRoot)
+        let entitlementsPlist = try? targetPlistHelper.entitlementsPlist(target: target, sourceRoot: sourceRoot)
 
-        return .init(target: target.name, plist: plist, path: plistPath)
-    }
-
-    func entitlementsPlist(target: PBXTarget, sourceRoot: Path) throws -> PlistDescriptor? {
-        let buildConfig = target.buildConfigurationList?.buildConfigurations.first
-        let plistPathString = buildConfig?.buildSettings[PlistDescriptor.entitlementsPlistKey] as? String ?? ""
-        let plistPath = sourceRoot + Path(plistPathString)
-        let plist = try pathHelper.readPlistFile(from: plistPath)
-
-        return .init(target: target.name, plist: plist, path: plistPath)
-    }
-
-    func allPlists(from target: PBXTarget, sourceRoot: Path) -> [String: PlistDescriptor] {
-        var plists: [String: PlistDescriptor] = [:]
-
-        if let infoPlist = try? infoPlist(target: target, sourceRoot: sourceRoot) {
-            plists[PlistDescriptor.infoPlistKey] = infoPlist
-        }
-        if let entitlementsPlist = try? entitlementsPlist(target: target, sourceRoot: sourceRoot) {
-            plists[PlistDescriptor.entitlementsPlistKey] = entitlementsPlist
-        }
-
-        return plists
+        return [infoPlist, entitlementsPlist].compactMap(\.self)
     }
 
     // MARK: - Private

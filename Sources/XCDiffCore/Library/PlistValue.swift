@@ -25,24 +25,24 @@ public indirect enum PlistValue: Hashable {
 extension PlistValue: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .string(let string):
+        case let .string(string):
             return string
-        case .array(let array):
+        case let .array(array):
             let elements = array.map { $0.description }
             return "[\(elements.joined(separator: ", "))]"
-        case .dictionary(let dict):
+        case let .dictionary(dict):
             let pairs = dict.map { key, value in
                 "\(key.description): \(value.description)"
             }.sorted()
-            return "{\(pairs.joined(separator: ", "))}"
+            return "{\n\(pairs.joined(separator: "\n"))\n}"
         }
     }
 }
 
 // MARK: - Conversion utilities
 
-extension PlistValue {
-    public init(from anyValue: Any) {
+public extension PlistValue {
+    init(from anyValue: Any) {
         if let string = anyValue as? String {
             self = .string(string)
         } else if let bool = anyValue as? Bool {

@@ -28,10 +28,4 @@ class PathHelper {
         }
         return path.url.relative(to: sourceRoot.absolute().url)
     }
-
-    func readPlistFile(from path: Path) throws -> PlistValue {
-        let plistData = try path.read()
-        let anyValue = try PropertyListSerialization.propertyList(from: plistData, options: [], format: nil)
-        return PlistValue(from: anyValue)
-    }
 }

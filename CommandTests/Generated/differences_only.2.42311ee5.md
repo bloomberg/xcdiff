@@ -43,6 +43,9 @@
 ❌ ATTRIBUTES > "MismatchingLibrary" target
 ❌ ATTRIBUTES > "Project" target
 ❌ ATTRIBUTES > "ProjectUITests" target
+❌ PLISTS > "MismatchingLibrary" target
+❌ PLISTS > "Project" target
+❌ PLISTS > "Project" target > Info.plist - Info.plist
 
 
 ```

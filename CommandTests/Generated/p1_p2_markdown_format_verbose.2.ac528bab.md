@@ -24,13 +24,14 @@
   - `libMismatchingLibrary.a`
 
 
-### ⚠️  Only in second (11):
+### ⚠️  Only in second (12):
 
   - `MismatchingLibrary.framework`
   - `MismatchingLibrary/MismatchingLibrary-Info.plist`
   - `NewFramework.framework`
   - `NewFramework/Info.plist`
   - `NewFramework/NewFramework.h`
+  - `Project/Project.entitlements`
   - `Project/Project.xcconfig`
   - `Project/Target.xcconfig`
   - `ProjectFramework/Header4.h`
@@ -406,9 +407,10 @@
 ## ❌ SETTINGS > "Project" target > "Debug" configuration > Values
 
 
-### ⚠️  Only in second (1):
+### ⚠️  Only in second (2):
 
   - `ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES`
+  - `CODE_SIGN_ENTITLEMENTS = Project/Project.entitlements`
 
 
 ### ⚠️  Value mismatch (1):
@@ -425,9 +427,10 @@
 ## ❌ SETTINGS > "Project" target > "Release" configuration > Values
 
 
-### ⚠️  Only in second (1):
+### ⚠️  Only in second (2):
 
   - `ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES`
+  - `CODE_SIGN_ENTITLEMENTS = Project/Project.entitlements`
 
 
 ### ⚠️  Value mismatch (1):
@@ -528,7 +531,7 @@ Output format: (<path>, <name>, <source_tree>)
   - `(time.png, nil, <group>) → (Resources, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)`
 
 
-### ⚠️  Only in second (11):
+### ⚠️  Only in second (12):
 
   - `(Header4.h, nil, <group>) → (ProjectFramework, nil, <group>) → (nil, nil, <group>)`
   - `(Info.plist, nil, <group>) → (NewFramework, nil, <group>) → (nil, nil, <group>)`
@@ -538,6 +541,7 @@ Output format: (<path>, <name>, <source_tree>)
   - `(MismatchingLibrary.framework, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)`
   - `(NewFramework.framework, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)`
   - `(NewFramework.h, nil, <group>) → (NewFramework, nil, <group>) → (nil, nil, <group>)`
+  - `(Project.entitlements, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)`
   - `(Project.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)`
   - `(README.md, nil, <group>) → (nil, nil, <group>)`
   - `(Target.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)`
@@ -656,19 +660,64 @@ Output format: (<path>, <name>, <source_tree>)
 ## ✅ SWIFT_PACKAGES
 
 
-## ✅ PLISTS > MismatchingLibrary-Info.plist
+## ❌ PLISTS > "MismatchingLibrary" target
 
 
-## ✅ PLISTS > Info.plist > Info.plist
+### ⚠️  Only in second (1):
+
+  - `MismatchingLibrary-Info.plist`
 
 
-## ✅ PLISTS > Info.plist > Info.plist
+
+## ❌ PLISTS > "Project" target
 
 
-## ✅ PLISTS > Info.plist > Info.plist
+### ⚠️  Only in second (1):
+
+  - `Project.entitlements`
 
 
-## ✅ PLISTS > Info.plist > Info.plist
+
+## ❌ PLISTS > "Project" target > Info.plist - Info.plist
+
+
+### ⚠️  Only in first (4):
+
+  - `LSApplicationCategoryType`
+  - `fetch`
+  - `voip`
+  - `bluetooth-le`
+
+
+### ⚠️  Only in second (2):
+
+  - `UISceneConfigurationName`
+  - `remote-notification`
+
+
+### ⚠️  Value mismatch (3):
+
+  - `UIApplicationSceneManifest.UISceneConfigurations.UIWindowSceneSessionRoleApplication[0].UISceneDelegateClassName`
+    - `$(PRODUCT_BUNDLE_IDENTIFIER).AppSceneDelegate`
+    - `$(PRODUCT_MODULE_NAME).AppSceneDelegate`
+
+  - `UIBackgroundModes[0]`
+    - `fetch`
+    - `remote-notification`
+
+  - `UIRequiredDeviceCapabilities[0]`
+    - `bluetooth-le`
+    - `armv7`
+
+
+
+## ✅ PLISTS > "ProjectFramework" target > Info.plist - Info.plist
+
+
+## ✅ PLISTS > "ProjectTests" target > Info.plist - Info.plist
+
+
+## ✅ PLISTS > "ProjectUITests" target > Info.plist - Info.plist
 
 
 ## ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "MismatchingLibrary" target

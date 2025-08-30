@@ -4,12 +4,15 @@
 ```
 
 # Expected exit code
-0
+2
 
 # Expected output
 ```
 
-## ✅ PLISTS > Info.plist > Info.plist
+## ❌ PLISTS > "Project" target
+
+
+## ❌ PLISTS > "Project" target > Info.plist - Info.plist
 
 
 

@@ -17,25 +17,29 @@
 import Foundation
 import PathKit
 
-struct PlistDescriptor {
+struct PlistDescriptor: Equatable, Hashable {
     private var identifier: String { "\(target) (\(path))" }
 
     let target: String
     let plist: PlistValue
     let path: Path
-    
-    var plistName: String { path.lastComponent }
+    let type: PlistType
+    var name: String { path.lastComponent }
+
+    init(target: String, path: Path, plistData: Data, type: PlistType) throws {
+        let anyValue = try PropertyListSerialization.propertyList(from: plistData, options: [], format: nil)
+        self.init(target: target, path: path, plistValue: PlistValue(from: anyValue), type: type)
+    }
+
+    init(target: String, path: Path, plistValue: PlistValue, type: PlistType) {
+        self.target = target
+        self.path = path
+        plist = plistValue
+        self.type = type
+    }
 }
 
-extension PlistDescriptor: DiffComparable, Equatable, Hashable {
-    static func == (lhs: PlistDescriptor, rhs: PlistDescriptor) -> Bool {
-        lhs.identifier == rhs.identifier
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(identifier)
-    }
-
+extension PlistDescriptor: DiffComparable {
     var diffKey: String { identifier }
 }
 
@@ -44,6 +48,15 @@ extension PlistDescriptor: CustomStringConvertible {
 }
 
 extension PlistDescriptor {
-    static var infoPlistKey: String { "INFOPLIST_FILE" }
-    static var entitlementsPlistKey: String { "CODE_SIGN_ENTITLEMENTS" }
+    enum PlistType {
+        case info
+        case entitlements
+
+        var buildSettingsKey: String {
+            switch self {
+            case .info: "INFOPLIST_FILE"
+            case .entitlements: "CODE_SIGN_ENTITLEMENTS"
+            }
+        }
+    }
 }

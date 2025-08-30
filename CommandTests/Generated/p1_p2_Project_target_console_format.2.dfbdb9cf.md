@@ -33,7 +33,8 @@
 ❌ ATTRIBUTES > Root project
 ❌ ATTRIBUTES > "Project" target
 ✅ SWIFT_PACKAGES
-✅ PLISTS > Info.plist > Info.plist
+❌ PLISTS > "Project" target
+❌ PLISTS > "Project" target > Info.plist - Info.plist
 ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "Project" target
 
 

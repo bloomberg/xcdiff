@@ -24,13 +24,14 @@
   - `libMismatchingLibrary.a`
 
 
-### ⚠️  Only in second (11):
+### ⚠️  Only in second (12):
 
   - `MismatchingLibrary.framework`
   - `MismatchingLibrary/MismatchingLibrary-Info.plist`
   - `NewFramework.framework`
   - `NewFramework/Info.plist`
   - `NewFramework/NewFramework.h`
+  - `Project/Project.entitlements`
   - `Project/Project.xcconfig`
   - `Project/Target.xcconfig`
   - `ProjectFramework/Header4.h`

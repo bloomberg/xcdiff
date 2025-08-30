@@ -218,7 +218,8 @@
 
     ],
     "onlyInSecond" : [
-      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES"
+      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES",
+      "CODE_SIGN_ENTITLEMENTS = Project\/Project.entitlements"
     ],
     "tag" : "settings"
   },
@@ -256,7 +257,8 @@
 
     ],
     "onlyInSecond" : [
-      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES"
+      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES",
+      "CODE_SIGN_ENTITLEMENTS = Project\/Project.entitlements"
     ],
     "tag" : "settings"
   },

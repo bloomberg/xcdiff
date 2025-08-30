@@ -22,13 +22,19 @@ final class PlistComparator: Comparator {
 
     private let targetsHelper: TargetsHelper
 
-    init(targetsHelper: TargetsHelper = TargetsHelper()) {
+    convenience init() {
+        self.init(targetsHelper: TargetsHelper())
+    }
+
+    init(targetsHelper: TargetsHelper) {
         self.targetsHelper = targetsHelper
     }
 
-    func compare(_ first: ProjectDescriptor,
-                 _ second: ProjectDescriptor,
-                 parameters: ComparatorParameters) throws -> [CompareResult] {
+    func compare(
+        _ first: ProjectDescriptor,
+        _ second: ProjectDescriptor,
+        parameters: ComparatorParameters
+    ) throws -> [CompareResult] {
         let commonTargets = try targetsHelper.commonTargets(first, second, parameters: parameters)
 
         return try commonTargets.flatMap { firstTarget, secondTarget in
@@ -49,37 +55,58 @@ final class PlistComparator: Comparator {
         firstProject: ProjectDescriptor,
         secondProject: ProjectDescriptor
     ) throws -> [CompareResult] {
-        let firstPlists = targetsHelper.allPlists(from: firstTarget, sourceRoot: firstProject.sourceRoot)
-        let secondPlists = targetsHelper.allPlists(from: secondTarget, sourceRoot: secondProject.sourceRoot)
-        let plists = Set(firstPlists.keys).union(Set(secondPlists.keys))
+        let firstPlists = targetsHelper.plists(from: firstTarget, sourceRoot: firstProject.sourceRoot)
+        let secondPlists = targetsHelper.plists(from: secondTarget, sourceRoot: secondProject.sourceRoot)
         var results: [CompareResult] = []
 
-        for plistType in plists.sorted() {
-            let firstDescriptor = firstPlists[plistType]
-            let secondDescriptor = secondPlists[plistType]
+        let firstPlistTypes = firstPlists.map(\.type)
+        let secondPlistTypes = secondPlists.map(\.type)
 
-            guard let firstDescriptor,
-                  let secondDescriptor
-            else {
-                results.append(
-                    comparedPlistContexts(firstDescriptor, secondDescriptor)
+        if firstPlistTypes != secondPlistTypes {
+            let onlyInFirst = firstPlists
+                .filter { !secondPlistTypes.contains($0.type) }
+                .map(\.name)
+
+            let onlyInSecond = secondPlists
+                .filter { !firstPlistTypes.contains($0.type) }
+                .map(\.name)
+
+            results.append(
+                result(
+                    context: ["\"\(firstTarget.name)\" target"],
+                    onlyInFirst: onlyInFirst,
+                    onlyInSecond: onlyInSecond
                 )
-                continue
-            }
+            )
+        }
+
+        for (firstDescriptor, secondDescriptor) in zip(firstPlists, secondPlists) {
+            guard firstDescriptor.type == secondDescriptor.type else { continue }
 
             let comparedResult = comparePlist(firstDescriptor.plist, secondDescriptor.plist)
+
             guard !comparedResult.isEmpty else {
                 results.append(
-                    comparedPlistContexts(firstDescriptor, secondDescriptor)
+                    result(
+                        context: [
+                            "\"\(firstTarget.name)\" target",
+                            "\(firstDescriptor.name) - \(secondDescriptor.name)",
+                        ],
+                        onlyInFirst: [],
+                        onlyInSecond: []
+                    )
                 )
                 continue
             }
-            results.append(result(
-                context: ["\(firstDescriptor.plistName) > \(secondDescriptor.plistName)"],
-                onlyInFirst: comparedResult.onlyInFirst,
-                onlyInSecond: comparedResult.onlyInSecond,
-                differentValues: comparedResult.differentValues
-            ))
+
+            results.append(
+                result(
+                    context: ["\"\(firstTarget.name)\" target", "\(firstDescriptor.name) - \(secondDescriptor.name)"],
+                    onlyInFirst: comparedResult.onlyInFirst,
+                    onlyInSecond: comparedResult.onlyInSecond,
+                    differentValues: comparedResult.differentValues
+                )
+            )
         }
 
         return results
@@ -95,23 +122,18 @@ final class PlistComparator: Comparator {
             if lhsString != rhsString {
                 return result(
                     context: [context],
-                    differentValues: [.init(
-                        context: context,
-                        first: lhsString,
-                        second: rhsString
-                    )]
+                    differentValues: [
+                        .init(
+                            context: context,
+                            first: lhsString,
+                            second: rhsString
+                        ),
+                    ]
                 )
             }
-            return result(context: [], onlyInFirst: [], onlyInSecond: [])
+            fallthrough
         default:
-            return result(
-                context: [context],
-                differentValues: [.init(
-                    context: context,
-                    first: lhs.description,
-                    second: rhs.description
-                )]
-            )
+            return result(context: [], onlyInFirst: [], onlyInSecond: [])
         }
     }
 
@@ -126,20 +148,24 @@ final class PlistComparator: Comparator {
         let rhsKeys = Set(rhs.keys)
         let commonKeys = lhsKeys.intersection(rhsKeys)
 
-        let onlyInFirst = lhsKeys.subtracting(rhsKeys).sorted()
-        if !onlyInFirst.isEmpty {
-            results.append(result(
-                context: [context],
-                onlyInFirst: onlyInFirst
-            ))
+        let onlyInLhs = lhsKeys.subtracting(rhsKeys).sorted()
+        if !onlyInLhs.isEmpty {
+            results.append(
+                result(
+                    context: [context],
+                    onlyInFirst: onlyInLhs
+                )
+            )
         }
 
-        let onlyInSecond = rhsKeys.subtracting(lhsKeys).sorted()
-        if !onlyInSecond.isEmpty {
-            results.append(result(
-                context: [context],
-                onlyInSecond: onlyInSecond
-            ))
+        let onlyInRhs = rhsKeys.subtracting(lhsKeys).sorted()
+        if !onlyInRhs.isEmpty {
+            results.append(
+                result(
+                    context: [context],
+                    onlyInSecond: onlyInRhs
+                )
+            )
         }
 
         for key in commonKeys.sorted() {
@@ -160,49 +186,53 @@ final class PlistComparator: Comparator {
         )
     }
 
-    private func compareArrays(_ lhs: [PlistValue], _ rhs: [PlistValue], context: String) -> CompareResult {
-        var results: [CompareResult] = []
-        let maxCount = max(lhs.count, rhs.count)
+    private func compareArrays(
+        _ lhs: [PlistValue],
+        _ rhs: [PlistValue],
+        context: String
+    ) -> CompareResult {
+        var allResults: [CompareResult] = []
 
-        for index in 0 ..< maxCount {
-            let firstItem = index < lhs.count ? lhs[index] : nil
-            let secondItem = index < rhs.count ? rhs[index] : nil
+        // Step 1: Find unique string items (items that exist only in one array)
+        let lhsStringSet = Set(lhs.compactMap { item -> String? in
+            guard case let .string(value) = item else { return nil }
+            return value
+        })
 
-            switch (firstItem, secondItem) {
-            case let (firstVal?, secondVal?):
-                results.append(
-                    comparePlist(firstVal, secondVal, context: context)
+        let rhsStringSet = Set(rhs.compactMap { item -> String? in
+            guard case let .string(value) = item else { return nil }
+            return value
+        })
+
+        let onlyInLhs = Array(lhsStringSet.subtracting(rhsStringSet)).sorted()
+        let onlyInRhs = Array(rhsStringSet.subtracting(lhsStringSet)).sorted()
+
+        if !onlyInLhs.isEmpty || !onlyInRhs.isEmpty {
+            allResults.append(
+                result(
+                    context: [context],
+                    onlyInFirst: onlyInLhs,
+                    onlyInSecond: onlyInRhs
                 )
-            case let (firstVal?, nil):
-                results.append(result(
-                    context: [context],
-                    onlyInFirst: [firstVal.description]
-                ))
-            case let (nil, secondVal?):
-                results.append(result(
-                    context: [context],
-                    onlyInSecond: [secondVal.description]
-                ))
-            case (nil, nil):
-                break
+            )
+        }
+
+        // Step 2: Compare items by position for nested structure differences
+        for (index, (lhsItem, rhsItem)) in zip(lhs, rhs).enumerated() {
+            let itemContext = "\(context)[\(index)]"
+            let itemResult = comparePlist(lhsItem, rhsItem, context: itemContext)
+            if !itemResult.isEmpty {
+                allResults.append(itemResult)
             }
         }
 
-        return result(
-            context: results.flatMap(\.context),
-            onlyInFirst: results.flatMap(\.onlyInFirst),
-            onlyInSecond: results.flatMap(\.onlyInSecond),
-            differentValues: results.flatMap(\.differentValues)
-        )
-    }
-
-    private func comparedPlistContexts(_ lhs: PlistDescriptor?, _ rhs: PlistDescriptor?) -> CompareResult {
-        let context = [lhs?.plistName, rhs?.plistName].compactMap { $0 }
+        let nonEmptyResults = allResults.filter { !$0.isEmpty }
 
         return result(
-            context: context,
-            onlyInFirst: [],
-            onlyInSecond: []
+            context: nonEmptyResults.flatMap(\.context),
+            onlyInFirst: nonEmptyResults.flatMap(\.onlyInFirst),
+            onlyInSecond: nonEmptyResults.flatMap(\.onlyInSecond),
+            differentValues: nonEmptyResults.flatMap(\.differentValues)
         )
     }
 }

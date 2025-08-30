@@ -23,7 +23,7 @@ Output format: (<path>, <name>, <source_tree>)
   • (time.png, nil, <group>) → (Resources, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)
 
 
-⚠️  Only in second (11):
+⚠️  Only in second (12):
 
   • (Header4.h, nil, <group>) → (ProjectFramework, nil, <group>) → (nil, nil, <group>)
   • (Info.plist, nil, <group>) → (NewFramework, nil, <group>) → (nil, nil, <group>)
@@ -33,6 +33,7 @@ Output format: (<path>, <name>, <source_tree>)
   • (MismatchingLibrary.framework, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)
   • (NewFramework.framework, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)
   • (NewFramework.h, nil, <group>) → (NewFramework, nil, <group>) → (nil, nil, <group>)
+  • (Project.entitlements, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)
   • (Project.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)
   • (README.md, nil, <group>) → (nil, nil, <group>)
   • (Target.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)
