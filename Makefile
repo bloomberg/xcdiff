@@ -37,20 +37,19 @@ update_homebrew:
 	brew bump-formula-pr xcdiff --version="${VERSION}"
 
 format:
-	swiftformat .
+	mise exec swiftformat -- swiftlint .
 
 autocorrect:
-	swiftlint autocorrect --quiet
+	mise exec swiftlint -- swiftlint autocorrect --quiet
 
 lint:
-	swiftlint version
-	swiftformat --version
-	swiftlint --strict --quiet
-	swiftformat . --lint
+	mise exec swiftlint -- swiftlint version
+	mise exec swiftformat -- swiftformat --version
+	mise exec swiftlint -- swiftlint --strict --quiet
+	mise exec swiftformat -- swiftformat . --lint
 
 regenerate_command_snapshots:
 	./Scripts/generate_tests_commands_files.py
 
 install_tools:
-	./Scripts/brew.sh
-
+	mise install
