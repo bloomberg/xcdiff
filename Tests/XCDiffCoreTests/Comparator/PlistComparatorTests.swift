@@ -142,7 +142,7 @@ final class PlistComparatorTests: XCTestCase {
         XCTAssertEqual(results, expected)
     }
 
-    func testCompare_whenPlistOnlyInFirst() throws {
+    func testCompare_whenDifferentPlistContent_sameValue() throws {
         // Given
         targetsPlistHelper.infoPlist[Constants.project_1_plist_path] = ["CFBundleVersion": "1.0"]
         targetsPlistHelper.infoPlist[Constants.project_2_plist_path] = ["CFBundleIdentifier": "1.0"]
@@ -157,6 +157,32 @@ final class PlistComparatorTests: XCTestCase {
                 description: nil,
                 onlyInFirst: ["CFBundleVersion"],
                 onlyInSecond: ["CFBundleIdentifier"],
+                differentValues: []
+            ),
+        ]
+
+        // When
+        let results = try subject.compare(firstProject, secondProject, parameters: .all)
+
+        // Then
+        XCTAssertEqual(results, expected)
+    }
+
+    func testCompare_whenPlistOnlyInFirst() throws {
+        // Given
+        targetsPlistHelper.infoPlist[Constants.project_1_plist_path] = ["CFBundleVersion": "1.0"]
+        targetsPlistHelper.infoPlist[Constants.project_2_plist_path] = [:]
+
+        let expected = [
+            CompareResult(
+                tag: "plists",
+                context: [
+                    "\"\(Constants.targetName)\" target",
+                    "\(Constants.project_1_plist_path.lastComponent) - \(Constants.project_2_plist_path.lastComponent)",
+                ],
+                description: nil,
+                onlyInFirst: ["CFBundleVersion"],
+                onlyInSecond: [],
                 differentValues: []
             ),
         ]
@@ -267,17 +293,78 @@ final class PlistComparatorTests: XCTestCase {
                     "\(Constants.project_1_plist_path.lastComponent) - \(Constants.project_2_plist_path.lastComponent)",
                 ],
                 description: nil,
-                onlyInFirst: ["fetch", "telephony"],
-                onlyInSecond: ["bluetooth-le"],
                 differentValues: [
                     .init(
-                        context: "UIRequiredDeviceCapabilities[0]",
-                        first: "armv7",
+                        context: "UIRequiredDeviceCapabilities",
+                        first: "fetch, telephony",
                         second: "bluetooth-le"
                     ),
+                ]
+            ),
+        ]
+
+        // When
+        let results = try subject.compare(firstProject, secondProject, parameters: .all)
+
+        // Then
+        XCTAssertEqual(results, expected)
+    }
+
+    func testCompare_whenSecondArrayIsEmpty() throws {
+        // Given
+        targetsPlistHelper.infoPlist[Constants.project_1_plist_path] = [
+            "UIRequiredDeviceCapabilities": ["armv7", "telephony", "fetch"],
+        ]
+        targetsPlistHelper.infoPlist[Constants.project_2_plist_path] = [
+            "UIRequiredDeviceCapabilities": [],
+        ]
+
+        let expected = [
+            CompareResult(
+                tag: "plists",
+                context: [
+                    "\"\(Constants.targetName)\" target",
+                    "\(Constants.project_1_plist_path.lastComponent) - \(Constants.project_2_plist_path.lastComponent)",
+                ],
+                description: nil,
+                differentValues: [
                     .init(
-                        context: "UIRequiredDeviceCapabilities[1]",
-                        first: "telephony",
+                        context: "UIRequiredDeviceCapabilities",
+                        first: "armv7, fetch, telephony",
+                        second: "nil"
+                    ),
+                ]
+            ),
+        ]
+
+        // When
+        let results = try subject.compare(firstProject, secondProject, parameters: .all)
+
+        // Then
+        XCTAssertEqual(results, expected)
+    }
+
+    func testCompare_whenDifferentTypes() throws {
+        // Given
+        targetsPlistHelper.infoPlist[Constants.project_1_plist_path] = [
+            "UIRequiredDeviceCapabilities": ["armv7", "telephony", "fetch"],
+        ]
+        targetsPlistHelper.infoPlist[Constants.project_2_plist_path] = [
+            "UIRequiredDeviceCapabilities": "armv7",
+        ]
+
+        let expected = [
+            CompareResult(
+                tag: "plists",
+                context: [
+                    "\"\(Constants.targetName)\" target",
+                    "\(Constants.project_1_plist_path.lastComponent) - \(Constants.project_2_plist_path.lastComponent)",
+                ],
+                description: nil,
+                differentValues: [
+                    .init(
+                        context: "UIRequiredDeviceCapabilities",
+                        first: "[armv7, telephony, fetch]",
                         second: "armv7"
                     ),
                 ]
@@ -393,7 +480,7 @@ final class PlistComparatorTests: XCTestCase {
         // Given
         targetsPlistHelper.infoPlist[Constants.project_1_plist_path] = ["CFBundleVersion": "1.0"]
         targetsPlistHelper.entitlements[Constants.project_2_entitlements_path] = ["aps-environment": "development"]
-        
+
         let firstProjectWithInfoOnly = project()
             .addTarget(name: Constants.targetName) {
                 $0.addBuildConfiguration(name: "Debug") {
@@ -415,7 +502,6 @@ final class PlistComparatorTests: XCTestCase {
                 }
             }
             .projectDescriptor()
-
 
         let expected = [
             CompareResult(

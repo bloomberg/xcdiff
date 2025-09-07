@@ -1950,44 +1950,12 @@
             
         </td>
     </tr>
-    <tr class="onlyFirstContent">
-        <td>
-            fetch
-        </td>
-        <td>
-            
-        </td>
-    </tr>
-    <tr class="onlyFirstContent">
-        <td>
-            voip
-        </td>
-        <td>
-            
-        </td>
-    </tr>
-    <tr class="onlyFirstContent">
-        <td>
-            bluetooth-le
-        </td>
-        <td>
-            
-        </td>
-    </tr>
     <tr class="onlySecondContent">
         <td>
             
         </td>
         <td>
             UISceneConfigurationName
-        </td>
-    </tr>
-    <tr class="onlySecondContent">
-        <td>
-            
-        </td>
-        <td>
-            remote-notification
         </td>
     </tr>
     <tr class="rowSpacer">
@@ -2010,12 +1978,12 @@
     </tr>
     <tr class="differentContentKey">
         <td colspan="2">
-            UIBackgroundModes[0]
+            UIBackgroundModes
         </td>
     </tr>
     <tr class="differentContent">
         <td>
-            fetch
+            fetch, voip
         </td>
         <td>
             remote-notification
@@ -2023,7 +1991,7 @@
     </tr>
     <tr class="differentContentKey">
         <td colspan="2">
-            UIRequiredDeviceCapabilities[0]
+            UIRequiredDeviceCapabilities
         </td>
     </tr>
     <tr class="differentContent">
@@ -2031,7 +1999,7 @@
             bluetooth-le
         </td>
         <td>
-            armv7
+            nil
         </td>
     </tr>
     </tbody>

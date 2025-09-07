@@ -521,18 +521,14 @@ Output format: (<path>, <name>, <source_tree>)
 
 ❌ PLISTS > "Project" target > Info.plist - Info.plist
 
-⚠️  Only in first (4):
+⚠️  Only in first (1):
 
   • LSApplicationCategoryType
-  • fetch
-  • voip
-  • bluetooth-le
 
 
-⚠️  Only in second (2):
+⚠️  Only in second (1):
 
   • UISceneConfigurationName
-  • remote-notification
 
 
 ⚠️  Value mismatch (3):
@@ -541,13 +537,13 @@ Output format: (<path>, <name>, <source_tree>)
     ◦ $(PRODUCT_BUNDLE_IDENTIFIER).AppSceneDelegate
     ◦ $(PRODUCT_MODULE_NAME).AppSceneDelegate
 
-  • UIBackgroundModes[0]
-    ◦ fetch
+  • UIBackgroundModes
+    ◦ fetch, voip
     ◦ remote-notification
 
-  • UIRequiredDeviceCapabilities[0]
+  • UIRequiredDeviceCapabilities
     ◦ bluetooth-le
-    ◦ armv7
+    ◦ nil
 
 
 ✅ PLISTS > "ProjectFramework" target > Info.plist - Info.plist

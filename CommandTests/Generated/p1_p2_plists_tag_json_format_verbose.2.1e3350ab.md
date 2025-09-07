@@ -51,25 +51,21 @@
         "second" : "$(PRODUCT_MODULE_NAME).AppSceneDelegate"
       },
       {
-        "context" : "UIBackgroundModes[0]",
-        "first" : "fetch",
+        "context" : "UIBackgroundModes",
+        "first" : "fetch, voip",
         "second" : "remote-notification"
       },
       {
-        "context" : "UIRequiredDeviceCapabilities[0]",
+        "context" : "UIRequiredDeviceCapabilities",
         "first" : "bluetooth-le",
-        "second" : "armv7"
+        "second" : "nil"
       }
     ],
     "onlyInFirst" : [
-      "LSApplicationCategoryType",
-      "fetch",
-      "voip",
-      "bluetooth-le"
+      "LSApplicationCategoryType"
     ],
     "onlyInSecond" : [
-      "UISceneConfigurationName",
-      "remote-notification"
+      "UISceneConfigurationName"
     ],
     "tag" : "plists"
   },

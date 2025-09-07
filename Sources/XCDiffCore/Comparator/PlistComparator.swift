@@ -118,20 +118,28 @@ final class PlistComparator: Comparator {
             return compareDictionaries(lhsDict, rhsDict, context: context)
         case let (.array(lhsArray), .array(rhsArray)):
             return compareArrays(lhsArray, rhsArray, context: context)
-        case let (.string(lhsString), .string(rhsString)):
-            if lhsString != rhsString {
-                return result(
-                    context: [context],
-                    differentValues: [
-                        .init(
-                            context: context,
-                            first: lhsString,
-                            second: rhsString
-                        ),
-                    ]
-                )
-            }
-            fallthrough
+        case let (.string(lhsString), .string(rhsString)) where lhsString != rhsString:
+            return result(
+                context: [context],
+                differentValues: [
+                    .init(
+                        context: context,
+                        first: lhsString,
+                        second: rhsString
+                    ),
+                ]
+            )
+        case _ where lhs.description != rhs.description:
+            return result(
+                context: [context],
+                differentValues: [
+                    .init(
+                        context: context,
+                        first: lhs.description,
+                        second: rhs.description
+                    ),
+                ]
+            )
         default:
             return result(context: [], onlyInFirst: [], onlyInSecond: [])
         }
@@ -193,7 +201,7 @@ final class PlistComparator: Comparator {
     ) -> CompareResult {
         var allResults: [CompareResult] = []
 
-        // Step 1: Find unique string items (items that exist only in one array)
+        // Step 1: Find unique string items (items that exist only in one dimension array)
         let lhsStringSet = Set(lhs.compactMap { item -> String? in
             guard case let .string(value) = item else { return nil }
             return value
@@ -211,14 +219,22 @@ final class PlistComparator: Comparator {
             allResults.append(
                 result(
                     context: [context],
-                    onlyInFirst: onlyInLhs,
-                    onlyInSecond: onlyInRhs
+                    differentValues: [
+                        .init(
+                            context: context,
+                            first: onlyInLhs.joined(separator: ", ").nilIfEmpty,
+                            second: onlyInRhs.joined(separator: ", ").nilIfEmpty
+                        ),
+                    ]
                 )
             )
         }
 
         // Step 2: Compare items by position for nested structure differences
         for (index, (lhsItem, rhsItem)) in zip(lhs, rhs).enumerated() {
+            // Step 3: Skip string values because we handle it in Step 1
+            if case .string = lhsItem, case .string = rhsItem { continue }
+
             let itemContext = "\(context)[\(index)]"
             let itemResult = comparePlist(lhsItem, rhsItem, context: itemContext)
             if !itemResult.isEmpty {
@@ -227,7 +243,6 @@ final class PlistComparator: Comparator {
         }
 
         let nonEmptyResults = allResults.filter { !$0.isEmpty }
-
         return result(
             context: nonEmptyResults.flatMap(\.context),
             onlyInFirst: nonEmptyResults.flatMap(\.onlyInFirst),
@@ -240,5 +255,11 @@ final class PlistComparator: Comparator {
 private extension CompareResult {
     var isEmpty: Bool {
         onlyInFirst.isEmpty && onlyInSecond.isEmpty && differentValues.isEmpty
+    }
+}
+
+private extension String {
+    var nilIfEmpty: String? {
+        isEmpty ? nil : self
     }
 }
