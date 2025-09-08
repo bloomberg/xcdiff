@@ -2,6 +2,12 @@
 
 Few notes that should help to better understand the development process of the project.
 
+## Prerequisites
+
+- Xcode (please check [xcdiff.yaml](https://github.com/bloomberg/xcdiff/blob/main/.github/workflows/xcdiff.yaml) to see the exact version)
+- [mise](https://mise.jdx.dev)
+- [brew](https://brew.sh) (only needed for release process)
+
 ## Tools
 
 ### Swift Package Manager
@@ -14,15 +20,28 @@ We have set up [SwiftLint](https://github.com/realm/SwiftLint) to enforce Swift 
 You can run the following command to check if your code does not violate any of the rules.
 
 ```sh
-swiftlint
+mise exec swiftlint -- swiftlint
 ```
+
+or 
+
+```sh
+make lint
+```
+(also linting code formatting)
 
 ### SwiftFormat
 
 We have set up [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) to enforce consistent code formatting. You can run the following command in the root project directory to format your code.
 
 ```sh
-swiftformat .
+mise exec swiftformat -- swiftformat .
+```
+
+or
+
+```sh
+make format
 ```
 
 ## Project Structure
