@@ -124,6 +124,10 @@ final class CommandsRunnerTests: XCTestCase {
         ✅ ATTRIBUTES > "ProjectTests" target
         ✅ ATTRIBUTES > "ProjectUITests" target
         ✅ SWIFT_PACKAGES
+        ✅ PLISTS > "Project" target > Info.plist - Info.plist
+        ✅ PLISTS > "ProjectFramework" target > Info.plist - Info.plist
+        ✅ PLISTS > "ProjectTests" target > Info.plist - Info.plist
+        ✅ PLISTS > "ProjectUITests" target > Info.plist - Info.plist
         ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "MismatchingLibrary" target
         ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "Project" target
         ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "ProjectFramework" target

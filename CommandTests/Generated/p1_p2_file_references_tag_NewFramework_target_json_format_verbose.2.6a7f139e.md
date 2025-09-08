@@ -32,6 +32,7 @@
       "NewFramework.framework",
       "NewFramework\/Info.plist",
       "NewFramework\/NewFramework.h",
+      "Project\/Project.entitlements",
       "Project\/Project.xcconfig",
       "Project\/Target.xcconfig",
       "ProjectFramework\/Header4.h",

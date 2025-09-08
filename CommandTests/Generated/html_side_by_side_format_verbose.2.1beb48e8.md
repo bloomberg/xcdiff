@@ -282,6 +282,14 @@
             
         </td>
         <td>
+            Project/Project.entitlements
+        </td>
+    </tr>
+    <tr class="onlySecondContent">
+        <td>
+            
+        </td>
+        <td>
             Project/Project.xcconfig
         </td>
     </tr>
@@ -1251,6 +1259,14 @@
             ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
         </td>
     </tr>
+    <tr class="onlySecondContent">
+        <td>
+            
+        </td>
+        <td>
+            CODE_SIGN_ENTITLEMENTS = Project/Project.entitlements
+        </td>
+    </tr>
     <tr class="rowSpacer">
         <td colspan="2">
             
@@ -1291,6 +1307,14 @@
         </td>
         <td>
             ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
+        </td>
+    </tr>
+    <tr class="onlySecondContent">
+        <td>
+            
+        </td>
+        <td>
+            CODE_SIGN_ENTITLEMENTS = Project/Project.entitlements
         </td>
     </tr>
     <tr class="rowSpacer">
@@ -1594,6 +1618,14 @@
             
         </td>
         <td>
+            (Project.entitlements, nil, &#x3C;group&#x3E;) → (Project, nil, &#x3C;group&#x3E;) → (nil, nil, &#x3C;group&#x3E;)
+        </td>
+    </tr>
+    <tr class="onlySecondContent">
+        <td>
+            
+        </td>
+        <td>
             (Project.xcconfig, nil, &#x3C;group&#x3E;) → (Project, nil, &#x3C;group&#x3E;) → (nil, nil, &#x3C;group&#x3E;)
         </td>
     </tr>
@@ -1857,6 +1889,130 @@
 </section>
 <section class="success">
     <h2>✅ SWIFT_PACKAGES</h2>
+</section>
+<section class="warning">
+    <h2>❌ PLISTS &#x3E; &quot;MismatchingLibrary&quot; target</h2>
+<table>
+    <thead>
+        <tr>
+            <th>First</th>
+            <th>Second</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr class="onlySecondContent">
+        <td>
+            
+        </td>
+        <td>
+            MismatchingLibrary-Info.plist
+        </td>
+    </tr>
+    </tbody>
+</table>
+</section>
+<section class="warning">
+    <h2>❌ PLISTS &#x3E; &quot;Project&quot; target</h2>
+<table>
+    <thead>
+        <tr>
+            <th>First</th>
+            <th>Second</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr class="onlySecondContent">
+        <td>
+            
+        </td>
+        <td>
+            Project.entitlements
+        </td>
+    </tr>
+    </tbody>
+</table>
+</section>
+<section class="warning">
+    <h2>❌ PLISTS &#x3E; &quot;Project&quot; target &#x3E; Info.plist - Info.plist</h2>
+<table>
+    <thead>
+        <tr>
+            <th>First</th>
+            <th>Second</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr class="onlyFirstContent">
+        <td>
+            LSApplicationCategoryType
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+    <tr class="onlySecondContent">
+        <td>
+            
+        </td>
+        <td>
+            UISceneConfigurationName
+        </td>
+    </tr>
+    <tr class="rowSpacer">
+        <td colspan="2">
+            
+        </td>
+    </tr>
+    <tr class="differentContentKey">
+        <td colspan="2">
+            UIApplicationSceneManifest.UISceneConfigurations.UIWindowSceneSessionRoleApplication[0].UISceneDelegateClassName
+        </td>
+    </tr>
+    <tr class="differentContent">
+        <td>
+            $(PRODUCT_BUNDLE_IDENTIFIER).AppSceneDelegate
+        </td>
+        <td>
+            $(PRODUCT_MODULE_NAME).AppSceneDelegate
+        </td>
+    </tr>
+    <tr class="differentContentKey">
+        <td colspan="2">
+            UIBackgroundModes
+        </td>
+    </tr>
+    <tr class="differentContent">
+        <td>
+            fetch, voip
+        </td>
+        <td>
+            remote-notification
+        </td>
+    </tr>
+    <tr class="differentContentKey">
+        <td colspan="2">
+            UIRequiredDeviceCapabilities
+        </td>
+    </tr>
+    <tr class="differentContent">
+        <td>
+            bluetooth-le
+        </td>
+        <td>
+            nil
+        </td>
+    </tr>
+    </tbody>
+</table>
+</section>
+<section class="success">
+    <h2>✅ PLISTS &#x3E; &quot;ProjectFramework&quot; target &#x3E; Info.plist - Info.plist</h2>
+</section>
+<section class="success">
+    <h2>✅ PLISTS &#x3E; &quot;ProjectTests&quot; target &#x3E; Info.plist - Info.plist</h2>
+</section>
+<section class="success">
+    <h2>✅ PLISTS &#x3E; &quot;ProjectUITests&quot; target &#x3E; Info.plist - Info.plist</h2>
 </section>
 <section class="success">
     <h2>✅ FILESYSTEM_SYNCHRONIZED_GROUPS &#x3E; &quot;MismatchingLibrary&quot; target</h2>

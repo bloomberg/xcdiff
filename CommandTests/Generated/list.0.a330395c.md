@@ -29,6 +29,7 @@ inclusion status when tags aren't explicitly specified.
 - LINKED_DEPENDENCIES            | Yes
 - ATTRIBUTES                     | Yes
 - SWIFT_PACKAGES                 | Yes
+- PLISTS                         | Yes
 - FILESYSTEM_SYNCHRONIZED_GROUPS | Yes
 
 ```

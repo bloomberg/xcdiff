@@ -18,6 +18,8 @@ import Foundation
 import PathKit
 import XcodeProj
 
+// swiftlint:disable file_length
+
 typealias TargetPair = (first: PBXTarget, second: PBXTarget)
 
 struct SourceDescriptor: Hashable, DiffComparable {
@@ -106,7 +108,17 @@ enum AttributeValue: Equatable, CustomStringConvertible {
 }
 
 final class TargetsHelper {
-    private let pathHelper = PathHelper()
+    private let pathHelper: PathHelper
+    private let targetPlistHelper: TargetsPlistHelperProtocol
+
+    convenience init() {
+        self.init(pathHelper: PathHelper(), targetPlistHelper: TargetsPlistHelper())
+    }
+
+    init(pathHelper: PathHelper, targetPlistHelper: TargetsPlistHelperProtocol) {
+        self.pathHelper = pathHelper
+        self.targetPlistHelper = targetPlistHelper
+    }
 
     func targets(from projectDescription: ProjectDescriptor) -> Set<String> {
         return native(from: projectDescription).union(aggregate(from: projectDescription))
@@ -295,6 +307,13 @@ final class TargetsHelper {
             url: package.repositoryURL ?? "nil",
             version: package.versionRequirement?.description ?? "nil"
         )
+    }
+
+    func plists(from target: PBXTarget, sourceRoot: Path) -> [PlistDescriptor] {
+        let infoPlist = try? targetPlistHelper.infoPlist(target: target, sourceRoot: sourceRoot)
+        let entitlementsPlist = try? targetPlistHelper.entitlementsPlist(target: target, sourceRoot: sourceRoot)
+
+        return [infoPlist, entitlementsPlist].compactMap(\.self)
     }
 
     // MARK: - Private

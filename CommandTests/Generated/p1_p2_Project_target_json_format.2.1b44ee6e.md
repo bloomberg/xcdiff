@@ -32,6 +32,7 @@
       "NewFramework.framework",
       "NewFramework\/Info.plist",
       "NewFramework\/NewFramework.h",
+      "Project\/Project.entitlements",
       "Project\/Project.xcconfig",
       "Project\/Target.xcconfig",
       "ProjectFramework\/Header4.h",
@@ -327,7 +328,8 @@
 
     ],
     "onlyInSecond" : [
-      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES"
+      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES",
+      "CODE_SIGN_ENTITLEMENTS = Project\/Project.entitlements"
     ],
     "tag" : "settings"
   },
@@ -365,7 +367,8 @@
 
     ],
     "onlyInSecond" : [
-      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES"
+      "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES",
+      "CODE_SIGN_ENTITLEMENTS = Project\/Project.entitlements"
     ],
     "tag" : "settings"
   },
@@ -396,6 +399,7 @@
       "(MismatchingLibrary.framework, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)",
       "(NewFramework.framework, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)",
       "(NewFramework.h, nil, <group>) → (NewFramework, nil, <group>) → (nil, nil, <group>)",
+      "(Project.entitlements, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)",
       "(Project.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)",
       "(README.md, nil, <group>) → (nil, nil, <group>)",
       "(Target.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)"
@@ -505,6 +509,51 @@
 
     ],
     "tag" : "swift_packages"
+  },
+  {
+    "context" : [
+      "\"Project\" target"
+    ],
+    "differentValues" : [
+
+    ],
+    "onlyInFirst" : [
+
+    ],
+    "onlyInSecond" : [
+      "Project.entitlements"
+    ],
+    "tag" : "plists"
+  },
+  {
+    "context" : [
+      "\"Project\" target",
+      "Info.plist - Info.plist"
+    ],
+    "differentValues" : [
+      {
+        "context" : "UIApplicationSceneManifest.UISceneConfigurations.UIWindowSceneSessionRoleApplication[0].UISceneDelegateClassName",
+        "first" : "$(PRODUCT_BUNDLE_IDENTIFIER).AppSceneDelegate",
+        "second" : "$(PRODUCT_MODULE_NAME).AppSceneDelegate"
+      },
+      {
+        "context" : "UIBackgroundModes",
+        "first" : "fetch, voip",
+        "second" : "remote-notification"
+      },
+      {
+        "context" : "UIRequiredDeviceCapabilities",
+        "first" : "bluetooth-le",
+        "second" : "nil"
+      }
+    ],
+    "onlyInFirst" : [
+      "LSApplicationCategoryType"
+    ],
+    "onlyInSecond" : [
+      "UISceneConfigurationName"
+    ],
+    "tag" : "plists"
   },
   {
     "context" : [

@@ -240,6 +240,24 @@
 ## ✅ SWIFT_PACKAGES
 
 
+## ❌ PLISTS > "MismatchingLibrary" target
+
+
+## ❌ PLISTS > "Project" target
+
+
+## ❌ PLISTS > "Project" target > Info.plist - Info.plist
+
+
+## ✅ PLISTS > "ProjectFramework" target > Info.plist - Info.plist
+
+
+## ✅ PLISTS > "ProjectTests" target > Info.plist - Info.plist
+
+
+## ✅ PLISTS > "ProjectUITests" target > Info.plist - Info.plist
+
+
 ## ✅ FILESYSTEM_SYNCHRONIZED_GROUPS > "MismatchingLibrary" target
 
 

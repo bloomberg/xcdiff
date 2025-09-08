@@ -394,6 +394,24 @@
 <section class="success">
     <h2>✅ SWIFT_PACKAGES</h2>
 </section>
+<section class="warning">
+    <h2>❌ PLISTS &#x3E; &quot;MismatchingLibrary&quot; target</h2>
+</section>
+<section class="warning">
+    <h2>❌ PLISTS &#x3E; &quot;Project&quot; target</h2>
+</section>
+<section class="warning">
+    <h2>❌ PLISTS &#x3E; &quot;Project&quot; target &#x3E; Info.plist - Info.plist</h2>
+</section>
+<section class="success">
+    <h2>✅ PLISTS &#x3E; &quot;ProjectFramework&quot; target &#x3E; Info.plist - Info.plist</h2>
+</section>
+<section class="success">
+    <h2>✅ PLISTS &#x3E; &quot;ProjectTests&quot; target &#x3E; Info.plist - Info.plist</h2>
+</section>
+<section class="success">
+    <h2>✅ PLISTS &#x3E; &quot;ProjectUITests&quot; target &#x3E; Info.plist - Info.plist</h2>
+</section>
 <section class="success">
     <h2>✅ FILESYSTEM_SYNCHRONIZED_GROUPS &#x3E; &quot;MismatchingLibrary&quot; target</h2>
 </section>

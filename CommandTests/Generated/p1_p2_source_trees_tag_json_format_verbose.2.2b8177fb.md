@@ -36,6 +36,7 @@
       "(MismatchingLibrary.framework, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)",
       "(NewFramework.framework, nil, BUILT_PRODUCTS_DIR) → (nil, Products, <group>) → (nil, nil, <group>)",
       "(NewFramework.h, nil, <group>) → (NewFramework, nil, <group>) → (nil, nil, <group>)",
+      "(Project.entitlements, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)",
       "(Project.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)",
       "(README.md, nil, <group>) → (nil, nil, <group>)",
       "(Target.xcconfig, nil, <group>) → (Project, nil, <group>) → (nil, nil, <group>)"

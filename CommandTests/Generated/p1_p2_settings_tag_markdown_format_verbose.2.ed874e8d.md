@@ -126,9 +126,10 @@
 ## ❌ SETTINGS > "Project" target > "Debug" configuration > Values
 
 
-### ⚠️  Only in second (1):
+### ⚠️  Only in second (2):
 
   - `ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES`
+  - `CODE_SIGN_ENTITLEMENTS = Project/Project.entitlements`
 
 
 ### ⚠️  Value mismatch (1):
@@ -145,9 +146,10 @@
 ## ❌ SETTINGS > "Project" target > "Release" configuration > Values
 
 
-### ⚠️  Only in second (1):
+### ⚠️  Only in second (2):
 
   - `ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES`
+  - `CODE_SIGN_ENTITLEMENTS = Project/Project.entitlements`
 
 
 ### ⚠️  Value mismatch (1):

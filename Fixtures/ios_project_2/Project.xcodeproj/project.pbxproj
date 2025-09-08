@@ -103,6 +103,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2213D2552E63B8F500CBEC89 /* Project.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Project.entitlements; sourceTree = "<group>"; };
 		2E26637422B7F52500BA59BC /* Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E26637722B7F52500BA59BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E26637922B7F52500BA59BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -222,6 +223,7 @@
 		2E26637622B7F52500BA59BC /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				2213D2552E63B8F500CBEC89 /* Project.entitlements */,
 				FBB3B02122FAE57E00EE8176 /* Resources */,
 				FBAE6F0322F02466004B7BDB /* Group A */,
 				FBAE6F0F22F02562004B7BDB /* Group B */,
@@ -877,6 +879,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Project/Project.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CUSTOM_SETTING_COMMON = VALUE_2;
 				INFOPLIST_FILE = Project/Info.plist;
@@ -898,6 +901,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Project/Project.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CUSTOM_SETTING_COMMON = VALUE_2;
 				INFOPLIST_FILE = Project/Info.plist;
@@ -1182,6 +1186,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Project/Project.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CUSTOM_SETTING_COMMON = VALUE_2;
 				INFOPLIST_FILE = Project/Info.plist;
