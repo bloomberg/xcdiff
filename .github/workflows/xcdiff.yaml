@@ -23,8 +23,13 @@ jobs:
     runs-on: macOS-14
     steps:
     - uses: actions/checkout@v4
+    - uses: jdx/mise-action@v3
+      with:
+        install: true
+        cache: true
+        github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Install dependencies
-      run: ./Scripts/brew.sh
+      run: make install_tools
     - name: lint
       run: make lint
 

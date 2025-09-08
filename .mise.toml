@@ -1,0 +1,8 @@
+[tools]
+swiftlint = "0.49.1"
+swiftformat = "0.50.3"
+
+[settings]
+jobs = 6
+http_timeout = "30"
+experimental = true
