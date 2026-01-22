@@ -59,9 +59,9 @@
         "package": "XcodeProj",
         "repositoryURL": "https://github.com/tuist/xcodeproj.git",
         "state": {
-          "branch": null,
-          "revision": "6f90427e172da66336739801c84b9cef3e17367b",
-          "version": "8.26.6"
+          "branch": "waltflanagan/StrongTypes",
+          "revision": "bf96639f81663c8c032a0296e75c911041c95220",
+          "version": null
         }
       }
     ]

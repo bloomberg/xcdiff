@@ -19,7 +19,7 @@ import XcodeProj
 
 final class PBXBuildConfigurationBuilder {
     private let name: String
-    private var buildSettings: [String: Any] = [:]
+    private var buildSettings: [String: BuildSetting] = [:]
     private var baseConfiguration: PBXFileReference?
 
     init(name: String) {
@@ -27,7 +27,7 @@ final class PBXBuildConfigurationBuilder {
     }
 
     @discardableResult
-    func setValue(_ value: Any, forKey key: String) -> PBXBuildConfigurationBuilder {
+    func setValue(_ value: BuildSetting, forKey key: String) -> PBXBuildConfigurationBuilder {
         buildSettings[key] = value
         return self
     }
