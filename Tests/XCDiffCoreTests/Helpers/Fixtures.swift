@@ -65,6 +65,10 @@ final class ProjectFixtures {
         return path(to: "non_existing")
     }
 
+    func ios_project_malformed() -> Path {
+        return path(to: "ios_project_malformed")
+    }
+
     func ios_project_1() -> Path {
         return path(to: "ios_project_1")
     }

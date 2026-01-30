@@ -53,4 +53,21 @@ final class DefaultXcodeProjLoaderTests: XCTestCase {
             XCTAssertEqual(error.localizedDescription, "The project cannot be found at \(path.string)")
         }
     }
+
+    func testLoad_whenProjectIsMalformed() {
+        // Given
+        let path = fixtures.project.ios_project_malformed()
+
+        // When / Then
+        XCTAssertThrowsError(try subject.load(at: path)) { error in
+            guard let error = error as? ComparatorError else {
+                XCTFail("Expected ComparatorError")
+                return
+            }
+            XCTAssertTrue(error.localizedDescription.hasPrefix("Encountered unknown error while loading XcodeProj at"))
+            XCTAssertTrue(error.localizedDescription.contains(path.string))
+            // Verify the underlying error details are included (the change on this branch)
+            XCTAssertFalse(error.localizedDescription.hasSuffix(path.string))
+        }
+    }
 }
