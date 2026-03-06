@@ -28,7 +28,9 @@ class DefaultXcodeProjLoader: XcodeProjLoader {
         } catch let error as XCodeProjError {
             throw ComparatorError.generic(error.description)
         } catch {
-            throw ComparatorError.generic("Encountered unknown error while loading XcodeProj at \(path.string)")
+            throw ComparatorError.generic(
+                "Encountered unknown error while loading XcodeProj at \(path.string). \(error)"
+            )
         }
     }
 }
