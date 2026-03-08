@@ -17,7 +17,7 @@
 import Foundation
 import XcodeProj
 
-extension PBXCopyFilesBuildPhase.SubFolder: CustomStringConvertible {
+extension PBXCopyFilesBuildPhase.SubFolder: @retroactive CustomStringConvertible {
     public var description: String {
         switch self {
         case .absolutePath: return "absolutePath"
@@ -43,7 +43,7 @@ extension PBXTarget {
     }
 }
 
-extension XCRemoteSwiftPackageReference.VersionRequirement: CustomStringConvertible {
+extension XCRemoteSwiftPackageReference.VersionRequirement: @retroactive CustomStringConvertible {
     public var description: String {
         switch self {
         case let .upToNextMajorVersion(version):
