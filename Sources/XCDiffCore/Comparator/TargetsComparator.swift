@@ -29,7 +29,8 @@ final class TargetsComparator: Comparator {
             .validateTargetsOption(parameters)
         let nativeTargetResults = try compareNativeTargets(first, second, parameters: parameters)
         let aggregateTargetResults = compareAggregateTargets(first, second, parameters: parameters)
-        return nativeTargetResults + aggregateTargetResults
+        let duplicates = try checkDuplicateTargets(first, second, parameters: parameters)
+        return nativeTargetResults + aggregateTargetResults + duplicates
     }
 
     private func compareNativeTargets(_ first: ProjectDescriptor,
@@ -59,6 +60,38 @@ final class TargetsComparator: Comparator {
         return results(context: ["AGGREGATE targets"],
                        first: targetsHelper.aggregate(from: first).filter(by: parameters.targets),
                        second: targetsHelper.aggregate(from: second).filter(by: parameters.targets))
+    }
+
+    private func checkDuplicateTargets(
+        _ first: ProjectDescriptor,
+        _ second: ProjectDescriptor,
+        parameters: ComparatorParameters
+    ) throws -> [CompareResult] {
+        let firstTargets = targetsHelper.allTargetNames(from: first).filter(by: parameters.targets)
+        let secondTargets = targetsHelper.allTargetNames(from: second).filter(by: parameters.targets)
+        let common = Set(firstTargets).intersection(Set(secondTargets))
+
+        func duplicated(in names: [String]) -> [String] {
+            Dictionary(grouping: names.filter { common.contains($0) }, by: { $0 })
+                .filter { $0.value.count > 1 }
+                .keys
+                .sorted()
+        }
+
+        let duplicatesInFirst = duplicated(in: firstTargets)
+        let duplicatesInSecond = duplicated(in: secondTargets)
+
+        if duplicatesInFirst.isEmpty, duplicatesInSecond.isEmpty {
+            return []
+        }
+
+        // Duplicates are flagged as diffs, even if both targets have the same set
+        // this is due to xcdiff not being able to reliably diff match the correct duplicate
+        return results(
+            context: ["Duplicate targets"],
+            onlyInFirst: duplicatesInFirst,
+            onlyInSecond: duplicatesInSecond
+        )
     }
 
     // A relaxed version of common targets that doesn't require
