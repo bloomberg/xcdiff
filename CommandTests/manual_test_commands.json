@@ -83,5 +83,10 @@
         "alias": "test_filesystem_synchronized_groups",
         "command": ["-p1", "{xcode16_syncgroups_1}", "-p2", "{xcode16_syncgroups_2}", "-g", "filesystem_synchronized_groups", "-v"],
         "comment": "Filesystem synchronized root groups are part of the diff."
+    },
+    {
+        "alias": "duplicate_targets",
+        "command": ["-p1", "{duplicate_targets_1}", "-p2", "{duplicate_targets_2}", "-g", "targets", "-v"],
+        "comment": "A target whose name collides with an existing one is flagged rather than silently excluded from the diff."
     }
 ]

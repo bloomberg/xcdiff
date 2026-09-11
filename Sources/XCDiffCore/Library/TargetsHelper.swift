@@ -120,6 +120,11 @@ final class TargetsHelper {
         self.targetPlistHelper = targetPlistHelper
     }
 
+    func allTargetNames(from projectDescription: ProjectDescriptor) -> [String] {
+        let pbxproj = projectDescription.pbxproj
+        return (pbxproj.aggregateTargets + pbxproj.nativeTargets).map(\.name)
+    }
+
     func targets(from projectDescription: ProjectDescriptor) -> Set<String> {
         return native(from: projectDescription).union(aggregate(from: projectDescription))
     }

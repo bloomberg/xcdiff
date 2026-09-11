@@ -180,4 +180,32 @@ final class TargetsComparatorTests: XCTestCase {
         ]
         XCTAssertEqual(actual, expected)
     }
+
+    func testCompare_whenSecondProjectHasDuplicateNamedTarget() throws {
+        // Given
+        let first = project()
+            .addTarget(name: "A", productType: .application)
+            .projectDescriptor()
+        let second = project()
+            .addTarget(name: "A", productType: .application)
+            .addTarget(name: "A", productType: .application)
+            .projectDescriptor()
+
+        // When
+        let actual = try subject.compare(
+            first, second,
+            parameters: .all
+        )
+
+        // Then
+        XCTAssertEqual(actual, [
+            CompareResult(tag: "targets", context: ["NATIVE targets"]),
+            CompareResult(tag: "targets", context: ["AGGREGATE targets"]),
+            CompareResult(
+                tag: "targets",
+                context: ["Duplicate targets"],
+                onlyInSecond: ["A"]
+            ),
+        ])
+    }
 }
